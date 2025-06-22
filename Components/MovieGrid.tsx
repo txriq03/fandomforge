@@ -1,8 +1,8 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { imageBaseUrl } from "@/utils";
+import { imageBaseUrl } from "@/utils/constants";
 import SteamCard from "./SteamCard";
-const fetchMovies = async () => {
+const getPopularMovies = async () => {
   const url =
     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
   const options = {
@@ -22,8 +22,10 @@ const fetchMovies = async () => {
 const MovieGrid = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["movies"],
-    queryFn: fetchMovies,
+    queryFn: getPopularMovies,
   });
+
+  console.log(data);
 
   if (isPending) return <div className="text-center py-4">Loading...</div>;
   if (error)
