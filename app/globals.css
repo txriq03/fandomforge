@@ -4,10 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #F5F5F7;
+  --background: oklch(95% 0.05 276.935);
   --foreground: #1D1D1F;
-  --primary: oklch(64.5% 0.246 16.439);
-  --primary-light: oklch(58.6% 0.253 17.585);
+  --primary: oklch(58.5% 0.233 277.117);
+  --primary-light: oklch(67.3% 0.182 276.935);
 }
 
 @theme inline {
@@ -17,16 +17,16 @@
   --font-mono: var(--font-geist-mono);
   --color-sidebar: #1D1D1F;
   --color-primary: var(--primary);
+  --color-sidebar: white;
   --color-primary-light: var(--primary-light);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121212;
-    --foreground: #F5F5F7;
-    
-  }
+.dark {
+  --background: #121212;
+  --foreground: #F5F5F7;
 }
+
+
 
 body {
   background: var(--background);

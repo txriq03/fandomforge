@@ -53,9 +53,9 @@ const Sidebar = () => {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center rounded-lg text-white/65 text-sm hover:text-rose-400  transition-all duration-400 text-nowrap",
+                  "flex items-center rounded-lg text-foreground/65 text-sm hover:text-primary  transition-all duration-400 text-nowrap",
                   collapsed ? "justify-center p-2.5" : "gap-2 p-3",
-                  isActive && "bg-indigo-300/5 text-rose-400"
+                  isActive && "bg-primary-light text-indigo-50"
                 )}
               >
                 <item.icon size={18} className="leading-none" />
