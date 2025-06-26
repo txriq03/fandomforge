@@ -1,10 +1,13 @@
+import CarouselAndRecentlyPlayed from "@/Components/CarouselAndRecentlyPlayed";
 import MovieGrid from "@/Components/MovieGrid";
-import SteamCard from "@/Components/SteamCard";
+import PopularCarousel from "@/Components/PopularCarousel";
+import { DashboardProvider } from "@/providers/DashboardContext";
 
-export default function Home() {
+export default function DashboardPage() {
   return (
-    <div>
+    <DashboardProvider>
+      <CarouselAndRecentlyPlayed />
       <MovieGrid />
-    </div>
+    </DashboardProvider>
   );
 }
