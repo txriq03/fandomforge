@@ -3,9 +3,6 @@
 @source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
 
-
-
-
 :root {
   --background: oklch(95% 0.05 276.935);
   --foreground: #1D1D1F;
@@ -14,7 +11,8 @@
 }
 
 @theme inline {
-  --font-main: var(--font-torus)
+  --font-main: var(--font-poppins);
+  --font-heading: var(--font-quicksand);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

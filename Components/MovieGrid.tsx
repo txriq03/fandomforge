@@ -1,15 +1,19 @@
 "use client";
 import { imageBaseUrl } from "@/lib/constants";
-import SteamCard from "./SteamCard";
 import { useDashbaord } from "@/providers/DashboardContext";
-import { Image } from "@heroui/react";
+import { Image, Spinner } from "@heroui/react";
 
 const MovieGrid = () => {
   const { popularMovies, isPending, error } = useDashbaord();
 
   console.log(popularMovies);
 
-  if (isPending) return <div className="text-center py-4">Loading...</div>;
+  if (isPending)
+    return (
+      <div className="text-center ">
+        <Spinner variant="simple" size="lg" />
+      </div>
+    );
   if (error)
     return (
       <div className="text-center py-4 text-rose-500">

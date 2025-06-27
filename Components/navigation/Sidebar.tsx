@@ -10,18 +10,17 @@ import { navItems } from "@/lib/data/navItems";
 
 const Sidebar = () => {
   const { collapsed, toggleCollapsed } = useSidebar();
-  // const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
   return (
     <div
-      className="group/sidebar fixed hidden lg:block h-screen"
+      className="group/sidebar fixed hidden lg:block h-screen shadow-xl"
       data-state={collapsed ? "closed" : "open"}
     >
       <aside
         className={cn(
           "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative ",
-          collapsed ? "w-16 p-3" : "w-58 p-2"
+          collapsed ? "w-16 p-3" : "w-58 p-3"
         )}
       >
         <Button

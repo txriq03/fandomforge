@@ -34,10 +34,12 @@ const PopularCarousel = ({ className }: { className?: string }) => {
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
-              <div className="absolute bottom-4 left-6 text-white z-10 space-y-3">
+              <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-7">
                 <h2 className="text-lg sm:text-2xl font-bold">{movie.title}</h2>
                 <VoteAverageChip value={movie.vote_average} />
-                <p className="text-white/75">{movie.overview}</p>
+                <p className="text-white/75 line-clamp-3 text-sm sm:text-base">
+                  {movie.overview}
+                </p>
               </div>
             </div>
           </div>
