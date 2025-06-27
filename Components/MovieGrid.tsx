@@ -2,6 +2,7 @@
 import { imageBaseUrl } from "@/lib/constants";
 import SteamCard from "./SteamCard";
 import { useDashbaord } from "@/providers/DashboardContext";
+import { Image } from "@heroui/react";
 
 const MovieGrid = () => {
   const { popularMovies, isPending, error } = useDashbaord();
@@ -18,11 +19,17 @@ const MovieGrid = () => {
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-      {popularMovies.results.map((movie: any) => (
-        <div key={movie.id} className="flex flex-col items-center">
-          <SteamCard url={`${imageBaseUrl}${movie.poster_path}`} />
-        </div>
-      ))}
+      {popularMovies.results.map((movie: any) => {
+        const url = `${imageBaseUrl}${movie.poster_path}`;
+        return (
+          <div key={movie.id}>
+            <Image
+              src={url}
+              className="w-full h-full object-cover hover:scale-105"
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

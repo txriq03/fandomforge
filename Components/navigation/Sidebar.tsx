@@ -15,12 +15,12 @@ const Sidebar = () => {
 
   return (
     <div
-      className="group/sidebar fixed hidden lg:block h-screen pb-5"
+      className="group/sidebar fixed hidden lg:block h-screen"
       data-state={collapsed ? "closed" : "open"}
     >
       <aside
         className={cn(
-          "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative rounded-xl",
+          "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative ",
           collapsed ? "w-16 p-3" : "w-58 p-2"
         )}
       >

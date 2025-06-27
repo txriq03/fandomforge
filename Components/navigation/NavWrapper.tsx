@@ -9,12 +9,12 @@ import Topbar from "./Topbar";
 const NavWrapper = ({ children }: { children: ReactNode }) => {
   const { collapsed } = useSidebar();
   return (
-    <div className="mt-2 mx-2">
+    <div className="font-main">
       <Sidebar />
       <BottomBar />
       <main
         className={cn(
-          "transition-all duration-500 ",
+          "transition-all duration-500",
           collapsed ? "lg:ml-[64px]" : "lg:ml-[232px]"
         )}
       >

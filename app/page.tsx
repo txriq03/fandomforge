@@ -6,8 +6,10 @@ import { DashboardProvider } from "@/providers/DashboardContext";
 export default function DashboardPage() {
   return (
     <DashboardProvider>
-      <CarouselAndRecentlyPlayed />
-      <MovieGrid />
+      <div className="px-1 sm:px-2 lg:px-4 space-y-4">
+        <CarouselAndRecentlyPlayed />
+        <MovieGrid />
+      </div>
     </DashboardProvider>
   );
 }

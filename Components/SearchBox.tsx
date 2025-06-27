@@ -7,7 +7,7 @@ const SearchBox = () => {
   return (
     <Input
       placeholder="Search..."
-      startContent={<Search className="text-foreground/50" />}
+      startContent={<Search className="text-primary-light" />}
       className="max-w-md"
     />
   );

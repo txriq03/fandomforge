@@ -6,8 +6,8 @@ import { Bell, LogIn, Settings } from "lucide-react";
 
 const Topbar = () => {
   return (
-    <div className=" w-full ">
-      <div className="bg-sidebar py-2 px-2 rounded-xl flex justify-between gap-4">
+    <div className=" w-full sm:px-2 lg:px-4  sm:pt-2">
+      <div className="bg-sidebar py-2 px-2 sm:rounded-xl flex justify-between gap-4">
         <SearchBox />
         <div className="flex gap-2">
           <Button
