@@ -35,7 +35,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <Providers>
           <NavWrapper>
-            <div className="space-y-4">
+            <div className="space-y-4 min-h-screen">
               <Topbar />
               {children}
             </div>
