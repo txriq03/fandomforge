@@ -1,5 +1,5 @@
 "use client";
-import { login, signup } from "@/lib/supabase/client-actions";
+import { login, signup } from "@/lib/supabase/actions";
 import { useUIContext } from "@/providers/UIContext";
 import {
   addToast,
@@ -15,7 +15,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { AtSign, Lock, Mail, User2 } from "lucide-react";
 import Image from "next/image";
-import { unstable_rethrow } from "next/navigation";
+import { unstable_rethrow, useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 
 const LoginModal = () => {
@@ -31,7 +31,7 @@ const LoginModal = () => {
     >
       <ModalContent>
         {(onClose) => (
-          <div className="flex">
+          <div className="flex ">
             <div className="flex-1 h-[400px] hidden sm:block w-full relative">
               <Image
                 fill
@@ -70,20 +70,21 @@ const LoginModal = () => {
 };
 
 const SignupForm = () => {
+  const router = useRouter();
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
       return signup(formData);
     },
     onSuccess: () => {
       addToast({
-        title: "You're logged in",
+        title: "Account created!",
         color: "primary",
         variant: "solid",
       });
     },
     onError: (error) => {
       addToast({
-        title: "Error logging in.",
+        title: "Error creating account.",
         description: error.message,
         color: "danger",
         variant: "solid",

@@ -1,10 +1,13 @@
 import CarouselAndRecentlyPlayed from "@/Components/CarouselAndRecentlyPlayed";
 import LoginModal from "@/Components/LoginModal";
 import MovieGrid from "@/Components/MovieGrid";
-import PopularCarousel from "@/Components/PopularCarousel";
+import { createClient } from "@/lib/supabase/server";
 import { DashboardProvider } from "@/providers/DashboardContext";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.getUser();
   return (
     <>
       <DashboardProvider>
@@ -12,7 +15,7 @@ export default function DashboardPage() {
           <CarouselAndRecentlyPlayed />
           <MovieGrid />
         </div>
-        <LoginModal />
+        {(error || !data?.user) && <LoginModal />}
       </DashboardProvider>
     </>
   );
