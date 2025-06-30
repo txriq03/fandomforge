@@ -1,5 +1,7 @@
 "use client";
-import { login, signup } from "@/lib/supabase/actions";
+import { signup } from "@/lib/supabase/actions";
+import { createClient } from "@/lib/supabase/client";
+import { login } from "@/lib/supabase/client-actions";
 import { useUIContext } from "@/providers/UIContext";
 import {
   addToast,
@@ -12,6 +14,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@heroui/react";
+import { useMutation } from "@tanstack/react-query";
 import { AtSign, Lock, Mail, User2 } from "lucide-react";
 import Image from "next/image";
 import { unstable_rethrow } from "next/navigation";
@@ -39,12 +42,12 @@ const LoginModal = () => {
                 className="object-cover h-full w-full "
               />
             </div>
-            <div className="flex-1 ">
+            <div className="flex-1">
               <ModalHeader className="text-primary text-2xl font-bold font-heading">
-                {showSignUp ? "Create an Account" : "Welcome back"}
+                {showSignUp ? "Sign up" : "Welcome back"}
               </ModalHeader>
               {showSignUp ? <SignupForm /> : <LoginForm />}
-              <ModalFooter className="flex flex-row items-center gap-1 text-sm justify-start pt-0">
+              <ModalFooter className="flex flex-row items-center gap-1 text-sm justify-start pt-0 ">
                 {" "}
                 {showSignUp
                   ? "Already have an account?"
@@ -77,13 +80,14 @@ const SignupForm = () => {
     console.log("Form data:", formData);
     try {
       const result = await signup(formData);
-      addToast({ title: "Sign up successful!" });
+      addToast({ title: "Sign up successful!", color: "success" });
       console.log("User:", result);
     } catch (err) {
       if (err instanceof Error) {
         console.error(err.message);
       }
       console.error("Unknown error occurred");
+      addToast({ title: "Unknown error occurred.", color: "danger" });
     } finally {
       setLoading(false);
     }
@@ -94,13 +98,11 @@ const SignupForm = () => {
         <Input
           name="username"
           isRequired
+          minLength={3}
+          maxLength={20}
+          pattern="^[a-zA-Z0-9]+$"
           placeholder="Username"
           startContent={<User2 size={18} className="text-primary/50" />}
-          validate={(value) => {
-            if (value.length < 3) {
-              return "Username must be at least 3 characters long.";
-            }
-          }}
         />
         <Input
           name="email"
@@ -131,7 +133,7 @@ const SignupForm = () => {
           type="submit"
           isLoading={loading}
         >
-          {!loading && "Sign up"}
+          {!loading && "Create your account"}
         </Button>
       </Form>
     </ModalBody>
@@ -139,25 +141,30 @@ const SignupForm = () => {
 };
 
 const LoginForm = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
+  const mutation = useMutation({
+    mutationFn: (formData: FormData) => {
+      return login(formData);
+    },
+    onSuccess: () => {
+      addToast({
+        title: "You're logged in",
+        color: "primary",
+        variant: "solid",
+      });
+    },
+    onError: (error) => {
+      addToast({
+        title: "Error logging in.",
+        description: error.message,
+        color: "danger",
+        variant: "solid",
+      });
+    },
+  });
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    console.log("Form data:", formData);
-    try {
-      const result = await login(formData);
-      alert("Signup successful!");
-      console.log("User:", result);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.message);
-      }
-      addToast({ title: "Unknown error occurred." });
-      console.error("Unknown error occurred.");
-    } finally {
-      setLoading(false);
-    }
+    mutation.mutate(new FormData(e.currentTarget));
   };
   return (
     <ModalBody>
@@ -181,9 +188,9 @@ const LoginForm = () => {
           variant="shadow"
           size="lg"
           type="submit"
-          isLoading={loading}
+          isLoading={mutation.isPending}
         >
-          {!loading && "Login"}
+          {!mutation.isPending && "Login"}
         </Button>
       </Form>
     </ModalBody>
