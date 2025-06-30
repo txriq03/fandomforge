@@ -1,7 +1,5 @@
 "use client";
-import { signup } from "@/lib/supabase/actions";
-import { createClient } from "@/lib/supabase/client";
-import { login } from "@/lib/supabase/client-actions";
+import { login, signup } from "@/lib/supabase/client-actions";
 import { useUIContext } from "@/providers/UIContext";
 import {
   addToast,
@@ -72,25 +70,30 @@ const LoginModal = () => {
 };
 
 const SignupForm = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
+  const mutation = useMutation({
+    mutationFn: (formData: FormData) => {
+      return signup(formData);
+    },
+    onSuccess: () => {
+      addToast({
+        title: "You're logged in",
+        color: "primary",
+        variant: "solid",
+      });
+    },
+    onError: (error) => {
+      addToast({
+        title: "Error logging in.",
+        description: error.message,
+        color: "danger",
+        variant: "solid",
+      });
+    },
+  });
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    console.log("Form data:", formData);
-    try {
-      const result = await signup(formData);
-      addToast({ title: "Sign up successful!", color: "success" });
-      console.log("User:", result);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.message);
-      }
-      console.error("Unknown error occurred");
-      addToast({ title: "Unknown error occurred.", color: "danger" });
-    } finally {
-      setLoading(false);
-    }
+    mutation.mutate(new FormData(e.currentTarget));
   };
   return (
     <ModalBody>
@@ -101,6 +104,13 @@ const SignupForm = () => {
           minLength={3}
           maxLength={20}
           pattern="^[a-zA-Z0-9]+$"
+          errorMessage={({ validationDetails, validationErrors }) => {
+            if (validationDetails.patternMismatch) {
+              return "Username can only contain alphanumeric characters.";
+            }
+
+            return validationErrors;
+          }}
           placeholder="Username"
           startContent={<User2 size={18} className="text-primary/50" />}
         />
@@ -124,6 +134,14 @@ const SignupForm = () => {
           placeholder="Confirm Password"
           type="password"
           startContent={<Lock size={18} className="text-primary/50" />}
+          validate={(value) => {
+            const password = document.querySelector<HTMLInputElement>(
+              'input[name="password"]'
+            );
+            if (password && value !== password.value) {
+              return "Passwords do not match.";
+            }
+          }}
         />
         <Button
           fullWidth
@@ -131,9 +149,9 @@ const SignupForm = () => {
           variant="shadow"
           size="lg"
           type="submit"
-          isLoading={loading}
+          isLoading={mutation.isPending}
         >
-          {!loading && "Create your account"}
+          {!mutation.isPending && "Create your account"}
         </Button>
       </Form>
     </ModalBody>
@@ -170,6 +188,7 @@ const LoginForm = () => {
     <ModalBody>
       <Form onSubmit={onSubmit}>
         <Input
+          isRequired
           placeholder="Email"
           type="email"
           name="email"
@@ -177,6 +196,7 @@ const LoginForm = () => {
         />
 
         <Input
+          isRequired
           placeholder="Password"
           type="password"
           name="password"
