@@ -1,7 +1,10 @@
 "use client";
+import { login, signup } from "@/lib/supabase/actions";
 import { useUIContext } from "@/providers/UIContext";
 import {
+  addToast,
   Button,
+  Form,
   Input,
   Modal,
   ModalBody,
@@ -11,6 +14,7 @@ import {
 } from "@heroui/react";
 import { AtSign, Lock, Mail, User2 } from "lucide-react";
 import Image from "next/image";
+import { unstable_rethrow } from "next/navigation";
 import React, { useContext, useState } from "react";
 
 const LoginModal = () => {
@@ -31,13 +35,13 @@ const LoginModal = () => {
               <Image
                 fill
                 alt="login image"
-                src="/abstract.jpg"
+                src="/login.jpg"
                 className="object-cover h-full w-full "
               />
             </div>
             <div className="flex-1 ">
               <ModalHeader className="text-primary text-2xl font-bold font-heading">
-                {showSignUp ? "Sign up" : "Sign in"}
+                {showSignUp ? "Create an Account" : "Welcome back"}
               </ModalHeader>
               {showSignUp ? <SignupForm /> : <LoginForm />}
               <ModalFooter className="flex flex-row items-center gap-1 text-sm justify-start pt-0">
@@ -65,52 +69,123 @@ const LoginModal = () => {
 };
 
 const SignupForm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    console.log("Form data:", formData);
+    try {
+      const result = await signup(formData);
+      addToast({ title: "Sign up successful!" });
+      console.log("User:", result);
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      }
+      console.error("Unknown error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <ModalBody>
-      <Input
-        placeholder="Username"
-        startContent={<User2 size={18} className="text-primary/50" />}
-      />
-      <Input
-        placeholder="Email"
-        type="email"
-        startContent={<AtSign size={18} className="text-primary/50" />}
-      />
-      <Input
-        placeholder="Password"
-        type="password"
-        startContent={<Lock size={18} className="text-primary/50" />}
-      />
+      <Form onSubmit={onSubmit}>
+        <Input
+          name="username"
+          isRequired
+          placeholder="Username"
+          startContent={<User2 size={18} className="text-primary/50" />}
+          validate={(value) => {
+            if (value.length < 3) {
+              return "Username must be at least 3 characters long.";
+            }
+          }}
+        />
+        <Input
+          name="email"
+          isRequired
+          placeholder="Email"
+          type="email"
+          startContent={<AtSign size={18} className="text-primary/50" />}
+        />
+        <Input
+          name="password"
+          isRequired
+          placeholder="Password"
+          type="password"
+          startContent={<Lock size={18} className="text-primary/50" />}
+        />
 
-      <Input
-        placeholder="Confirm Password"
-        type="password"
-        startContent={<Lock size={18} className="text-primary/50" />}
-      />
-      <Button fullWidth color="primary" variant="shadow" size="lg">
-        Login
-      </Button>
+        <Input
+          isRequired
+          placeholder="Confirm Password"
+          type="password"
+          startContent={<Lock size={18} className="text-primary/50" />}
+        />
+        <Button
+          fullWidth
+          color="primary"
+          variant="shadow"
+          size="lg"
+          type="submit"
+          isLoading={loading}
+        >
+          {!loading && "Sign up"}
+        </Button>
+      </Form>
     </ModalBody>
   );
 };
 
 const LoginForm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    console.log("Form data:", formData);
+    try {
+      const result = await login(formData);
+      alert("Signup successful!");
+      console.log("User:", result);
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      }
+      addToast({ title: "Unknown error occurred." });
+      console.error("Unknown error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <ModalBody>
-      <Input
-        placeholder="Email"
-        type="email"
-        startContent={<AtSign size={18} className="text-primary/50" />}
-      />
+      <Form onSubmit={onSubmit}>
+        <Input
+          placeholder="Email"
+          type="email"
+          name="email"
+          startContent={<AtSign size={18} className="text-primary/50" />}
+        />
 
-      <Input
-        placeholder="Password"
-        type="password"
-        startContent={<Lock size={18} className="text-primary/50" />}
-      />
-      <Button fullWidth color="primary" variant="shadow" size="lg">
-        Login
-      </Button>
+        <Input
+          placeholder="Password"
+          type="password"
+          name="password"
+          startContent={<Lock size={18} className="text-primary/50" />}
+        />
+        <Button
+          fullWidth
+          color="primary"
+          variant="shadow"
+          size="lg"
+          type="submit"
+          isLoading={loading}
+        >
+          {!loading && "Login"}
+        </Button>
+      </Form>
     </ModalBody>
   );
 };
