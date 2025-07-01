@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/providers/Providers";
 import NavWrapper from "@/Components/navigation/NavWrapper";
 import Topbar from "@/Components/navigation/Topbar";
+import LoginModal from "@/Components/LoginModal";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -40,6 +41,7 @@ export default function RootLayout({
               {children}
             </div>
           </NavWrapper>
+          <LoginModal />
         </Providers>
       </body>
     </html>

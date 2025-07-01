@@ -12,7 +12,6 @@ export default async function DashboardPage() {
           <CarouselAndRecentlyPlayed />
           <MovieGrid />
         </div>
-        <LoginModal />
       </DashboardProvider>
     </>
   );
