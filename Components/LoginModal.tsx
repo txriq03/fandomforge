@@ -1,5 +1,5 @@
 "use client";
-import { login, signup } from "@/lib/supabase/client-actions";
+import { login, signup } from "@/lib/supabase/actions";
 import { useUIContext } from "@/providers/UIContext";
 import {
   addToast,

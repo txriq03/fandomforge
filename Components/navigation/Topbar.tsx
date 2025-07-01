@@ -4,9 +4,9 @@ import { Button } from "@heroui/react";
 import { Bell, LogIn, LogOut, Settings } from "lucide-react";
 import { useUIContext } from "@/providers/UIContext";
 import { useAuthContext } from "@/providers/AuthContext";
-import { signOut } from "@/lib/supabase/client-actions";
+import { signOut } from "@/lib/supabase/actions";
 
-const Topbar = () => {
+const Topbar = ({ user }: any) => {
   const { onLoginOpen } = useUIContext();
   const { session } = useAuthContext();
 
@@ -15,7 +15,7 @@ const Topbar = () => {
       <div className="bg-sidebar py-2 px-2 sm:rounded-xl flex justify-between gap-4 outline-1 outline-indigo-500/15">
         <SearchBox />
         <div className="flex gap-2">
-          {!session ? (
+          {!user ? (
             <Button variant="shadow" color="primary" onPress={onLoginOpen}>
               Login <LogIn />
             </Button>
