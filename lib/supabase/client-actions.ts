@@ -45,3 +45,8 @@ export const signup = async (formData: FormData) => {
 
   return data;
 };
+
+export const signOut = async () => {
+  const supabase = createClient();
+  await supabase.auth.signOut({ scope: "local" });
+};

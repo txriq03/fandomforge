@@ -1,5 +1,5 @@
 "use client";
-import { login, signup } from "@/lib/supabase/actions";
+import { login, signup } from "@/lib/supabase/client-actions";
 import { useUIContext } from "@/providers/UIContext";
 import {
   addToast,
@@ -13,10 +13,9 @@ import {
   ModalHeader,
 } from "@heroui/react";
 import { useMutation } from "@tanstack/react-query";
-import { AtSign, Lock, Mail, User2 } from "lucide-react";
+import { AtSign, Lock, User2 } from "lucide-react";
 import Image from "next/image";
-import { unstable_rethrow, useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 
 const LoginModal = () => {
   const { isLoginOpen, onLoginOpenChange } = useUIContext();
@@ -70,7 +69,8 @@ const LoginModal = () => {
 };
 
 const SignupForm = () => {
-  const router = useRouter();
+  const { onLoginOpenChange } = useUIContext();
+
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
       return signup(formData);
@@ -81,6 +81,7 @@ const SignupForm = () => {
         color: "primary",
         variant: "solid",
       });
+      onLoginOpenChange(false);
     },
     onError: (error) => {
       addToast({
@@ -160,6 +161,8 @@ const SignupForm = () => {
 };
 
 const LoginForm = () => {
+  const { onLoginOpenChange } = useUIContext();
+
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
       return login(formData);
@@ -170,6 +173,7 @@ const LoginForm = () => {
         color: "primary",
         variant: "solid",
       });
+      onLoginOpenChange(false);
     },
     onError: (error) => {
       addToast({

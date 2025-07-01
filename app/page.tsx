@@ -5,9 +5,6 @@ import { createClient } from "@/lib/supabase/server";
 import { DashboardProvider } from "@/providers/DashboardContext";
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.getUser();
   return (
     <>
       <DashboardProvider>
@@ -15,7 +12,7 @@ export default async function DashboardPage() {
           <CarouselAndRecentlyPlayed />
           <MovieGrid />
         </div>
-        {(error || !data?.user) && <LoginModal />}
+        <LoginModal />
       </DashboardProvider>
     </>
   );
