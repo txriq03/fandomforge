@@ -3,12 +3,11 @@ import SearchBox from "../SearchBox";
 import { Button } from "@heroui/react";
 import { Bell, LogIn, LogOut, Settings } from "lucide-react";
 import { useUIContext } from "@/providers/UIContext";
-import { useAuthContext } from "@/providers/AuthContext";
 import { signOut } from "@/lib/supabase/actions";
+import UserBtn from "../UserBtn";
 
 const Topbar = ({ user }: any) => {
   const { onLoginOpen } = useUIContext();
-  const { session } = useAuthContext();
 
   return (
     <div className=" w-full sm:px-2 lg:px-4  sm:pt-2">
@@ -21,15 +20,7 @@ const Topbar = ({ user }: any) => {
             </Button>
           ) : (
             <>
-              <Button
-                isIconOnly
-                radius="full"
-                className="p-2.5 "
-                color="default"
-                variant="flat"
-              >
-                <Settings />
-              </Button>
+              <UserBtn user={user} />
 
               <Button
                 isIconOnly
