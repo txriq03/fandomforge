@@ -24,8 +24,8 @@ const Topbar = ({ user }: any) => {
               <Button
                 isIconOnly
                 radius="full"
-                className="p-2.5 text-primary"
-                color="primary"
+                className="p-2.5 "
+                color="default"
                 variant="flat"
               >
                 <Settings />
@@ -34,8 +34,8 @@ const Topbar = ({ user }: any) => {
               <Button
                 isIconOnly
                 radius="full"
-                className="p-2.5 text-primary"
-                color="primary"
+                className="p-2.5 "
+                color="success"
                 variant="flat"
               >
                 <Bell />
@@ -44,7 +44,7 @@ const Topbar = ({ user }: any) => {
                 isIconOnly
                 variant="flat"
                 color="danger"
-                className="p-2.5"
+                className="p-2.5 hover:bg-danger hover:text-slate-50"
                 radius="full"
                 onPress={signOut}
               >
