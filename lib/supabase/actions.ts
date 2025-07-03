@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { devLog } from "../utils";
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -54,4 +55,36 @@ export async function signup(formData: FormData) {
 export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut({ scope: "local" });
+}
+
+export async function getProfile() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    devLog.error("Error getting session:", userError?.message);
+    return null;
+  } else {
+    devLog.log("User:", user);
+  }
+
+  devLog.log("User ID:", user.id);
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  if (profileError) {
+    devLog.error("Error getting profile:", profileError.message);
+    return null;
+  } else {
+    devLog.log("Profile:", profile);
+  }
+
+  return profile;
 }

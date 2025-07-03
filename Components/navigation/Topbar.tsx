@@ -1,13 +1,23 @@
 "use client";
 import SearchBox from "../SearchBox";
 import { Button } from "@heroui/react";
-import { Bell, LogIn, LogOut, Settings } from "lucide-react";
+import { Bell, LogIn, LogOut } from "lucide-react";
 import { useUIContext } from "@/providers/UIContext";
-import { signOut } from "@/lib/supabase/actions";
+import { getProfile, signOut } from "@/lib/supabase/actions";
 import UserBtn from "../UserBtn";
+import { useQuery } from "@tanstack/react-query";
+import { devLog } from "@/lib/utils";
 
 const Topbar = ({ user }: any) => {
   const { onLoginOpen } = useUIContext();
+
+  const { data: profile, isPending } = useQuery({
+    queryKey: ["profile"],
+    queryFn: getProfile,
+  });
+
+  devLog.log("Profile", profile);
+  devLog.log("User", user);
 
   return (
     <div className=" w-full sm:px-2 lg:px-4  sm:pt-2">
@@ -20,7 +30,7 @@ const Topbar = ({ user }: any) => {
             </Button>
           ) : (
             <>
-              <UserBtn user={user} />
+              {profile && <UserBtn profile={profile} />}
 
               <Button
                 isIconOnly
