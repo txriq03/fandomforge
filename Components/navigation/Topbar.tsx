@@ -29,29 +29,7 @@ const Topbar = ({ user }: any) => {
               Login <LogIn />
             </Button>
           ) : (
-            <>
-              {profile && <UserBtn profile={profile} />}
-
-              <Button
-                isIconOnly
-                radius="full"
-                className="p-2.5 "
-                color="success"
-                variant="flat"
-              >
-                <Bell />
-              </Button>
-              <Button
-                isIconOnly
-                variant="flat"
-                color="danger"
-                className="p-2.5 hover:bg-danger hover:text-slate-50"
-                radius="full"
-                onPress={signOut}
-              >
-                <LogOut />
-              </Button>
-            </>
+            <>{profile && <UserBtn profile={profile} />}</>
           )}
         </div>
       </div>

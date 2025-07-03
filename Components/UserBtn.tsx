@@ -1,8 +1,16 @@
 "use client";
 
 import Profile from "@/types/profile";
-import { Avatar, Button } from "@heroui/react";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@heroui/react";
 import { ChevronDown } from "lucide-react";
+import AccountMenu from "./AccountMenu";
 
 const UserBtn = ({ profile }: { profile: Profile }) => {
   return (
@@ -14,15 +22,7 @@ const UserBtn = ({ profile }: { profile: Profile }) => {
           Level <span className="font-semibold">{profile.level}</span>
         </p>
       </div>
-      <Button
-        isIconOnly
-        size="sm"
-        radius="full"
-        variant="light"
-        className="hidden sm:flex"
-      >
-        <ChevronDown size={21} className="text-slate-900/50" />
-      </Button>
+      <AccountMenu />
     </div>
   );
 };
