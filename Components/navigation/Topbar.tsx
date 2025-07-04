@@ -3,15 +3,15 @@ import SearchBox from "../SearchBox";
 import { Button } from "@heroui/react";
 import { Bell, LogIn, LogOut } from "lucide-react";
 import { useUIContext } from "@/providers/UIContext";
-import { getProfile, signOut } from "@/lib/supabase/actions";
 import UserBtn from "../UserBtn";
 import { useQuery } from "@tanstack/react-query";
 import { devLog } from "@/lib/utils";
+import { getProfile } from "@/lib/supabase/client-actions";
 
 const Topbar = ({ user }: any) => {
   const { onLoginOpen } = useUIContext();
 
-  const { data: profile, isPending } = useQuery({
+  const { data: profile } = useQuery({
     queryKey: ["profile"],
     queryFn: getProfile,
   });

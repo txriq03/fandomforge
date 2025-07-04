@@ -6,8 +6,7 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { Bell, ChevronDown, LogOut, Settings, User2 } from "lucide-react";
-import React from "react";
-
+import { signOut } from "@/lib/supabase/actions";
 const AccountMenu = () => {
   return (
     <Dropdown>
@@ -37,6 +36,7 @@ const AccountMenu = () => {
           color="danger"
           className="text-danger"
           startContent={<LogOut size={16} />}
+          onPress={signOut}
         >
           Logout
         </DropdownItem>
