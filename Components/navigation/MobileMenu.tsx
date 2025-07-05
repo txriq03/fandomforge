@@ -43,13 +43,19 @@ const MobileMenunOptionsCard = () => {
     <div className="grid grid-cols-3 gap-3 px-1 py-2 font-main">
       {fullOptions.map((item) => {
         return (
-          <Tooltip content={item.name} delay={500} closeDelay={0}>
+          <Tooltip
+            content={item.name}
+            delay={500}
+            closeDelay={0}
+            key={item.name}
+          >
             <Button
               isIconOnly
               as={Link}
               href={item.href}
               color="primary"
               variant="shadow"
+              size="lg"
             >
               <item.icon />
             </Button>
