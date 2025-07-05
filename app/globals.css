@@ -9,6 +9,8 @@
     --foreground: #1D1D1F;
     --primary: oklch(58.5% 0.233 277.117);
     --primary-light: oklch(67.3% 0.182 276.935);
+    --card: oklch(98.4% 0.003 247.858);
+    --options: white;
   }
 
   .dark {
@@ -27,6 +29,8 @@
   --font-mono: var(--font-geist-mono);
   --color-sidebar: #1D1D1F;
   --color-primary: var(--primary);
+  --color-card:  var(--card);
+  --color-options: var(--options);
   --color-sidebar: white;
   --color-primary-light: var(--primary-light);
 }

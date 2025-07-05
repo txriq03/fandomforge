@@ -7,6 +7,7 @@ import UserBtn from "../SidebarFooter";
 import { useQuery } from "@tanstack/react-query";
 import { devLog } from "@/lib/utils";
 import { getProfile } from "@/lib/supabase/client-actions";
+import Notifications from "../Notifications";
 
 const Topbar = ({ user }: any) => {
   const { onLoginOpen } = useUIContext();
@@ -24,17 +25,7 @@ const Topbar = ({ user }: any) => {
       <div className="bg-sidebar py-2 px-2 sm:rounded-xl flex justify-between gap-4 outline-1 outline-indigo-500/15">
         <SearchBox />
         <div className="flex gap-2">
-          <>
-            <Button
-              isIconOnly
-              radius="full"
-              className="p-2.5 "
-              color="primary"
-              variant="solid"
-            >
-              <Bell />
-            </Button>
-          </>
+          <Notifications />
         </div>
       </div>
     </div>
