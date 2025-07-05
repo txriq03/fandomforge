@@ -6,6 +6,7 @@ import NavWrapper from "@/Components/navigation/NavWrapper";
 import Topbar from "@/Components/navigation/Topbar";
 import LoginModal from "@/Components/LoginModal";
 import { createClient } from "@/lib/supabase/server";
+import { UserProvider } from "@/providers/UserProvider";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -40,13 +41,15 @@ export default async function RootLayout({
     >
       <body className={`antialiased`}>
         <Providers>
-          <NavWrapper>
-            <div className="space-y-4 min-h-screen">
-              <Topbar user={user} />
-              {children}
-            </div>
-          </NavWrapper>
-          <LoginModal />
+          <UserProvider user={user}>
+            <NavWrapper>
+              <div className="space-y-4 min-h-screen">
+                <Topbar user={user} />
+                {children}
+              </div>
+            </NavWrapper>
+            <LoginModal />
+          </UserProvider>
         </Providers>
       </body>
     </html>

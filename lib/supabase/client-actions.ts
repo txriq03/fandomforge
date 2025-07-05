@@ -1,3 +1,4 @@
+import Profile from "@/types/profile";
 import { devLog } from "../utils";
 import { createClient } from "./client";
 
@@ -52,7 +53,7 @@ export const signOut = async () => {
   await supabase.auth.signOut({ scope: "local" });
 };
 
-export async function getProfile() {
+export async function getProfile(): Promise<Profile | null> {
   const supabase = createClient();
 
   const {

@@ -1,15 +1,20 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@heroui/react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, LogIn } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Avatar } from "@heroui/react";
 import { useSidebar } from "@/providers/SidebarProvider";
 import { navItems } from "@/lib/data/navItems";
+import SidebarFooter from "../SidebarFooter";
+import { useUser } from "@/providers/UserProvider";
+import { useUIContext } from "@/providers/UIContext";
 
 const Sidebar = () => {
   const { collapsed, toggleCollapsed } = useSidebar();
+  const user = useUser();
+  const { onLoginOpen } = useUIContext();
+
   const pathname = usePathname();
 
   return (
@@ -72,6 +77,20 @@ const Sidebar = () => {
             );
           })}
         </nav>
+
+        {/* Footer */}
+        {user ? (
+          <SidebarFooter className="mt-auto  " />
+        ) : (
+          <Button
+            isIconOnly={collapsed}
+            color="primary"
+            onPress={onLoginOpen}
+            className="mt-auto"
+          >
+            {collapsed ? <LogIn size={18} /> : "Login"}
+          </Button>
+        )}
       </aside>
     </div>
   );
