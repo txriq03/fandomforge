@@ -49,7 +49,7 @@ const AccountCard = ({ profile }: { profile: Profile }) => {
 
         {/* Options */}
         <div className="border-1 p-2 border-primary/25 rounded-xl space-y-2 bg-options">
-          <div className="flex items-center gap-2 text-base hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
+          <div className="flex items-center gap-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
             <Pen size={18} />
             <p>Edit Profile</p>
           </div>
@@ -60,7 +60,7 @@ const AccountCard = ({ profile }: { profile: Profile }) => {
             offset={25}
             className="p-0"
           >
-            <div className="flex items-center justify-between text-base hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
+            <div className="flex items-center justify-between text-sm hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
               <div className="flex gap-2 items-center">
                 <div className={cn("h-3 w-3 bg-success rounded-full")} />
                 <p>Online</p>

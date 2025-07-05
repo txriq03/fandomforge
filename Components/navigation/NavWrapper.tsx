@@ -5,13 +5,15 @@ import BottomBar from "./Bottombar";
 import { useSidebar } from "@/providers/SidebarProvider";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
+import MobileMenu from "./MobileMenu";
 
 const NavWrapper = ({ children }: { children: ReactNode }) => {
   const { collapsed } = useSidebar();
   return (
     <div className="font-main">
       <Sidebar />
-      <BottomBar />
+      {/* <BottomBar /> */}
+      <MobileMenu />
       <main
         className={cn(
           "transition-all duration-500",

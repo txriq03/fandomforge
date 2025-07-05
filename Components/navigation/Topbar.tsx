@@ -21,12 +21,10 @@ const Topbar = ({ user }: any) => {
   devLog.log("User", user);
 
   return (
-    <div className=" w-full sm:px-2 lg:px-4  sm:pt-2">
-      <div className="bg-sidebar py-2 px-2 sm:rounded-xl flex justify-between gap-4 outline-1 outline-indigo-500/15">
+    <div className=" w-full  lg:px-4 lg:pt-2">
+      <div className="bg-sidebar py-2 px-2 lg:rounded-xl flex justify-between gap-4 outline-1 outline-indigo-500/15">
         <SearchBox />
-        <div className="flex gap-2">
-          <Notifications />
-        </div>
+        <Notifications />
       </div>
     </div>
   );

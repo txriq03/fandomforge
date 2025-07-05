@@ -21,7 +21,7 @@ const AccountBar = () => {
     return;
   }
   return (
-    <Popover showArrow>
+    <Popover>
       <PopoverTrigger>
         <div className="flex flex-nowrap gap-2 rounded-md flex-1 hover:bg-black/5 transition-all duration-250 cursor-pointer">
           <Badge
