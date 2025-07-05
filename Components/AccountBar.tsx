@@ -1,6 +1,12 @@
 "use client";
 import { getProfile } from "@/lib/supabase/client-actions";
-import { Avatar, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import {
+  Avatar,
+  Badge,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@heroui/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import AccountCard from "./AccountCard";
@@ -18,7 +24,15 @@ const AccountBar = () => {
     <Popover showArrow>
       <PopoverTrigger>
         <div className="flex flex-nowrap gap-2 rounded-md flex-1 hover:bg-black/5 transition-all duration-250 cursor-pointer">
-          <Avatar radius="md" showFallback src={"/default_pfp.png"} />
+          <Badge
+            color="success"
+            content=""
+            placement="bottom-right"
+            size="lg"
+            shape="circle"
+          >
+            <Avatar radius="full" showFallback src={"/default_pfp.png"} />
+          </Badge>
           <div className=" flex-col flex-nowrap hidden group-data-[state=open]/sidebar:sm:flex">
             <p className="text-sm">{profile.username}</p>
             <p className="text-[0.8rem] text-black/50 whitespace-nowrap">
