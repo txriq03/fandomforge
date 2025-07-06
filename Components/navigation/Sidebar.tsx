@@ -24,7 +24,7 @@ const Sidebar = () => {
     >
       <aside
         className={cn(
-          "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative ",
+          "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative z-50",
           collapsed ? "w-16 p-3" : "w-58 p-3"
         )}
       >
@@ -32,7 +32,7 @@ const Sidebar = () => {
           isIconOnly
           variant="light"
           onPress={toggleCollapsed}
-          className="absolute right-[-12] min-w-0 min-h-0 w-6 h-6 top-12 bg-sidebar z-100"
+          className="absolute right-[-12] min-w-0 min-h-0 w-6 h-6 top-12 bg-sidebar z-50"
           radius="full"
         >
           <ChevronRight

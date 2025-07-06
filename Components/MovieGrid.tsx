@@ -3,6 +3,8 @@ import { imageBaseUrl } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useDashbaord } from "@/providers/DashboardContext";
 import { Image, Spinner } from "@heroui/react";
+import Link from "next/link";
+import MediaPoster from "./MediaPoster";
 
 const MovieGrid = ({ className }: { className?: string }) => {
   const { popularMovies, isPending, error } = useDashbaord();
@@ -31,14 +33,7 @@ const MovieGrid = ({ className }: { className?: string }) => {
     >
       {popularMovies.results.map((movie: any) => {
         const url = `${imageBaseUrl}${movie.poster_path}`;
-        return (
-          <div key={movie.id}>
-            <Image
-              src={url}
-              className="w-full h-full object-cover hover:scale-105"
-            />
-          </div>
-        );
+        return <MediaPoster media={movie} key={movie.id} />;
       })}
     </div>
   );
