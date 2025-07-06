@@ -1,3 +1,4 @@
+"use client";
 import { imageBaseUrl } from "@/lib/constants";
 import { Button, Chip, Image } from "@heroui/react";
 import Link from "next/link";
@@ -11,12 +12,12 @@ const MediaPoster = ({ media }: any) => {
     <Link
       href={`/movie/${media.id}`}
       key={media.id}
-      className="group relative transition-all duration-300  hover:scale-105"
+      className="group relative transition-all duration-300 hover:scale-105 outline-3 outline-transparent group-hover:outline-amber-400"
     >
-      <Image
-        alt={media.id}
+      <img
+        alt={media.title}
         src={url}
-        className="w-full h-full object-cover transition-filter duration-300 group-hover:brightness-50"
+        className="w-full rounded-lg h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 "
       />
       <div className="flex flex-col justify-between h-full tracking-tighter leading-tighter  absolute z-50 top-0 left-0 p-3 text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
         <Chip

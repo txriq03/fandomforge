@@ -48,6 +48,9 @@ const MobileMenunOptionsCard = () => {
             delay={500}
             closeDelay={0}
             key={item.name}
+            classNames={{
+              base: "pointer-events-none",
+            }}
           >
             <Button
               isIconOnly
