@@ -91,7 +91,10 @@ const statusOptionsCard = () => {
           }
 
           return (
-            <div className="flex gap-2 hover:bg-slate-100 p-1 rounded-md transition-colors cursor-pointer">
+            <div
+              className="flex gap-2 hover:bg-slate-100 p-1 rounded-md transition-colors cursor-pointer"
+              key={status.name}
+            >
               <div className="pt-1">{status.icon}</div>
               <div className="flex flex-col">
                 {status.name}{" "}

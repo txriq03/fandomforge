@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@heroui/react";
 import { cn } from "@/lib/utils";
-import { Settings } from "lucide-react";
+import { Bell } from "lucide-react";
 import AccountBar from "./AccountBar";
 
 const SidebarFooter = ({ className }: { className?: string }) => {
@@ -12,11 +12,12 @@ const SidebarFooter = ({ className }: { className?: string }) => {
       <AccountBar />
       <Button
         isIconOnly
-        variant="light"
+        variant="solid"
         radius="md"
-        className="text-black/50 hidden group-data-[state=open]/sidebar:flex"
+        color="primary"
+        className=" hidden group-data-[state=open]/sidebar:flex"
       >
-        <Settings size={21} />
+        <Bell size={21} />
       </Button>
     </div>
   );

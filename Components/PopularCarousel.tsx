@@ -19,7 +19,7 @@ const PopularCarousel = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "overflow-hidden w-full h-full rounded-xl relative",
+        "overflow-hidden w-full h-full lg:rounded-xl relative",
         className
       )}
       ref={emblaRef}

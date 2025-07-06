@@ -32,7 +32,7 @@ const Sidebar = () => {
           isIconOnly
           variant="light"
           onPress={toggleCollapsed}
-          className="absolute right-[-12] min-w-0 min-h-0 w-6 h-6 top-12 bg-sidebar "
+          className="absolute right-[-12] min-w-0 min-h-0 w-6 h-6 top-12 bg-sidebar z-100"
           radius="full"
         >
           <ChevronRight

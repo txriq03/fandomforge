@@ -43,10 +43,7 @@ export default async function RootLayout({
         <Providers>
           <UserProvider user={user}>
             <NavWrapper>
-              <div className="space-y-4 min-h-screen">
-                <Topbar user={user} />
-                {children}
-              </div>
+              <div className="space-y-4 min-h-screen">{children}</div>
             </NavWrapper>
             <LoginModal />
           </UserProvider>
