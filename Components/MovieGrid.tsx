@@ -1,20 +1,24 @@
 "use client";
-import { imageBaseUrl } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { cn, devLog } from "@/lib/utils";
 import { useDashbaord } from "@/providers/DashboardContext";
-import { Image, Spinner } from "@heroui/react";
-import Link from "next/link";
+import { Card, Skeleton } from "@heroui/react";
 import MediaPoster from "./MediaPoster";
 
 const MovieGrid = ({ className }: { className?: string }) => {
   const { popularMovies, isPending, error } = useDashbaord();
-
-  console.log(popularMovies);
+  devLog.log(popularMovies);
 
   if (isPending)
     return (
-      <div className="text-center ">
-        <Spinner variant="simple" size="lg" />
+      <div
+        className={cn(
+          "grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-3 ",
+          className
+        )}
+      >
+        {Array.from({ length: 5 }).map((_, i) => (
+          <SkeletonCard key={i} />
+        ))}
       </div>
     );
   if (error)
@@ -32,11 +36,30 @@ const MovieGrid = ({ className }: { className?: string }) => {
       )}
     >
       {popularMovies.results.map((movie: any) => {
-        const url = `${imageBaseUrl}${movie.poster_path}`;
         return <MediaPoster media={movie} key={movie.id} />;
       })}
     </div>
   );
 };
 
+const SkeletonCard = () => {
+  return (
+    <Card className="space-y-3 sm:space-y-5 p-4" radius="lg">
+      <Skeleton className="rounded-lg">
+        <div className="h-18 sm:h-24 rounded-lg bg-default-300" />
+      </Skeleton>
+      <div className=" space-y-2 sm:space-y-3">
+        <Skeleton className="w-3/5 rounded-lg">
+          <div className="h-3 w-3/5 rounded-lg bg-default-200" />
+        </Skeleton>
+        <Skeleton className="w-4/5 rounded-lg">
+          <div className="h-3 w-4/5 rounded-lg bg-default-200" />
+        </Skeleton>
+        <Skeleton className="w-2/5 rounded-lg">
+          <div className="h-3 w-2/5 rounded-lg bg-default-300" />
+        </Skeleton>
+      </div>
+    </Card>
+  );
+};
 export default MovieGrid;

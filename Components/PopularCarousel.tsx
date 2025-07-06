@@ -4,6 +4,7 @@ import { useDashbaord } from "@/providers/DashboardContext";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback } from "react";
 import VoteAverageChip from "./VoteAverageChip";
+import { Spinner } from "@heroui/react";
 
 const PopularCarousel = ({ className }: { className?: string }) => {
   const { popularMovies, isPending } = useDashbaord();
@@ -13,7 +14,11 @@ const PopularCarousel = ({ className }: { className?: string }) => {
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
 
   if (isPending) {
-    return <div></div>;
+    return (
+      <div className="h-full w-full bg-slate-50 outline-1 outline-primary rounded-lg grid place-items-center">
+        <Spinner size="lg" variant="simple" />
+      </div>
+    );
   }
 
   return (
