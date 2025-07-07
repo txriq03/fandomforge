@@ -4,9 +4,9 @@ import { getProfile } from "@/lib/supabase/client-actions";
 import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     username: string;
-  };
+  }>;
 }
 
 const ProfilePage = async ({ params }: PageProps) => {
