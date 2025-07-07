@@ -1,5 +1,6 @@
 "use client";
 import { login, signup } from "@/lib/supabase/actions";
+import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import {
   addToast,
@@ -11,6 +12,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Skeleton,
+  Spinner,
 } from "@heroui/react";
 import { useMutation } from "@tanstack/react-query";
 import { AtSign, Lock, User2 } from "lucide-react";
@@ -20,7 +23,7 @@ import { useState } from "react";
 const LoginModal = () => {
   const { isLoginOpen, onLoginOpenChange } = useUIContext();
   const [showSignUp, toggleShowSignUp] = useState(false);
-
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Modal
       isOpen={isLoginOpen}
@@ -32,11 +35,25 @@ const LoginModal = () => {
         {(onClose) => (
           <div className="flex ">
             <div className="flex-1 h-[400px] hidden sm:block w-full relative">
+              {!imageLoaded && (
+                <Spinner
+                  variant="simple"
+                  color="primary"
+                  className="w-full h-full m-auto"
+                  size="lg"
+                />
+              )}
+
               <Image
                 fill
                 alt="login image"
                 src="/login.jpg"
-                className="object-cover h-full w-full "
+                className={cn(
+                  "object-cover h-full w-full transition-opacity opacity-0",
+                  imageLoaded && "opacity-100"
+                )}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageLoaded(true)}
               />
             </div>
             <div className="flex-1">

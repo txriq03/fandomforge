@@ -1,5 +1,5 @@
 "use client";
-import { getOwnProfile, getProfile } from "@/lib/supabase/client-actions";
+import { getOwnProfile } from "@/lib/supabase/client-actions";
 import {
   Avatar,
   Badge,
