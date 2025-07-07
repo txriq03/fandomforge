@@ -4,6 +4,7 @@ import { getProfile } from "@/lib/supabase/client-actions";
 import { useUser } from "@/providers/UserProvider";
 import { Avatar, Button, Spinner } from "@heroui/react";
 import { useQuery } from "@tanstack/react-query";
+import { Plus } from "lucide-react";
 import { useParams } from "next/navigation";
 
 const InsideBanner = () => {
@@ -32,13 +33,19 @@ const InsideBanner = () => {
           radius="none"
           src={profile?.profile_pic || "/default_pfp.png"}
           showFallback
-          className="w-35 h-35"
+          className="w-30 h-30  sm:w-35 sm:h-35"
         />
-        <p className="text-xl my-2">{profile?.username}</p>
+        <p className="text-lg sm:text-xl my-2">{profile?.username}</p>
       </div>
+
+      {/* Buttons */}
       {!isSameUser() && (
-        <Button className="my-2 bg-primary-light text-white" radius="sm">
-          Follow
+        <Button
+          startContent={<Plus size={21} />}
+          className="my-2 bg-primary-light text-white"
+          radius="sm"
+        >
+          Add Friend
         </Button>
       )}
     </div>

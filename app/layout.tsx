@@ -43,7 +43,7 @@ export default async function RootLayout({
         <Providers>
           <UserProvider user={user}>
             <NavWrapper>
-              <div className="space-y-4 min-h-screen">{children}</div>
+              <div className=" min-h-screen">{children}</div>
             </NavWrapper>
             <LoginModal />
           </UserProvider>
