@@ -1,12 +1,19 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { Tab, Tabs } from "@heroui/react";
 import { History, UsersRound } from "lucide-react";
 import { BiStats } from "react-icons/bi";
 import { GrOverview } from "react-icons/gr";
-
+import { useMediaQuery } from "usehooks-ts";
 const ProfileTabs = () => {
+  const isMobile = useMediaQuery("(max-width: 640px)");
+
   return (
-    <div className="flex overflow-x-auto gap-4 bg-slate-50 justify-center">
+    <div
+      className={cn(
+        "flex  bg-slate-50 justify-start sm:justify-center overflow-x-auto"
+      )}
+    >
       <Tabs variant="underlined" color="primary" aria-label="Profile options">
         <Tab
           key="overview"

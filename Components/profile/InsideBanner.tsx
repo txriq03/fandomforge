@@ -6,6 +6,7 @@ import { Avatar, Button, Spinner } from "@heroui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import { useParams } from "next/navigation";
+import { useMediaQuery } from "usehooks-ts";
 
 const InsideBanner = () => {
   const params = useParams();
@@ -19,6 +20,8 @@ const InsideBanner = () => {
   const isSameUser = () => {
     return user?.user_metadata.username === profile?.username;
   };
+
+  const isMobile = useMediaQuery("(max-width: 640px)");
 
   if (isPending) {
     return (
@@ -43,7 +46,7 @@ const InsideBanner = () => {
         <Button
           startContent={<Plus size={21} />}
           className="my-2 bg-primary-light text-white"
-          radius="sm"
+          size={isMobile ? "sm" : "md"}
         >
           Add Friend
         </Button>
