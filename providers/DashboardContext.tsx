@@ -1,11 +1,11 @@
 "use client";
 
-import { getPopularMovies } from "@/lib/api/tmdb";
+import { getTrending } from "@/lib/api/tmdb";
 import { useQuery } from "@tanstack/react-query";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext } from "react";
 
 interface DashboardContextType {
-  popularMovies: any;
+  trending: any;
   isPending: boolean;
   error: any;
 }
@@ -24,16 +24,16 @@ export const useDashbaord = () => {
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
   const {
-    data: popularMovies,
+    data: trending,
     isPending,
     error,
   } = useQuery({
-    queryKey: ["popularMovies"],
-    queryFn: getPopularMovies,
+    queryKey: ["trendingMovies"],
+    queryFn: getTrending,
   });
 
   return (
-    <DashboardContext.Provider value={{ popularMovies, isPending, error }}>
+    <DashboardContext.Provider value={{ trending, isPending, error }}>
       {children}
     </DashboardContext.Provider>
   );

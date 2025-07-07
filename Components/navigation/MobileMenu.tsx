@@ -16,7 +16,7 @@ const MobileMenu = () => {
       <PopoverTrigger>
         <Button
           isIconOnly
-          className="lg:hidden fixed bottom-5 right-5 z-50 "
+          className="lg:hidden fixed bottom-5 right-5 "
           radius="lg"
           size="lg"
           color="primary"

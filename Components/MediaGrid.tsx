@@ -4,9 +4,9 @@ import { useDashbaord } from "@/providers/DashboardContext";
 import { Card, Skeleton } from "@heroui/react";
 import MediaPoster from "./MediaPoster";
 
-const MovieGrid = ({ className }: { className?: string }) => {
-  const { popularMovies, isPending, error } = useDashbaord();
-  devLog.log(popularMovies);
+const MediaGrid = ({ className }: { className?: string }) => {
+  const { trending, isPending, error } = useDashbaord();
+  devLog.log(trending);
 
   if (isPending)
     return (
@@ -35,8 +35,8 @@ const MovieGrid = ({ className }: { className?: string }) => {
         className
       )}
     >
-      {popularMovies.results.map((movie: any) => {
-        return <MediaPoster media={movie} key={movie.id} />;
+      {trending.results.map((media: any) => {
+        return <MediaPoster media={media} key={media.id} />;
       })}
     </div>
   );
@@ -62,4 +62,4 @@ const SkeletonCard = () => {
     </Card>
   );
 };
-export default MovieGrid;
+export default MediaGrid;
