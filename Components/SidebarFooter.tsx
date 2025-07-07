@@ -19,7 +19,7 @@ const SidebarFooter = ({ className }: { className?: string }) => {
         size="sm"
         className=" hidden group-data-[state=open]/sidebar:flex"
       >
-        <FaBell size={21} />
+        <FaBell className="text-primary-light" size={21} />
       </Button>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { getProfile } from "@/lib/supabase/client-actions";
+import { getOwnProfile, getProfile } from "@/lib/supabase/client-actions";
 import {
   Avatar,
   Badge,
@@ -14,7 +14,7 @@ import AccountCard from "./AccountCard";
 const AccountBar = () => {
   const { data: profile } = useQuery({
     queryKey: ["profile"],
-    queryFn: getProfile,
+    queryFn: getOwnProfile,
   });
 
   if (!profile) {

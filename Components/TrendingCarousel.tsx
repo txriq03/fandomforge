@@ -1,15 +1,22 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useDashbaord } from "@/providers/DashboardContext";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback } from "react";
 import VoteAverageChip from "./VoteAverageChip";
 import { Chip, Spinner } from "@heroui/react";
-import { BiMovie } from "react-icons/bi";
 import { Clapperboard, Tv } from "lucide-react";
+import { getTrending } from "@/lib/api/tmdb";
+import { useQuery } from "@tanstack/react-query";
 
 const TrendingCarousel = ({ className }: { className?: string }) => {
-  const { trending, isPending } = useDashbaord();
+  const {
+    data: trending,
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: ["trendingMovies"],
+    queryFn: getTrending,
+  });
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -54,7 +61,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                     <VoteAverageChip value={media.vote_average} />
 
                     <Chip
-                      className="text-sm pl-2 bg-primary-light text-white"
+                      className="text-sm pl-2 bg-purple-500 text-white"
                       size="sm"
                       startContent={
                         media.media_type === "movie" ? (

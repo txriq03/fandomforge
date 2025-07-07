@@ -1,11 +1,19 @@
 "use client";
 import { cn, devLog } from "@/lib/utils";
-import { useDashbaord } from "@/providers/DashboardContext";
 import { Card, Skeleton } from "@heroui/react";
 import MediaPoster from "./MediaPoster";
+import { useQuery } from "@tanstack/react-query";
+import { getTrending } from "@/lib/api/tmdb";
 
 const MediaGrid = ({ className }: { className?: string }) => {
-  const { trending, isPending, error } = useDashbaord();
+  const {
+    data: trending,
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: ["trendingMovies"],
+    queryFn: getTrending,
+  });
   devLog.log(trending);
 
   if (isPending)

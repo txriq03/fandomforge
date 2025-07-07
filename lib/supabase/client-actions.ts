@@ -53,7 +53,7 @@ export const signOut = async () => {
   await supabase.auth.signOut({ scope: "local" });
 };
 
-export async function getProfile(): Promise<Profile | null> {
+export async function getOwnProfile(): Promise<Profile | null> {
   const supabase = createClient();
 
   const {
@@ -80,6 +80,29 @@ export async function getProfile(): Promise<Profile | null> {
     return null;
   } else {
     devLog.log("Profile:", profile);
+  }
+
+  return profile;
+}
+
+export async function getProfile(username: string): Promise<Profile | null> {
+  const supabase = createClient();
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("username", username)
+    .single();
+
+  if (profileError) {
+    devLog.error(
+      "Error getting profile for username:",
+      username,
+      profileError.message
+    );
+    return null;
+  } else {
+    devLog.log("Profile fetched:", profile);
   }
 
   return profile;

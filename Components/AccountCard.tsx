@@ -13,7 +13,8 @@ import {
   Progress,
   Tooltip,
 } from "@heroui/react";
-import { ChevronRight, Pen } from "lucide-react";
+import { ChevronRight, Pen, User2 } from "lucide-react";
+import Link from "next/link";
 
 const AccountCard = ({ profile }: { profile: Profile }) => {
   const user = useUser();
@@ -49,10 +50,13 @@ const AccountCard = ({ profile }: { profile: Profile }) => {
 
         {/* Options */}
         <div className="border-1 p-2 border-primary/25 rounded-xl space-y-2 bg-options">
-          <div className="flex items-center gap-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
-            <Pen size={18} />
-            <p>Edit Profile</p>
-          </div>
+          <Link
+            href={`/profile/${profile.username}`}
+            className="flex items-center gap-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer"
+          >
+            <User2 size={18} />
+            <p>Profile</p>
+          </Link>
           <Divider />
           <Tooltip
             placement="right"
