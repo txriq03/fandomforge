@@ -79,21 +79,21 @@ const Sidebar = () => {
         </nav>
 
         {/* Footer */}
-        {user ? (
-          <div className="mt-auto gap-4 flex flex-col">
-            <Divider />
+        <div className="mt-auto gap-4 flex flex-col">
+          <Divider />
+          {user ? (
             <SidebarFooter />
-          </div>
-        ) : (
-          <Button
-            isIconOnly={collapsed}
-            color="primary"
-            onPress={onLoginOpen}
-            className="mt-auto"
-          >
-            {collapsed ? <LogIn size={18} /> : "Login"}
-          </Button>
-        )}
+          ) : (
+            <Button
+              isIconOnly={collapsed}
+              color="primary"
+              onPress={onLoginOpen}
+              className="mt-auto"
+            >
+              {collapsed ? <LogIn size={18} /> : "Login"}
+            </Button>
+          )}
+        </div>
       </aside>
     </div>
   );

@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@heroui/react";
 import { cn } from "@/lib/utils";
-import { Bell, Settings } from "lucide-react";
 import { RiSettings3Fill } from "react-icons/ri";
 import AccountBar from "./AccountBar";
 import { FaBell } from "react-icons/fa";

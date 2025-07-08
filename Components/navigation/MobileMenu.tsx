@@ -1,18 +1,23 @@
+"use client";
 import { navItem, navItems } from "@/lib/data/navItems";
-import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Tooltip,
-} from "@heroui/react";
-import { Ellipsis, Menu, Settings, User2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useUIContext } from "@/providers/UIContext";
+import { useUser } from "@/providers/UserProvider";
+import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { LogIn, Settings, User2 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
+import { TbMenu3 } from "react-icons/tb";
 
 const MobileMenu = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
-    <Popover placement="left">
+    <Popover
+      placement="left"
+      backdrop="opaque"
+      isOpen={isMobileMenuOpen}
+      onOpenChange={setIsMobileMenuOpen}
+    >
       <PopoverTrigger>
         <Button
           isIconOnly
@@ -20,11 +25,11 @@ const MobileMenu = () => {
           radius="lg"
           size="lg"
         >
-          <Menu size={32} />
+          <TbMenu3 size={32} />
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        <MobileMenunOptionsCard />
+        <MobileMenunOptionsCard setPopoverOpen={setIsMobileMenuOpen} />
       </PopoverContent>
     </Popover>
   );
@@ -37,19 +42,28 @@ const others: navItem[] = [
 
 const fullOptions: navItem[] = [...navItems, ...others];
 
-const MobileMenunOptionsCard = () => {
+const MobileMenunOptionsCard = ({
+  setPopoverOpen,
+}: {
+  setPopoverOpen: any;
+}) => {
+  const user = useUser();
+  const { onLoginOpen } = useUIContext();
+
   return (
     <div className="grid grid-cols-3 gap-3 px-1 py-2 font-main">
       {fullOptions.map((item) => {
+        const hideAuthItems = () => {
+          return !user && (item.name === "Profile" || item.name === "Settings");
+        };
+
         return (
-          <Tooltip
-            content={item.name}
-            delay={500}
-            closeDelay={0}
+          <div
             key={item.name}
-            classNames={{
-              base: "pointer-events-none",
-            }}
+            className={cn(
+              "flex flex-col items-center",
+              hideAuthItems() && "hidden"
+            )}
           >
             <Button
               isIconOnly
@@ -61,9 +75,29 @@ const MobileMenunOptionsCard = () => {
             >
               <item.icon />
             </Button>
-          </Tooltip>
+            <p className="text-slate-400 text-sm ">{item.name}</p>
+          </div>
         );
       })}
+
+      {/* Only show if there's no  user */}
+      {!user && (
+        <div className={cn("flex flex-col items-center")}>
+          <Button
+            isIconOnly
+            color="primary"
+            variant="shadow"
+            size="lg"
+            onPress={() => {
+              onLoginOpen();
+              setPopoverOpen(false);
+            }}
+          >
+            <LogIn />
+          </Button>
+          <p className="text-slate-400 text-sm ">Login</p>
+        </div>
+      )}
     </div>
   );
 };
