@@ -108,6 +108,6 @@ export async function getProfile(username: string): Promise<Profile | null> {
   return profile;
 }
 
-// const isSameUser = () => {
-//   return user?.user_metadata.username === profile?.username;
-// };
+export const isSameUser = (user: any, profile: Profile) => {
+  return user?.user_metadata.username === profile?.username;
+};

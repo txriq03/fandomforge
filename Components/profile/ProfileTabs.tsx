@@ -4,10 +4,7 @@ import { Tab, Tabs } from "@heroui/react";
 import { History, UsersRound } from "lucide-react";
 import { BiStats } from "react-icons/bi";
 import { GrOverview } from "react-icons/gr";
-import { useMediaQuery } from "usehooks-ts";
 const ProfileTabs = () => {
-  const isMobile = useMediaQuery("(max-width: 640px)");
-
   return (
     <div
       className={cn(

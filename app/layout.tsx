@@ -7,6 +7,7 @@ import Topbar from "@/Components/navigation/Topbar";
 import LoginModal from "@/Components/LoginModal";
 import { createClient } from "@/lib/supabase/server";
 import { UserProvider } from "@/providers/UserProvider";
+import ProfileModal from "@/Components/profile/ProfileModal";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -46,6 +47,7 @@ export default async function RootLayout({
               <div className=" min-h-screen">{children}</div>
             </NavWrapper>
             <LoginModal />
+            <ProfileModal />
           </UserProvider>
         </Providers>
       </body>

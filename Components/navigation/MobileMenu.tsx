@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
-import { LogIn, Settings, User2 } from "lucide-react";
+import { LogIn, LucideProps, Settings, User2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { ForwardRefExoticComponent, RefAttributes, useState } from "react";
 import { TbMenu3 } from "react-icons/tb";
 
 const MobileMenu = () => {
@@ -37,17 +37,24 @@ const MobileMenu = () => {
 
 const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
   const user = useUser();
-  const { authModal } = useUIContext();
+  const { authModal, profileModal } = useUIContext();
 
-  const others: navItem[] = [
+  type authItem = {
+    name: string;
+    icon: ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+    >;
+    href?: string;
+  };
+  const others: authItem[] = [
     {
       name: "Profile",
       icon: User2,
-      href: `/profile/${user?.user_metadata.username}`,
     },
     { name: "Settings", icon: Settings, href: "/settings" },
   ];
-  const fullOptions: navItem[] = [...navItems, ...others];
+
+  const fullOptions = [...navItems, ...others];
 
   return (
     <div className="grid grid-cols-3 gap-3 px-1 py-2 font-main">
@@ -67,11 +74,17 @@ const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
             <Button
               isIconOnly
               as={Link}
-              href={item.href}
+              href={item.href || ""}
               color="primary"
               variant="shadow"
               size="lg"
-              onPress={() => setPopoverOpen(false)}
+              onPress={() => {
+                if (item.name === "Profile") {
+                  profileModal.onOpen();
+                  console.warn("Profile modal is open");
+                }
+                setPopoverOpen(false);
+              }}
             >
               <item.icon />
             </Button>
@@ -79,6 +92,8 @@ const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
           </div>
         );
       })}
+
+      {/* Only show if there is a user */}
 
       {/* Only show if there's no  user */}
       {!user && (
