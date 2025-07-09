@@ -1,9 +1,7 @@
 "use client";
-
-import { getProfile } from "@/lib/supabase/utils";
+import useProfile from "@/hooks/useProfile";
 import { useUser } from "@/providers/UserProvider";
 import { Avatar, Button, Spinner } from "@heroui/react";
-import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
@@ -11,10 +9,7 @@ import { useMediaQuery } from "usehooks-ts";
 const InsideBanner = () => {
   const params = useParams();
   const username = params.username as string;
-  const { data: profile, isPending } = useQuery({
-    queryKey: ["profile", username],
-    queryFn: () => getProfile(username),
-  });
+  const { data: profile, isPending } = useProfile(username);
   const user = useUser();
 
   const isSameUser = () => {

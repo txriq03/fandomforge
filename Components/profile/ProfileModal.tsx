@@ -1,14 +1,17 @@
 "use client";
-import { Modal, ModalContent, Spinner } from "@heroui/react";
+import { useUIContext } from "@/providers/UIContext";
+import { Modal, ModalContent, ModalHeader } from "@heroui/react";
 
 const ProfileModal = () => {
+  const { profileModal } = useUIContext();
   return (
     <Modal
-      isOpen={isLoginOpen}
-      onOpenChange={onLoginOpenChange}
+      isOpen={profileModal.isOpen}
+      onOpenChange={profileModal.onOpenChange}
       size="2xl"
       className="font-main"
     >
+      <ModalHeader></ModalHeader>
       <ModalContent>{(onClose) => <div className="flex "></div>}</ModalContent>
     </Modal>
   );
