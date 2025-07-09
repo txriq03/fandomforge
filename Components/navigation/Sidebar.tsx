@@ -13,7 +13,7 @@ import { useUIContext } from "@/providers/UIContext";
 const Sidebar = () => {
   const { collapsed, toggleCollapsed } = useSidebar();
   const user = useUser();
-  const { onLoginOpen } = useUIContext();
+  const { authModal } = useUIContext();
 
   const pathname = usePathname();
 
@@ -87,7 +87,7 @@ const Sidebar = () => {
             <Button
               isIconOnly={collapsed}
               color="primary"
-              onPress={onLoginOpen}
+              onPress={authModal.onOpen}
               className="mt-auto"
             >
               {collapsed ? <LogIn size={18} /> : "Login"}

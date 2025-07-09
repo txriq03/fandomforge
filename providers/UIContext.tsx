@@ -3,9 +3,15 @@ import { useDisclosure } from "@heroui/react";
 import { createContext, ReactNode, useContext } from "react";
 
 interface UIContextType {
-  isLoginOpen: any;
-  onLoginOpen: any;
-  onLoginOpenChange: any;
+  authModal: {
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+    onOpenChange: () => void;
+    isControlled: boolean;
+    getButtonProps: (props?: any) => any;
+    getDisclosureProps: (props?: any) => any;
+  };
 }
 
 export const UIContext = createContext<UIContextType | undefined>(undefined);
@@ -19,15 +25,10 @@ export const useUIContext = () => {
 };
 
 const UIContextProvider = ({ children }: { children: ReactNode }) => {
-  const {
-    isOpen: isLoginOpen,
-    onOpen: onLoginOpen,
-    onOpenChange: onLoginOpenChange,
-  } = useDisclosure();
+  const authModal = useDisclosure();
+
   return (
-    <UIContext.Provider value={{ isLoginOpen, onLoginOpen, onLoginOpenChange }}>
-      {children}
-    </UIContext.Provider>
+    <UIContext.Provider value={{ authModal }}>{children}</UIContext.Provider>
   );
 };
 

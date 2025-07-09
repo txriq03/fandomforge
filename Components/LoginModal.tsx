@@ -12,7 +12,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Skeleton,
   Spinner,
 } from "@heroui/react";
 import { useMutation } from "@tanstack/react-query";
@@ -21,13 +20,13 @@ import Image from "next/image";
 import { useState } from "react";
 
 const LoginModal = () => {
-  const { isLoginOpen, onLoginOpenChange } = useUIContext();
+  const { authModal } = useUIContext();
   const [showSignUp, toggleShowSignUp] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Modal
-      isOpen={isLoginOpen}
-      onOpenChange={onLoginOpenChange}
+      isOpen={authModal.isOpen}
+      onOpenChange={authModal.onOpenChange}
       size="2xl"
       className="font-main"
     >
@@ -60,7 +59,11 @@ const LoginModal = () => {
               <ModalHeader className="text-primary text-2xl font-bold font-heading">
                 {showSignUp ? "Sign up" : "Welcome back"}
               </ModalHeader>
-              {showSignUp ? <SignupForm /> : <LoginForm />}
+              {showSignUp ? (
+                <SignupForm onClose={onClose} />
+              ) : (
+                <LoginForm onClose={onClose} />
+              )}
               <ModalFooter className="flex flex-row items-center gap-1 text-sm justify-start pt-0 ">
                 {" "}
                 {showSignUp
@@ -85,9 +88,7 @@ const LoginModal = () => {
   );
 };
 
-const SignupForm = () => {
-  const { onLoginOpenChange } = useUIContext();
-
+const SignupForm = ({ onClose }: { onClose: () => void }) => {
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
       return signup(formData);
@@ -98,7 +99,7 @@ const SignupForm = () => {
         color: "primary",
         variant: "solid",
       });
-      onLoginOpenChange(false);
+      onClose();
     },
     onError: (error) => {
       addToast({
@@ -177,9 +178,7 @@ const SignupForm = () => {
   );
 };
 
-const LoginForm = () => {
-  const { onLoginOpenChange } = useUIContext();
-
+const LoginForm = ({ onClose }: { onClose: () => void }) => {
   const mutation = useMutation({
     mutationFn: (formData: FormData) => {
       return login(formData);
@@ -190,7 +189,7 @@ const LoginForm = () => {
         color: "primary",
         variant: "solid",
       });
-      onLoginOpenChange(false);
+      onClose();
     },
     onError: (error) => {
       addToast({

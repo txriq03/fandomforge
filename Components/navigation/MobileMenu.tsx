@@ -37,7 +37,7 @@ const MobileMenu = () => {
 
 const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
   const user = useUser();
-  const { onLoginOpen } = useUIContext();
+  const { authModal } = useUIContext();
 
   const others: navItem[] = [
     {
@@ -89,7 +89,7 @@ const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
             variant="shadow"
             size="lg"
             onPress={() => {
-              onLoginOpen();
+              authModal.onOpen();
               setPopoverOpen(false);
             }}
           >
