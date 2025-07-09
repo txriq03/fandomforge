@@ -24,3 +24,13 @@ export const getTrending = async () => {
   }
   return res.json();
 };
+
+export const getMovieById = async (movieId: string) => {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
+
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    throw new Error("Failed to fetch movie details.");
+  }
+  return res.json();
+};

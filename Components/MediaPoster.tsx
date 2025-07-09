@@ -10,7 +10,7 @@ const MediaPoster = ({ media }: any) => {
   const name = media.title || media.name;
   return (
     <Link
-      href={`/movie/${media.id}`}
+      href={`/${media.media_type}/${media.id}`}
       key={media.id}
       className="group relative transition-all duration-300 hover:scale-105 outline-3 outline-transparent group-hover:outline-amber-400"
     >

@@ -29,31 +29,30 @@ const MobileMenu = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        <MobileMenunOptionsCard setPopoverOpen={setIsMobileMenuOpen} />
+        <MobileMenunContent setPopoverOpen={setIsMobileMenuOpen} />
       </PopoverContent>
     </Popover>
   );
 };
 
-const others: navItem[] = [
-  { name: "Profile", icon: User2, href: "/profile" },
-  { name: "Settings", icon: Settings, href: "/settings" },
-];
-
-const fullOptions: navItem[] = [...navItems, ...others];
-
-const MobileMenunOptionsCard = ({
-  setPopoverOpen,
-}: {
-  setPopoverOpen: any;
-}) => {
+const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
   const user = useUser();
   const { onLoginOpen } = useUIContext();
+
+  const others: navItem[] = [
+    {
+      name: "Profile",
+      icon: User2,
+      href: `/profile/${user?.user_metadata.username}`,
+    },
+    { name: "Settings", icon: Settings, href: "/settings" },
+  ];
+  const fullOptions: navItem[] = [...navItems, ...others];
 
   return (
     <div className="grid grid-cols-3 gap-3 px-1 py-2 font-main">
       {fullOptions.map((item) => {
-        const hideAuthItems = () => {
+        const shouldShowAuthItems = () => {
           return !user && (item.name === "Profile" || item.name === "Settings");
         };
 
@@ -62,7 +61,7 @@ const MobileMenunOptionsCard = ({
             key={item.name}
             className={cn(
               "flex flex-col items-center",
-              hideAuthItems() && "hidden"
+              shouldShowAuthItems() && "hidden"
             )}
           >
             <Button
@@ -72,6 +71,7 @@ const MobileMenunOptionsCard = ({
               color="primary"
               variant="shadow"
               size="lg"
+              onPress={() => setPopoverOpen(false)}
             >
               <item.icon />
             </Button>

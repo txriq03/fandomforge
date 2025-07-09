@@ -1,6 +1,6 @@
 import InsideBanner from "@/Components/profile/InsideBanner";
 import ProfileTabs from "@/Components/profile/ProfileTabs";
-import { getProfile } from "@/lib/supabase/client-actions";
+import { getProfile } from "@/lib/supabase/utils";
 import { notFound } from "next/navigation";
 
 interface PageProps {

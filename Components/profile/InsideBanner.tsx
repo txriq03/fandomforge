@@ -1,6 +1,6 @@
 "use client";
 
-import { getProfile } from "@/lib/supabase/client-actions";
+import { getProfile } from "@/lib/supabase/utils";
 import { useUser } from "@/providers/UserProvider";
 import { Avatar, Button, Spinner } from "@heroui/react";
 import { useQuery } from "@tanstack/react-query";
