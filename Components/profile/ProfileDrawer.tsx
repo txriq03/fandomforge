@@ -32,6 +32,28 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
       onOpenChange={profileModal.onOpenChange}
       placement="bottom"
       className={cn("font-main", className)}
+      motionProps={{
+        variants: {
+          enter: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              type: "spring",
+              duration: 0.3,
+              mass: 1,
+              damping: 18,
+              stiffness: 300,
+            },
+          },
+          exit: {
+            opacity: 0,
+            y: 100,
+            transition: {
+              duration: 0.2,
+            },
+          },
+        },
+      }}
     >
       {isPending || !profile ? (
         <Spinner variant="simple" size="lg" />
