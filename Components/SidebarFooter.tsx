@@ -16,21 +16,19 @@ const SidebarFooter = ({ className }: { className?: string }) => {
           isIconOnly
           variant="light"
           radius="md"
-          color="primary"
           size="sm"
           className=" hidden group-data-[state=open]/sidebar:flex"
         >
-          <RiSettings3Fill className="text-primary-light" size={21} />
+          <RiSettings3Fill className="text-foreground/75" size={21} />
         </Button>
         <Button
           isIconOnly
           variant="light"
           radius="md"
-          color="primary"
           size="sm"
           className=" hidden group-data-[state=open]/sidebar:flex"
         >
-          <FaBell className="text-primary-light" size={21} />
+          <FaBell className="text-foreground/75" size={21} />
         </Button>
       </div>
     </div>

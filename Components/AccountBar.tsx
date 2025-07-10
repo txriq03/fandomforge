@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@heroui/react";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import AccountCard from "./AccountCard";
 
 const AccountBar = () => {
@@ -17,11 +17,13 @@ const AccountBar = () => {
     queryFn: getOwnProfile,
   });
 
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
   if (!profile) {
     return;
   }
   return (
-    <Popover>
+    <Popover isOpen={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger>
         <div className="flex flex-nowrap gap-2 rounded-md flex-1 hover:bg-black/5 transition-all duration-250 cursor-pointer">
           <Badge
@@ -42,7 +44,7 @@ const AccountBar = () => {
         </div>
       </PopoverTrigger>
       <PopoverContent className="p-0">
-        <AccountCard profile={profile} />
+        <AccountCard profile={profile} setIsPopoverOpen={setIsPopoverOpen} />
       </PopoverContent>
     </Popover>
   );

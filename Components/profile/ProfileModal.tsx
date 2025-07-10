@@ -42,7 +42,6 @@ const ProfileModal = ({ className }: { className?: string }) => {
               <>
                 {/* Banner area*/}
                 <div className="relative w-full h-[150px] sm:h-[200px] bg-[#232634]">
-                  <div className="w-[50px] h-[8px] rounded-full bg-white/10 absolute top-0 mt-2 left-1/2 -translate-x-1/2  sm:hidden" />
                   <div className="px-5 absolute -bottom-15 ">
                     <Badge
                       color="success"
@@ -72,7 +71,6 @@ const ProfileModal = ({ className }: { className?: string }) => {
                     {isSameUser(user, profile) ? (
                       <Button
                         startContent={<FaPen />}
-                        className="text-right"
                         size={isMobile ? "sm" : "md"}
                       >
                         Edit Profile
