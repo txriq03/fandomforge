@@ -18,8 +18,9 @@ import { IoChatbubble } from "react-icons/io5";
 import { TiUserAdd } from "react-icons/ti";
 import { useMediaQuery } from "usehooks-ts";
 import ProfileModalTabs from "./ProfileModalTabs";
+import { cn } from "@/lib/utils";
 
-const ProfileModal = () => {
+const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();
   const { profileModal } = useUIContext();
   const { data: profile, isPending } = useProfile(user?.user_metadata.username);
@@ -30,7 +31,7 @@ const ProfileModal = () => {
       isOpen={profileModal.isOpen}
       onOpenChange={profileModal.onOpenChange}
       size="xl"
-      className="font-main"
+      className={cn("font main", className)}
     >
       {isPending || !profile ? (
         <Spinner variant="simple" size="lg" />
