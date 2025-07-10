@@ -25,7 +25,10 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
   const { profileModal } = useUIContext();
   const { data: profile, isPending } = useProfile(user?.user_metadata.username);
   const isMobile = useMediaQuery("(max-width: 640px)");
-
+  const fullProfile = {
+    user,
+    profile,
+  };
   return (
     <Drawer
       isOpen={profileModal.isOpen}
@@ -123,7 +126,7 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
                   <p className="text-foreground/50 text-sm">Display name</p>
                 </div>
                 <div className="overflow-x-auto">
-                  <ProfileModalTabs />
+                  <ProfileModalTabs profile={fullProfile} />
                 </div>
               </div>
             </>

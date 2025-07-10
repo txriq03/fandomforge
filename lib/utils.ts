@@ -22,3 +22,15 @@ export const devLog = {
     }
   },
 };
+
+export const getImageUrl = (
+  imageUrl: string | null,
+  size = "original"
+): string => {
+  const baseImageUrl =
+    size === "original"
+      ? `https://image.tmdb.org/t/p/original`
+      : `https://image.tmdb.org/t/p/w${size}`;
+
+  return `${baseImageUrl}${imageUrl}`;
+};

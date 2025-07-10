@@ -1,6 +1,7 @@
 import Profile from "@/types/profile";
 import { devLog } from "../utils";
 import { createClient } from "./client";
+import { format, parseISO } from "date-fns";
 
 export const login = async (formData: FormData) => {
   const supabase = createClient();
@@ -110,4 +111,12 @@ export async function getProfile(username: string): Promise<Profile | null> {
 
 export const isSameUser = (user: any, profile: Profile) => {
   return user?.user_metadata.username === profile?.username;
+};
+
+export const formatDate = (iso: string) => {
+  const formatted = format(
+    parseISO("2025-07-02T23:42:54.848253Z"),
+    "do MMMM, yyyy"
+  );
+  return formatted;
 };

@@ -1,5 +1,4 @@
 "use client";
-import useOwnProfile from "@/hooks/useOwnProfile";
 import useProfile from "@/hooks/useProfile";
 import { isSameUser } from "@/lib/supabase/utils";
 import { useUIContext } from "@/providers/UIContext";
@@ -25,6 +24,11 @@ const ProfileModal = ({ className }: { className?: string }) => {
   const { profileModal } = useUIContext();
   const { data: profile, isPending } = useProfile(user?.user_metadata.username);
   const isMobile = useMediaQuery("(max-width: 640px)");
+
+  const fullProfile = {
+    profile,
+    user,
+  };
 
   return (
     <Modal
@@ -100,7 +104,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
                     <p className="text-foreground/50 text-sm">Display name</p>
                   </div>
                   <div className="overflow-x-auto">
-                    <ProfileModalTabs />
+                    <ProfileModalTabs profile={fullProfile} />
                   </div>
                 </div>
               </>

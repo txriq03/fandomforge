@@ -1,3 +1,4 @@
+import MediaHeader from "@/Components/MediaHeader";
 import { getMovieById } from "@/lib/api/tmdb";
 
 interface PageProps {
@@ -10,7 +11,11 @@ const MoviePage = async ({ params }: PageProps) => {
   const { id } = await params;
   const movie = await getMovieById(id);
   console.log(movie);
-  return <div>{movie.title}</div>;
+  return (
+    <>
+      <MediaHeader movie={movie} />
+    </>
+  );
 };
 
 export default MoviePage;
