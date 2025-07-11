@@ -34,7 +34,7 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
       isOpen={profileModal.isOpen}
       onOpenChange={profileModal.onOpenChange}
       placement="bottom"
-      className={cn("font-main", className)}
+      className={cn("font-main h-[400px]", className)}
       motionProps={{
         variants: {
           enter: {
