@@ -1,14 +1,17 @@
 "use client";
 import { cn, getImageUrl } from "@/lib/utils";
-import { Movie } from "@/types/movie";
 import Image from "next/image";
 import { Button, Image as HeroImage } from "@heroui/react";
 import { Heart } from "lucide-react";
+import { Movie } from "@/types/movie";
+import TVSeries from "@/types/tv";
 
-const MediaHeader = ({ movie }: { movie: Movie }) => {
-  const backdropUrl = getImageUrl(movie.backdrop_path);
-  const posterUrl = getImageUrl(movie.poster_path, "500");
+const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
+  const backdropUrl = getImageUrl(media.backdrop_path);
+  const posterUrl = getImageUrl(media.poster_path, "500");
   console.log(backdropUrl);
+
+  const title = "title" in media ? media.title : media.name;
   return (
     <>
       <div
@@ -17,7 +20,7 @@ const MediaHeader = ({ movie }: { movie: Movie }) => {
         )}
       >
         <Image
-          alt={movie.title}
+          alt={title}
           fill
           src={backdropUrl}
           className="object-cover object-center"
@@ -45,8 +48,10 @@ const MediaHeader = ({ movie }: { movie: Movie }) => {
           </div>
 
           <div className=" flex flex-col gap-1 py-2">
-            <p className="text-2xl sm:text-[1.8rem]">{movie.title}</p>
-            <p className="text-foreground/50 text-sm">{movie.overview}</p>
+            <p className="text-2xl sm:text-[1.8rem] font-heading font-bold">
+              {title}
+            </p>
+            <p className="text-foreground/50 text-sm">{media.overview}</p>
           </div>
         </div>
       </div>

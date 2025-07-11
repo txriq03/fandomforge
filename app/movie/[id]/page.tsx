@@ -13,7 +13,7 @@ const MoviePage = async ({ params }: PageProps) => {
   console.log(movie);
   return (
     <>
-      <MediaHeader movie={movie} />
+      <MediaHeader media={movie} />
     </>
   );
 };

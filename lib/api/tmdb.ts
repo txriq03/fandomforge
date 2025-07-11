@@ -1,4 +1,5 @@
 import { Movie } from "@/types/movie";
+import TVSeries from "@/types/tv";
 
 const options = {
   method: "GET",
@@ -33,6 +34,16 @@ export const getMovieById = async (movieId: string): Promise<Movie> => {
   const res = await fetch(url, options);
   if (!res.ok) {
     throw new Error("Failed to fetch movie details.");
+  }
+  return res.json();
+};
+
+export const getTVById = async (tvSeriesId: string): Promise<TVSeries> => {
+  const url = `https://api.themoviedb.org/3/tv/${tvSeriesId}?language=en-US`;
+
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    throw new Error("Failed to fetch TV series details.");
   }
   return res.json();
 };
