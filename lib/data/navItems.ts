@@ -11,7 +11,7 @@ export type navItem = {
 
 export const navItems: navItem[] = [
   { name: "Home", icon: House, href: "/" },
-  { name: "Movies", icon: Clapperboard, href: "/movies" },
+  { name: "Movies", icon: Clapperboard, href: "/movie" },
   { name: "TV Shows", icon: Tv, href: "/tv" },
   { name: "History", icon: History, href: "/history" },
 ];

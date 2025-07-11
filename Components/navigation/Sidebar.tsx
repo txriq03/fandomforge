@@ -19,12 +19,12 @@ const Sidebar = () => {
 
   return (
     <div
-      className="group/sidebar fixed hidden lg:block h-screen shadow-xl"
+      className="group/sidebar fixed hidden lg:block h-screen shadow-xl z-50"
       data-state={collapsed ? "closed" : "open"}
     >
       <aside
         className={cn(
-          "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative z-50",
+          "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative",
           collapsed ? "w-16 p-3" : "w-58 p-3"
         )}
       >
@@ -32,7 +32,7 @@ const Sidebar = () => {
           isIconOnly
           variant="light"
           onPress={toggleCollapsed}
-          className="absolute right-[-12] min-w-0 min-h-0 w-6 h-6 top-12 bg-sidebar z-50"
+          className="absolute right-[-12] min-w-0 min-h-0 w-6 h-6 top-12 bg-sidebar"
           radius="full"
         >
           <ChevronRight
