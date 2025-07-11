@@ -59,7 +59,9 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
       }}
     >
       {isPending || !profile ? (
-        <Spinner variant="simple" size="lg" />
+        <DrawerContent>
+          {(onClose) => <Spinner variant="simple" size="lg" className="p-25" />}
+        </DrawerContent>
       ) : (
         <DrawerContent>
           {(onClose) => (

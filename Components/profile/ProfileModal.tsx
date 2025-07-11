@@ -34,11 +34,13 @@ const ProfileModal = ({ className }: { className?: string }) => {
     <Modal
       isOpen={profileModal.isOpen}
       onOpenChange={profileModal.onOpenChange}
-      size="xl"
+      size={isPending || !profile ? "sm" : "xl"}
       className={cn("font main", className)}
     >
       {isPending || !profile ? (
-        <Spinner variant="simple" size="lg" />
+        <ModalContent>
+          {(onClose) => <Spinner variant="simple" size="lg" className="py-5" />}
+        </ModalContent>
       ) : (
         <>
           <ModalContent>
