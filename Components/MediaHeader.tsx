@@ -35,10 +35,10 @@ const MediaHeader = ({ movie }: { movie: Movie }) => {
               shadow="lg"
             />
             <div className="flex flex-1 gap-2">
-              <Button fullWidth color="primary" size="sm">
+              <Button fullWidth color="primary">
                 Play
               </Button>
-              <Button isIconOnly className="bg-pink-500 text-white" size="sm">
+              <Button isIconOnly className="bg-pink-500 text-white">
                 <Heart size={18} />
               </Button>
             </div>
