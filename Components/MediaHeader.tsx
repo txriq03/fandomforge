@@ -25,7 +25,7 @@ const MediaHeader = ({ movie }: { movie: Movie }) => {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
       </div>
       <div className="bg-slate-50 w-full  px-5 sm:px-10">
-        <div className="flex gap-10">
+        <div className="flex flex-col sm:flex-row gap-1 sm:gap-10">
           {/* Poster and buttons */}
           <div className="flex  sm:flex-col gap-2 py-5 w-full sm:w-[180px] lg:w-[250px]  flex-shrink-0 -mt-30 items-end sm:items-stretch">
             <HeroImage
@@ -44,8 +44,8 @@ const MediaHeader = ({ movie }: { movie: Movie }) => {
             </div>
           </div>
 
-          <div className="max-sm:hidden flex flex-col gap-1 py-2">
-            <p className="text-xl sm:text-[1.8rem]">{movie.title}</p>
+          <div className=" flex flex-col gap-1 py-2">
+            <p className="text-2xl sm:text-[1.8rem]">{movie.title}</p>
             <p className="text-foreground/50 text-sm">{movie.overview}</p>
           </div>
         </div>
