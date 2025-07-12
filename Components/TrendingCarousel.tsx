@@ -7,6 +7,7 @@ import { Chip, Spinner } from "@heroui/react";
 import { Clapperboard, Tv } from "lucide-react";
 import { getTrending } from "@/lib/api/tmdb";
 import { useQuery } from "@tanstack/react-query";
+import Autoplay from "embla-carousel-autoplay";
 
 const TrendingCarousel = ({ className }: { className?: string }) => {
   const {
@@ -17,14 +18,14 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
     queryKey: ["trendingMovies"],
     queryFn: getTrending,
   });
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
 
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
 
   if (isPending) {
     return (
-      <div className="h-full w-full bg-slate-50 outline-1 outline-primary rounded-lg grid place-items-center">
+      <div className="h-full w-full bg-slate-50 outline-1 outline-primary grid place-items-center">
         <Spinner size="lg" variant="simple" />
       </div>
     );
