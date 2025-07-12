@@ -2,15 +2,14 @@
 import { cn } from "@/lib/utils";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useState } from "react";
-import VoteAverageChip from "./VoteAverageChip";
-import { Button, Spinner } from "@heroui/react";
+import { Button, Chip, Spinner } from "@heroui/react";
 import { Info, LucideProps } from "lucide-react";
 import { getTrending } from "@/lib/api/tmdb";
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
-import { FaCalendar, FaPlayCircle } from "react-icons/fa";
+import { FaCalendar, FaPlayCircle, FaStar } from "react-icons/fa";
 import { formatDate } from "@/lib/supabase/utils";
 import { IconType } from "react-icons";
 
@@ -78,13 +77,17 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                   <div className="hidden sm:flex gap-3">
                     <MetadataChip
                       Icon={FaCalendar}
-                      text={formatDate(releaseDate)}
+                      value={formatDate(releaseDate)}
                     />
                     <MetadataChip
                       Icon={FaPlayCircle}
-                      text={media.media_type === "tv" ? "TV" : "Movie"}
+                      value={media.media_type === "tv" ? "TV" : "Movie"}
                     />
-                    <VoteAverageChip value={media.vote_average} />
+                    <MetadataChip
+                      value={media.vote_average.toFixed(1)}
+                      Icon={FaStar}
+                      fill
+                    />
                   </div>
 
                   <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm max-w-[50ch]">
@@ -164,13 +167,27 @@ interface MetadataChipProps {
     | React.ForwardRefExoticComponent<
         Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
       >;
-  text: string;
+  value: string;
+  fill?: boolean;
 }
-const MetadataChip = ({ Icon, text }: MetadataChipProps) => {
+const MetadataChip = ({ Icon, value, fill = false }: MetadataChipProps) => {
+  if (fill) {
+    return (
+      <Chip
+        color="primary"
+        size="sm"
+        radius="sm"
+        className="font-bold p-1"
+        startContent={<Icon className="text-amber-300" size={15} />}
+      >
+        {value}
+      </Chip>
+    );
+  }
   return (
     <div className="flex gap-1 items-center text-sm">
       <Icon />
-      <p>{text}</p>
+      <p>{value}</p>
     </div>
   );
 };
