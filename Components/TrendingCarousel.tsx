@@ -86,19 +86,21 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
         })}
       </div>
 
-      {/* Optional Nav Buttons */}
-      <button
-        className="absolute left-4 top-1/2 z-20 text-white text-3xl"
-        onClick={scrollPrev}
-      >
-        ‹
-      </button>
-      <button
-        className="absolute right-4 top-1/2 z-20 text-white text-3xl"
-        onClick={scrollNext}
-      >
-        ›
-      </button>
+      {/* Nav Buttons */}
+      <div className="hidden sm:block">
+        <button
+          className="absolute left-4 top-1/2 z-20 text-white text-3xl"
+          onClick={scrollPrev}
+        >
+          ‹
+        </button>
+        <button
+          className="absolute right-4 top-1/2 z-20 text-white text-3xl"
+          onClick={scrollNext}
+        >
+          ›
+        </button>
+      </div>
     </div>
   );
 };
