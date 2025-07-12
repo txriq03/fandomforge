@@ -1,40 +1,49 @@
 "use client";
 import { cn } from "@/lib/utils";
 import useEmblaCarousel from "embla-carousel-react";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import VoteAverageChip from "./VoteAverageChip";
-import { Button, Chip, Spinner } from "@heroui/react";
-import { Calendar, Info, LucideProps, Tv } from "lucide-react";
+import { Button, Spinner } from "@heroui/react";
+import { Info, LucideProps } from "lucide-react";
 import { getTrending } from "@/lib/api/tmdb";
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
-import { MdLocalMovies } from "react-icons/md";
 import { FaCalendar, FaPlayCircle } from "react-icons/fa";
 import { formatDate } from "@/lib/supabase/utils";
 import { IconType } from "react-icons";
 
 const TrendingCarousel = ({ className }: { className?: string }) => {
-  const {
-    data: trending,
-    isPending,
-    error,
-  } = useQuery({
+  const { data: trending, isPending } = useQuery({
     queryKey: ["trendingMovies"],
     queryFn: getTrending,
   });
 
   const isMobile = useIsMobile();
-
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
 
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
+
   if (isPending) {
     return (
-      <div className="h-full w-full bg-slate-50  grid place-items-center">
+      <div className="h-full w-full bg-slate-50 grid place-items-center">
         <Spinner size="lg" variant="simple" />
       </div>
     );
@@ -55,19 +64,17 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
           return (
             <div className="flex-[0_0_100%] relative h-full" key={media.id}>
               <div
-                className="w-full h-full  bg-cover bg-center"
+                className="w-full h-full bg-cover bg-center"
                 style={{
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/${media.backdrop_path})`,
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/80 via-transparent to-black/40" />
                 <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
-                  {/* Name */}
-                  <h2 className="text-2xl sm:text-4xl font-bold font-heading  sm:max-w-[30ch] line-clamp-1">
+                  <h2 className="text-2xl sm:text-4xl font-bold font-heading sm:max-w-[30ch] line-clamp-1">
                     {name}
                   </h2>
 
-                  {/* Metadata */}
                   <div className="hidden sm:flex gap-3">
                     <MetadataChip
                       Icon={FaCalendar}
@@ -77,16 +84,13 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                       Icon={FaPlayCircle}
                       text={media.media_type === "tv" ? "TV" : "Movie"}
                     />
-
                     <VoteAverageChip value={media.vote_average} />
                   </div>
 
-                  {/* Overview */}
-                  <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm  max-w-[50ch]">
+                  <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm max-w-[50ch]">
                     {media.overview}
                   </p>
 
-                  {/* Buttons */}
                   <div className="flex gap-2">
                     <Button
                       color="primary"
@@ -117,7 +121,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
         })}
       </div>
 
-      {/* Nav Buttons */}
+      {/* Navigation Buttons */}
       <div className="hidden sm:block">
         <button
           className="absolute left-4 top-1/2 z-20 text-white text-3xl"
@@ -132,6 +136,24 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
           ›
         </button>
       </div>
+
+      {/* Step Indicators */}
+      {scrollSnaps.length > 0 && (
+        <div className="absolute sm:bottom-0 max-sm:top-1/2 sm:translate-0 -translate-y-1/2 p-5 right-0 flex flex-col  sm:flex-row gap-2 z-20">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => emblaApi?.scrollTo(index)}
+              className={cn(
+                "w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-500 cursor-pointer",
+                index === selectedIndex
+                  ? "bg-yellow-400 max-sm:h-5 sm:w-5"
+                  : "bg-white/50 hover:bg-white/80"
+              )}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
