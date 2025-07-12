@@ -85,7 +85,11 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                   </p>
 
                   {logoURL ? (
-                    <Image src={logo} className="w-[300px] sm:w-[350px]" />
+                    <Image
+                      src={logo}
+                      className="w-[200px] sm:w-[350px]"
+                      radius="none"
+                    />
                   ) : (
                     <h2 className="text-2xl sm:text-4xl font-bold  sm:max-w-[30ch] line-clamp-1">
                       {name}
