@@ -2,21 +2,31 @@
 import { cn } from "@/lib/utils";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Chip, Spinner } from "@heroui/react";
+import { Button, Chip, Image, Spinner } from "@heroui/react";
 import { Info, LucideProps } from "lucide-react";
-import { getTrending } from "@/lib/api/tmdb";
-import { useQuery } from "@tanstack/react-query";
+import { fetchMediaLogo, getImageUrl, getTrending } from "@/lib/api/tmdb";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
 import { FaCalendar, FaPlayCircle, FaStar } from "react-icons/fa";
 import { formatDate } from "@/lib/supabase/utils";
 import { IconType } from "react-icons";
+import { imageBaseUrl } from "@/lib/constants";
 
 const TrendingCarousel = ({ className }: { className?: string }) => {
   const { data: trending, isPending } = useQuery({
     queryKey: ["trendingMovies"],
     queryFn: getTrending,
+  });
+  const top5 = trending?.results?.slice(0, 5) || [];
+
+  const logoQueries = useQueries({
+    queries: top5.map((media: any) => ({
+      queryKey: ["trendingLogo", media.id],
+      queryFn: () => fetchMediaLogo(media.id),
+      enabled: !!trending, // only run if trending is available
+    })),
   });
 
   const isMobile = useIsMobile();
@@ -50,16 +60,16 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
 
   return (
     <div
-      className={cn(
-        "overflow-hidden w-full h-full lg:rounded-xl relative",
-        className
-      )}
+      className={cn("overflow-hidden w-full h-full relative", className)}
       ref={emblaRef}
     >
       <div className="flex h-full">
-        {trending.results.slice(0, 5).map((media: any, index: number) => {
+        {top5.map((media: any, index: number) => {
           const name = media.title || media.name;
           const releaseDate = media.release_date || media.first_air_date;
+          const logoURL: any = logoQueries[index]?.data;
+          const logo = getImageUrl(logoURL);
+
           return (
             <div className="flex-[0_0_100%] relative h-full" key={media.id}>
               <div
@@ -73,9 +83,14 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                   <p className=" font-semibold text-sm text-pink-400">
                     #{index + 1} Trending
                   </p>
-                  <h2 className="text-2xl sm:text-4xl font-bold font-heading sm:max-w-[30ch] line-clamp-1">
-                    {name}
-                  </h2>
+
+                  {logoURL ? (
+                    <Image src={logo} className="w-[300px] sm:w-[350px]" />
+                  ) : (
+                    <h2 className="text-2xl sm:text-4xl font-bold  sm:max-w-[30ch] line-clamp-1">
+                      {name}
+                    </h2>
+                  )}
 
                   <div className="hidden sm:flex gap-3">
                     <MetadataChip

@@ -1,10 +1,11 @@
 "use client";
-import { cn, getImageUrl } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button, Image as HeroImage } from "@heroui/react";
 import { Heart } from "lucide-react";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
+import { getImageUrl } from "@/lib/api/tmdb";
 
 const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
   const backdropUrl = getImageUrl(media.backdrop_path);

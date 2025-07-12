@@ -47,3 +47,24 @@ export const getTVById = async (tvSeriesId: string): Promise<TVSeries> => {
   }
   return res.json();
 };
+
+export const fetchMediaLogo = async (mediaId: string): Promise<string> => {
+  const url = `https://api.themoviedb.org/3/movie/${mediaId}/images?include_image_language=en,`;
+  const res = await fetch(url, options);
+  const data = await res.json();
+  console.log("Logo data:", data);
+  const logo = data.logos?.[0];
+  return logo ? `https://image.tmdb.org/t/p/w500${logo.file_path}` : "";
+};
+
+export const getImageUrl = (
+  imageUrl: string | null,
+  size = "original"
+): string => {
+  const baseImageUrl =
+    size === "original"
+      ? `https://image.tmdb.org/t/p/original`
+      : `https://image.tmdb.org/t/p/w${size}`;
+
+  return `${baseImageUrl}${imageUrl}`;
+};

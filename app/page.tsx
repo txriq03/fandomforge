@@ -4,7 +4,7 @@ import TrendingCarousel from "@/Components/TrendingCarousel";
 export default async function HomePage() {
   return (
     <div className="space-y-4 pb-4">
-      <div className="h-[40vh] sm:h-[50vh] lg:h-[60vh] lg:px-4 lg:pt-4">
+      <div className="h-[40vh] sm:h-[50vh] lg:h-[60vh] ">
         <TrendingCarousel />
       </div>
 
