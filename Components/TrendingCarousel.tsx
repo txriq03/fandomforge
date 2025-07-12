@@ -57,7 +57,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
       ref={emblaRef}
     >
       <div className="flex h-full">
-        {trending.results.slice(0, 5).map((media: any) => {
+        {trending.results.slice(0, 5).map((media: any, index: number) => {
           const name = media.title || media.name;
           const releaseDate = media.release_date || media.first_air_date;
           return (
@@ -70,6 +70,9 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
               >
                 <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/80 via-transparent to-black/40" />
                 <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
+                  <p className=" font-semibold text-sm text-pink-400">
+                    #{index + 1} Trending
+                  </p>
                   <h2 className="text-2xl sm:text-4xl font-bold font-heading sm:max-w-[30ch] line-clamp-1">
                     {name}
                   </h2>
@@ -90,7 +93,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                     />
                   </div>
 
-                  <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm max-w-[50ch]">
+                  <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm lg:text-base max-w-[50ch]">
                     {media.overview}
                   </p>
 

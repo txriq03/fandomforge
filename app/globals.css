@@ -5,8 +5,8 @@
 
 @layer theme {
   :root {
-    /* --background: oklch(95.625% 0.00698 248.256); */
-    --background: oklch(95% 0.05 276.935);
+    --background: oklch(95.625% 0.00698 248.256);
+    /* --background: oklch(95% 0.05 276.935); */
     --foreground: #1d1d1f;
     --primary: oklch(58.5% 0.233 277.117);
     --primary-light: oklch(67.3% 0.182 276.935);
