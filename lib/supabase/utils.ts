@@ -113,10 +113,17 @@ export const isSameUser = (user: any, profile: Profile) => {
   return user?.user_metadata.username === profile?.username;
 };
 
-export const formatDate = (iso: string) => {
+export const formatDateTime = (iso: string) => {
   const formatted = format(
     parseISO("2025-07-02T23:42:54.848253Z"),
     "do MMMM, yyyy"
   );
+  return formatted;
+};
+
+export const formatDate = (iso: string) => {
+  if (!iso) return "";
+  const date = parseISO(iso);
+  const formatted = format(date, "do MMMM, yyyy");
   return formatted;
 };

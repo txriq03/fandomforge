@@ -8,9 +8,9 @@ const VoteAverageChip = ({ value }: { value: number }) => {
     <Chip
       color="primary"
       size="sm"
-      radius="md"
-      className="font-bold pl-2"
-      startContent={<FaStar className="text-amber-300" size={18} />}
+      radius="sm"
+      className="font-bold p-1"
+      startContent={<FaStar className="text-amber-300" size={15} />}
     >
       {value.toFixed(1)}
     </Chip>

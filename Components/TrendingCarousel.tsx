@@ -4,12 +4,16 @@ import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback } from "react";
 import VoteAverageChip from "./VoteAverageChip";
 import { Button, Chip, Spinner } from "@heroui/react";
-import { Clapperboard, Info, Tv } from "lucide-react";
+import { Calendar, Info, LucideProps, Tv } from "lucide-react";
 import { getTrending } from "@/lib/api/tmdb";
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
+import { MdLocalMovies } from "react-icons/md";
+import { FaCalendar, FaPlayCircle } from "react-icons/fa";
+import { formatDate } from "@/lib/supabase/utils";
+import { IconType } from "react-icons";
 
 const TrendingCarousel = ({ className }: { className?: string }) => {
   const {
@@ -30,7 +34,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
 
   if (isPending) {
     return (
-      <div className="h-full w-full bg-slate-50 outline-1 outline-primary grid place-items-center">
+      <div className="h-full w-full bg-slate-50  grid place-items-center">
         <Spinner size="lg" variant="simple" />
       </div>
     );
@@ -47,42 +51,38 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
       <div className="flex h-full">
         {trending.results.slice(0, 5).map((media: any) => {
           const name = media.title || media.name;
+          const releaseDate = media.release_date || media.first_air_date;
           return (
             <div className="flex-[0_0_100%] relative h-full" key={media.id}>
               <div
-                className="w-full h-full bg-cover bg-center"
+                className="w-full h-full  bg-cover bg-center"
                 style={{
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/${media.backdrop_path})`,
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/80 via-transparent to-black/40" />
                 <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
                   {/* Name */}
-                  <h2 className="text-2xl sm:text-4xl font-bold font-heading">
+                  <h2 className="text-2xl sm:text-4xl font-bold font-heading  sm:max-w-[30ch] line-clamp-1">
                     {name}
                   </h2>
 
                   {/* Metadata */}
-                  <div className="hidden sm:flex gap-2">
-                    <VoteAverageChip value={media.vote_average} />
+                  <div className="hidden sm:flex gap-3">
+                    <MetadataChip
+                      Icon={FaCalendar}
+                      text={formatDate(releaseDate)}
+                    />
+                    <MetadataChip
+                      Icon={FaPlayCircle}
+                      text={media.media_type === "tv" ? "TV" : "Movie"}
+                    />
 
-                    <Chip
-                      className="text-sm pl-2 bg-purple-500 text-white"
-                      size="sm"
-                      startContent={
-                        media.media_type === "movie" ? (
-                          <Clapperboard size={16} />
-                        ) : (
-                          <Tv size={16} />
-                        )
-                      }
-                    >
-                      {media.media_type}
-                    </Chip>
+                    <VoteAverageChip value={media.vote_average} />
                   </div>
 
                   {/* Overview */}
-                  <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm sm:text-base">
+                  <p className="max-sm:hidden text-white/75 line-clamp-2 sm:line-clamp-3 text-sm  max-w-[50ch]">
                     {media.overview}
                   </p>
 
@@ -91,7 +91,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                     <Button
                       color="primary"
                       radius="sm"
-                      size={isMobile ? "md" : "lg"}
+                      size={isMobile ? "md" : "md"}
                     >
                       Play Now
                     </Button>
@@ -105,7 +105,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                       isIconOnly
                       className="bg-pink-500 text-white"
                       radius="sm"
-                      size={isMobile ? "md" : "lg"}
+                      size={isMobile ? "md" : "md"}
                     >
                       <Info size={isMobile ? 18 : 24} />
                     </Button>
@@ -132,6 +132,23 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
           ›
         </button>
       </div>
+    </div>
+  );
+};
+
+interface MetadataChipProps {
+  Icon:
+    | IconType
+    | React.ForwardRefExoticComponent<
+        Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+      >;
+  text: string;
+}
+const MetadataChip = ({ Icon, text }: MetadataChipProps) => {
+  return (
+    <div className="flex gap-1 items-center text-sm">
+      <Icon />
+      <p>{text}</p>
     </div>
   );
 };
