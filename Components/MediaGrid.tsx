@@ -43,7 +43,13 @@ const MediaGrid = ({ className }: { className?: string }) => {
       )}
     >
       {trending.results.map((media: any) => {
-        return <MediaPoster media={media} key={media.id} />;
+        return (
+          <MediaPoster
+            media={media}
+            key={media.id}
+            className="hover:scale-105"
+          />
+        );
       })}
     </div>
   );

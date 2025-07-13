@@ -69,7 +69,10 @@ const TrendingCarousel = () => {
       </div>
 
       {/* Carousel */}
-      <div className=" flex justify-center px-2 sm:px-4" ref={emblaRef}>
+      <div
+        className=" flex justify-center px-2 sm:px-4 overflow-hidden"
+        ref={emblaRef}
+      >
         <div className="flex gap-[2px] sm:gap-2">
           {trending?.results
             ?.slice(0, 10)

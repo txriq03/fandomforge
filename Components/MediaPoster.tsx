@@ -26,7 +26,7 @@ const MediaPoster = ({ media, className, number }: Props) => {
       href={`/${media.media_type}/${media.id}`}
       key={media.id}
       className={cn(
-        "group relative transition-all duration-300 hover:scale-105 outline-3 outline-transparent group-hover:outline-amber-400",
+        "group relative transition-all duration-300  outline-3 outline-transparent group-hover:outline-amber-400",
         className
       )}
     >
