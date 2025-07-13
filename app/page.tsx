@@ -1,6 +1,7 @@
 import DevelopmentAlert from "@/Components/DevelopmentAlert";
 import MediaGrid from "@/Components/MediaGrid";
 import BannerCarousel from "@/Components/BannerCarousel";
+import TrendingCarousel from "@/Components/TrendingCarousel";
 
 export default async function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default async function HomePage() {
         <BannerCarousel />
       </div>
       <DevelopmentAlert />
+      {/* <TrendingCarousel /> */}
       <MediaGrid className="px-1 sm:px-2 lg:px-4" />
     </div>
   );

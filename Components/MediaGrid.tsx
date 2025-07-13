@@ -11,10 +11,9 @@ const MediaGrid = ({ className }: { className?: string }) => {
     isPending,
     error,
   } = useQuery({
-    queryKey: ["trendingMovies"],
+    queryKey: ["trendingMedia"],
     queryFn: getTrending,
   });
-  devLog.log(trending);
 
   if (isPending)
     return (

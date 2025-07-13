@@ -15,7 +15,7 @@ import { IconType } from "react-icons";
 
 const BannerCarousel = ({ className }: { className?: string }) => {
   const { data: trending, isPending } = useQuery({
-    queryKey: ["trendingMovies"],
+    queryKey: ["trendingMedia"],
     queryFn: getTrending,
   });
   const top5 = trending?.results?.slice(0, 5) || [];
