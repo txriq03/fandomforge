@@ -37,7 +37,7 @@ const MediaPoster = ({ media, className, number }: Props) => {
       />
       {number && (
         <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-white grid place-items-center font-bold font-heading rounded-br-sm ">
-          {formatNumber(number + 1)}
+          {formatNumber(number)}
         </div>
       )}
 
