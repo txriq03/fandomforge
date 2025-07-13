@@ -48,8 +48,11 @@ export const getTVById = async (tvSeriesId: string): Promise<TVSeries> => {
   return res.json();
 };
 
-export const fetchMediaLogo = async (mediaId: string): Promise<string> => {
-  const url = `https://api.themoviedb.org/3/movie/${mediaId}/images?include_image_language=en,`;
+export const fetchMediaLogo = async (
+  mediaId: string,
+  mediaType: string
+): Promise<string> => {
+  const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/images?include_image_language=en,`;
   const res = await fetch(url, options);
   const data = await res.json();
   console.log("Logo data:", data);

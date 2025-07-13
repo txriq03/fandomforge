@@ -12,9 +12,8 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { FaCalendar, FaPlayCircle, FaStar } from "react-icons/fa";
 import { formatDate } from "@/lib/supabase/utils";
 import { IconType } from "react-icons";
-import { imageBaseUrl } from "@/lib/constants";
 
-const TrendingCarousel = ({ className }: { className?: string }) => {
+const BannerCarousel = ({ className }: { className?: string }) => {
   const { data: trending, isPending } = useQuery({
     queryKey: ["trendingMovies"],
     queryFn: getTrending,
@@ -24,7 +23,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
   const logoQueries = useQueries({
     queries: top5.map((media: any) => ({
       queryKey: ["trendingLogo", media.id],
-      queryFn: () => fetchMediaLogo(media.id),
+      queryFn: () => fetchMediaLogo(media.id, media.media_type),
       enabled: !!trending, // only run if trending is available
     })),
   });
@@ -78,12 +77,8 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/${media.backdrop_path})`,
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/80 via-transparent to-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t  from-black/80  to-black/25" />
                 <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
-                  <p className=" font-semibold text-sm text-pink-400">
-                    #{index + 1} Trending
-                  </p>
-
                   {logoURL ? (
                     <Image
                       src={logo}
@@ -132,7 +127,7 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
                           : `/tv/${media.id}`
                       }
                       isIconOnly
-                      className="bg-pink-500 text-white"
+                      className=" text-white bg-neutral-600"
                       radius="sm"
                       size={isMobile ? "md" : "md"}
                     >
@@ -147,19 +142,23 @@ const TrendingCarousel = ({ className }: { className?: string }) => {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="hidden sm:block">
-        <button
-          className="absolute left-4 top-1/2 z-20 text-white text-3xl"
+      <div className="hidden sm:block opacity-0">
+        <Button
+          isIconOnly
+          size="sm"
+          className="absolute left-4 top-1/2 z-20 text-white text-3xl cursor-pointer bg-neutral-700"
           onClick={scrollPrev}
         >
           ‹
-        </button>
-        <button
-          className="absolute right-4 top-1/2 z-20 text-white text-3xl"
+        </Button>
+        <Button
+          isIconOnly
+          size="sm"
+          className="absolute right-4 top-1/2 z-20 text-white text-3xl cursor-pointer bg-neutral-700"
           onClick={scrollNext}
         >
           ›
-        </button>
+        </Button>
       </div>
 
       {/* Step Indicators */}
@@ -214,4 +213,4 @@ const MetadataChip = ({ Icon, value, fill = false }: MetadataChipProps) => {
   );
 };
 
-export default TrendingCarousel;
+export default BannerCarousel;

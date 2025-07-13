@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import TrendingCarousel from "./TrendingCarousel";
+import TrendingCarousel from "./BannerCarousel";
 import { cn } from "@/lib/utils";
 
 const CarouselAndRecentlyPlayed = ({ className }: { className?: string }) => {
