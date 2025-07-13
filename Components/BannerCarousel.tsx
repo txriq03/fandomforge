@@ -22,7 +22,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
   const top5 = trending?.results?.slice(0, 5) || [];
 
   const logoQueries = useQueries({
-    queries: top5.map((media: any) => ({
+    queries: top5.map((media: TrendingMedia) => ({
       queryKey: ["trendingLogo", media.id],
       queryFn: () => fetchMediaLogo(media.id, media.media_type),
       enabled: !!trending, // only run if trending is available

@@ -56,7 +56,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
                       size="lg"
                       shape="circle"
                       classNames={{
-                        badge: "h-7 w-7",
+                        badge: "h-7 w-7 bottom-5 right-5 border-white border-4",
                       }}
                     >
                       <Avatar

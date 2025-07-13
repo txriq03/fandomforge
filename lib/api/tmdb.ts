@@ -49,7 +49,7 @@ export const getTVById = async (tvSeriesId: string): Promise<TVSeries> => {
 };
 
 export const fetchMediaLogo = async (
-  mediaId: string,
+  mediaId: number,
   mediaType: string
 ): Promise<string> => {
   const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/images?include_image_language=en,`;
