@@ -12,6 +12,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { FaCalendar, FaPlayCircle, FaStar } from "react-icons/fa";
 import { formatDate } from "@/lib/supabase/utils";
 import { IconType } from "react-icons";
+import { TrendingMedia } from "@/types/trending";
 
 const BannerCarousel = ({ className }: { className?: string }) => {
   const { data: trending, isPending } = useQuery({
@@ -63,9 +64,21 @@ const BannerCarousel = ({ className }: { className?: string }) => {
       ref={emblaRef}
     >
       <div className="flex h-full">
-        {top5.map((media: any, index: number) => {
-          const name = media.title || media.name;
-          const releaseDate = media.release_date || media.first_air_date;
+        {top5.map((media: TrendingMedia, index: number) => {
+          let name: string;
+          let releaseDate: string;
+          let url: string;
+
+          if (media.media_type === "movie") {
+            name = media.title;
+            releaseDate = media.release_date;
+            url = `/movie/${media.id}`;
+          } else {
+            name = media.name;
+            releaseDate = media.first_air_date;
+            url = `/tv/${media.id}`;
+          }
+
           const logoURL: any = logoQueries[index]?.data;
           const logo = getImageUrl(logoURL);
 
@@ -121,11 +134,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                     </Button>
                     <Button
                       as={Link}
-                      href={
-                        media.media_type === "movie"
-                          ? `/movie/${media.id}`
-                          : `/tv/${media.id}`
-                      }
+                      href={url}
                       isIconOnly
                       className=" text-white bg-neutral-600"
                       radius="sm"
@@ -147,7 +156,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
           isIconOnly
           size="sm"
           className="absolute left-4 top-1/2 z-20 text-white text-3xl cursor-pointer bg-neutral-700"
-          onClick={scrollPrev}
+          onPress={scrollPrev}
         >
           ‹
         </Button>
@@ -155,7 +164,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
           isIconOnly
           size="sm"
           className="absolute right-4 top-1/2 z-20 text-white text-3xl cursor-pointer bg-neutral-700"
-          onClick={scrollNext}
+          onPress={scrollNext}
         >
           ›
         </Button>

@@ -25,7 +25,7 @@ const Sidebar = () => {
       <aside
         className={cn(
           "h-full bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative",
-          collapsed ? "w-16 p-3" : "w-58 p-3"
+          collapsed ? "w-16 p-3" : "w-54 p-3"
         )}
       >
         <Button
@@ -59,7 +59,8 @@ const Sidebar = () => {
                 className={cn(
                   "flex items-center rounded-lg text-foreground/65 text-sm hover:text-primary  transition-all duration-400 text-nowrap",
                   collapsed ? "justify-center p-2.5" : "gap-2 p-3",
-                  isActive && "bg-primary-light text-indigo-50"
+                  isActive &&
+                    "bg-primary-light text-indigo-50 hover:text-indigo-50 border-1 border-primary"
                 )}
               >
                 <item.icon size={18} className="leading-none" />

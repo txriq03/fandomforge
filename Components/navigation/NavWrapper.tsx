@@ -17,7 +17,7 @@ const NavWrapper = ({ children }: { children: ReactNode }) => {
       <main
         className={cn(
           "transition-all duration-500",
-          collapsed ? "lg:ml-[64px]" : "lg:ml-[232px]"
+          collapsed ? "lg:ml-[64px]" : "lg:ml-[217px]"
         )}
       >
         {children}

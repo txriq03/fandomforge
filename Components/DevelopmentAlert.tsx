@@ -4,7 +4,7 @@ import { Alert } from "@heroui/react";
 
 const DevelopmentAlert = () => {
   return (
-    <div className="w-full flex justify-center px-4">
+    <div className="w-full flex justify-center px-2 sm:px-4">
       <Alert
         variant="faded"
         color="warning"
