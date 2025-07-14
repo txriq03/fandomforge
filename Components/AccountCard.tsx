@@ -53,14 +53,14 @@ const AccountCard = ({
                 size="lg"
                 shape="circle"
                 classNames={{
-                  badge: "h-6 w-6 bottom-4 right-4 border-white border-4",
+                  badge: "h-6 w-6 bottom-4 right-4 border-card border-4",
                 }}
               >
                 <Avatar
                   src="/default_pfp.png"
                   className="h-23 w-23 left-0"
                   classNames={{
-                    base: "border-5 border-white",
+                    base: "border-5 border-card",
                     img: "group-hover:brightness-60 transition-all duration-100",
                   }}
                 />
@@ -70,7 +70,7 @@ const AccountCard = ({
         </div>
       </CardHeader>
 
-      <CardBody className="gap-2">
+      <CardBody className="gap-2 bg-card">
         {/* Buttons */}
         <div className="flex justify-end">
           <Button size="sm" startContent={<FaPen />}>
@@ -85,10 +85,10 @@ const AccountCard = ({
         </div>
 
         {/* Options */}
-        <div className="border-1 p-2 border-primary/25 rounded-xl space-y-2 bg-options">
+        <div className="border-1 p-2 border-primary/25 rounded-xl space-y-2 not-dark:bg-options">
           <Link
             href={`/profile/${profile.username}`}
-            className="flex items-center gap-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer"
+            className="flex items-center gap-2 text-sm hover:bg-slate-100 dark:hover:bg-primary-light/15 p-1.5 rounded-lg transition-all duration-300 cursor-pointer"
           >
             <User2 size={18} />
             <p>Profile</p>
@@ -100,7 +100,7 @@ const AccountCard = ({
             offset={25}
             className="p-0"
           >
-            <div className="flex items-center justify-between text-sm hover:bg-slate-100 dark:hover:bg-slate-900 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
+            <div className="flex items-center justify-between text-sm hover:bg-slate-100 dark:hover:bg-primary-light/15 p-1.5 rounded-lg transition-all duration-300 cursor-pointer">
               <div className="flex gap-2 items-center">
                 <div className={cn("h-3 w-3 bg-success rounded-full")} />
                 <p>Online</p>
@@ -121,7 +121,7 @@ const AccountCard = ({
 
 const statusOptionsCard = () => {
   return (
-    <Card className="w-[250px] font-main" radius="sm">
+    <Card className="w-[250px] font-main bg-card" radius="sm">
       <CardBody className="gap-1">
         {statusOptions.map((status: StatusOption) => {
           let description;
@@ -132,7 +132,7 @@ const statusOptionsCard = () => {
 
           return (
             <div
-              className="flex gap-2 hover:bg-slate-100 p-1 rounded-md transition-colors cursor-pointer"
+              className="flex gap-2 hover:bg-slate-100 dark:hover:bg-primary-light/10 p-1 rounded-md transition-colors cursor-pointer"
               key={status.name}
             >
               <div className="pt-1">{status.icon}</div>

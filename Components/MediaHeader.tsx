@@ -28,7 +28,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
         />
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
       </div>
-      <div className="bg-slate-50 w-full  px-5 sm:px-10">
+      <div className="bg-primary/1 w-full  px-5 sm:px-10">
         <div className="flex flex-col sm:flex-row gap-1 sm:gap-10">
           {/* Poster and buttons */}
           <div className="flex  sm:flex-col gap-2 py-5 w-full sm:w-[180px] lg:w-[250px]  flex-shrink-0 -mt-30 items-end sm:items-stretch">

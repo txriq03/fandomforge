@@ -57,7 +57,7 @@ export const fetchMediaLogo = async (
   const data = await res.json();
   console.log("Logo data:", data);
   const logo = data.logos?.[0];
-  return logo ? `https://image.tmdb.org/t/p/w500${logo.file_path}` : "";
+  return logo ? `https://image.tmdb.org/t/p/original${logo.file_path}` : "";
 };
 
 export const getImageUrl = (

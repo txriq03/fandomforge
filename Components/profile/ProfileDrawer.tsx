@@ -77,14 +77,14 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
                     size="lg"
                     shape="circle"
                     classNames={{
-                      badge: "h-7 w-7 bottom-5 right-5 border-white border-4",
+                      badge: "h-7 w-7 bottom-5 right-5 border-card border-4",
                     }}
                   >
                     <Avatar
                       src="/default_pfp.png"
                       className="h-30 w-30  left-0"
                       classNames={{
-                        base: "border-5 border-white", // Replace with your custom color
+                        base: "border-5 border-card", // Replace with your custom color
                       }}
                     />
                   </Badge>

@@ -42,7 +42,7 @@ export default async function RootLayout({
       lang="en"
       className={`bg-background ${poppins.variable} ${quicksand.variable}`}
     >
-      <body className={`antialiased`}>
+      <body className={`antialiased dark bg-background text-foreground`}>
         <Providers>
           <UserProvider user={user}>
             <NavWrapper>

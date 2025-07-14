@@ -36,7 +36,7 @@ const MediaPoster = ({ media, className, number }: Props) => {
         className="w-full rounded-lg h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 "
       />
       {number && (
-        <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-white grid place-items-center font-bold font-heading rounded-br-sm ">
+        <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-rose-400 grid place-items-center font-bold font-heading rounded-br-sm text-slate-50">
           {formatNumber(number)}
         </div>
       )}

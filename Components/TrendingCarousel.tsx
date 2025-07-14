@@ -45,14 +45,16 @@ const TrendingCarousel = () => {
     <div>
       <div className="flex justify-between py-2 px-2 sm:px-4 items-end">
         {/* Heading */}
-        <h2 className=" text-xl sm:text-3xl font-semibold">Top 10</h2>
+        <h2 className=" text-xl sm:text-3xl font-semibold dark:text-indigo-400">
+          Top 10
+        </h2>
 
         {/* Navigation Buttons */}
         <div className=" gap-1 hidden sm:flex">
           <Button
             isIconOnly
             size="sm"
-            className=" text-white text-3xl cursor-pointer bg-neutral-700"
+            className=" text-white text-3xl cursor-pointer bg-neutral-700 dark:bg-primary"
             onPress={scrollPrev}
           >
             <FaChevronLeft size={14} />
@@ -60,7 +62,7 @@ const TrendingCarousel = () => {
           <Button
             isIconOnly
             size="sm"
-            className="r text-white text-3xl cursor-pointer bg-neutral-700"
+            className="r text-white text-3xl cursor-pointer bg-neutral-700 dark:bg-primary"
             onPress={scrollNext}
           >
             <FaChevronRight size={14} />

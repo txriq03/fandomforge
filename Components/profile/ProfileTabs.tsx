@@ -8,7 +8,7 @@ const ProfileTabs = () => {
   return (
     <div
       className={cn(
-        "flex  bg-slate-50 justify-start sm:justify-center overflow-x-auto"
+        "flex  bg-slate-50 justify-start sm:justify-center overflow-x-auto dark:bg-white/5"
       )}
     >
       <Tabs variant="underlined" color="primary" aria-label="Profile options">
