@@ -56,7 +56,7 @@ const LoginModal = () => {
               />
             </div>
             <div className="flex-1">
-              <ModalHeader className="text-primary text-2xl font-bold font-heading">
+              <ModalHeader className="text-primary dark:text-primary-light text-2xl font-bold font-heading">
                 {showSignUp ? "Sign up" : "Welcome back"}
               </ModalHeader>
               {showSignUp ? (
@@ -132,28 +132,36 @@ const SignupForm = ({ onClose }: { onClose: () => void }) => {
             return validationErrors;
           }}
           placeholder="Username"
-          startContent={<User2 size={18} className="text-primary/50" />}
+          startContent={
+            <User2 size={18} className="text-primary/50 dark:text-primary" />
+          }
         />
         <Input
           name="email"
           isRequired
           placeholder="Email"
           type="email"
-          startContent={<AtSign size={18} className="text-primary/50" />}
+          startContent={
+            <AtSign size={18} className="text-primary/50 dark:text-primary" />
+          }
         />
         <Input
           name="password"
           isRequired
           placeholder="Password"
           type="password"
-          startContent={<Lock size={18} className="text-primary/50" />}
+          startContent={
+            <Lock size={18} className="text-primary/50 dark:text-primary" />
+          }
         />
 
         <Input
           isRequired
           placeholder="Confirm Password"
           type="password"
-          startContent={<Lock size={18} className="text-primary/50" />}
+          startContent={
+            <Lock size={18} className="text-primary/50 dark:text-primary" />
+          }
           validate={(value) => {
             const password = document.querySelector<HTMLInputElement>(
               'input[name="password"]'
@@ -213,7 +221,9 @@ const LoginForm = ({ onClose }: { onClose: () => void }) => {
           placeholder="Email"
           type="email"
           name="email"
-          startContent={<AtSign size={18} className="text-primary/50" />}
+          startContent={
+            <AtSign size={18} className="text-primary/50 dark:text-primary" />
+          }
         />
 
         <Input
@@ -221,7 +231,9 @@ const LoginForm = ({ onClose }: { onClose: () => void }) => {
           placeholder="Password"
           type="password"
           name="password"
-          startContent={<Lock size={18} className="text-primary/50" />}
+          startContent={
+            <Lock size={18} className="text-primary/50 dark:text-primary" />
+          }
         />
         <Button
           fullWidth
