@@ -25,7 +25,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
     queries: top5.map((media: TrendingMedia) => ({
       queryKey: ["trendingLogo", media.id],
       queryFn: () => fetchMediaLogo(media.id, media.media_type),
-      enabled: !!trending, // only run if trending is available
+      enabled: !!trending,
     })),
   });
 
@@ -52,7 +52,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
 
   if (isPending) {
     return (
-      <div className="h-full w-full bg-slate-50 grid place-items-center">
+      <div className="h-full w-full bg-primary/2 grid place-items-center">
         <Spinner size="lg" variant="simple" />
       </div>
     );

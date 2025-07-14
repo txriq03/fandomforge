@@ -4,9 +4,9 @@ import { useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
 import { getImageUrl, getTrending } from "@/lib/api/tmdb";
-import { Button, Image } from "@heroui/react";
+import { Button, Card, Image, Skeleton } from "@heroui/react";
 import { TrendingMedia } from "@/types/trending";
-import { formatNumber } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import MediaPoster from "./MediaPoster";
@@ -38,7 +38,18 @@ const TrendingCarousel = () => {
     }
   }, [emblaApi, trending]);
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending)
+    return (
+      <div
+        className={cn(
+          "grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-1 sm:gap-3 px-2 sm:px-4 "
+        )}
+      >
+        {Array.from({ length: 5 }).map((_, i) => (
+          <SkeletonCard key={i} />
+        ))}
+      </div>
+    );
   if (error) return <div>Something went wrong</div>;
 
   return (
@@ -104,6 +115,27 @@ const TrendingCarousel = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SkeletonCard = () => {
+  return (
+    <Card className="space-y-3 sm:space-y-5 p-4 " radius="lg">
+      <Skeleton className="rounded-lg">
+        <div className="h-15 sm:h-24 rounded-lg bg-default-900" />
+      </Skeleton>
+      <div className=" space-y-2 sm:space-y-3">
+        <Skeleton className="w-3/5 rounded-lg">
+          <div className="h-3 w-3/5 rounded-lg bg-default-700" />
+        </Skeleton>
+        <Skeleton className="w-4/5 rounded-lg">
+          <div className="h-3 w-4/5 rounded-lg bg-default-700" />
+        </Skeleton>
+        <Skeleton className="w-2/5 rounded-lg">
+          <div className="h-3 w-2/5 rounded-lg bg-default-700" />
+        </Skeleton>
+      </div>
+    </Card>
   );
 };
 
