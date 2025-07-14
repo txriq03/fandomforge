@@ -1,18 +1,26 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import Image from "next/image";
-import { Button, Image as HeroImage } from "@heroui/react";
+import { Button, Chip, Image as HeroImage } from "@heroui/react";
 import { Heart } from "lucide-react";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
 import { getImageUrl } from "@/lib/api/tmdb";
+import useIsMobile from "@/hooks/useIsMobile";
+import { CiBookmarkPlus } from "react-icons/ci";
+import { LuSend } from "react-icons/lu";
+import { FaStar } from "react-icons/fa";
+import { BsSend } from "react-icons/bs";
 
 const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
   const backdropUrl = getImageUrl(media.backdrop_path);
   const posterUrl = getImageUrl(media.poster_path, "500");
-  console.log(backdropUrl);
+  const isMobile = useIsMobile();
+  console.log("Details:", media);
 
   const title = "title" in media ? media.title : media.name;
+  const releaseDate =
+    "release_date" in media ? media.release_date : media.first_air_date;
   return (
     <>
       <div
@@ -28,7 +36,77 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
         />
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
       </div>
-      <div className="bg-primary/1 w-full  px-5 sm:px-10">
+
+      {/* Only show for Mobile */}
+      <div className="px-4 py-2 sm:hidden">
+        <div className="flex justify-between">
+          <h1 className="text-3xl">{title}</h1>
+
+          {/* Buttons */}
+          <div className="flex gap-2">
+            <Button isIconOnly variant="light">
+              <CiBookmarkPlus size={28} />
+            </Button>
+            <Button isIconOnly variant="light">
+              <BsSend size={23} />
+            </Button>
+          </div>
+        </div>
+        {/* Metadata */}
+        <div className="flex gap-2 py-2 items-center flex-wrap">
+          <div className="text-sm flex gap-1 items-center">
+            <FaStar className="text-yellow-400" />
+            <p>{media.vote_average.toFixed(1)}</p>
+          </div>
+          <div>•</div>
+          <div className="text-sm"> {formatDate(releaseDate, true)}</div>
+          <div>•</div>
+
+          {media.genres.map((genre: { id: number; name: string }) => (
+            <Chip
+              color="primary"
+              className="border-1"
+              variant="bordered"
+              radius="sm"
+              size="sm"
+            >
+              {genre.name}
+            </Chip>
+          ))}
+
+          {media.adult && (
+            <Chip
+              color="primary"
+              className="border-1"
+              variant="bordered"
+              radius="sm"
+              size="sm"
+            >
+              18+
+            </Chip>
+          )}
+        </div>
+
+        <div className="flex gap-2 py-2">
+          <Button fullWidth color="primary">
+            Play Trivia
+          </Button>
+          <Button
+            fullWidth
+            variant="ghost"
+            className="border-pink-500 text-pink-500 border-1"
+          >
+            Favourite
+          </Button>
+        </div>
+
+        <p className="text-sm font-extralight text-foreground/75">
+          {media.overview}
+        </p>
+      </div>
+
+      {/* Show for other devices */}
+      <div className="bg-primary/1 w-full  px-5 sm:px-10 max-sm:hidden">
         <div className="flex flex-col sm:flex-row gap-1 sm:gap-10">
           {/* Poster and buttons */}
           <div className="flex  sm:flex-col gap-2 py-5 w-full sm:w-[180px] lg:w-[250px]  flex-shrink-0 -mt-30 items-end sm:items-stretch">

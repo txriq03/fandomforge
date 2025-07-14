@@ -10,7 +10,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Link from "next/link";
 import useIsMobile from "@/hooks/useIsMobile";
 import { FaCalendar, FaPlayCircle, FaStar } from "react-icons/fa";
-import { formatDate } from "@/lib/supabase/utils";
+import { formatDate } from "@/lib/utils";
 import { IconType } from "react-icons";
 import { TrendingMedia } from "@/types/trending";
 

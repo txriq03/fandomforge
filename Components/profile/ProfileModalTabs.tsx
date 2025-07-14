@@ -1,5 +1,5 @@
 "use client";
-import { formatDateTime } from "@/lib/supabase/utils";
+import { formatDateTime } from "@/lib/utils";
 import { Tab, Tabs } from "@heroui/react";
 import { User } from "@supabase/supabase-js";
 
