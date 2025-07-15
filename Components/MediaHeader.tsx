@@ -1,7 +1,13 @@
 "use client";
 import { cn, formatDate } from "@/lib/utils";
 import Image from "next/image";
-import { Button, Chip, Image as HeroImage } from "@heroui/react";
+import {
+  addToast,
+  Button,
+  Chip,
+  Image as HeroImage,
+  Spinner,
+} from "@heroui/react";
 import { Heart } from "lucide-react";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
@@ -10,24 +16,85 @@ import { FaStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import {
   TbArrowLeft,
-  TbBookmarkPlus,
+  TbBookmark,
+  TbBookmarkFilled,
   TbDeviceGamepad3Filled,
   TbHeart,
   TbSend2,
 } from "react-icons/tb";
 import { useState } from "react";
-import { TrendingMedia } from "@/types/trending";
+import { useUser } from "@/providers/UserProvider";
+import { useIsBookmarked } from "@/hooks/useIsBookmarked";
+import { addBookmark, removeBookmark } from "@/lib/supabase/utils";
+import { MediaType } from "@/types/trending";
+import { useQueryClient } from "@tanstack/react-query";
 
 const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
+  const user = useUser();
   const [showMore, toggleShowMore] = useState(false);
+  const [isBookmarkPending, setIsBookmarkPending] = useState(false);
   const router = useRouter();
+
+  // Set variables
   const backdropUrl = getImageUrl(media.backdrop_path);
   const posterUrl = getImageUrl(media.poster_path, "500");
-  console.log("Details:", media);
+  const mediaType: MediaType = "title" in media ? "movie" : "tv";
 
+  const queryClient = useQueryClient();
+
+  const { data: isBookmarked, isPending: isBookmarkedPending } =
+    useIsBookmarked({
+      media_id: media.id,
+      media_type: mediaType,
+      profile_id: user?.id ?? "",
+    });
+
+  const handleBookmark = async () => {
+    if (!user) return;
+
+    const bookmarkPayload = {
+      media_id: media.id,
+      media_type: mediaType,
+      profile_id: user.id,
+    };
+    setIsBookmarkPending(true);
+    try {
+      if (isBookmarked) {
+        await removeBookmark(bookmarkPayload);
+
+        addToast({
+          title: "Removed from bookmarks",
+          color: "success",
+          timeout: 3000,
+          shouldShowTimeoutProgress: true,
+        });
+      } else {
+        await addBookmark(bookmarkPayload);
+
+        addToast({
+          title: "Added to bookmarks",
+          color: "success",
+          timeout: 3000,
+          shouldShowTimeoutProgress: true,
+        });
+      }
+
+      // ✅ Invalidate the query so it refetches and updates the UI
+      queryClient.invalidateQueries({
+        queryKey: ["isBookmarked", user.id, media.id, mediaType],
+      });
+    } catch (err) {
+      addToast({
+        title: "Bookmark failed",
+        description: (err as Error).message,
+        color: "danger",
+      });
+    } finally {
+      setIsBookmarkPending(false);
+    }
+  };
   const title = "title" in media ? media.title : media.name;
-  const releaseDate =
-    "release_date" in media ? media.release_date : media.first_air_date;
+
   return (
     <>
       <div
@@ -45,9 +112,6 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
           >
             <TbArrowLeft size={18} />
           </Button>
-          {/* <Button isIconOnly variant="light" size="sm">
-            <BsBack />
-          </Button> */}
         </div>
         <Image
           alt={title}
@@ -65,8 +129,21 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
 
           {/* Buttons */}
           <div className="flex gap-1">
-            <Button isIconOnly variant="light">
-              <TbBookmarkPlus size={24} />
+            <Button isIconOnly variant="light" onPress={handleBookmark}>
+              {isBookmarkPending ? (
+                <Spinner
+                  size="sm"
+                  variant="simple"
+                  classNames={{
+                    circle1: "text-white",
+                    circle2: "text-slate-300",
+                  }}
+                />
+              ) : isBookmarked ? (
+                <TbBookmarkFilled size={24} />
+              ) : (
+                <TbBookmark size={24} />
+              )}
             </Button>
             <Button isIconOnly variant="light">
               <TbSend2 size={24} className="-rotate-45" />
@@ -76,6 +153,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
 
         <Metadata media={media} />
 
+        {/* Big buttons */}
         <div className="flex gap-2 py-2">
           <Button
             fullWidth
@@ -94,6 +172,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
           </Button>
         </div>
 
+        {/* Description */}
         <div className="text-sm font-extralight text-foreground/75 py-2">
           <p className={showMore ? "" : "line-clamp-3"}>{media.overview}</p>
           <button
@@ -130,7 +209,32 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
             <p className="text-2xl sm:text-[1.8rem] font-heading font-bold">
               {title}
             </p>
-            <Metadata media={media} />
+
+            <div className="flex gap-2">
+              <Metadata media={media} />
+              <div className="flex gap-1">
+                <Button isIconOnly variant="light" onPress={handleBookmark}>
+                  {isBookmarkPending ? (
+                    <Spinner
+                      size="sm"
+                      variant="simple"
+                      classNames={{
+                        circle1: "text-white",
+                        circle2: "text-slate-300",
+                      }}
+                    />
+                  ) : isBookmarked ? (
+                    <TbBookmarkFilled size={24} />
+                  ) : (
+                    <TbBookmark size={24} />
+                  )}
+                </Button>
+                <Button isIconOnly variant="light">
+                  <TbSend2 size={24} className="-rotate-45" />
+                </Button>
+              </div>
+            </div>
+
             <p className="text-foreground/50 text-sm">{media.overview}</p>
           </div>
         </div>

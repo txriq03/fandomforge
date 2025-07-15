@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const useOwnProfile = (options = {}) => {
   return useQuery({
     queryKey: ["profile"],
-    queryFn: () => getOwnProfile,
+    queryFn: getOwnProfile,
     ...options,
   });
 };

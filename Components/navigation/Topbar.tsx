@@ -1,15 +1,46 @@
 "use client";
-import SearchBox from "../SearchBox";
-import Notifications from "../Notifications";
 
-const Topbar = ({ user }: any) => {
+import useOwnProfile from "@/hooks/useOwnProfile";
+import { getPfp } from "@/lib/supabase/utils";
+import { useUser } from "@/providers/UserProvider";
+import {
+  Avatar,
+  Button,
+  Navbar,
+  NavbarContent,
+  NavbarItem,
+} from "@heroui/react";
+import { RiSearch2Line } from "react-icons/ri";
+import { TbUser } from "react-icons/tb";
+
+const Topbar = () => {
+  const user = useUser();
+  const { data: profile } = useOwnProfile();
   return (
-    <div className=" w-full  lg:px-4 lg:pt-2">
-      <div className="bg-sidebar py-2 px-2 lg:rounded-xl flex justify-between gap-4 outline-1 outline-indigo-500/15">
-        <SearchBox />
-        <Notifications />
-      </div>
-    </div>
+    <Navbar
+      maxWidth="full"
+      isBlurred={false}
+      classNames={{
+        base: "absolute top-0 bg-transparent ",
+      }}
+    >
+      <NavbarContent justify="end" className="gap-1">
+        <NavbarItem>
+          <Button isIconOnly variant="light" radius="lg">
+            <RiSearch2Line size={24} />
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          {user ? (
+            <Avatar size="sm" src={getPfp(profile?.profile_pic)} />
+          ) : (
+            <Button isIconOnly variant="light">
+              <TbUser size={24} />
+            </Button>
+          )}
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
 };
 
