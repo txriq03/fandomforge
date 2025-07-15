@@ -16,6 +16,7 @@ import {
   TbSend2,
 } from "react-icons/tb";
 import { useState } from "react";
+import { TrendingMedia } from "@/types/trending";
 
 const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
   const [showMore, toggleShowMore] = useState(false);
@@ -72,41 +73,8 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
             </Button>
           </div>
         </div>
-        {/* Metadata */}
-        <div className="flex gap-2 py-2 items-center flex-wrap">
-          <div className="text-sm flex gap-1 items-center">
-            <FaStar className="text-yellow-400" />
-            <p>{media.vote_average.toFixed(1)}</p>
-          </div>
-          <div>•</div>
-          <div className="text-sm"> {formatDate(releaseDate, true)}</div>
-          <div>•</div>
 
-          {media.genres.map((genre: { id: number; name: string }) => (
-            <Chip
-              color="primary"
-              className="border-1"
-              variant="bordered"
-              radius="sm"
-              size="sm"
-              key={genre.id}
-            >
-              {genre.name}
-            </Chip>
-          ))}
-
-          {media.adult && (
-            <Chip
-              color="primary"
-              className="border-1"
-              variant="bordered"
-              radius="sm"
-              size="sm"
-            >
-              18+
-            </Chip>
-          )}
-        </div>
+        <Metadata media={media} />
 
         <div className="flex gap-2 py-2">
           <Button
@@ -162,11 +130,53 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
             <p className="text-2xl sm:text-[1.8rem] font-heading font-bold">
               {title}
             </p>
+            <Metadata media={media} />
             <p className="text-foreground/50 text-sm">{media.overview}</p>
           </div>
         </div>
       </div>
     </>
+  );
+};
+
+const Metadata = ({ media }: { media: Movie | TVSeries }) => {
+  const releaseDate =
+    "release_date" in media ? media.release_date : media.first_air_date;
+  return (
+    <div className="flex gap-2 py-2 items-center flex-wrap">
+      <div className="text-sm flex gap-1 items-center">
+        <FaStar className="text-yellow-400" />
+        <p>{media.vote_average.toFixed(1)}</p>
+      </div>
+      <div>•</div>
+      <div className="text-sm"> {formatDate(releaseDate, true)}</div>
+      <div>•</div>
+
+      {media.genres.map((genre: { id: number; name: string }) => (
+        <Chip
+          color="primary"
+          className="border-1"
+          variant="bordered"
+          radius="sm"
+          size="sm"
+          key={genre.id}
+        >
+          {genre.name}
+        </Chip>
+      ))}
+
+      {media.adult && (
+        <Chip
+          color="primary"
+          className="border-1"
+          variant="bordered"
+          radius="sm"
+          size="sm"
+        >
+          18+
+        </Chip>
+      )}
+    </div>
   );
 };
 
