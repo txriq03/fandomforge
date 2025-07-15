@@ -6,16 +6,16 @@ import { Heart } from "lucide-react";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
 import { getImageUrl } from "@/lib/api/tmdb";
-import useIsMobile from "@/hooks/useIsMobile";
 import { CiBookmarkPlus } from "react-icons/ci";
-import { LuSend } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
-import { BsSend } from "react-icons/bs";
+import { BsBack, BsSend } from "react-icons/bs";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
+  const router = useRouter();
   const backdropUrl = getImageUrl(media.backdrop_path);
   const posterUrl = getImageUrl(media.poster_path, "500");
-  const isMobile = useIsMobile();
   console.log("Details:", media);
 
   const title = "title" in media ? media.title : media.name;
@@ -25,9 +25,24 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
     <>
       <div
         className={cn(
-          `w-full h-[180px] sm:h-[300px] bg-slate-800 bg-cover bg-center relative`
+          `w-full h-[280px] sm:h-[300px] bg-slate-800 bg-cover bg-center relative`
         )}
       >
+        <div className="absolute inset-0 bg-gradient-to-b z-1  from-black/80 via-transparent to-transparent" />
+        <div className="absolute top-0 w-full z-2 p-3 flex justify-between">
+          <Button
+            isIconOnly
+            variant="light"
+            size="sm"
+            radius="lg"
+            onPress={() => router.back()}
+          >
+            <IoMdArrowRoundBack size={18} />
+          </Button>
+          {/* <Button isIconOnly variant="light" size="sm">
+            <BsBack />
+          </Button> */}
+        </div>
         <Image
           alt={title}
           fill
