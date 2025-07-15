@@ -6,13 +6,19 @@ import { Heart } from "lucide-react";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
 import { getImageUrl } from "@/lib/api/tmdb";
-import { CiBookmarkPlus } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
-import { BsBack, BsSend } from "react-icons/bs";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import {
+  TbArrowLeft,
+  TbBookmarkPlus,
+  TbDeviceGamepad3Filled,
+  TbHeart,
+  TbSend2,
+} from "react-icons/tb";
+import { useState } from "react";
 
 const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
+  const [showMore, toggleShowMore] = useState(false);
   const router = useRouter();
   const backdropUrl = getImageUrl(media.backdrop_path);
   const posterUrl = getImageUrl(media.poster_path, "500");
@@ -29,15 +35,14 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
         )}
       >
         <div className="absolute inset-0 bg-gradient-to-b z-1  from-black/80 via-transparent to-transparent" />
-        <div className="absolute top-0 w-full z-2 p-3 flex justify-between">
+        <div className="absolute top-0 w-full z-2 p-2 flex justify-between">
           <Button
             isIconOnly
             variant="light"
-            size="sm"
             radius="lg"
             onPress={() => router.back()}
           >
-            <IoMdArrowRoundBack size={18} />
+            <TbArrowLeft size={18} />
           </Button>
           {/* <Button isIconOnly variant="light" size="sm">
             <BsBack />
@@ -58,12 +63,12 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
           <h1 className="text-3xl">{title}</h1>
 
           {/* Buttons */}
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <Button isIconOnly variant="light">
-              <CiBookmarkPlus size={28} />
+              <TbBookmarkPlus size={24} />
             </Button>
             <Button isIconOnly variant="light">
-              <BsSend size={23} />
+              <TbSend2 size={24} className="-rotate-45" />
             </Button>
           </div>
         </div>
@@ -84,6 +89,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
               variant="bordered"
               radius="sm"
               size="sm"
+              key={genre.id}
             >
               {genre.name}
             </Chip>
@@ -103,21 +109,32 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
         </div>
 
         <div className="flex gap-2 py-2">
-          <Button fullWidth color="primary">
+          <Button
+            fullWidth
+            color="primary"
+            startContent={<TbDeviceGamepad3Filled className="shrink-0" />}
+          >
             Play Trivia
           </Button>
           <Button
             fullWidth
             variant="ghost"
             className="border-pink-500 text-pink-500 border-1"
+            startContent={<TbHeart />}
           >
             Favourite
           </Button>
         </div>
 
-        <p className="text-sm font-extralight text-foreground/75">
-          {media.overview}
-        </p>
+        <div className="text-sm font-extralight text-foreground/75 py-2">
+          <p className={showMore ? "" : "line-clamp-3"}>{media.overview}</p>
+          <button
+            className="text-primary-light font-medium cursor-pointer"
+            onClick={() => toggleShowMore(!showMore)}
+          >
+            {showMore ? "Show less" : "Read more"}
+          </button>
+        </div>
       </div>
 
       {/* Show for other devices */}
