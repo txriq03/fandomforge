@@ -1,17 +1,22 @@
-import { Clapperboard, History, House, LucideProps, Tv } from "lucide-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { IconType } from "react-icons";
+import { FaHouseChimney } from "react-icons/fa6";
+import {
+  TbBookmarksFilled,
+  TbDeviceTvFilled,
+  TbHistory,
+  TbMovie,
+} from "react-icons/tb";
 
 export type navItem = {
   name: string;
-  icon: ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-  >;
+  icon: IconType;
   href: string;
 };
 
 export const navItems: navItem[] = [
-  { name: "Home", icon: House, href: "/" },
-  { name: "Movies", icon: Clapperboard, href: "/movie" },
-  { name: "TV Shows", icon: Tv, href: "/tv" },
-  { name: "History", icon: History, href: "/history" },
+  { name: "Home", icon: FaHouseChimney, href: "/" },
+  { name: "Movies", icon: TbMovie, href: "/movie" },
+  { name: "TV Shows", icon: TbDeviceTvFilled, href: "/tv" },
+  { name: "History", icon: TbHistory, href: "/history" },
+  { name: "Saved", icon: TbBookmarksFilled, href: "/bookmarks" },
 ];

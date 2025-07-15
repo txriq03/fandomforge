@@ -26,14 +26,14 @@ const MediaPoster = ({ media, className, number }: Props) => {
       href={`/${media.media_type}/${media.id}`}
       key={media.id}
       className={cn(
-        "group relative transition-all duration-300  outline-3 outline-transparent group-hover:outline-amber-400",
+        "group relative rounded-md overflow-hidden transition-all duration-300  outline-3 outline-transparent group-hover:outline-amber-400",
         className
       )}
     >
       <img
         alt={name}
         src={url}
-        className="w-full rounded-lg h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 "
+        className="w-full h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 "
       />
       {number && (
         <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-rose-400 grid place-items-center font-bold font-heading rounded-br-sm text-slate-50">
