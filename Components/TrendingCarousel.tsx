@@ -83,10 +83,10 @@ const TrendingCarousel = () => {
 
       {/* Carousel */}
       <div
-        className=" flex justify-center px-2 sm:px-4 overflow-hidden"
+        className=" flex justify-center sm:px-4 overflow-hidden"
         ref={emblaRef}
       >
-        <div className="flex gap-[2px] sm:gap-2">
+        <div className="flex sm:gap-2">
           {trending?.results
             ?.slice(0, 10)
             .map((media: TrendingMedia, index: number) => {
@@ -107,7 +107,7 @@ const TrendingCarousel = () => {
                 <MediaPoster
                   key={media.id}
                   media={media}
-                  className=" flex-[0_0_33.333%] sm:flex-[0_0_20%] lg:flex-[0_0_15%]"
+                  className=" flex-[0_0_33.333%] sm:flex-[0_0_25%] md:flex-[0_0_20%] xl:flex-[0_0_15%] rounded-none sm:rounded-md"
                   number={index + 1}
                 />
               );
