@@ -1,4 +1,5 @@
 import { Movie } from "@/types/movie";
+import { MediaType } from "@/types/trending";
 import TVSeries from "@/types/tv";
 
 const options = {
@@ -63,7 +64,8 @@ export const fetchMediaLogo = async (
 export const getImageUrl = (
   imageUrl: string | null,
   size = "original"
-): string => {
+): string | null => {
+  if (!imageUrl) return null;
   const baseImageUrl =
     size === "original"
       ? `https://image.tmdb.org/t/p/original`
@@ -71,3 +73,16 @@ export const getImageUrl = (
 
   return `${baseImageUrl}${imageUrl}`;
 };
+
+export async function fetchMedia(mediaId: number, mediaType: MediaType) {
+  const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+  const url = `${TMDB_BASE_URL}/${mediaType}/${mediaId}`;
+
+  const res = await fetch(url, options);
+  if (!res.ok)
+    throw new Error(`Failed to fetch ${mediaType} with id ${mediaId}`);
+
+  const data = await res.json();
+
+  return data;
+}

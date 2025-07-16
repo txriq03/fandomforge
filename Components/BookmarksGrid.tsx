@@ -1,0 +1,58 @@
+"use client";
+
+import { useBookmarks } from "@/hooks/useBookmarks";
+import { fetchMedia, getImageUrl } from "@/lib/api/tmdb";
+import { useUser } from "@/providers/UserProvider";
+import { MediaType } from "@/types/trending";
+import { Alert, Image, Spinner } from "@heroui/react";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import MediaPoster from "./MediaPoster";
+
+const BookmarksGrid = () => {
+  const user = useUser();
+
+  if (!user)
+    return (
+      <Alert
+        title="No user found"
+        description="You need to be logged in to view saved media."
+        color="warning"
+        variant="faded"
+      />
+    );
+
+  const { data: bookmarks, isPending } = useBookmarks(user.id);
+
+  const mediaQueries = useQueries({
+    queries: (bookmarks ?? []).map(({ media_id, media_type }) => ({
+      queryKey: ["bookmarkDetails", media_type, media_id],
+      queryFn: () => fetchMedia(media_id, media_type),
+      enabled: !!bookmarks, // important!
+      staleTime: 1000 * 60 * 60,
+    })),
+  });
+
+  if (isPending || !bookmarks)
+    return <Spinner variant="simple" size="lg" className="mx-auto" />;
+
+  console.log("Media queries:", mediaQueries);
+  return (
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3">
+      {mediaQueries.map((query, index) => {
+        const poster = getImageUrl(query.data?.poster_path);
+        const { media_id, media_type } = bookmarks[index];
+
+        console.log(query.data);
+
+        // Add media_type to json object
+        const media = { ...query.data, media_type: media_type };
+
+        if (!poster) return null;
+
+        return <MediaPoster key={media_id} media={media} />;
+      })}
+    </div>
+  );
+};
+
+export default BookmarksGrid;

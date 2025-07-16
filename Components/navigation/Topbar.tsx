@@ -2,6 +2,7 @@
 
 import useOwnProfile from "@/hooks/useOwnProfile";
 import { getPfp } from "@/lib/supabase/utils";
+import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
 import {
   Avatar,
@@ -16,6 +17,7 @@ import { TbUser } from "react-icons/tb";
 const Topbar = () => {
   const user = useUser();
   const { data: profile } = useOwnProfile();
+  const { authModal, profileModal } = useUIContext();
   return (
     <Navbar
       maxWidth="full"
@@ -32,9 +34,22 @@ const Topbar = () => {
         </NavbarItem>
         <NavbarItem>
           {user ? (
-            <Avatar size="sm" src={getPfp(profile?.profile_pic)} />
+            <Avatar
+              as="button"
+              isFocusable
+              onClick={() => profileModal.onOpen()}
+              size="sm"
+              src={getPfp(profile?.profile_pic)}
+              classNames={{
+                base: "hover:brightness-50 duration-200 transition-filter cursor-pointer",
+              }}
+            />
           ) : (
-            <Button isIconOnly variant="light">
+            <Button
+              isIconOnly
+              variant="light"
+              onPress={() => authModal.onOpen()}
+            >
               <TbUser size={24} />
             </Button>
           )}

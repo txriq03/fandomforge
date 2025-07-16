@@ -1,11 +1,10 @@
 import Profile from "@/types/profile";
 import { devLog } from "../utils";
 import { createClient } from "./client";
-import { format, parseISO } from "date-fns";
+
+const supabase = createClient();
 
 export const login = async (formData: FormData) => {
-  const supabase = createClient();
-
   // Data from form
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
@@ -120,7 +119,7 @@ export const getPfp = (imageUrl: string | null | undefined) => {
 export type BookmarkPayload = {
   media_id: number;
   media_type: "movie" | "tv";
-  profile_id: string;
+  user_id: string;
 };
 
 export const addBookmark = async (payload: BookmarkPayload) => {
@@ -137,7 +136,7 @@ export const removeBookmark = async (payload: BookmarkPayload) => {
   const supabase = createClient();
 
   const { data, error } = await supabase.from("bookmarks").delete().match({
-    profile_id: payload.profile_id,
+    user_id: payload.user_id,
     media_id: payload.media_id,
     media_type: payload.media_type,
   });
@@ -155,7 +154,7 @@ export const isBookmarked = async (
   const { data, error } = await supabase
     .from("bookmarks")
     .select("id")
-    .eq("profile_id", payload.profile_id)
+    .eq("user_id", payload.user_id)
     .eq("media_id", payload.media_id)
     .eq("media_type", payload.media_type)
     .limit(1)
@@ -165,3 +164,13 @@ export const isBookmarked = async (
 
   return !!data;
 };
+
+export async function getBookmarks(userId: string) {
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .select("media_id, media_type") // adjust this based on your schema
+    .eq("user_id", userId);
+
+  if (error) throw new Error(error.message);
+  return data;
+}

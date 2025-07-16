@@ -46,7 +46,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
     useIsBookmarked({
       media_id: media.id,
       media_type: mediaType,
-      profile_id: user?.id ?? "",
+      user_id: user?.id ?? "",
     });
 
   const handleBookmark = async () => {
@@ -55,7 +55,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
     const bookmarkPayload = {
       media_id: media.id,
       media_type: mediaType,
-      profile_id: user.id,
+      user_id: user.id,
     };
     setIsBookmarkPending(true);
     try {
