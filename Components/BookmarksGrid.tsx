@@ -1,11 +1,9 @@
 "use client";
-
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { fetchMedia, getImageUrl } from "@/lib/api/tmdb";
 import { useUser } from "@/providers/UserProvider";
-import { MediaType } from "@/types/trending";
-import { Alert, Image, Spinner } from "@heroui/react";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { Alert, Spinner } from "@heroui/react";
+import { useQueries } from "@tanstack/react-query";
 import MediaPoster from "./MediaPoster";
 
 const BookmarksGrid = () => {
@@ -41,8 +39,6 @@ const BookmarksGrid = () => {
       {mediaQueries.map((query, index) => {
         const poster = getImageUrl(query.data?.poster_path);
         const { media_id, media_type } = bookmarks[index];
-
-        console.log(query.data);
 
         // Add media_type to json object
         const media = { ...query.data, media_type: media_type };

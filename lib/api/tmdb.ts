@@ -62,7 +62,7 @@ export const fetchMediaLogo = async (
 };
 
 export const getImageUrl = (
-  imageUrl: string | null,
+  imageUrl: string,
   size = "original"
 ): string | null => {
   if (!imageUrl) return null;
