@@ -90,7 +90,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/${media.backdrop_path})`,
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t  from-black/80  to-black/25" />
+                <div className="absolute inset-0 bg-gradient-to-t  from-background  to-background/25" />
                 <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
                   {logoURL ? (
                     <Image
