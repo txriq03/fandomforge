@@ -86,7 +86,7 @@ const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
                 setPopoverOpen(false);
               }}
             >
-              <item.icon />
+              <item.icon size={24} />
             </Button>
             <p className="text-slate-400 text-sm ">{item.name}</p>
           </div>
