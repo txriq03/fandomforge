@@ -61,7 +61,10 @@ export const fetchMediaLogo = async (
   return logo ? `https://image.tmdb.org/t/p/original${logo.file_path}` : "";
 };
 
-export const getImageUrl = (imageUrl: string, size = "original"): string => {
+export const getImageUrl = (
+  imageUrl: string | null,
+  size = "original"
+): string => {
   if (!imageUrl) return "";
   const baseImageUrl =
     size === "original"
