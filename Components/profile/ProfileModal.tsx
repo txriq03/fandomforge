@@ -9,6 +9,9 @@ import {
   Button,
   Modal,
   ModalContent,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Spinner,
   Tooltip,
 } from "@heroui/react";
@@ -18,6 +21,8 @@ import { TiUserAdd } from "react-icons/ti";
 import { useMediaQuery } from "usehooks-ts";
 import ProfileModalTabs from "./ProfileModalTabs";
 import { cn } from "@/lib/utils";
+import { TbDots, TbDotsVertical } from "react-icons/tb";
+import ProfilePopoverMenu from "./ProfilePopoverMenu";
 
 const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();
@@ -48,6 +53,9 @@ const ProfileModal = ({ className }: { className?: string }) => {
               <>
                 {/* Banner area*/}
                 <div className="relative w-full h-[150px] sm:h-[200px] bg-[#232634]">
+                  <div className="flex justify-end p-1">
+                    <ProfilePopoverMenu />
+                  </div>
                   <div className="px-5 absolute -bottom-15 ">
                     <Badge
                       color="success"
