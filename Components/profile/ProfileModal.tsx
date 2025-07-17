@@ -54,7 +54,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
                 {/* Banner area*/}
                 <div className="relative w-full h-[150px] sm:h-[200px] bg-[#232634]">
                   <div className="flex justify-end p-1">
-                    <ProfilePopoverMenu />
+                    <ProfilePopoverMenu profile={profile} />
                   </div>
                   <div className="px-5 absolute -bottom-15 ">
                     <Badge

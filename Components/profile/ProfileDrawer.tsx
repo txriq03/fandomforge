@@ -19,6 +19,7 @@ import { TiUserAdd } from "react-icons/ti";
 import { useMediaQuery } from "usehooks-ts";
 import ProfileModalTabs from "./ProfileModalTabs";
 import { cn } from "@/lib/utils";
+import ProfilePopoverMenu from "./ProfilePopoverMenu";
 
 const ProfileDrawer = ({ className }: { className?: string }) => {
   const user = useUser();
@@ -69,6 +70,9 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
               {/* Banner area*/}
               <div className="relative w-full h-[150px] sm:h-[200px] bg-[#232634]">
                 <div className="w-[50px] h-[8px] rounded-full bg-white/10 absolute top-0 mt-2 left-1/2 -translate-x-1/2  sm:hidden" />
+                <div className="flex justify-end p-1">
+                  <ProfilePopoverMenu profile={profile} />
+                </div>
                 <div className="px-5 absolute -bottom-15 ">
                   <Badge
                     color="success"
