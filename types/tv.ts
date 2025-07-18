@@ -1,3 +1,5 @@
+import { MediaType } from "./trending";
+
 type TVSeries = {
   adult: boolean;
   backdrop_path: string | null;
@@ -92,6 +94,7 @@ type TVSeries = {
   type: string; // e.g., "Scripted"
   vote_average: number;
   vote_count: number;
+  media_type?: "tv";
 };
 
 export default TVSeries;

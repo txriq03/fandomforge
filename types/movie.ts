@@ -1,3 +1,5 @@
+import { MediaType } from "./trending";
+
 export type Movie = {
   adult: boolean;
   backdrop_path: string | null;
@@ -44,4 +46,5 @@ export type Movie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  media_type?: "movie";
 };

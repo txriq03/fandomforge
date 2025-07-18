@@ -35,7 +35,7 @@ const ProfilePopoverMenu = ({ profile }: { profile: Profile }) => {
             title: "text-primary-light",
             wrapper: "hover:bg-primary-light/100",
           }}
-        ></DropdownItem>
+        />
         <DropdownItem
           color="danger"
           variant="flat"
@@ -47,7 +47,7 @@ const ProfilePopoverMenu = ({ profile }: { profile: Profile }) => {
             profileModal.onClose();
             signOut();
           }}
-        ></DropdownItem>
+        />
       </DropdownMenu>
     </Dropdown>
   );

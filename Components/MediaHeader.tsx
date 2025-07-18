@@ -97,31 +97,6 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
 
   return (
     <>
-      <div
-        className={cn(
-          `w-full h-[280px] sm:h-[300px] bg-slate-800 bg-cover bg-center relative`
-        )}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b z-1  from-black/80 via-transparent to-transparent" />
-        <div className="absolute top-0 w-full z-2 p-2 flex justify-between">
-          <Button
-            isIconOnly
-            variant="light"
-            radius="lg"
-            onPress={() => router.back()}
-          >
-            <TbArrowLeft size={18} />
-          </Button>
-        </div>
-        <Image
-          alt={title}
-          fill
-          src={backdropUrl}
-          className="object-cover object-center"
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
-      </div>
-
       {/* Only show for Mobile */}
       <div className="px-4 py-2 sm:hidden">
         <div className="flex justify-between">
@@ -210,6 +185,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
               {title}
             </p>
 
+            {/* Metadata and bookmark button */}
             <div className="flex gap-2">
               <Metadata media={media} />
               <div className="flex gap-1">
