@@ -7,7 +7,6 @@ import UIContextProvider from "./UIContext";
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import AuthContextProvider from "./AuthContext";
 import { useRouter } from "next/navigation";
-import { Router } from "lucide-react";
 
 declare module "@react-types/shared" {
   interface RouterConfig {

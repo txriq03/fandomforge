@@ -1,13 +1,13 @@
-import Overview from "@/Components/media-page/Overview";
+import Comments from "@/Components/media-page/Comments";
 import Padding from "@/Components/ui/Padding";
 import React from "react";
 
-const MoviePage = () => {
+const CommentsPage = () => {
   return (
     <Padding className="pt-2">
-      <Overview />
+      <Comments />
     </Padding>
   );
 };
 
-export default MoviePage;
+export default CommentsPage;

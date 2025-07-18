@@ -2,7 +2,7 @@
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
 import { Tabs, Tab } from "@heroui/tabs";
-import Padding from "../utils/Padding";
+import Padding from "../ui/Padding";
 import useIsMobile from "@/hooks/useIsMobile";
 import { Alert } from "@heroui/react";
 import { usePathname } from "next/navigation";
@@ -23,19 +23,23 @@ const MediaTabs = ({ media }: { media: Movie | TVSeries }) => {
           tabList: "flex justify-center",
         }}
       >
-        <Tab key="/" title="Overview" href="/">
-          <Alert
-            title="No content"
-            description="Not enough information to provide an overview."
-          />
-        </Tab>
+        <Tab
+          key={`/movie/${media.id}`}
+          title="Overview"
+          href={`/movie/${media.id}`}
+        />
+
         <Tab key="/activity" title="Activity" href="/activity">
           <Alert
             title="No content"
             description={`There has been no activity for this ${type}.`}
           />
         </Tab>
-        <Tab key="/comments" title="Comments" href="/comments" />
+        <Tab
+          key={`/movie/${media.id}/comments`}
+          title="Comments"
+          href={`/movie/${media.id}/comments`}
+        />
       </Tabs>
     </Padding>
   );
