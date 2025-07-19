@@ -1,29 +1,29 @@
 import MediaBanner from "@/Components/media-page/MediaBanner";
 import MediaTabs from "@/Components/media-page/MediaTabs";
 import MediaHeader from "@/Components/MediaHeader";
-import { getMovieById } from "@/lib/api/tmdb";
+import { getMediaById } from "@/lib/api/tmdb";
+import { MediaType } from "@/types/trending";
 import { ReactNode } from "react";
 
 interface PageProps {
   params: Promise<{
     id: string;
+    media_type: MediaType;
   }>;
   children: ReactNode;
 }
 
 const MovieLayout = async ({ params, children }: PageProps) => {
-  const { id } = await params;
-  let movie = await getMovieById(id);
-  movie = { ...movie, media_type: "movie" };
+  const { id, media_type } = await params;
+  let media = await getMediaById(id, media_type);
+  media = { ...media, media_type: media_type };
 
-  console.log("Movie media type:", movie.media_type);
-
-  console.log(movie);
+  console.log(media);
   return (
     <>
-      <MediaBanner media={movie} />
-      <MediaHeader media={movie} />
-      <MediaTabs media={movie} />
+      <MediaBanner media={media} />
+      <MediaHeader media={media} />
+      <MediaTabs media={media} />
       {children}
     </>
   );

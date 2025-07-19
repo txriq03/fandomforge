@@ -3,6 +3,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { createReview } from "@/lib/supabase/actions";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
+import { MediaType } from "@/types/trending";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
 import { Form } from "@heroui/form";
@@ -16,6 +17,7 @@ const ReviewMessageBox = () => {
   const user = useUser();
   const params = useParams();
   const mediaId = params.id as string;
+  const mediaType = params.media_type as MediaType;
   const isMobile = useIsMobile();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -34,7 +36,7 @@ const ReviewMessageBox = () => {
     setIsLoading(true);
     const result = await createReview({
       media_id: mediaId,
-      media_type: "movie",
+      media_type: mediaType,
       comment,
       rating,
     });
