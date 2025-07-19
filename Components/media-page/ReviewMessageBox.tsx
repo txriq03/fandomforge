@@ -11,14 +11,9 @@ import { TbStar, TbStarFilled } from "react-icons/tb";
 const ReviewMessageBox = () => {
   const user = useUser();
   const isMobile = useIsMobile();
-  const [hover, setHover] = useState<number | null>(null);
-  const [rating, setRating] = useState(0);
 
   if (!user) return <NoAuthBox />;
 
-  const handleClick = (index: number) => {
-    setRating(index);
-  };
   return (
     <div>
       <Textarea
@@ -26,8 +21,9 @@ const ReviewMessageBox = () => {
         placeholder="What did you think?"
         classNames={{
           mainWrapper: "hover:bg-white",
+
           inputWrapper:
-            "bg-black/5 hover:bg-white/5 data-focus:bg-black/10 border-primary/25 border-1",
+            "bg-black/5 hover:bg-white/5 data-focus:bg-black/10 border-primary/25 border-1 data-[hover=true]:bg-primary/10",
         }}
       />
       <div className="flex justify-between py-2 items-start">
