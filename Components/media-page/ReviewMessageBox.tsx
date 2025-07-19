@@ -11,12 +11,13 @@ import { TbStar, TbStarFilled } from "react-icons/tb";
 const ReviewMessageBox = () => {
   const user = useUser();
   const isMobile = useIsMobile();
-  const [stars, setStars] = useState(0);
+  const [hover, setHover] = useState<number | null>(null);
+  const [rating, setRating] = useState(0);
 
   if (!user) return <NoAuthBox />;
 
-  const handleStars = (index: number) => {
-    setStars(index);
+  const handleClick = (index: number) => {
+    setRating(index);
   };
   return (
     <div>
@@ -30,29 +31,7 @@ const ReviewMessageBox = () => {
         }}
       />
       <div className="flex justify-between py-2 items-start">
-        <div className="flex gap-1 ">
-          {[...Array(5)].map((_, index: number) => {
-            const starNum = index + 1;
-            if (stars >= starNum) {
-              return (
-                <button onClick={() => handleStars(starNum)}>
-                  <TbStarFilled
-                    size={isMobile ? 21 : 24}
-                    className="text-yellow-400 cursor-pointer"
-                  />
-                </button>
-              );
-            }
-            return (
-              <button
-                onClick={() => handleStars(starNum)}
-                className="cursor-pointer"
-              >
-                <TbStar size={isMobile ? 21 : 24} />
-              </button>
-            );
-          })}
-        </div>
+        <StarRating />
         <Button
           color="primary"
           radius="sm"
@@ -87,6 +66,46 @@ const NoAuthBox = () => {
         </Button>
       </CardBody>
     </Card>
+  );
+};
+
+interface StarRatingProps {
+  rating?: number;
+  onChange?: (value: number) => void;
+}
+const StarRating = ({ rating = 0, onChange }: StarRatingProps) => {
+  const isMobile = useIsMobile();
+  const [hover, setHover] = useState<number | null>(null);
+  const [current, setCurrent] = useState(0);
+
+  const handleClick = (value: number) => {
+    setCurrent(value);
+  };
+
+  return (
+    <div className="flex gap-1 ">
+      {[...Array(5)].map((_, index: number) => {
+        const value = index + 1;
+        const isFilled = value <= (hover ?? current);
+        return (
+          <button
+            onClick={() => handleClick(value)}
+            className="cursor-pointer"
+            onMouseEnter={() => setHover(value)}
+            onMouseLeave={() => setHover(null)}
+          >
+            {isFilled ? (
+              <TbStarFilled
+                size={isMobile ? 21 : 24}
+                className="text-yellow-400 cursor-pointer"
+              />
+            ) : (
+              <TbStar size={isMobile ? 21 : 24} />
+            )}
+          </button>
+        );
+      })}
+    </div>
   );
 };
 export default ReviewMessageBox;
