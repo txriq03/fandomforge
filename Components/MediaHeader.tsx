@@ -141,7 +141,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
             className="border-pink-500 text-pink-500 border-1"
             startContent={<TbHeart />}
           >
-            Favourite
+            I liked this
           </Button>
         </div>
 
