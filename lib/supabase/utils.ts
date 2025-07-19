@@ -1,6 +1,10 @@
 import Profile from "@/types/profile";
 import { devLog } from "../utils";
 import { createClient } from "./client";
+import { MediaType } from "@/types/trending";
+import { Database } from "@/types/supabase";
+
+type Review = Database["public"]["Tables"]["reviews"]["Row"];
 
 const supabase = createClient();
 
@@ -174,3 +178,22 @@ export async function getBookmarks(userId: string) {
   if (error) throw new Error(error.message);
   return data;
 }
+
+export const getReviewsForMedia = async (
+  mediaId: string,
+  mediaType: MediaType
+): Promise<Review[]> => {
+  const { data, error } = await supabase
+    .from("reviews")
+    .select("*")
+    .eq("media_id", mediaId)
+    .eq("media_type", mediaType)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching reviews:", error.message);
+    return [];
+  }
+
+  return data as Review[];
+};

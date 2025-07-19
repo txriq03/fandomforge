@@ -9,6 +9,7 @@ import { Card, CardBody } from "@heroui/card";
 import { Form } from "@heroui/form";
 import { Textarea } from "@heroui/input";
 import { addToast } from "@heroui/toast";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import { TbStar, TbStarFilled } from "react-icons/tb";
@@ -22,6 +23,7 @@ const ReviewMessageBox = () => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
   if (!user) return <NoAuthBox />;
 
@@ -43,6 +45,11 @@ const ReviewMessageBox = () => {
 
     if (result?.success) {
       addToast({ title: "Review submitted!", color: "success" });
+
+      // Invalidate review query to trigger refetch
+      queryClient.invalidateQueries({
+        queryKey: ["reviews", mediaId, mediaType],
+      });
     } else {
       addToast({
         title: result?.error,

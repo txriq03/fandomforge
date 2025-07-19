@@ -1,11 +1,15 @@
 import ReviewMessageBox from "@/Components/media-page/ReviewMessageBox";
+import Reviews from "@/Components/media-page/Reviews";
 import Padding from "@/Components/ui/Padding";
+import { Divider } from "@heroui/divider";
 import React from "react";
 
 const ReviewsPage = () => {
   return (
-    <Padding className="py-2">
+    <Padding className="pt-2 pb-10">
       <ReviewMessageBox />
+      <Divider className="mt-[30px] mb-[15px] bg-primary/25" />
+      <Reviews />
     </Padding>
   );
 };

@@ -5,7 +5,7 @@ export interface TrendingAllResponse {
   total_results: number;
 }
 
-export type MediaType = "movie" | "tv" | "person";
+export type MediaType = "movie" | "tv";
 
 export interface TrendingMovie {
   adult: boolean;
