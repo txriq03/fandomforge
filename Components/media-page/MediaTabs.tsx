@@ -5,13 +5,12 @@ import { Tabs, Tab } from "@heroui/tabs";
 import Padding from "../ui/Padding";
 import useIsMobile from "@/hooks/useIsMobile";
 import { usePathname } from "next/navigation";
-import { Alert } from "@heroui/alert";
 
 const MediaTabs = ({ media }: { media: Movie | TVSeries }) => {
   const isMobile = useIsMobile();
   const pathname = usePathname();
 
-  const type = media.media_type === "tv" ? "tv show" : media.media_type;
+  const type = media.media_type;
   return (
     <Padding className="overflow-x-scroll">
       <Tabs
@@ -24,21 +23,21 @@ const MediaTabs = ({ media }: { media: Movie | TVSeries }) => {
         }}
       >
         <Tab
-          key={`/movie/${media.id}`}
+          key={`/${type}/${media.id}`}
           title="Overview"
-          href={`/movie/${media.id}`}
+          href={`/${type}/${media.id}`}
         />
 
-        <Tab key="/activity" title="Activity" href="/activity">
-          <Alert
-            title="No content"
-            description={`There has been no activity for this ${type}.`}
-          />
-        </Tab>
         <Tab
-          key={`/movie/${media.id}/comments`}
-          title="Comments"
-          href={`/movie/${media.id}/comments`}
+          key={`/${type}/${media.id}/activity`}
+          title="Activity"
+          href={`/${type}/${media.id}/activity`}
+        />
+
+        <Tab
+          key={`/${type}/${media.id}/reviews`}
+          title="Reviews"
+          href={`/${type}/${media.id}/reviews`}
         />
       </Tabs>
     </Padding>

@@ -1,27 +1,11 @@
-import MediaBanner from "@/Components/media-page/MediaBanner";
-import MediaTabs from "@/Components/media-page/MediaTabs";
-import MediaHeader from "@/Components/MediaHeader";
-import { getTVById } from "@/lib/api/tmdb";
+import Overview from "@/Components/media-page/Overview";
+import Padding from "@/Components/ui/Padding";
 
-interface PageProps {
-  params: Promise<{
-    id: string;
-  }>;
-}
-
-const TvPage = async ({ params }: PageProps) => {
-  const { id } = await params;
-  let tvShow = await getTVById(id);
-
-  tvShow = { ...tvShow, media_type: "tv" };
-
-  console.log(tvShow);
+const TvPage = () => {
   return (
-    <>
-      <MediaBanner media={tvShow} />
-      <MediaHeader media={tvShow} />
-      <MediaTabs media={tvShow} />
-    </>
+    <Padding className="pt-2">
+      <Overview />
+    </Padding>
   );
 };
 
