@@ -1,4 +1,5 @@
 "use client";
+import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
@@ -26,16 +27,22 @@ const ReviewMessageBox = () => {
 };
 
 const NoAuthBox = () => {
+  const { authModal } = useUIContext();
+
   return (
     <Card
       className="bg-black/15 border-primary border-1 border-dashed py-2"
       shadow="none"
     >
       <CardBody className="items-center space-y-3 text-center">
-        <p className="text-primary-light text-sm">
+        <p className="text-primary-light text-sm sm:text-base">
           You need to be logged in to post a review.
         </p>
-        <Button color="primary" className="min-w-[200px]">
+        <Button
+          color="primary"
+          className="min-w-[200px]"
+          onPress={authModal.onOpen}
+        >
           Sign in
         </Button>
       </CardBody>
