@@ -32,7 +32,7 @@ const NoAuthBox = () => {
       shadow="none"
     >
       <CardBody className="items-center space-y-3 text-center">
-        <p className="text-primary-light">
+        <p className="text-primary-light text-sm">
           You need to be logged in to post a review.
         </p>
         <Button color="primary" className="min-w-[200px]">
