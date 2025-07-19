@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { devLog } from "../utils";
+import { MediaType } from "@/types/trending";
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -56,3 +57,33 @@ export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut({ scope: "local" });
 }
+
+interface ReviewParameters {
+  media_id: string;
+  media_type: MediaType;
+  rating: number;
+  comment?: string;
+}
+
+export const createReview = async (input: ReviewParameters) => {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+  if (userError || !user) {
+    return { error: "Unauthorized" };
+  }
+
+  const { error } = await supabase.from("reviews").insert({
+    ...input,
+    user_id: user.id,
+  });
+
+  if (error) {
+    return { error: "Could not create review", details: error.message };
+  }
+
+  return { success: true };
+};
