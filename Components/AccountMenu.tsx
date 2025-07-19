@@ -1,12 +1,12 @@
+import { Bell, ChevronDown, LogOut, Settings, User2 } from "lucide-react";
+import { signOut } from "@/lib/supabase/actions";
 import {
-  Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@heroui/react";
-import { Bell, ChevronDown, LogOut, Settings, User2 } from "lucide-react";
-import { signOut } from "@/lib/supabase/actions";
+} from "@heroui/dropdown";
+import { Button } from "@heroui/button";
 const AccountMenu = () => {
   return (
     <Dropdown>

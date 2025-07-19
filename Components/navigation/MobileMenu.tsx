@@ -1,9 +1,11 @@
 "use client";
-import { navItem, navItems } from "@/lib/data/navItems";
+import { navItems } from "@/lib/data/navItems";
 import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
-import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { Button } from "@heroui/button";
+import { Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
+
 import { LogIn, LucideProps, Settings, User2 } from "lucide-react";
 import Link from "next/link";
 import { ForwardRefExoticComponent, RefAttributes, useState } from "react";

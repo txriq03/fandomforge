@@ -4,16 +4,13 @@ import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
 import Profile from "@/types/profile";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Tooltip,
-} from "@heroui/react";
+import { Avatar } from "@heroui/avatar";
+import { Badge } from "@heroui/badge";
+import { Button } from "@heroui/button";
+import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Divider } from "@heroui/divider";
+import { Tooltip } from "@heroui/tooltip";
+
 import { ChevronRight, User2 } from "lucide-react";
 import Link from "next/link";
 import { FaPen } from "react-icons/fa";

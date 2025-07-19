@@ -1,13 +1,8 @@
 "use client";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@heroui/react";
+
+import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
 import { Bell, PackageOpen } from "lucide-react";
 import React from "react";
 

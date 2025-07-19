@@ -2,18 +2,19 @@
 import { login, signup } from "@/lib/supabase/actions";
 import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
+import { Button } from "@heroui/button";
 import {
-  addToast,
-  Button,
-  Form,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Spinner,
-} from "@heroui/react";
+} from "@heroui/modal";
+import { Spinner } from "@heroui/spinner";
+import { addToast } from "@heroui/toast";
+import { Form } from "@heroui/form";
+import { Input } from "@heroui/input";
+
 import { useMutation } from "@tanstack/react-query";
 import { AtSign, Lock, User2 } from "lucide-react";
 import Image from "next/image";

@@ -4,8 +4,8 @@ import TVSeries from "@/types/tv";
 import { Tabs, Tab } from "@heroui/tabs";
 import Padding from "../ui/Padding";
 import useIsMobile from "@/hooks/useIsMobile";
-import { Alert } from "@heroui/react";
 import { usePathname } from "next/navigation";
+import { Alert } from "@heroui/alert";
 
 const MediaTabs = ({ media }: { media: Movie | TVSeries }) => {
   const isMobile = useIsMobile();

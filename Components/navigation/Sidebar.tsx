@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Button, Divider } from "@heroui/react";
+import { Button } from "@heroui/button";
+import { Divider } from "@heroui/divider";
 import { ChevronRight, LogIn } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

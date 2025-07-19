@@ -1,10 +1,10 @@
 "use client";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { SidebarProvider } from "./SidebarProvider";
 import UIContextProvider from "./UIContext";
-import { HeroUIProvider, ToastProvider } from "@heroui/react";
+import { HeroUIProvider } from "@heroui/system";
+import { ToastProvider } from "@heroui/toast";
 import AuthContextProvider from "./AuthContext";
 import { useRouter } from "next/navigation";
 

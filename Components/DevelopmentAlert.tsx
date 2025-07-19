@@ -1,6 +1,5 @@
 "use client";
-
-import { Alert } from "@heroui/react";
+import { Alert } from "@heroui/alert";
 
 const DevelopmentAlert = () => {
   return (

@@ -1,11 +1,12 @@
 "use client";
 import { imageBaseUrl } from "@/lib/constants";
-import { Button, Chip } from "@heroui/react";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import React from "react";
 import { cn, formatNumber } from "@/lib/utils";
 import { TrendingMedia } from "@/types/trending";
+import { Chip } from "@heroui/chip";
+import { Button } from "@heroui/button";
 
 interface Props {
   media: TrendingMedia;

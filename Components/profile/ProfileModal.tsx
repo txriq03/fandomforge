@@ -3,18 +3,19 @@ import useProfile from "@/hooks/useProfile";
 import { isSameUser } from "@/lib/supabase/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
-import {
-  Avatar,
-  Badge,
-  Button,
-  Modal,
-  ModalContent,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Spinner,
-  Tooltip,
-} from "@heroui/react";
+// import {
+//   Avatar,
+//   Badge,
+//   Button,
+//   Modal,
+//   ModalContent,
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+//   Spinner,
+//   Tooltip,
+// } from "@heroui/react";
+import { Modal, ModalContent } from "@heroui/modal";
 import { FaPen } from "react-icons/fa";
 import { IoChatbubble } from "react-icons/io5";
 import { TiUserAdd } from "react-icons/ti";
@@ -23,6 +24,11 @@ import ProfileModalTabs from "./ProfileModalTabs";
 import { cn } from "@/lib/utils";
 import { TbDots, TbDotsVertical } from "react-icons/tb";
 import ProfilePopoverMenu from "./ProfilePopoverMenu";
+import { Spinner } from "@heroui/spinner";
+import { Badge } from "@heroui/badge";
+import { Button } from "@heroui/button";
+import { Tooltip } from "@heroui/tooltip";
+import { Avatar } from "@heroui/avatar";
 
 const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();

@@ -2,9 +2,11 @@
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { fetchMedia, getImageUrl } from "@/lib/api/tmdb";
 import { useUser } from "@/providers/UserProvider";
-import { Alert, Spinner } from "@heroui/react";
+
 import { useQueries } from "@tanstack/react-query";
 import MediaPoster from "./MediaPoster";
+import { Alert } from "@heroui/alert";
+import { Spinner } from "@heroui/spinner";
 
 const BookmarksGrid = () => {
   const user = useUser();

@@ -1,9 +1,10 @@
 "use client";
 import { cn, devLog } from "@/lib/utils";
-import { Card, Skeleton } from "@heroui/react";
 import MediaPoster from "./MediaPoster";
 import { useQuery } from "@tanstack/react-query";
 import { getTrending } from "@/lib/api/tmdb";
+import { Card } from "@heroui/card";
+import { Skeleton } from "@heroui/skeleton";
 
 const MediaGrid = ({ className }: { className?: string }) => {
   const {

@@ -1,13 +1,11 @@
 "use client";
 import { cn, formatDate } from "@/lib/utils";
-import Image from "next/image";
-import {
-  addToast,
-  Button,
-  Chip,
-  Image as HeroImage,
-  Spinner,
-} from "@heroui/react";
+// import { addToast, Button, Chip, Image, Spinner } from "@heroui/react";
+import { addToast } from "@heroui/toast";
+import { Button } from "@heroui/button";
+import { Chip } from "@heroui/chip";
+import { Image } from "@heroui/image";
+import { Spinner } from "@heroui/spinner";
 import { Heart } from "lucide-react";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
@@ -164,7 +162,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
         <div className="flex flex-col sm:flex-row gap-1 sm:gap-10">
           {/* Poster and buttons */}
           <div className="flex  sm:flex-col gap-2 py-5 w-full sm:w-[180px] lg:w-[250px]  flex-shrink-0 -mt-30 items-end sm:items-stretch">
-            <HeroImage
+            <Image
               src={posterUrl}
               className="object-cover h-auto w-[100px] sm:w-full"
               radius="sm"

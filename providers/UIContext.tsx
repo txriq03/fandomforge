@@ -1,5 +1,5 @@
 "use client";
-import { useDisclosure } from "@heroui/react";
+import { useDisclosure } from "@heroui/modal";
 import { createContext, ReactNode, useContext } from "react";
 
 type Modal = {

@@ -1,15 +1,12 @@
 "use client";
 import { getOwnProfile } from "@/lib/supabase/utils";
-import {
-  Avatar,
-  Badge,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@heroui/react";
+
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import AccountCard from "./AccountCard";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { Badge } from "@heroui/badge";
+import { Avatar } from "@heroui/avatar";
 
 const AccountBar = () => {
   const { data: profile } = useQuery({

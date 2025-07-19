@@ -4,15 +4,11 @@ import useOwnProfile from "@/hooks/useOwnProfile";
 import { getPfp } from "@/lib/supabase/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
-import {
-  Avatar,
-  Button,
-  Navbar,
-  NavbarContent,
-  NavbarItem,
-} from "@heroui/react";
+import { Navbar, NavbarContent, NavbarItem } from "@heroui/navbar";
+import { Avatar } from "@heroui/avatar";
 import { RiSearch2Line } from "react-icons/ri";
 import { TbUser } from "react-icons/tb";
+import { Button } from "@heroui/button";
 
 const Topbar = () => {
   const user = useUser();

@@ -1,7 +1,9 @@
 "use client";
 import useProfile from "@/hooks/useProfile";
 import { useUser } from "@/providers/UserProvider";
-import { Avatar, Button, Spinner } from "@heroui/react";
+import { Avatar } from "@heroui/avatar";
+import { Button } from "@heroui/button";
+import { Spinner } from "@heroui/spinner";
 import { Plus } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";

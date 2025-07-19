@@ -1,18 +1,15 @@
 import {
-  Button,
   Dropdown,
-  DropdownItem,
-  DropdownMenu,
   DropdownTrigger,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@heroui/react";
+  DropdownMenu,
+  DropdownItem,
+} from "@heroui/dropdown";
 import { TbArrowRight, TbDots, TbLogout } from "react-icons/tb";
 import { signOut } from "@/lib/supabase/actions";
 import { useUIContext } from "@/providers/UIContext";
 import Link from "next/link";
 import Profile from "@/types/profile";
+import { Button } from "@heroui/button";
 
 const ProfilePopoverMenu = ({ profile }: { profile: Profile }) => {
   const { profileModal } = useUIContext();

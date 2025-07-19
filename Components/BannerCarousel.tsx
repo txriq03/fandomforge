@@ -2,7 +2,6 @@
 import { cn } from "@/lib/utils";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Chip, Image, Spinner } from "@heroui/react";
 import { Info, LucideProps } from "lucide-react";
 import { fetchMediaLogo, getImageUrl, getTrending } from "@/lib/api/tmdb";
 import { useQueries, useQuery } from "@tanstack/react-query";
@@ -13,6 +12,10 @@ import { FaCalendar, FaPlayCircle, FaStar } from "react-icons/fa";
 import { formatDate } from "@/lib/utils";
 import { IconType } from "react-icons";
 import { TrendingMedia } from "@/types/trending";
+import { Spinner } from "@heroui/spinner";
+import { Image } from "@heroui/image";
+import { Button } from "@heroui/button";
+import { Chip } from "@heroui/chip";
 
 const BannerCarousel = ({ className }: { className?: string }) => {
   const { data: trending, isPending } = useQuery({

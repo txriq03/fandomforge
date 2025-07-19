@@ -1,5 +1,4 @@
 import DevelopmentAlert from "@/Components/DevelopmentAlert";
-import MediaGrid from "@/Components/MediaGrid";
 import BannerCarousel from "@/Components/BannerCarousel";
 import TrendingCarousel from "@/Components/TrendingCarousel";
 

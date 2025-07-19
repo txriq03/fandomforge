@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Tab, Tabs } from "@heroui/react";
+import { Tab, Tabs } from "@heroui/tabs";
 import { History, UsersRound } from "lucide-react";
 import { BiStats } from "react-icons/bi";
 import { GrOverview } from "react-icons/gr";

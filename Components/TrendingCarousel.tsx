@@ -3,14 +3,17 @@
 import { useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
-import { getImageUrl, getTrending } from "@/lib/api/tmdb";
-import { Button, Card, Image, Skeleton } from "@heroui/react";
+import { getTrending } from "@/lib/api/tmdb";
 import { TrendingMedia } from "@/types/trending";
-import { cn, formatNumber } from "@/lib/utils";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import MediaPoster from "./MediaPoster";
 import useIsMobile from "@/hooks/useIsMobile";
+import { Button } from "@heroui/button";
+import { Image } from "@heroui/image";
+import { Skeleton } from "@heroui/skeleton";
+import { Card } from "@heroui/card";
+
 const TrendingCarousel = () => {
   const isMobile = useIsMobile();
   const {

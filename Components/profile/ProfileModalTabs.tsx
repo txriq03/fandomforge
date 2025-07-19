@@ -1,6 +1,6 @@
 "use client";
 import { formatDateTime } from "@/lib/utils";
-import { Tab, Tabs } from "@heroui/react";
+import { Tab, Tabs } from "@heroui/tabs";
 import { User } from "@supabase/supabase-js";
 
 const ProfileModalTabs = ({ profile }: { profile: any }) => {
