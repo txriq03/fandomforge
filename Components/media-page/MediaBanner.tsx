@@ -34,6 +34,7 @@ const MediaBanner = ({ media }: { media: Movie | TVSeries }) => {
         fill
         src={backdropUrl}
         className="object-cover object-center"
+        priority
       />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
     </div>

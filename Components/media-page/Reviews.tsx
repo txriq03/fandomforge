@@ -8,6 +8,7 @@ import { Avatar } from "@heroui/avatar";
 import { Card, CardBody } from "@heroui/card";
 import { Spinner } from "@heroui/spinner";
 import { useParams } from "next/navigation";
+import ReviewStarRating from "./ReviewStarRating";
 
 const Reviews = () => {
   const params = useParams();
@@ -48,6 +49,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
         <Avatar src={avatar} />
         <div className="flex flex-col gap-1">
           <p className="text-foreground/75 text-sm">{review.username}</p>
+          {review.rating && <ReviewStarRating rating={review.rating} />}
+
           <p className="text-sm lg:text-base font-light">{review.comment}</p>
         </div>
       </CardBody>
