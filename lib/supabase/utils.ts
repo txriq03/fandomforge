@@ -1,4 +1,5 @@
-import Profile from "@/types/profile";
+// import Profile from "@/types/profile";
+import { Profile } from "@/types/tables";
 import { devLog } from "../utils";
 import { createClient } from "./client";
 import { MediaType } from "@/types/trending";
@@ -89,7 +90,7 @@ export async function getProfile(username: string): Promise<Profile | null> {
   const supabase = createClient();
 
   const { data: profile, error: profileError } = await supabase
-    .from("profiles")
+    .from("extended_profiles")
     .select("*")
     .eq("username", username)
     .single();

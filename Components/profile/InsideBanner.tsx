@@ -25,13 +25,14 @@ const InsideBanner = () => {
       <Spinner variant="simple" color="danger" className="m-auto" size="lg" />
     );
   }
+  console.log("Profile:", profile);
 
   return (
     <div className="container w-full  text-white flex justify-between items-end">
       <div className="flex items-end gap-5 ">
         <Avatar
           radius="none"
-          src={profile?.profile_pic || "/default_pfp.png"}
+          src={profile?.avatar_url || "/default_pfp.png"}
           showFallback
           className="w-30 h-30  sm:w-35 sm:h-35"
         />
