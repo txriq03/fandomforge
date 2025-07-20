@@ -2,9 +2,7 @@ import Profile from "@/types/profile";
 import { devLog } from "../utils";
 import { createClient } from "./client";
 import { MediaType } from "@/types/trending";
-import { Database } from "@/types/supabase";
-
-type Review = Database["public"]["Tables"]["reviews"]["Row"];
+import { Review } from "@/types/tables";
 
 const supabase = createClient();
 
@@ -184,7 +182,7 @@ export const getReviewsForMedia = async (
   mediaType: MediaType
 ): Promise<Review[]> => {
   const { data, error } = await supabase
-    .from("reviews")
+    .from("reviews_with_profiles")
     .select("*")
     .eq("media_id", mediaId)
     .eq("media_type", mediaType)

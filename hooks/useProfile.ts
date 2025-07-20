@@ -6,7 +6,7 @@ const useProfile = (username: string, options = {}) => {
     queryKey: ["profile", username],
     queryFn: () => getProfile(username),
     enabled: !!username,
-    ...options, // allow overrides like staleTime, retry, etc.
+    ...options,
   });
 };
 
