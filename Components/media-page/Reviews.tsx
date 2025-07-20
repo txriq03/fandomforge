@@ -9,6 +9,9 @@ import { Card, CardBody } from "@heroui/card";
 import { Spinner } from "@heroui/spinner";
 import { useParams } from "next/navigation";
 import ReviewStarRating from "./ReviewStarRating";
+import { timeago } from "@/lib/utils";
+import { Button } from "@heroui/button";
+import { TbHeart, TbMessage } from "react-icons/tb";
 
 const Reviews = () => {
   const params = useParams();
@@ -44,14 +47,36 @@ const Reviews = () => {
 const ReviewCard = ({ review }: { review: Review }) => {
   const avatar = getPfp(review.avatar_url);
   return (
-    <Card className="bg-primary/5" shadow="none">
-      <CardBody className="flex-row gap-2">
-        <Avatar src={avatar} />
-        <div className="flex flex-col gap-1">
-          <p className="text-foreground/75 text-sm">{review.username}</p>
-          {review.rating && <ReviewStarRating rating={review.rating} />}
+    <Card className="bg-transparent" shadow="none">
+      <CardBody className="flex-row gap-2 px-0">
+        <div>
+          <Avatar src={avatar} />
+        </div>
+        <div className="flex flex-col gap-1 w-full">
+          <div className="flex gap-2 items-center">
+            <p className="text-foreground/75 text-sm">{review.username}</p>
+            <p className="text-foreground/25">•</p>
+            <div className="text-[0.8rem]">
+              {review.rating && <ReviewStarRating rating={review.rating} />}
+            </div>
+          </div>
 
-          <p className="text-sm lg:text-base font-light">{review.comment}</p>
+          <p className="text-[0.75rem] sm:text-[0.8rem] md:text-[0.9rem] font-light line-clamp-3">
+            {review.comment}
+          </p>
+
+          <div className="flex gap-1 items-center">
+            <p className="text-[0.7rem] text-foreground/30">
+              {timeago(review.created_at!)}
+            </p>
+            <p className="text-foreground/30">•</p>
+            <Button isIconOnly variant="light" size="sm">
+              <TbHeart size={18} />
+            </Button>
+            <Button isIconOnly variant="light" size="sm">
+              <TbMessage size={18} />
+            </Button>
+          </div>
         </div>
       </CardBody>
     </Card>

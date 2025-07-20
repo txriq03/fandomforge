@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
-import { parseISO, format } from "date-fns";
+import { parseISO, format, formatDistanceToNow } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -40,4 +40,10 @@ export const formatDate = (iso: string, yearOnly = false) => {
   if (!iso) return "";
   const date = parseISO(iso);
   return yearOnly ? format(date, "yyyy") : format(date, "do MMMM, yyyy");
+};
+
+export const timeago = (iso: string) => {
+  const raw = formatDistanceToNow(new Date(iso), { addSuffix: true });
+  const timeAgo = raw.replace(/^about /, "");
+  return timeAgo;
 };

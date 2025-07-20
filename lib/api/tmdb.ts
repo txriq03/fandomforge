@@ -46,7 +46,6 @@ export const fetchMediaLogo = async (
   const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/images?include_image_language=en,`;
   const res = await fetch(url, options);
   const data = await res.json();
-  console.log("Logo data:", data);
   const logo = data.logos?.[0];
   return logo ? `https://image.tmdb.org/t/p/original${logo.file_path}` : "";
 };
