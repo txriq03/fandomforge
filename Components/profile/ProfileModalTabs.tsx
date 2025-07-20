@@ -1,11 +1,10 @@
 "use client";
 import { formatDateTime } from "@/lib/utils";
+import { Profile } from "@/types/tables";
 import { Tab, Tabs } from "@heroui/tabs";
-import { User } from "@supabase/supabase-js";
 
-const ProfileModalTabs = ({ profile }: { profile: any }) => {
-  const user: User = profile.user;
-  const memberSince = formatDateTime(user.created_at);
+const ProfileModalTabs = ({ profile }: { profile: Profile }) => {
+  const memberSince = formatDateTime(profile.created_at);
 
   return (
     <Tabs

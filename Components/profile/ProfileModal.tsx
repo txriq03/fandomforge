@@ -3,18 +3,6 @@ import useProfile from "@/hooks/useProfile";
 import { isSameUser } from "@/lib/supabase/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
-// import {
-//   Avatar,
-//   Badge,
-//   Button,
-//   Modal,
-//   ModalContent,
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-//   Spinner,
-//   Tooltip,
-// } from "@heroui/react";
 import { Modal, ModalContent } from "@heroui/modal";
 import { FaPen } from "react-icons/fa";
 import { IoChatbubble } from "react-icons/io5";
@@ -22,7 +10,6 @@ import { TiUserAdd } from "react-icons/ti";
 import { useMediaQuery } from "usehooks-ts";
 import ProfileModalTabs from "./ProfileModalTabs";
 import { cn } from "@/lib/utils";
-import { TbDots, TbDotsVertical } from "react-icons/tb";
 import ProfilePopoverMenu from "./ProfilePopoverMenu";
 import { Spinner } from "@heroui/spinner";
 import { Badge } from "@heroui/badge";
@@ -33,7 +20,7 @@ import { Avatar } from "@heroui/avatar";
 const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();
   const { profileModal } = useUIContext();
-  const { data: profile, isPending } = useProfile(user?.user_metadata.username);
+  const { data: profile, isPending } = useProfile(user?.id);
   const isMobile = useMediaQuery("(max-width: 640px)");
 
   const fullProfile = {
@@ -120,7 +107,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
                     <p className="text-foreground/50 text-sm">Display name</p>
                   </div>
                   <div className="overflow-x-auto">
-                    <ProfileModalTabs profile={fullProfile} />
+                    <ProfileModalTabs profile={profile} />
                   </div>
                 </div>
               </>

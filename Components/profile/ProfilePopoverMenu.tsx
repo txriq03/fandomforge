@@ -8,8 +8,8 @@ import { TbArrowRight, TbDots, TbLogout } from "react-icons/tb";
 import { signOut } from "@/lib/supabase/actions";
 import { useUIContext } from "@/providers/UIContext";
 import Link from "next/link";
-import Profile from "@/types/profile";
 import { Button } from "@heroui/button";
+import { Profile } from "@/types/tables";
 
 const ProfilePopoverMenu = ({ profile }: { profile: Profile }) => {
   const { profileModal } = useUIContext();

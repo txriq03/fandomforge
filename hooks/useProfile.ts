@@ -1,11 +1,11 @@
 import { getProfile } from "@/lib/supabase/utils";
 import { useQuery } from "@tanstack/react-query";
 
-const useProfile = (username: string, options = {}) => {
+const useProfile = (userId?: string, options = {}) => {
   return useQuery({
-    queryKey: ["profile", username],
-    queryFn: () => getProfile(username),
-    enabled: !!username,
+    queryKey: ["profile", userId],
+    queryFn: () => getProfile(userId),
+    enabled: !!userId,
     ...options,
   });
 };

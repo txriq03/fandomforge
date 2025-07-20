@@ -28,7 +28,12 @@ export const formatNumber = (num: number) => {
   return num.toString().padStart(2, "0");
 };
 
-export const formatDateTime = (iso: string) => {
+export const formatDateTime = (iso: string | null) => {
+  if (!iso) {
+    devLog.error("No iso provided for formatDateTime.");
+    return null;
+  }
+
   const formatted = format(
     parseISO("2025-07-02T23:42:54.848253Z"),
     "do MMMM, yyyy"

@@ -4,6 +4,7 @@ import { devLog } from "../utils";
 import { createClient } from "./client";
 import { MediaType } from "@/types/trending";
 import { Review } from "@/types/tables";
+import { User } from "@supabase/supabase-js";
 
 const supabase = createClient();
 
@@ -86,7 +87,30 @@ export async function getOwnProfile(): Promise<Profile | null> {
   return profile;
 }
 
-export async function getProfile(username: string): Promise<Profile | null> {
+export async function getProfile(userId?: string): Promise<Profile | null> {
+  const supabase = createClient();
+
+  const { data: profile, error: profileError } = await supabase
+    .from("extended_profiles")
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (!userId) {
+    devLog.error("No user Id provided.");
+    return null;
+  }
+  if (profileError) {
+    devLog.error("Error getting profile for username:", profileError.message);
+    return null;
+  }
+
+  return profile;
+}
+
+export async function getProfileByUsername(
+  username?: string
+): Promise<Profile | null> {
   const supabase = createClient();
 
   const { data: profile, error: profileError } = await supabase
@@ -95,19 +119,19 @@ export async function getProfile(username: string): Promise<Profile | null> {
     .eq("username", username)
     .single();
 
+  if (!username) {
+    devLog.error("No username provided for getProfileByUsername.");
+    return null;
+  }
   if (profileError) {
-    devLog.error(
-      "Error getting profile for username:",
-      username,
-      profileError.message
-    );
+    devLog.error("Error getting profile for username:", profileError.message);
     return null;
   }
 
   return profile;
 }
 
-export const isSameUser = (user: any, profile: Profile) => {
+export const isSameUser = (user: User | null, profile: Profile) => {
   return user?.user_metadata.username === profile?.username;
 };
 

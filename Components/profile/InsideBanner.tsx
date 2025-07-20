@@ -11,8 +11,8 @@ import { useMediaQuery } from "usehooks-ts";
 const InsideBanner = () => {
   const params = useParams();
   const username = params.username as string;
-  const { data: profile, isPending } = useProfile(username);
   const user = useUser();
+  const { data: profile, isPending } = useProfile(user!.id);
 
   const isSameUser = () => {
     return user?.user_metadata.username === profile?.username;

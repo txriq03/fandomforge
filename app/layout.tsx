@@ -7,8 +7,6 @@ import Topbar from "@/Components/navigation/Topbar";
 import LoginModal from "@/Components/LoginModal";
 import { createClient } from "@/lib/supabase/server";
 import { UserProvider } from "@/providers/UserProvider";
-import ProfileModal from "@/Components/profile/ProfileModal";
-import ProfileDrawer from "@/Components/profile/ProfileDrawer";
 import ProfileWrapper from "@/Components/profile/ProfileWrapper";
 
 const quicksand = Quicksand({

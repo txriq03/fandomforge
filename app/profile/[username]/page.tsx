@@ -1,6 +1,6 @@
 import InsideBanner from "@/Components/profile/InsideBanner";
 import ProfileTabs from "@/Components/profile/ProfileTabs";
-import { getProfile } from "@/lib/supabase/utils";
+import { getProfile, getProfileByUsername } from "@/lib/supabase/utils";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -11,7 +11,7 @@ interface PageProps {
 
 const ProfilePage = async ({ params }: PageProps) => {
   const { username } = await params;
-  const profile = await getProfile(username);
+  const profile = await getProfileByUsername(username);
 
   if (!profile) {
     notFound();

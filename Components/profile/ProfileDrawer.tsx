@@ -23,7 +23,7 @@ import { Button } from "@heroui/button";
 const ProfileDrawer = ({ className }: { className?: string }) => {
   const user = useUser();
   const { profileModal } = useUIContext();
-  const { data: profile, isPending } = useProfile(user?.user_metadata.username);
+  const { data: profile, isPending } = useProfile(user?.id);
   const isMobile = useMediaQuery("(max-width: 640px)");
   const fullProfile = {
     user,
@@ -131,7 +131,7 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
                   <p className="text-foreground/50 text-sm">Display name</p>
                 </div>
                 <div className="overflow-x-auto">
-                  <ProfileModalTabs profile={fullProfile} />
+                  <ProfileModalTabs profile={profile} />
                 </div>
               </div>
             </>
