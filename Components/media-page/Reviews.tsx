@@ -61,7 +61,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
             </div>
           </div>
 
-          <p className="text-[0.75rem] sm:text-[0.8rem] md:text-[0.9rem] font-light line-clamp-3">
+          <p className="text-[0.75rem] sm:text-[0.8rem] md:text-[0.9rem] font-light line-clamp-4">
             {review.comment}
           </p>
 
@@ -70,10 +70,10 @@ const ReviewCard = ({ review }: { review: Review }) => {
               {timeago(review.created_at!)}
             </p>
             <p className="text-foreground/30">•</p>
-            <Button isIconOnly variant="light" size="sm">
+            <Button isIconOnly variant="light" size="sm" aria-label="like">
               <TbHeart size={18} />
             </Button>
-            <Button isIconOnly variant="light" size="sm">
+            <Button isIconOnly variant="light" size="sm" aria-label="reply">
               <TbMessage size={18} />
             </Button>
           </div>

@@ -46,6 +46,10 @@ const ReviewMessageBox = () => {
     if (result?.success) {
       addToast({ title: "Review submitted!", color: "success" });
 
+      setRating(0);
+      console.log("Rating after reset:", rating);
+      setComment("");
+
       // Invalidate review query to trigger refetch
       queryClient.invalidateQueries({
         queryKey: ["reviews", mediaId, mediaType],
@@ -67,7 +71,7 @@ const ReviewMessageBox = () => {
         name="comment"
         isRequired
         minLength={5}
-        maxLength={200}
+        maxLength={10000}
         label="Write your review"
         placeholder="What did you think?"
         value={comment}
@@ -132,10 +136,9 @@ interface StarRatingProps {
 const StarRating = ({ rating = 0, onChange }: StarRatingProps) => {
   const isMobile = useIsMobile();
   const [hover, setHover] = useState<number | null>(null);
-  const [current, setCurrent] = useState(rating);
+  const current = rating;
 
   const handleClick = (value: number) => {
-    setCurrent(value);
     onChange?.(value);
   };
 
