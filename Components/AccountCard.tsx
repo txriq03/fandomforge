@@ -3,7 +3,7 @@ import { signOut } from "@/lib/supabase/actions";
 import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
-import Profile from "@/types/profile";
+import { Profile } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
 import { Badge } from "@heroui/badge";
 import { Button } from "@heroui/button";
