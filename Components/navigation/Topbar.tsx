@@ -34,7 +34,7 @@ const Topbar = () => {
               as="button"
               isFocusable
               onClick={() => profileModal.onOpen()}
-              src={getPfp(profile?.profile_pic)}
+              src={getPfp(profile?.avatar_url)}
               classNames={{
                 base: "hover:brightness-50 duration-200 transition-filter cursor-pointer",
               }}
