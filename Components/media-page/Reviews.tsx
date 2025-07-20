@@ -1,8 +1,10 @@
 "use client";
 import { useReviewsForMedia } from "@/hooks/useMediaReview";
+import { getPfp } from "@/lib/supabase/utils";
 import { Review } from "@/types/tables";
 import { MediaType } from "@/types/trending";
 import { Alert } from "@heroui/alert";
+import { Avatar } from "@heroui/avatar";
 import { Card, CardBody } from "@heroui/card";
 import { Spinner } from "@heroui/spinner";
 import { useParams } from "next/navigation";
@@ -39,11 +41,15 @@ const Reviews = () => {
 };
 
 const ReviewCard = ({ review }: { review: Review }) => {
+  const avatar = getPfp(review.avatar_url);
   return (
     <Card className="bg-primary/5" shadow="none">
-      <CardBody>
-        <p>{review.username}</p>
-        <p className="text-sm lg:text-base">{review.comment}</p>
+      <CardBody className="flex-row gap-2">
+        <Avatar src={avatar} />
+        <div className="flex flex-col gap-1">
+          <p className="text-foreground/75">{review.username}</p>
+          <p className="text-sm lg:text-base ">{review.comment}</p>
+        </div>
       </CardBody>
     </Card>
   );
