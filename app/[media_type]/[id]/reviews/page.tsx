@@ -6,7 +6,7 @@ import React from "react";
 
 const ReviewsPage = () => {
   return (
-    <Padding className="pt-2 pb-10">
+    <Padding className="pt-2 pb-20">
       <ReviewMessageBox />
       {/* <Divider className="mt-[30px] mb-[15px] bg-primary/25" /> */}
       <p className="pt-10 pb-2 text-sm sm:text-lg text-foreground/60 font-light">
