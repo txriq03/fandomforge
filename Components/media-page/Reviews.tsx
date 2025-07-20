@@ -32,11 +32,11 @@ const Reviews = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       {reviews.map((review: Review) => (
         <ReviewCard review={review} key={review.id} />
       ))}
-    </>
+    </div>
   );
 };
 
@@ -47,8 +47,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
       <CardBody className="flex-row gap-2">
         <Avatar src={avatar} />
         <div className="flex flex-col gap-1">
-          <p className="text-foreground/75">{review.username}</p>
-          <p className="text-sm lg:text-base ">{review.comment}</p>
+          <p className="text-foreground/75 text-sm">{review.username}</p>
+          <p className="text-sm lg:text-base font-light">{review.comment}</p>
         </div>
       </CardBody>
     </Card>
