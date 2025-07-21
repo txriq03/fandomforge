@@ -33,7 +33,7 @@ const AccountCard = ({
     <Card className="min-w-[300px] font-main p-0">
       <CardHeader className="p-0">
         {/* Banner area */}
-        <div className="relative w-full h-[150px] sm:h-[120px] bg-[#232634]">
+        <div className="relative w-full h-[100px] bg-[#232634]">
           <div className="px-3 absolute -bottom-12.5 ">
             {/* Avatar button*/}
             <button
