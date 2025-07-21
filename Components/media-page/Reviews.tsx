@@ -12,6 +12,8 @@ import ReviewStarRating from "./ReviewStarRating";
 import { timeago } from "@/lib/utils";
 import { Button } from "@heroui/button";
 import { TbHeart, TbMessage } from "react-icons/tb";
+import useProfile from "@/hooks/useProfile";
+import { useUIContext } from "@/providers/UIContext";
 
 const Reviews = () => {
   const params = useParams();
@@ -46,12 +48,15 @@ const Reviews = () => {
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const avatar = getPfp(review.avatar_url);
+  const { data: profile, isPending } = useProfile(review.user_id);
+  const { profileModal } = useUIContext();
+
   return (
     <Card className="bg-transparent" shadow="none">
       <CardBody className="flex-row gap-2 px-0">
-        <div>
+        <Button radius="full" isIconOnly onPress={profileModal.onOpen}>
           <Avatar src={avatar} />
-        </div>
+        </Button>
         <div className="flex flex-col gap-1 w-full">
           <div className="flex gap-2 items-center">
             <p className="text-foreground/75 text-sm">{review.username}</p>

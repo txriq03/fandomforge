@@ -1,4 +1,3 @@
-// import Profile from "@/types/profile";
 import { Profile } from "@/types/tables";
 import { devLog } from "../utils";
 import { createClient } from "./client";
@@ -87,7 +86,9 @@ export async function getOwnProfile(): Promise<Profile | null> {
   return profile;
 }
 
-export async function getProfile(userId?: string): Promise<Profile | null> {
+export async function getProfile(
+  userId?: string | null
+): Promise<Profile | null> {
   const supabase = createClient();
 
   const { data: profile, error: profileError } = await supabase

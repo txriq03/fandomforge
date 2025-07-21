@@ -4,12 +4,10 @@ import useProfile from "@/hooks/useProfile";
 import { isSameUser } from "@/lib/supabase/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
-
 import { Tooltip } from "@heroui/tooltip";
 import { Avatar } from "@heroui/avatar";
 import { Drawer, DrawerContent } from "@heroui/drawer";
 import { Badge } from "@heroui/badge";
-
 import { FaPen } from "react-icons/fa";
 import { IoChatbubble } from "react-icons/io5";
 import { TiUserAdd } from "react-icons/ti";
@@ -25,10 +23,7 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
   const { profileModal } = useUIContext();
   const { data: profile, isPending } = useProfile(user?.id);
   const isMobile = useMediaQuery("(max-width: 640px)");
-  const fullProfile = {
-    user,
-    profile,
-  };
+
   return (
     <Drawer
       isOpen={profileModal.isOpen}
