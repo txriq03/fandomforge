@@ -35,6 +35,7 @@ const MediaPoster = ({ media, className, number }: Props) => {
       <Image
         alt={name}
         src={url}
+        radius="none"
         classNames={{
           wrapper:
             "w-full h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 ",
