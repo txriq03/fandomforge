@@ -1,6 +1,6 @@
 import InsideBanner from "@/Components/profile/InsideBanner";
 import ProfileTabs from "@/Components/profile/ProfileTabs";
-import { getProfile, getProfileByUsername } from "@/lib/supabase/utils";
+import { getProfileByUsername } from "@/lib/supabase/utils";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -20,7 +20,7 @@ const ProfilePage = async ({ params }: PageProps) => {
   return (
     <>
       <div className="w-full bg-slate-900 h-[250px] flex items-end">
-        <InsideBanner />
+        <InsideBanner profile={profile} />
       </div>
       <ProfileTabs />
     </>

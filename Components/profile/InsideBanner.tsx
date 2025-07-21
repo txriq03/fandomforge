@@ -1,6 +1,8 @@
 "use client";
 import useProfile from "@/hooks/useProfile";
+import { isSameUser } from "@/lib/supabase/utils";
 import { useUser } from "@/providers/UserProvider";
+import { Profile } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
 import { Button } from "@heroui/button";
 import { Spinner } from "@heroui/spinner";
@@ -8,23 +10,19 @@ import { Plus } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 
-const InsideBanner = () => {
+const InsideBanner = ({ profile }: { profile: Profile }) => {
   const params = useParams();
   const username = params.username as string;
   const user = useUser();
-  const { data: profile, isPending } = useProfile(user!.id);
-
-  const isSameUser = () => {
-    return user?.user_metadata.username === profile?.username;
-  };
+  // const { data: profile, isPending } = useProfile(user!.id);
 
   const isMobile = useMediaQuery("(max-width: 640px)");
 
-  if (isPending) {
-    return (
-      <Spinner variant="simple" color="danger" className="m-auto" size="lg" />
-    );
-  }
+  // if (isPending) {
+  //   return (
+  //     <Spinner variant="simple" color="danger" className="m-auto" size="lg" />
+  //   );
+  // }
   console.log("Profile:", profile);
 
   return (
@@ -40,7 +38,7 @@ const InsideBanner = () => {
       </div>
 
       {/* Buttons */}
-      {!isSameUser() && (
+      {!isSameUser(user, profile) && (
         <Button
           startContent={<Plus size={21} />}
           className="my-2 bg-primary-light text-white"

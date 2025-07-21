@@ -133,7 +133,7 @@ export async function getProfileByUsername(
 }
 
 export const isSameUser = (user: User | null, profile: Profile) => {
-  return user?.user_metadata.username === profile?.username;
+  return user?.id === profile?.id;
 };
 
 export const getPfp = (imageUrl: string | null | undefined) => {
