@@ -70,17 +70,21 @@ const ReviewCard = ({ review }: { review: Review }) => {
             {review.comment}
           </p>
 
-          <div className="flex gap-1 items-center">
+          <div className="flex gap-2 items-center">
             <p className="text-[0.7rem] text-foreground/30">
               {timeago(review.created_at!)}
             </p>
             <p className="text-foreground/30">•</p>
-            <Button isIconOnly variant="light" size="sm" aria-label="like">
-              <TbHeart size={18} />
-            </Button>
-            <Button isIconOnly variant="light" size="sm" aria-label="reply">
-              <TbMessage size={18} />
-            </Button>
+
+            {/* Buttons */}
+            <div className="flex gap-1">
+              <Button isIconOnly variant="light" size="sm" aria-label="like">
+                <TbHeart size={18} />
+              </Button>
+              <Button isIconOnly variant="light" size="sm" aria-label="reply">
+                <TbMessage size={18} />
+              </Button>
+            </div>
           </div>
         </div>
       </CardBody>

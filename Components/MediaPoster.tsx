@@ -7,6 +7,7 @@ import { cn, formatNumber } from "@/lib/utils";
 import { TrendingMedia } from "@/types/trending";
 import { Chip } from "@heroui/chip";
 import { Button } from "@heroui/button";
+import { Image } from "@heroui/image";
 
 interface Props {
   media: TrendingMedia;
@@ -31,10 +32,13 @@ const MediaPoster = ({ media, className, number }: Props) => {
         className
       )}
     >
-      <img
+      <Image
         alt={name}
         src={url}
-        className="w-full h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 "
+        classNames={{
+          wrapper:
+            "w-full h-full object-cover transition-[filter] duration-300 group-hover:brightness-50 ",
+        }}
       />
       {number && (
         <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-rose-400 grid place-items-center font-bold font-heading rounded-br-sm text-slate-50">
