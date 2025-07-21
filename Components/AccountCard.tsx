@@ -23,11 +23,7 @@ const AccountCard = ({
   setIsPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const user = useUser();
-  const { profileModal, openProfileModal } = useUIContext();
-  const fullProfile = {
-    ...profile,
-    ...user,
-  };
+  const { openProfileModal } = useUIContext();
 
   return (
     <Card className="min-w-[300px] font-main p-0">

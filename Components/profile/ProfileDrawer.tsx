@@ -113,8 +113,9 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
                         color="primary"
                         size={isMobile ? "sm" : "md"}
                         startContent={<TiUserAdd size={21} />}
+                        className="text-sm"
                       >
-                        Add Friend
+                        Follow
                       </Button>
                     </>
                   )}

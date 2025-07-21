@@ -16,16 +16,17 @@ import { Badge } from "@heroui/badge";
 import { Button } from "@heroui/button";
 import { Tooltip } from "@heroui/tooltip";
 import { Avatar } from "@heroui/avatar";
+import { useFollowUser } from "@/hooks/useFollowUser";
 
 const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();
   const { profileModal, profileUserId } = useUIContext();
   const { data: profile, isPending } = useProfile(profileUserId);
   const isMobile = useMediaQuery("(max-width: 640px)");
+  const followMutation = useFollowUser();
 
-  const fullProfile = {
-    profile,
-    user,
+  const handleFollow = () => {
+    followMutation.mutate(profile?.id);
   };
 
   return (
@@ -33,7 +34,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
       isOpen={profileModal.isOpen}
       onOpenChange={profileModal.onOpenChange}
       size={isPending || !profile ? "sm" : "xl"}
-      className={cn("font main bg-card", className)}
+      className={cn("font-main bg-card", className)}
     >
       {isPending || !profile ? (
         <ModalContent>
@@ -93,9 +94,18 @@ const ProfileModal = ({ className }: { className?: string }) => {
                           radius="sm"
                           color="primary"
                           size={isMobile ? "sm" : "md"}
-                          startContent={<TiUserAdd size={21} />}
+                          startContent={
+                            !followMutation.isPending && <TiUserAdd size={21} />
+                          }
+                          className="text-base"
+                          isLoading={followMutation.isPending}
+                          onPress={handleFollow}
                         >
-                          Add Friend
+                          {followMutation.isPending ? (
+                            <p>Following</p>
+                          ) : (
+                            <p>Follow</p>
+                          )}
                         </Button>
                       </>
                     )}

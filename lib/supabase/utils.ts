@@ -221,3 +221,32 @@ export const getReviewsForMedia = async (
 
   return data as Review[];
 };
+
+export const followUser = async (followedId?: string | null) => {
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (!followedId) {
+    throw new Error("No follow ID provided");
+  }
+
+  if (authError || !user) {
+    throw new Error("Not authenticated");
+  }
+
+  const { error } = await supabase
+    .from("follows")
+    .insert([{ follower_id: user.id, followed_id: followedId }]);
+
+  if (error) {
+    if (error.code === "23505") {
+      throw new Error("Already following the user");
+    }
+
+    throw new Error(error.message);
+  }
+
+  return { sucess: true };
+};
