@@ -1,6 +1,7 @@
 import { Movie } from "@/types/movie";
 import { MediaType } from "@/types/trending";
 import TVSeries from "@/types/tv";
+import { devLog } from "../utils";
 
 const options = {
   method: "GET",
@@ -26,7 +27,13 @@ export const getTrending = async () => {
   if (!res.ok) {
     throw new Error("Failed to fetch trending.");
   }
-  return res.json();
+
+  const data = await res.json();
+  const filtered = data.results.filter(
+    (item: any) => item.media_type !== "person"
+  );
+  devLog.log("Filtered: ", filtered);
+  return filtered;
 };
 
 export const getMediaById = async (mediaId: string, mediaType: MediaType) => {

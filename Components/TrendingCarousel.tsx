@@ -90,31 +90,29 @@ const TrendingCarousel = () => {
         ref={emblaRef}
       >
         <div className="flex sm:gap-2">
-          {trending?.results
-            ?.slice(0, 10)
-            .map((media: TrendingMedia, index: number) => {
-              let name: string;
-              let releaseDate: string;
-              let url: string;
+          {trending?.slice(0, 10).map((media: TrendingMedia, index: number) => {
+            let name: string;
+            let releaseDate: string;
+            let url: string;
 
-              if (media.media_type === "movie") {
-                name = media.title;
-                releaseDate = media.release_date;
-                url = `/movie/${media.id}`;
-              } else {
-                name = media.name;
-                releaseDate = media.first_air_date;
-                url = `/tv/${media.id}`;
-              }
-              return (
-                <MediaPoster
-                  key={media.id}
-                  media={media}
-                  className=" flex-[0_0_33.333%] sm:flex-[0_0_25%] md:flex-[0_0_20%] xl:flex-[0_0_15%] rounded-none sm:rounded-md"
-                  number={index + 1}
-                />
-              );
-            })}
+            if (media.media_type === "movie") {
+              name = media.title;
+              releaseDate = media.release_date;
+              url = `/movie/${media.id}`;
+            } else {
+              name = media.name;
+              releaseDate = media.first_air_date;
+              url = `/tv/${media.id}`;
+            }
+            return (
+              <MediaPoster
+                key={media.id}
+                media={media}
+                className=" flex-[0_0_33.333%] sm:flex-[0_0_25%] md:flex-[0_0_20%] xl:flex-[0_0_15%] rounded-none sm:rounded-md"
+                number={index + 1}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

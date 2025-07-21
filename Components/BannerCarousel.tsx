@@ -22,7 +22,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
     queryKey: ["trendingMedia"],
     queryFn: getTrending,
   });
-  const top5 = trending?.results?.slice(0, 5) || [];
+  const top5 = trending?.slice(0, 5) || [];
 
   const logoQueries = useQueries({
     queries: top5.map((media: TrendingMedia) => ({
