@@ -1,30 +1,30 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { followUser } from "@/lib/supabase/utils";
+import { unfollowUser } from "@/lib/supabase/utils";
 import { addToast } from "@heroui/toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export function useFollowUser() {
+export function useUnfollowUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: followUser,
+    mutationFn: unfollowUser,
     onSuccess: (_, followedId) => {
-      // Refetch follow-related queries
+      // Invalidate follow-related queries
       queryClient.invalidateQueries({ queryKey: ["following"] });
       queryClient.invalidateQueries({ queryKey: ["followers", followedId] });
       queryClient.invalidateQueries({ queryKey: ["isFollowing", followedId] });
 
-      addToast({ title: "Followed", color: "success" });
+      addToast({ title: "Unfollowed", color: "success" });
     },
     onError: (error: unknown) => {
       if (error instanceof Error) {
-        console.error("Follow failed:", error.message);
+        console.error("Unfollow failed:", error.message);
         addToast({
-          title: "Follow failed",
+          title: "Unfollow failed",
           description: error.message,
           color: "danger",
         });
       } else {
-        console.error("Unknown follow error:", error);
+        console.error("Unknown error during unfollow");
       }
     },
   });

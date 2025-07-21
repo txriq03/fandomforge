@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import ProfilePopoverMenu from "./ProfilePopoverMenu";
 import { Spinner } from "@heroui/spinner";
 import { Button } from "@heroui/button";
+import FollowToggle from "./FollowToggle";
 
 const ProfileDrawer = ({ className }: { className?: string }) => {
   const user = useUser();
@@ -105,18 +106,10 @@ const ProfileDrawer = ({ className }: { className?: string }) => {
                     <>
                       <Tooltip content="Message" showArrow>
                         <Button isIconOnly size={isMobile ? "sm" : "md"}>
-                          <IoChatbubble size={21} />
+                          <IoChatbubble size={18} />
                         </Button>
                       </Tooltip>
-                      <Button
-                        radius="sm"
-                        color="primary"
-                        size={isMobile ? "sm" : "md"}
-                        startContent={<TiUserAdd size={21} />}
-                        className="text-sm"
-                      >
-                        Follow
-                      </Button>
+                      <FollowToggle profile={profile} />
                     </>
                   )}
                 </div>

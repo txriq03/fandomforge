@@ -250,3 +250,63 @@ export const followUser = async (followedId?: string | null) => {
 
   return { sucess: true };
 };
+
+export const getFollowing = async () => {
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) throw new Error("Not authenticated.");
+
+  const { data, error } = await supabase
+    .from("follows")
+    .select(
+      "followed_id, followed:followed_id ( id, email, username, avatar_url )"
+    )
+    .eq("follower_id", user.id);
+
+  if (error) throw new Error(error.message);
+
+  return data ?? [];
+};
+
+export const isFollowing = async (
+  targetUserId: string | null
+): Promise<boolean> => {
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) throw new Error("Not authenticated");
+
+  const { data, error } = await supabase
+    .from("follows")
+    .select("follower_id")
+    .eq("follower_id", user.id)
+    .eq("followed_id", targetUserId)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+
+  return !!data;
+};
+
+export const unfollowUser = async (
+  followedId: string | null
+): Promise<void> => {
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) throw new Error("Not authenticated");
+
+  const { error } = await supabase.from("follows").delete().match({
+    follower_id: user.id,
+    followed_id: followedId,
+  });
+
+  if (error) throw new Error(error.message);
+};

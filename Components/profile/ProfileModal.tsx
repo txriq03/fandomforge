@@ -17,6 +17,7 @@ import { Button } from "@heroui/button";
 import { Tooltip } from "@heroui/tooltip";
 import { Avatar } from "@heroui/avatar";
 import { useFollowUser } from "@/hooks/useFollowUser";
+import FollowToggle from "./FollowToggle";
 
 const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();
@@ -90,23 +91,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
                             <IoChatbubble size={21} />
                           </Button>
                         </Tooltip>
-                        <Button
-                          radius="sm"
-                          color="primary"
-                          size={isMobile ? "sm" : "md"}
-                          startContent={
-                            !followMutation.isPending && <TiUserAdd size={21} />
-                          }
-                          className="text-base"
-                          isLoading={followMutation.isPending}
-                          onPress={handleFollow}
-                        >
-                          {followMutation.isPending ? (
-                            <p>Following</p>
-                          ) : (
-                            <p>Follow</p>
-                          )}
-                        </Button>
+                        <FollowToggle profile={profile} />
                       </>
                     )}
                   </div>
