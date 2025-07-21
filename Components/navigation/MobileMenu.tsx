@@ -39,7 +39,7 @@ const MobileMenu = () => {
 
 const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
   const user = useUser();
-  const { authModal, profileModal } = useUIContext();
+  const { authModal, openProfileModal } = useUIContext();
 
   type authItem = {
     name: string;
@@ -82,7 +82,7 @@ const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
               size="lg"
               onPress={() => {
                 if (item.name === "Profile") {
-                  profileModal.onOpen();
+                  openProfileModal(user!.id);
                   console.warn("Profile modal is open");
                 }
                 setPopoverOpen(false);

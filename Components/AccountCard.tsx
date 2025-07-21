@@ -23,7 +23,7 @@ const AccountCard = ({
   setIsPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const user = useUser();
-  const { profileModal } = useUIContext();
+  const { profileModal, openProfileModal } = useUIContext();
   const fullProfile = {
     ...profile,
     ...user,
@@ -39,7 +39,7 @@ const AccountCard = ({
             <button
               onClick={() => {
                 setIsPopoverOpen(false);
-                profileModal.onOpen();
+                openProfileModal(user!.id);
               }}
               className="cursor-pointer group"
             >

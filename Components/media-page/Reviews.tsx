@@ -48,13 +48,17 @@ const Reviews = () => {
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const avatar = getPfp(review.avatar_url);
-  const { data: profile, isPending } = useProfile(review.user_id);
-  const { profileModal } = useUIContext();
+  // const { data: profile, isPending } = useProfile(review.user_id);
+  const { openProfileModal } = useUIContext();
 
   return (
     <Card className="bg-transparent" shadow="none">
       <CardBody className="flex-row gap-2 px-0">
-        <Button radius="full" isIconOnly onPress={profileModal.onOpen}>
+        <Button
+          radius="full"
+          isIconOnly
+          onPress={() => openProfileModal(review.user_id)}
+        >
           <Avatar src={avatar} />
         </Button>
         <div className="flex flex-col gap-1 w-full">

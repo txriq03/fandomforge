@@ -13,7 +13,7 @@ import { Button } from "@heroui/button";
 const Topbar = () => {
   const user = useUser();
   const { data: profile } = useOwnProfile();
-  const { authModal, profileModal } = useUIContext();
+  const { authModal, openProfileModal } = useUIContext();
   return (
     <Navbar
       maxWidth="full"
@@ -33,7 +33,7 @@ const Topbar = () => {
             <Avatar
               as="button"
               isFocusable
-              onClick={() => profileModal.onOpen()}
+              onClick={() => openProfileModal(user.id)}
               src={getPfp(profile?.avatar_url)}
               classNames={{
                 base: "hover:brightness-50 duration-200 transition-filter cursor-pointer",

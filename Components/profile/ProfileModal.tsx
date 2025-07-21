@@ -19,8 +19,8 @@ import { Avatar } from "@heroui/avatar";
 
 const ProfileModal = ({ className }: { className?: string }) => {
   const user = useUser();
-  const { profileModal } = useUIContext();
-  const { data: profile, isPending } = useProfile(user?.id);
+  const { profileModal, profileUserId } = useUIContext();
+  const { data: profile, isPending } = useProfile(profileUserId);
   const isMobile = useMediaQuery("(max-width: 640px)");
 
   const fullProfile = {

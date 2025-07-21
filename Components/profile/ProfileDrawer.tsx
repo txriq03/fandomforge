@@ -20,8 +20,8 @@ import { Button } from "@heroui/button";
 
 const ProfileDrawer = ({ className }: { className?: string }) => {
   const user = useUser();
-  const { profileModal } = useUIContext();
-  const { data: profile, isPending } = useProfile(user?.id);
+  const { profileModal, profileUserId } = useUIContext();
+  const { data: profile, isPending } = useProfile(profileUserId);
   const isMobile = useMediaQuery("(max-width: 640px)");
 
   return (

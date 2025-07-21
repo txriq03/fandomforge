@@ -1,6 +1,13 @@
 "use client";
 import { useDisclosure } from "@heroui/modal";
-import { createContext, ReactNode, useContext } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 type Modal = {
   isOpen: boolean;
@@ -15,6 +22,10 @@ type Modal = {
 interface UIContextType {
   authModal: Modal;
   profileModal: Modal;
+  openProfileModal: (profileUserId: string | null) => void;
+  closeProfileModal: () => void;
+  profileUserId: string | null;
+  setProfileUserId: Dispatch<SetStateAction<string | null>>;
 }
 
 export const UIContext = createContext<UIContextType | undefined>(undefined);
@@ -30,9 +41,29 @@ export const useUIContext = () => {
 const UIContextProvider = ({ children }: { children: ReactNode }) => {
   const authModal = useDisclosure();
   const profileModal = useDisclosure();
+  const [profileUserId, setProfileUserId] = useState<string | null>(null);
+
+  const openProfileModal = (profileUserId: string | null) => {
+    setProfileUserId(profileUserId);
+    profileModal.onOpen();
+  };
+
+  const closeProfileModal = () => {
+    setProfileUserId(null);
+    profileModal.onClose();
+  };
 
   return (
-    <UIContext.Provider value={{ authModal, profileModal }}>
+    <UIContext.Provider
+      value={{
+        authModal,
+        profileModal,
+        profileUserId,
+        setProfileUserId,
+        openProfileModal,
+        closeProfileModal,
+      }}
+    >
       {children}
     </UIContext.Provider>
   );
