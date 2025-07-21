@@ -19,16 +19,7 @@ const MediaBanner = ({ media }: { media: Movie | TVSeries }) => {
       )}
     >
       <div className="absolute inset-0 bg-gradient-to-b z-1  from-black/80 via-transparent to-transparent" />
-      <div className="absolute top-0 w-full z-2 p-2 flex justify-between">
-        <Button
-          isIconOnly
-          variant="light"
-          radius="lg"
-          onPress={() => router.back()}
-        >
-          <TbArrowLeft size={18} />
-        </Button>
-      </div>
+
       <Image
         alt={title}
         fill
