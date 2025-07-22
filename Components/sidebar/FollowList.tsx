@@ -1,6 +1,7 @@
 "use client";
 import { useFollowing } from "@/hooks/useFollowing";
 import { getPfp } from "@/lib/supabase/utils";
+import { useUIContext } from "@/providers/UIContext";
 import { Avatar } from "@heroui/avatar";
 import { Badge } from "@heroui/badge";
 import { Card } from "@heroui/card";
@@ -29,25 +30,30 @@ const FollowList = () => {
         <TbSquareRoundedPlusFilled size={18} />
       </div>
 
-      {isPending ? (
-        <Card className="bg-black/5 py-2 my-2" shadow="none">
-          <Spinner variant="simple" className="mx-auto" />
-        </Card>
-      ) : (
-        following?.map((item: any) => (
-          // <div>{item.followed.username}</div>
-          <FollowCard key={item.followed_id} followedUser={item} />
-        ))
-      )}
+      <div className="py-2 flex flex-col gap-2">
+        {isPending ? (
+          <Card className="bg-black/5 py-2" shadow="none">
+            <Spinner variant="simple" className="mx-auto" />
+          </Card>
+        ) : (
+          following?.map((item: any) => (
+            <FollowCard key={item.followed_id} followedUser={item} />
+          ))
+        )}
+      </div>
     </div>
   );
 };
 
 const FollowCard = ({ followedUser }: { followedUser: FollowedUser }) => {
+  const { openProfileModal } = useUIContext();
   const user = followedUser.followed;
   const avatar = getPfp(user.avatar_url);
   return (
-    <div className="py-2 flex gap-2">
+    <button
+      className=" flex gap-2 bg-primary-light/5 hover:bg-primary-light/10 transition-all duration-300 w-full rounded-full cursor-pointer"
+      onClick={() => openProfileModal(user.id)}
+    >
       <Badge
         color="success"
         content=""
@@ -63,7 +69,7 @@ const FollowCard = ({ followedUser }: { followedUser: FollowedUser }) => {
         <p>{user.username}</p>
         <p className="text-[0.6rem] text-success">online</p>
       </div>
-    </div>
+    </button>
   );
 };
 
