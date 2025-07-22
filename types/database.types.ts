@@ -69,7 +69,36 @@ export type Database = {
           followed_id?: string
           follower_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "follows_followed_id_fkey1"
+            columns: ["followed_id"]
+            isOneToOne: false
+            referencedRelation: "extended_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "follows_followed_id_fkey1"
+            columns: ["followed_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "follows_follower_id_fkey1"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "extended_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "follows_follower_id_fkey1"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {

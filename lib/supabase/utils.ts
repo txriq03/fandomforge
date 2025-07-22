@@ -3,7 +3,7 @@ import { devLog } from "../utils";
 import { createClient } from "./client";
 import { MediaType } from "@/types/trending";
 import { Review } from "@/types/tables";
-import { User } from "@supabase/supabase-js";
+import { QueryData, User } from "@supabase/supabase-js";
 
 const supabase = createClient();
 
@@ -251,6 +251,15 @@ export const followUser = async (followedId?: string | null) => {
   return { sucess: true };
 };
 
+type FollowedUser = {
+  followed_id: string;
+  followed: {
+    avatar_url: string;
+    id: string;
+    username: string;
+  };
+};
+
 export const getFollowing = async () => {
   const {
     data: { user },
@@ -259,12 +268,21 @@ export const getFollowing = async () => {
 
   if (authError || !user) throw new Error("Not authenticated.");
 
+  const followedUsersQuery = supabase
+    .from("follows")
+    .select("followed_id, followed:followed_id ( id, username, avatar_url )")
+    .eq("follower_id", user.id);
+
+  // type FollowedUsers = QueryData<typeof followedUsersQuery>;
+
   const { data, error } = await supabase
     .from("follows")
-    .select(
-      "followed_id, followed:followed_id ( id, email, username, avatar_url )"
-    )
+    .select("followed_id, followed:followed_id ( id, username, avatar_url )")
     .eq("follower_id", user.id);
+
+  // const { data, error } = await followedUsersQuery;
+
+  // const followedUsers: FollowedUsers | null = data;
 
   if (error) throw new Error(error.message);
 

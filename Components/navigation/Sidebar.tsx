@@ -10,6 +10,7 @@ import { navItems } from "@/lib/data/navItems";
 import SidebarFooter from "../SidebarFooter";
 import { useUser } from "@/providers/UserProvider";
 import { useUIContext } from "@/providers/UIContext";
+import FollowList from "../sidebar/FollowList";
 
 const Sidebar = () => {
   const { collapsed, toggleCollapsed } = useSidebar();
@@ -79,6 +80,18 @@ const Sidebar = () => {
             );
           })}
         </nav>
+
+        {/* Follow List */}
+        {user && (
+          <div
+            className={cn(
+              "my-auto py-10 px-2 text-sm transition-all duration-300 opacity-100",
+              collapsed && "opacity-0"
+            )}
+          >
+            <FollowList />
+          </div>
+        )}
 
         {/* Footer */}
         <div className="mt-auto gap-4 flex flex-col">
