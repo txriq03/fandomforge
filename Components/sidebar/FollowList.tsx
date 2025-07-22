@@ -26,7 +26,12 @@ const FollowList = () => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <p>Following</p>
+        <div className="flex gap-2 items-center">
+          <p>Following</p>
+          <p className="text-[0.7rem] text-primary-light/80">
+            ({following?.length})
+          </p>
+        </div>
         <TbSquareRoundedPlusFilled size={18} />
       </div>
 
