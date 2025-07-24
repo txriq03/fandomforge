@@ -7,6 +7,7 @@ import {
   TbDeviceTvFilled,
   TbHistory,
   TbMovie,
+  TbUsersGroup,
 } from "react-icons/tb";
 
 export type navItem = {
@@ -22,4 +23,5 @@ export const navItems: navItem[] = [
   { name: "Browse", icon: TbBrandSafari, href: "/browse" },
   { name: "History", icon: TbHistory, href: "/history" },
   { name: "Saved", icon: TbBookmarksFilled, href: "/bookmarks" },
+  { name: "Community", icon: TbUsersGroup, href: "/community" },
 ];
