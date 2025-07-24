@@ -98,7 +98,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                   {logoURL ? (
                     <Image
                       src={logo}
-                      className="w-[200px] sm:w-[350px]"
+                      className="w-[200px] sm:w-[220px] lg:w-[350px]"
                       radius="none"
                     />
                   ) : (
