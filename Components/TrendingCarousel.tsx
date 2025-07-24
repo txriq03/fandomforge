@@ -86,10 +86,10 @@ const TrendingCarousel = () => {
 
       {/* Carousel */}
       <div
-        className=" flex justify-center sm:px-4 overflow-hidden"
+        className=" flex justify-center sm:px-4 overflow-hidden "
         ref={emblaRef}
       >
-        <div className="flex sm:gap-2">
+        <div className="flex gap-1 sm:gap-2">
           {trending?.slice(0, 10).map((media: TrendingMedia, index: number) => {
             let name: string;
             let releaseDate: string;
