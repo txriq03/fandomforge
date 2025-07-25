@@ -1,5 +1,6 @@
 import BrowsePopover from "@/Components/browse/BrowsePopover";
 import FilterOptions from "@/Components/browse/FilterOptions";
+import MediaGrid from "@/Components/browse/MediaGrid";
 import Padding from "@/Components/ui/Padding";
 import { BrowseType } from "@/types/browseType";
 import { MediaType } from "@/types/trending";
@@ -24,6 +25,7 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
         <BrowsePopover browseType={browseType} />
       </div>
       <FilterOptions />
+      <MediaGrid />
     </Padding>
   );
 };

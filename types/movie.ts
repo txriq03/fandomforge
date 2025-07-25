@@ -48,3 +48,39 @@ export type Movie = {
   vote_count: number;
   media_type?: "movie";
 };
+
+// Movie object from route: https://api.themoviedb.org/3/discover/movie
+export type DiscoverMovie = {
+  adult: boolean;
+  backdrop_path: string | null;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
+// TVSeries object from route: https://api.themoviedb.org/3/discover/tv
+export type DiscoverTVSeries = {
+  adult: boolean;
+  backdrop_path: string | null;
+  genre_ids: number[];
+  id: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
+  first_air_date: string;
+  name: string;
+  vote_average: number;
+  vote_count: number;
+};

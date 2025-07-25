@@ -7,14 +7,25 @@ import { Select, SelectItem } from "@heroui/select";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useMovieGenres } from "@/hooks/useMovieGenres";
 import { Genre } from "@/types/genres";
+import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 
 const FilterOptions = () => {
   const { data, isPending } = useMovieGenres();
 
   const genres: Genre[] = data?.genres;
   const isMobile = useIsMobile();
+
+  const years = Array.from(
+    { length: new Date().getFullYear() - 1970 + 1 },
+    (_, i) => {
+      const year = 1970 + i;
+      return { key: year.toString(), label: year.toString() };
+    }
+  ).reverse();
+
   return (
     <Form className="flex flex-row gap-4">
+      {/* Search */}
       <Input
         name="search"
         classNames={{
@@ -22,18 +33,20 @@ const FilterOptions = () => {
           inputWrapper:
             "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7 group-data-[has-value=true]:placeholder:text-primary-light/5",
         }}
-        className="group-data-[has-value=true]:placeholder:text-primary-light/5"
+        className="group-data-[has-value=true]:placeholder:text-primary-light/5 sm:max-w-[230px]"
         label={isMobile ? "" : "Search"}
         placeholder={isMobile ? "Search" : ""}
-        radius="sm"
         startContent={<TbSearch className="text-indigo-200" />}
         labelPlacement={isMobile ? "inside" : "outside"}
         isClearable
       />
+
+      {/* Genres */}
       <Select
         name="genre"
+        className="max-w-[230px]"
         classNames={{
-          base: "hidden lg:flex",
+          base: "hidden sm:flex",
           label: "group-data-[has-label-outside=true]:text-indigo-200",
           trigger:
             "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
@@ -61,48 +74,33 @@ const FilterOptions = () => {
           </SelectItem>
         ))}
       </Select>
-      <Select
-        classNames={{
-          label: "group-data-[has-label-outside=true]:text-indigo-200",
-          base: "hidden lg:flex",
-          trigger:
-            "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
-        }}
+
+      {/* Year */}
+      <Autocomplete
+        className="max-w-[230px]"
+        name="year"
         label="Year"
-        radius="sm"
         labelPlacement="outside"
         placeholder="Any"
-      >
-        <SelectItem>Test</SelectItem>
-      </Select>
-      <Select
+        isClearable
+        defaultItems={years}
         classNames={{
-          label: "group-data-[has-label-outside=true]:text-indigo-200",
-          base: "hidden lg:flex",
-          trigger:
-            "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
+          base: "hidden sm:flex",
+          popoverContent: "bg-black/20",
         }}
-        label="Type"
-        radius="sm"
-        labelPlacement="outside"
-        placeholder="Any"
-      >
-        <SelectItem>Test</SelectItem>
-      </Select>
-      <Select
-        classNames={{
-          label: "group-data-[has-label-outside=true]:text-indigo-200",
-          base: "hidden lg:flex",
-          trigger:
-            "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
+        inputProps={{
+          classNames: {
+            label:
+              "dark:group-data-[has-label-outside=true]:text-indigo-200 text-indigo-200",
+            inputWrapper:
+              "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
+          },
         }}
-        label="Type"
-        radius="sm"
-        labelPlacement="outside"
-        placeholder="Any"
       >
-        <SelectItem>Test</SelectItem>
-      </Select>
+        {(item) => (
+          <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>
+        )}
+      </Autocomplete>
     </Form>
   );
 };

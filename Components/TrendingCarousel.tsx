@@ -108,6 +108,7 @@ const TrendingCarousel = () => {
               <MediaPoster
                 key={media.id}
                 media={media}
+                mediaType={media.media_type}
                 className=" flex-[0_0_33.333%] sm:flex-[0_0_25%] md:flex-[0_0_20%] xl:flex-[0_0_15%] rounded-none sm:rounded-md"
                 number={index + 1}
               />

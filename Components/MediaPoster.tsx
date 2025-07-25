@@ -4,28 +4,34 @@ import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import React from "react";
 import { cn, formatNumber } from "@/lib/utils";
-import { TrendingMedia } from "@/types/trending";
+import { MediaType, TrendingMedia } from "@/types/trending";
 import { Chip } from "@heroui/chip";
 import { Button } from "@heroui/button";
 import { Image } from "@heroui/image";
+import { DiscoverMovie, DiscoverTVSeries, Movie } from "@/types/movie";
+import TVSeries from "@/types/tv";
 
 interface Props {
-  media: TrendingMedia;
+  media: Movie | TVSeries | DiscoverMovie | DiscoverTVSeries;
   className?: string;
   number?: number;
+  mediaType: MediaType;
 }
 
-const MediaPoster = ({ media, className, number }: Props) => {
+const MediaPoster = ({ media, className, number, mediaType }: Props) => {
   const url = `${imageBaseUrl}${media.poster_path}`;
-  let name;
-  if (media.media_type === "movie") {
-    name = media.title;
+
+  let name: string;
+
+  if (mediaType === "movie") {
+    name = (media as Movie | DiscoverMovie).title;
   } else {
-    name = media.name;
+    name = (media as TVSeries | DiscoverTVSeries).name;
   }
+
   return (
     <Link
-      href={`/${media.media_type}/${media.id}`}
+      href={`/${mediaType}/${media.id}`}
       key={media.id}
       className={cn(
         "group relative rounded-md overflow-hidden transition-all duration-300  outline-3 outline-transparent group-hover:outline-amber-400",

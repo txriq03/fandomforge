@@ -47,7 +47,9 @@ const BookmarksGrid = () => {
 
         if (!poster) return null;
 
-        return <MediaPoster key={media_id} media={media} />;
+        return (
+          <MediaPoster key={media_id} media={media} mediaType={media_type} />
+        );
       })}
     </div>
   );

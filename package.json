@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroui/alert": "^2.2.23",
+    "@heroui/autocomplete": "^2.3.25",
     "@heroui/avatar": "^2.2.19",
     "@heroui/badge": "^2.2.15",
     "@heroui/button": "^2.2.23",
