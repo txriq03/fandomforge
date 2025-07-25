@@ -1,6 +1,7 @@
 import BrowsePopover from "@/Components/browse/BrowsePopover";
 import FilterOptions from "@/Components/browse/FilterOptions";
 import PopularNow from "@/Components/browse/PopularNow";
+import TrendingNow from "@/Components/browse/TrendingNow";
 import Padding from "@/Components/ui/Padding";
 import { BrowseType } from "@/types/browseType";
 import React from "react";
@@ -23,7 +24,12 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
       </div>
       <FilterOptions />
 
-      {browseType !== "reviews" && <PopularNow />}
+      {browseType !== "reviews" && (
+        <>
+          <PopularNow />
+          <TrendingNow />
+        </>
+      )}
     </Padding>
   );
 };

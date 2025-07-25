@@ -10,20 +10,13 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import MediaPoster from "./MediaPoster";
 import useIsMobile from "@/hooks/useIsMobile";
 import { Button } from "@heroui/button";
-import { Image } from "@heroui/image";
 import { Skeleton } from "@heroui/skeleton";
 import { Card } from "@heroui/card";
+import { useTrending } from "@/hooks/useTrending";
 
 const TrendingCarousel = () => {
   const isMobile = useIsMobile();
-  const {
-    data: trending,
-    isPending,
-    error,
-  } = useQuery({
-    queryKey: ["trendingMedia"],
-    queryFn: getTrending,
-  });
+  const { data: trending, isPending, error } = useTrending();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,

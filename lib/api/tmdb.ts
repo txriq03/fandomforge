@@ -21,8 +21,9 @@ export const getPopularMovies = async () => {
   return res.json();
 };
 
-export const getTrending = async () => {
-  const url = "https://api.themoviedb.org/3/trending/all/day?language=en-US";
+type TrendingType = "all" | "movie" | "tv";
+export const getTrending = async (mediaType: TrendingType = "all") => {
+  const url = `https://api.themoviedb.org/3/trending/${mediaType}/day?language=en-US`;
   const res = await fetch(url, options);
   if (!res.ok) {
     throw new Error("Failed to fetch trending.");
