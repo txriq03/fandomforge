@@ -10,7 +10,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 const MediaGrid = () => {
   const { data, isPending } = useMovieDiscovery();
   const media: TrendingMedia[] = data?.results;
-  const { media_type } = useParams();
+  const { browseType } = useParams();
   const isMobile = useIsMobile();
 
   const numToShow = (): number => {
@@ -21,14 +21,12 @@ const MediaGrid = () => {
     }
   };
 
-  const mediaType = media_type as MediaType;
+  const type = browseType as MediaType;
   return (
     <div className="flex gap-1 sm:gap-2 overflow-x-auto">
       {media?.slice(0, numToShow()).map((media: TrendingMedia) => {
         const poster = getImageUrl(media.poster_path);
-        return (
-          <MediaPoster key={media.id} media={media} mediaType={mediaType} />
-        );
+        return <MediaPoster key={media.id} media={media} mediaType={type} />;
       })}
     </div>
   );
