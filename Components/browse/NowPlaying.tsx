@@ -52,9 +52,11 @@ const NowPlaying = () => {
 
       {isPending && (
         <div className={cn("flex gap-1 sm:gap-2 lg:gap-2")}>
-          {Array.from({ length: numToShow() }).map((_, i) => (
-            <SkeletonGroup key={i} />
-          ))}
+          <SkeletonGroup />
+          <SkeletonGroup />
+          <SkeletonGroup />
+          <SkeletonGroup className="hidden sm:flex" />
+          <SkeletonGroup className="hidden lg:flex" />
         </div>
       )}
 

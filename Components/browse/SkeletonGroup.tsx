@@ -1,9 +1,13 @@
+import { cn } from "@/lib/utils";
 import { Card } from "@heroui/card";
 import { Skeleton } from "@heroui/skeleton";
 
-const SkeletonGroup = () => {
+const SkeletonGroup = ({ className }: { className?: string }) => {
   return (
-    <Card className="w-full aspect-[2/3] p-2 bg-neutral-900 " radius="md">
+    <Card
+      className={cn("w-full aspect-[2/3] p-2 bg-neutral-900", className)}
+      radius="md"
+    >
       <Skeleton className=" rounded-md lg:rounded-lg mb-3">
         <div className="w-full aspect-[1/1] rounded-lg bg-default-300" />
       </Skeleton>

@@ -9,8 +9,6 @@ import { Button } from "@heroui/button";
 import Link from "next/link";
 import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 import { useMediaQuery } from "usehooks-ts";
-import { Card } from "@heroui/card";
-import { Skeleton } from "@heroui/skeleton";
 import { cn } from "@/lib/utils";
 import SkeletonGroup from "./SkeletonGroup";
 
@@ -52,9 +50,11 @@ const PopularNow = () => {
 
       {isPending && (
         <div className={cn("flex gap-1 sm:gap-2 lg:gap-2")}>
-          {Array.from({ length: numToShow() }).map((_, i) => (
-            <SkeletonGroup key={i} />
-          ))}
+          <SkeletonGroup />
+          <SkeletonGroup />
+          <SkeletonGroup />
+          <SkeletonGroup className="hidden sm:flex" />
+          <SkeletonGroup className="hidden lg:flex" />
         </div>
       )}
 
