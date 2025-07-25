@@ -65,9 +65,7 @@ const FilterOptions = () => {
           <SelectItem
             key={genre.id}
             classNames={{
-              base: "data-[hover=true]:bg-primary/5 data-[focus=true]:bg-primary/5 ",
-              wrapper:
-                "data-[hover=true]:bg-primary/5 data-[focus=true]:bg-primary/5 ",
+              base: "data-[hover=true]:bg-primary data-[focus=true]:bg-primary/5 font-main",
             }}
           >
             {genre.name}
@@ -85,7 +83,7 @@ const FilterOptions = () => {
         isClearable
         defaultItems={years}
         classNames={{
-          base: "hidden sm:flex",
+          base: "hidden sm:flex font-main",
           popoverContent: "bg-[#202339]",
         }}
         inputProps={{

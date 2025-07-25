@@ -93,9 +93,8 @@ export const getMovieGenres = async () => {
   return data ?? [];
 };
 
-export const getMovieDiscovery = async () => {
-  const url =
-    "https://api.themoviedb.org/3/discover/movie?include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+export const getMediaDiscovery = async (mediaType: MediaType = "movie") => {
+  const url = `https://api.themoviedb.org/3/discover/${mediaType}?include_video=false&language=en-US&page=1&sort_by=popularity.desc`;
   const res = await fetch(url, options);
 
   if (!res.ok) throw new Error("Failed to get movie results.");

@@ -3,10 +3,7 @@ import FilterOptions from "@/Components/browse/FilterOptions";
 import PopularNow from "@/Components/browse/PopularNow";
 import Padding from "@/Components/ui/Padding";
 import { BrowseType } from "@/types/browseType";
-import { MediaType } from "@/types/trending";
-import { Button } from "@heroui/button";
 import React from "react";
-import { TbChevronDown } from "react-icons/tb";
 
 interface PageProps {
   params: Promise<{
@@ -25,7 +22,8 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
         <BrowsePopover browseType={browseType} />
       </div>
       <FilterOptions />
-      <PopularNow />
+
+      {browseType !== "reviews" && <PopularNow />}
     </Padding>
   );
 };

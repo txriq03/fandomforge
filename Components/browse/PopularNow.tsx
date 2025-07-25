@@ -1,18 +1,20 @@
 "use client";
-import { useMovieDiscovery } from "@/hooks/useMovieDiscovery";
-import { getImageUrl } from "@/lib/api/tmdb";
+import { useMediaDiscovery } from "@/hooks/useMediaDiscovery";
 import React from "react";
 import MediaPoster from "../MediaPoster";
-import { MediaType, TrendingMedia } from "@/types/trending";
+import { MediaType } from "@/types/trending";
 import { useParams } from "next/navigation";
 import useIsMobile from "@/hooks/useIsMobile";
 import { Button } from "@heroui/button";
 import Link from "next/link";
+import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 
 const PopularNow = () => {
-  const { data, isPending } = useMovieDiscovery();
-  const media: TrendingMedia[] = data?.results;
   const { browseType } = useParams();
+  const type = browseType as MediaType;
+  const { data, isPending } = useMediaDiscovery(type);
+  type DiscoverMedia = DiscoverMovie | DiscoverTVSeries;
+  const media: DiscoverMedia[] = data?.results;
   const isMobile = useIsMobile();
 
   const numToShow = (): number => {
@@ -23,7 +25,6 @@ const PopularNow = () => {
     }
   };
 
-  const type = browseType as MediaType;
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-end">
@@ -40,7 +41,7 @@ const PopularNow = () => {
         </Button>
       </div>
       <div className="flex gap-1 sm:gap-2 overflow-x-auto">
-        {media?.slice(0, numToShow()).map((media: TrendingMedia) => {
+        {media?.slice(0, numToShow()).map((media: DiscoverMedia) => {
           return <MediaPoster key={media.id} media={media} mediaType={type} />;
         })}
       </div>
