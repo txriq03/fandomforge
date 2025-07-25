@@ -1,6 +1,4 @@
-import { Movie } from "@/types/movie";
 import { MediaType } from "@/types/trending";
-import TVSeries from "@/types/tv";
 import { devLog } from "../utils";
 
 const options = {
@@ -103,3 +101,17 @@ export const getMediaDiscovery = async (mediaType: MediaType = "movie") => {
 
   return data ?? [];
 };
+
+export const getNowPlaying = async (mediaType: MediaType) => {
+  const url = `https://api.themoviedb.org/3/${mediaType}/now_playing`;
+  const res = await fetch(url, options);
+
+  if (!res.ok) throw new Error("Failed to get now_playing.");
+  const data = await res.json();
+
+  return data ?? [];
+};
+
+// export const getUpcoming = async (mediaType: MediaType) => {
+//   const url =
+// }

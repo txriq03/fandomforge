@@ -8,17 +8,18 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 import { useMediaQuery } from "usehooks-ts";
-import { useTrending } from "@/hooks/useTrending";
-import SkeletonGroup from "./SkeletonGroup";
+import { useNowPlaying } from "@/hooks/useNowPlaying";
+import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 import { cn } from "@/lib/utils";
+import SkeletonGroup from "./SkeletonGroup";
 
-const TrendingNow = () => {
+const NowPlaying = () => {
   const { browseType } = useParams();
   const type = browseType as MediaType;
-  console.log("Type:", type);
-  const { data, isPending } = useTrending(type);
-  type TrendingMedia = TrendingMovie | TrendingTV;
-  const media: TrendingMedia[] = data;
+  const { data, isPending } = useNowPlaying(type);
+  type DiscoverMedia = DiscoverMovie | DiscoverTVSeries;
+  const media: DiscoverMedia[] = data?.results;
+  console.log("NowPlaying:", media);
   const isMobile = useIsMobile();
 
   const isTablet = useMediaQuery("(max-width: 1024px");
@@ -36,14 +37,14 @@ const TrendingNow = () => {
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-end">
-        <h2 className="text-base sm:text-xl text-indigo-100">Trending Now</h2>
+        <h2 className="text-base sm:text-xl text-indigo-100">Now Playing</h2>
         <Button
           variant="light"
           size="sm"
           color="primary"
           className="text-primary-light"
           as={Link}
-          href={"/browse/movie/trending"}
+          href={"/browse/movie/popular_now"}
         >
           See More
         </Button>
@@ -58,7 +59,7 @@ const TrendingNow = () => {
       )}
 
       <div className="flex gap-1 sm:gap-2 overflow-x-auto">
-        {media?.slice(0, numToShow()).map((media: TrendingMedia) => {
+        {media?.slice(0, numToShow()).map((media: DiscoverMedia) => {
           return <MediaPoster key={media.id} media={media} mediaType={type} />;
         })}
       </div>
@@ -66,4 +67,4 @@ const TrendingNow = () => {
   );
 };
 
-export default TrendingNow;
+export default NowPlaying;

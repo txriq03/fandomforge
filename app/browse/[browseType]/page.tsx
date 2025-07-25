@@ -1,5 +1,6 @@
 import BrowsePopover from "@/Components/browse/BrowsePopover";
 import FilterOptions from "@/Components/browse/FilterOptions";
+import NowPlaying from "@/Components/browse/NowPlaying";
 import PopularNow from "@/Components/browse/PopularNow";
 import TrendingNow from "@/Components/browse/TrendingNow";
 import Padding from "@/Components/ui/Padding";
@@ -30,6 +31,7 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
           <TrendingNow />
         </>
       )}
+      {browseType === "movie" && <NowPlaying />}
     </Padding>
   );
 };
