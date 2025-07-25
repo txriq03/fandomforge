@@ -9,8 +9,9 @@ import { Button } from "@heroui/button";
 import Link from "next/link";
 import { useMediaQuery } from "usehooks-ts";
 import { useTrending } from "@/hooks/useTrending";
-import SkeletonGroup from "./SkeletonCard";
+import SkeletonGroup from "../SkeletonCard";
 import { cn } from "@/lib/utils";
+import { TbArrowNarrowRight } from "react-icons/tb";
 
 const TrendingNow = () => {
   const { browseType } = useParams();
@@ -19,17 +20,21 @@ const TrendingNow = () => {
   const { data, isPending } = useTrending(type);
   type TrendingMedia = TrendingMovie | TrendingTV;
   const media: TrendingMedia[] = data;
-  const isMobile = useIsMobile();
 
+  // Media Queries
+  const isMobile = useIsMobile();
   const isTablet = useMediaQuery("(max-width: 1024px");
+  const isLarge = useMediaQuery("(max-width: 1260px");
 
   const numToShow = (): number => {
     if (isMobile) {
       return 3;
     } else if (isTablet) {
       return 4;
-    } else {
+    } else if (isLarge) {
       return 5;
+    } else {
+      return 6;
     }
   };
 
@@ -44,6 +49,7 @@ const TrendingNow = () => {
           className="text-primary-light"
           as={Link}
           href={"/browse/movie/trending"}
+          endContent={<TbArrowNarrowRight size={18} />}
         >
           See More
         </Button>
@@ -56,6 +62,7 @@ const TrendingNow = () => {
           <SkeletonGroup />
           <SkeletonGroup className="hidden sm:flex" />
           <SkeletonGroup className="hidden lg:flex" />
+          <SkeletonGroup className="hidden xl:flex" />
         </div>
       )}
 

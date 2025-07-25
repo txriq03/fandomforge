@@ -10,7 +10,8 @@ import Link from "next/link";
 import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
-import SkeletonGroup from "./SkeletonCard";
+import SkeletonGroup from "../SkeletonCard";
+import { TbArrowNarrowRight } from "react-icons/tb";
 
 const PopularNow = () => {
   const { browseType } = useParams();
@@ -21,14 +22,17 @@ const PopularNow = () => {
   const isMobile = useIsMobile();
 
   const isTablet = useMediaQuery("(max-width: 1024px");
+  const isLarge = useMediaQuery("(max-width: 1260px");
 
   const numToShow = (): number => {
     if (isMobile) {
       return 3;
     } else if (isTablet) {
       return 4;
-    } else {
+    } else if (isLarge) {
       return 5;
+    } else {
+      return 6;
     }
   };
 
@@ -43,6 +47,7 @@ const PopularNow = () => {
           className="text-primary-light"
           as={Link}
           href={"/browse/movie/popular"}
+          endContent={<TbArrowNarrowRight size={18} />}
         >
           See More
         </Button>
@@ -55,6 +60,7 @@ const PopularNow = () => {
           <SkeletonGroup />
           <SkeletonGroup className="hidden sm:flex" />
           <SkeletonGroup className="hidden lg:flex" />
+          <SkeletonGroup className="hidden xl:flex" />
         </div>
       )}
 

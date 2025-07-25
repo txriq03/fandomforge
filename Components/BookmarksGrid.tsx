@@ -7,6 +7,7 @@ import { useQueries } from "@tanstack/react-query";
 import MediaPoster from "./MediaPoster";
 import { Alert } from "@heroui/alert";
 import { Spinner } from "@heroui/spinner";
+import SkeletonCard from "./SkeletonCard";
 
 const BookmarksGrid = () => {
   const user = useUser();
@@ -27,13 +28,21 @@ const BookmarksGrid = () => {
     queries: (bookmarks ?? []).map(({ media_id, media_type }) => ({
       queryKey: ["bookmarkDetails", media_type, media_id],
       queryFn: () => fetchMedia(media_id, media_type),
-      enabled: !!bookmarks, // important!
+      enabled: !!bookmarks,
       staleTime: 1000 * 60 * 60,
     })),
   });
 
   if (isPending || !bookmarks)
-    return <Spinner variant="simple" size="lg" className="mx-auto" />;
+    return (
+      <div className="flex gap-2 lg:gap-3">
+        <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard className="hidden sm:flex" />
+        <SkeletonCard className="hidden md:flex" />
+        <SkeletonCard className="hidden lg:flex" />
+      </div>
+    );
 
   console.log("Media queries:", mediaQueries);
   return (

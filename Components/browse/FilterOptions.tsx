@@ -8,6 +8,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useMovieGenres } from "@/hooks/useMovieGenres";
 import { Genre } from "@/types/genres";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
+import SearchField from "./SearchField";
 
 const FilterOptions = () => {
   const { data, isPending } = useMovieGenres();
@@ -26,20 +27,7 @@ const FilterOptions = () => {
   return (
     <Form className="flex flex-row gap-4">
       {/* Search */}
-      <Input
-        name="search"
-        classNames={{
-          label: "group-data-[filled-within=true]:text-indigo-200",
-          inputWrapper:
-            "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7 group-data-[has-value=true]:placeholder:text-primary-light/5",
-        }}
-        className="group-data-[has-value=true]:placeholder:text-primary-light/5 sm:max-w-[230px]"
-        label={isMobile ? "" : "Search"}
-        placeholder={isMobile ? "Search" : ""}
-        startContent={<TbSearch className="text-indigo-200" />}
-        labelPlacement={isMobile ? "inside" : "outside"}
-        isClearable
-      />
+      <SearchField />
 
       {/* Genres */}
       <Select

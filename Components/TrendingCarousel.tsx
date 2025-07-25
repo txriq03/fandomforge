@@ -13,7 +13,7 @@ import { Button } from "@heroui/button";
 import { Skeleton } from "@heroui/skeleton";
 import { Card } from "@heroui/card";
 import { useTrending } from "@/hooks/useTrending";
-import SkeletonCard from "./browse/SkeletonCard";
+import SkeletonCard from "./SkeletonCard";
 
 const TrendingCarousel = () => {
   const isMobile = useIsMobile();

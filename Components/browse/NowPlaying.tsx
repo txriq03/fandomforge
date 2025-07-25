@@ -11,7 +11,8 @@ import { useMediaQuery } from "usehooks-ts";
 import { useNowPlaying } from "@/hooks/useNowPlaying";
 import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 import { cn } from "@/lib/utils";
-import SkeletonGroup from "./SkeletonCard";
+import SkeletonGroup from "../SkeletonCard";
+import { TbArrowNarrowRight } from "react-icons/tb";
 
 const NowPlaying = () => {
   const { browseType } = useParams();
@@ -22,19 +23,17 @@ const NowPlaying = () => {
   console.log("NowPlaying:", media);
   const isMobile = useIsMobile();
   const isTablet = useMediaQuery("(max-width: 1024px");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true));
-
-  if (!mounted) return null;
+  const isLarge = useMediaQuery("(max-width: 1260px");
 
   const numToShow = (): number => {
     if (isMobile) {
       return 3;
     } else if (isTablet) {
       return 4;
-    } else {
+    } else if (isLarge) {
       return 5;
+    } else {
+      return 6;
     }
   };
 
@@ -49,6 +48,7 @@ const NowPlaying = () => {
           className="text-primary-light"
           as={Link}
           href={"/browse/movie/popular_now"}
+          endContent={<TbArrowNarrowRight size={18} />}
         >
           See More
         </Button>
@@ -61,6 +61,7 @@ const NowPlaying = () => {
           <SkeletonGroup />
           <SkeletonGroup className="hidden sm:flex" />
           <SkeletonGroup className="hidden lg:flex" />
+          <SkeletonGroup className="hidden xl:flex" />
         </div>
       )}
 
