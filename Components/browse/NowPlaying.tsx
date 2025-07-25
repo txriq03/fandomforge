@@ -1,6 +1,6 @@
 "use client";
 import { useMediaDiscovery } from "@/hooks/useMediaDiscovery";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MediaPoster from "../MediaPoster";
 import { MediaType, TrendingMovie, TrendingTV } from "@/types/trending";
 import { useParams } from "next/navigation";
@@ -11,7 +11,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { useNowPlaying } from "@/hooks/useNowPlaying";
 import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 import { cn } from "@/lib/utils";
-import SkeletonGroup from "./SkeletonGroup";
+import SkeletonGroup from "./SkeletonCard";
 
 const NowPlaying = () => {
   const { browseType } = useParams();
@@ -21,8 +21,12 @@ const NowPlaying = () => {
   const media: DiscoverMedia[] = data?.results;
   console.log("NowPlaying:", media);
   const isMobile = useIsMobile();
-
   const isTablet = useMediaQuery("(max-width: 1024px");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true));
+
+  if (!mounted) return null;
 
   const numToShow = (): number => {
     if (isMobile) {

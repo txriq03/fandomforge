@@ -9,7 +9,7 @@ import { Button } from "@heroui/button";
 import Link from "next/link";
 import { useMediaQuery } from "usehooks-ts";
 import { useTrending } from "@/hooks/useTrending";
-import SkeletonGroup from "./SkeletonGroup";
+import SkeletonGroup from "./SkeletonCard";
 import { cn } from "@/lib/utils";
 
 const TrendingNow = () => {

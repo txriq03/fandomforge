@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Card } from "@heroui/card";
 import { Skeleton } from "@heroui/skeleton";
 
-const SkeletonGroup = ({ className }: { className?: string }) => {
+const SkeletonCard = ({ className }: { className?: string }) => {
   return (
     <Card
       className={cn("w-full aspect-[2/3] p-2 bg-neutral-900", className)}
@@ -26,4 +26,4 @@ const SkeletonGroup = ({ className }: { className?: string }) => {
   );
 };
 
-export default SkeletonGroup;
+export default SkeletonCard;

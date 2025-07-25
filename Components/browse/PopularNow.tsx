@@ -10,7 +10,7 @@ import Link from "next/link";
 import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
-import SkeletonGroup from "./SkeletonGroup";
+import SkeletonGroup from "./SkeletonCard";
 
 const PopularNow = () => {
   const { browseType } = useParams();

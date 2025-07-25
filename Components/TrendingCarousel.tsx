@@ -13,6 +13,7 @@ import { Button } from "@heroui/button";
 import { Skeleton } from "@heroui/skeleton";
 import { Card } from "@heroui/card";
 import { useTrending } from "@/hooks/useTrending";
+import SkeletonCard from "./browse/SkeletonCard";
 
 const TrendingCarousel = () => {
   const isMobile = useIsMobile();
@@ -34,18 +35,6 @@ const TrendingCarousel = () => {
     }
   }, [emblaApi, trending]);
 
-  if (isPending)
-    return (
-      <div
-        className={cn(
-          "grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-1 sm:gap-3 px-2 sm:px-4 "
-        )}
-      >
-        {Array.from({ length: 5 }).map((_, i) => (
-          <SkeletonCard key={i} />
-        ))}
-      </div>
-    );
   if (error) return <div>Something went wrong</div>;
 
   return (
@@ -76,7 +65,18 @@ const TrendingCarousel = () => {
           </Button>
         </div>
       </div>
+      {/* Skeleton  */}
 
+      {isPending && (
+        <div className={cn("flex gap-2 px-1 sm:px-4")}>
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard className="hidden sm:flex" />
+          <SkeletonCard className="hidden lg:flex" />
+          <SkeletonCard className="hidden xl:flex" />
+        </div>
+      )}
       {/* Carousel */}
       <div
         className=" flex justify-center sm:px-4 overflow-hidden "
@@ -110,27 +110,6 @@ const TrendingCarousel = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-const SkeletonCard = () => {
-  return (
-    <Card className="space-y-3 sm:space-y-5 p-4 " radius="lg">
-      <Skeleton className="rounded-lg">
-        <div className="h-15 sm:h-24 rounded-lg bg-default-900" />
-      </Skeleton>
-      <div className=" space-y-2 sm:space-y-3">
-        <Skeleton className="w-3/5 rounded-lg">
-          <div className="h-3 w-3/5 rounded-lg bg-default-700" />
-        </Skeleton>
-        <Skeleton className="w-4/5 rounded-lg">
-          <div className="h-3 w-4/5 rounded-lg bg-default-700" />
-        </Skeleton>
-        <Skeleton className="w-2/5 rounded-lg">
-          <div className="h-3 w-2/5 rounded-lg bg-default-700" />
-        </Skeleton>
-      </div>
-    </Card>
   );
 };
 
