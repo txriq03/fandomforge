@@ -50,7 +50,7 @@ const FilterOptions = () => {
           label: "group-data-[has-label-outside=true]:text-indigo-200",
           trigger:
             "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
-          popoverContent: "bg-black/20",
+          popoverContent: "bg-[#202339]",
         }}
         label="Genres"
         isVirtualized
@@ -86,7 +86,7 @@ const FilterOptions = () => {
         defaultItems={years}
         classNames={{
           base: "hidden sm:flex",
-          popoverContent: "bg-black/20",
+          popoverContent: "bg-[#202339]",
         }}
         inputProps={{
           classNames: {
