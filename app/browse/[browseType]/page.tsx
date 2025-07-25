@@ -16,7 +16,7 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
   const { browseType } = await params;
 
   return (
-    <Padding className="font-main pt-[75px] space-y-6">
+    <Padding className="font-main pt-[75px] pb-[50px] space-y-6">
       {/* Browse Movies/Tv Shows/Reviews */}
       <div className="flex gap-2 text-primary-light/25 font-bold font-heading text-3xl lg:text-5xl items-center">
         <h1>Browse</h1>
