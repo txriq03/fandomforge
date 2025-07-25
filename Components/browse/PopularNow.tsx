@@ -8,6 +8,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 import { DiscoverMovie, DiscoverTVSeries } from "@/types/movie";
+import { useMediaQuery } from "usehooks-ts";
 
 const PopularNow = () => {
   const { browseType } = useParams();
@@ -17,9 +18,13 @@ const PopularNow = () => {
   const media: DiscoverMedia[] = data?.results;
   const isMobile = useIsMobile();
 
+  const isTablet = useMediaQuery("(max-width: 1024px");
+
   const numToShow = (): number => {
     if (isMobile) {
       return 3;
+    } else if (isTablet) {
+      return 4;
     } else {
       return 5;
     }

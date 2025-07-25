@@ -10,7 +10,6 @@ export default async function HomePage() {
       </div>
       <DevelopmentAlert />
       <TrendingCarousel />
-      {/* <MediaGrid className="px-1 sm:px-2 lg:px-4" /> */}
     </div>
   );
 }
