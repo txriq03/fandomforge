@@ -62,4 +62,4 @@ npm run dev
 
 ## Demo
 
-You can check ou the project at: [fandomforge.vercel.app](https://fandomforge.vercel.app)
+You can check out the project at: [fandomforge.vercel.app](https://fandomforge.vercel.app)
