@@ -2,7 +2,7 @@
 
 A social trivia platform for movie and TV fans. Test your knowledge among your peers.
 
-<img src="./public/hero.png" alt="Screenshot" width="100%" />
+<img src="./public/readme/hero.png" alt="Screenshot" width="100%" />
 
 ## Overview
 
