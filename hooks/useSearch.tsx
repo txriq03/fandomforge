@@ -6,5 +6,6 @@ export function useSearch(query: string, mediaType: MediaType) {
   return useQuery({
     queryKey: ["search", query],
     queryFn: () => getSearch(query, mediaType),
+    enabled: (mediaType === "movie" || mediaType === "tv") && !!query,
   });
 }

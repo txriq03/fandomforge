@@ -114,10 +114,13 @@ export const getNowPlaying = async (mediaType: MediaType) => {
 
 export const getSearch = async (query: string, mediaType: MediaType) => {
   const url = `https://api.themoviedb.org/3/search/${mediaType}?query=${query}`;
+
+  console.log("MediaType for getSearch:", mediaType);
   const res = await fetch(url, options);
 
   if (!res.ok) throw new Error("Failed to get search results.");
   const data = await res.json();
+  console.log("Search Data", data.results);
 
   return data ?? [];
 };

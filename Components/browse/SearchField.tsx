@@ -1,18 +1,39 @@
 "use client";
+import { useDebounce } from "@/hooks/useDebounce";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useSearchContext } from "@/providers/SearchProvider";
 import { Input } from "@heroui/input";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { TbSearch } from "react-icons/tb";
 
-const SearchField = ({ formRef }: { formRef: React.RefObject<null> }) => {
+const SearchField = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const isMobile = useIsMobile();
-  const { query, setQuery } = useSearchContext();
+
+  const initial = searchParams.get("query") || "";
+  const [value, setValue] = useState(initial);
+  const debounced = useDebounce(value, 400);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (debounced) {
+      params.set("query", debounced);
+    } else {
+      params.delete("query");
+    }
+
+    router.replace(`?${params.toString()}`);
+  }, [debounced, router]);
 
   return (
     <Input
       name="search"
-      value={query}
-      onValueChange={setQuery}
+      value={value}
+      onValueChange={setValue}
       classNames={{
         label: "group-data-[filled-within=true]:text-indigo-200",
         inputWrapper:
