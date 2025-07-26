@@ -1,5 +1,4 @@
 "use client";
-import { useMediaDiscovery } from "@/hooks/useMediaDiscovery";
 import React from "react";
 import MediaPoster from "../MediaPoster";
 import { MediaType, TrendingMovie, TrendingTV } from "@/types/trending";

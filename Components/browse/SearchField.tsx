@@ -3,7 +3,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import useIsMobile from "@/hooks/useIsMobile";
 import { useSearchContext } from "@/providers/SearchProvider";
 import { Input } from "@heroui/input";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TbSearch } from "react-icons/tb";

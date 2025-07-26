@@ -1,15 +1,14 @@
 "use client";
-import { Form } from "@heroui/form";
 import { Select, SelectItem } from "@heroui/select";
 import { useMovieGenres } from "@/hooks/useMovieGenres";
 import { Genre } from "@/types/genres";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
-import SearchField from "./SearchField";
+import { useState } from "react";
 
 const FilterOptions = () => {
   const { data, isPending } = useMovieGenres();
-  const genres: Genre[] = data?.genres;
-
+  const genresList: Genre[] = data?.genres;
+  const [genres, setGenres] = useState<Set<string>>();
   const years = Array.from(
     { length: new Date().getFullYear() - 1970 + 1 },
     (_, i) => {
@@ -18,11 +17,12 @@ const FilterOptions = () => {
     }
   ).reverse();
 
-  return (
-    <Form className="flex flex-row gap-4">
-      {/* Search */}
-      <SearchField />
+  const handleGenreChange = (e: any) => {
+    setGenres(new Set(e.target.value.split(",")));
+  };
 
+  return (
+    <>
       {/* Genres */}
       <Select
         name="genre"
@@ -42,8 +42,9 @@ const FilterOptions = () => {
         isLoading={isPending}
         isClearable
         spinnerProps={{ variant: "simple" }}
+        onChange={handleGenreChange}
       >
-        {genres?.map((genre: Genre) => (
+        {genresList?.map((genre: Genre) => (
           <SelectItem
             key={genre.id}
             classNames={{
@@ -88,7 +89,7 @@ const FilterOptions = () => {
           </AutocompleteItem>
         )}
       </Autocomplete>
-    </Form>
+    </>
   );
 };
 
