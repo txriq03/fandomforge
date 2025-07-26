@@ -66,7 +66,7 @@ const MediaPoster = ({ media, className, number, mediaType }: Props) => {
             radius="sm"
             startContent={<FaStar className="text-amber-300" />}
           >
-            {media.vote_average.toFixed(1)}
+            {media.vote_average?.toFixed(1)}
           </Chip>
         )}
 

@@ -17,8 +17,8 @@ const SearchResults = () => {
   const results = data?.results;
 
   return (
-    <div className="space-y-5">
-      <h1>Results</h1>
+    <div className="space-y-3">
+      <h1 className="text-indigo-200 sm:text-lg lg:text-xl">Results</h1>
 
       {isFetching && (
         <div className="flex gap-1 sm:gap-2 lg:gap-2">
