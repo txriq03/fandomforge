@@ -36,7 +36,7 @@ const BrowsePopover = ({ browseType }: { browseType: BrowseType }) => {
     >
       <DropdownTrigger>
         <button
-          className="text-primary-light/50 bg-primary-light/5 hover:bg-primary/10 transition-colors duration-300 px-2 py-1 rounded-lg flex gap-1 items-center cursor-pointer"
+          className="text-primary-light bg-primary-light/5 hover:bg-primary/10 transition-colors duration-300 px-2 py-1 rounded-lg flex gap-1 items-center cursor-pointer"
           color="primary"
         >
           {displayType()}

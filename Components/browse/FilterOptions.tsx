@@ -47,7 +47,7 @@ const FilterOptions = () => {
           <SelectItem
             key={genre.id}
             classNames={{
-              base: "data-[hover=true]:bg-primary font-main data-[selectable=true]:focus:bg-primary",
+              base: "data-[hover=true]:bg-primary/15 data-[hover=true]:text-primary-light font-main data-[selectable=true]:focus:bg-primary/15 data-[selectable=true]:focus:text-primary-light",
             }}
           >
             {genre.name}
@@ -71,7 +71,7 @@ const FilterOptions = () => {
         inputProps={{
           classNames: {
             label:
-              "dark:group-data-[has-label-outside=true]:text-indigo-200 text-indigo-200",
+              " group-data-[filled-within=true]:text-indigo-200 text-indigo-200",
             inputWrapper:
               "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
           },
@@ -81,7 +81,7 @@ const FilterOptions = () => {
           <AutocompleteItem
             key={item.key}
             classNames={{
-              base: "data-[hover=true]:bg-primary data-[selectable=true]:focus:bg-primary",
+              base: "data-[hover=true]:bg-primary/15 data-[hover=true]:text-primary-light data-[selectable=true]:focus:bg-primary/15 data-[selectable=true]:focus:text-primary-light",
             }}
           >
             {item.label}
