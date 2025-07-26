@@ -28,12 +28,14 @@ Currently, this app is still in development. Here is a checklist of what needs t
 | User Profiles                |                Display profiles that contain the user's activity, followers, etc                |       ✔️ |
 | Follow System                |                          Connect with others, build a network of fans                           |       ✔️ |
 | User Reviews                 |                      Leave comments and rate your favourite content (1-10)                      |       ✔️ |
+| Authentication               |                Registration and login through the email provider (via Supabase)                 |       ✔️ |
 | Leveling & Leaderboard       |                     Gain XP for correct answers and rise through the ranks                      |       ❌ |
 | Responsive & Accessible UI   |                              Tailored with TailwindCSS and HeroUI                               |       ✔️ |
 | Real-Time Notifications      |               Get alerted when someone follows you or interacts with your content               |       ❌ |
 | AI-Powered Trivia Generation | Random multiple-choice questions generated using GPT-4.1, based on selected movies or TV Series |       ❌ |
 | Messaging System             |                            Directly message other fans in real-time                             |       ❌ |
 | Search & Browse              |                  Discover trending, popular, and now-playing content from TMDB                  |       ⚠️ |
+| Edit Profile                 |                      Users can edit their avatar, display name, email, etc                      |       ❌ |
 
 ## Tech Stack
 
