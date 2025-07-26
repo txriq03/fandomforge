@@ -47,7 +47,7 @@ const FilterOptions = () => {
           <SelectItem
             key={genre.id}
             classNames={{
-              base: "data-[hover=true]:bg-primary data-[focus=true]:bg-primary/5 font-main",
+              base: "data-[hover=true]:bg-primary font-main data-[selectable=true]:focus:bg-primary",
             }}
           >
             {genre.name}
@@ -78,7 +78,14 @@ const FilterOptions = () => {
         }}
       >
         {(item) => (
-          <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>
+          <AutocompleteItem
+            key={item.key}
+            classNames={{
+              base: "data-[hover=true]:bg-primary data-[selectable=true]:focus:bg-primary",
+            }}
+          >
+            {item.label}
+          </AutocompleteItem>
         )}
       </Autocomplete>
     </Form>

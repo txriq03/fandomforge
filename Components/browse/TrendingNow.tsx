@@ -56,7 +56,7 @@ const TrendingNow = () => {
       </div>
 
       {isPending && (
-        <div className={cn("flex gap-1 sm:gap-2 lg:gap-2")}>
+        <div className={cn("flex gap-1 sm:gap-2 md:gap-3")}>
           <SkeletonGroup />
           <SkeletonGroup />
           <SkeletonGroup />
@@ -66,7 +66,7 @@ const TrendingNow = () => {
         </div>
       )}
 
-      <div className="flex gap-1 sm:gap-2 overflow-x-auto">
+      <div className="flex gap-1 sm:gap-2 md:gap-3 overflow-x-auto">
         {media?.slice(0, numToShow()).map((media: TrendingMedia) => {
           return <MediaPoster key={media.id} media={media} mediaType={type} />;
         })}
