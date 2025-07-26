@@ -112,8 +112,8 @@ export const getNowPlaying = async (mediaType: MediaType) => {
   return data ?? [];
 };
 
-export const getSearch = async (query: string) => {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${query}`;
+export const getSearch = async (query: string, mediaType: MediaType) => {
+  const url = `https://api.themoviedb.org/3/search/${mediaType}?query=${query}`;
   const res = await fetch(url, options);
 
   if (!res.ok) throw new Error("Failed to get search results.");

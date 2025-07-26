@@ -1,7 +1,7 @@
 "use client";
 import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
-import React from "react";
+import React, { useRef } from "react";
 import { TbSearch } from "react-icons/tb";
 import { Select, SelectItem } from "@heroui/select";
 import useIsMobile from "@/hooks/useIsMobile";
@@ -12,9 +12,8 @@ import SearchField from "./SearchField";
 
 const FilterOptions = () => {
   const { data, isPending } = useMovieGenres();
-
+  const formRef = useRef(null);
   const genres: Genre[] = data?.genres;
-  const isMobile = useIsMobile();
 
   const years = Array.from(
     { length: new Date().getFullYear() - 1970 + 1 },
@@ -27,7 +26,7 @@ const FilterOptions = () => {
   return (
     <Form className="flex flex-row gap-4">
       {/* Search */}
-      <SearchField />
+      <SearchField formRef={formRef} />
 
       {/* Genres */}
       <Select

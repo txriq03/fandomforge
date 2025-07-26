@@ -1,13 +1,18 @@
+"use client";
 import useIsMobile from "@/hooks/useIsMobile";
+import { useSearchContext } from "@/providers/SearchProvider";
 import { Input } from "@heroui/input";
-import React from "react";
 import { TbSearch } from "react-icons/tb";
 
-const SearchField = () => {
+const SearchField = ({ formRef }: { formRef: React.RefObject<null> }) => {
   const isMobile = useIsMobile();
+  const { query, setQuery } = useSearchContext();
+
   return (
     <Input
       name="search"
+      value={query}
+      onValueChange={setQuery}
       classNames={{
         label: "group-data-[filled-within=true]:text-indigo-200",
         inputWrapper:
