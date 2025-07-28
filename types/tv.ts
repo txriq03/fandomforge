@@ -1,5 +1,3 @@
-import { MediaType } from "./trending";
-
 type TVSeries = {
   adult: boolean;
   backdrop_path: string | null;

@@ -25,20 +25,27 @@ const ReviewCard = ({ review }: { review: Review }) => {
   const imageUrl = getImageUrl(review.backdrop_path);
   return (
     <Card
-      className="h-[200px] w-full bg-primary/5 relative overflow-visible group cursor-pointer"
+      className="h-[200px] w-full bg-primary/5 relative overflow-visible group cursor-pointer font-main"
       radius="sm"
     >
       {/* Banner image */}
-      <CardHeader className="h-[100px] overflow-hidden w-full p-0 group-hover:brightness-50 transition-filter duration-300 relative">
-        <Image src={imageUrl} radius="none" className="object-cover" />
-
-        <p className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap hidden hover:block">
+      <CardHeader className="h-[80px] overflow-hidden w-full p-0 relative">
+        <Image
+          src={imageUrl}
+          radius="none"
+          className="object-cover group-hover:brightness-50 transition-filter duration-300"
+        />
+        <p className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap hidden group-hover:block font-semibold">
           Read full review
         </p>
       </CardHeader>
 
       <CardBody>
-        <p className="text-foreground/70 text-sm line-clamp-2">
+        <p>
+          Review for <span className="font-semibold">{review.media_title}</span>
+        </p>
+
+        <p className="text-foreground/70 text-sm line-clamp-3">
           {review.comment}
         </p>
       </CardBody>

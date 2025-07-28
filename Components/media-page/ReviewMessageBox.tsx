@@ -21,13 +21,18 @@ const ReviewMessageBox = () => {
   const user = useUser();
   const mediaDetails = useMedia();
   const media: Movie | TVSeries = mediaDetails;
+
   const mediaId = media.id;
+  console.log("MediaID from messagebox", mediaId);
   const mediaType = media.media_type as MediaType;
   const isMobile = useIsMobile();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
+
+  const title =
+    mediaType === "movie" ? (media as Movie).title : (media as TVSeries).name;
 
   if (!user) return <NoAuthBox />;
 
@@ -43,6 +48,7 @@ const ReviewMessageBox = () => {
     const result = await createReview({
       media_id: String(mediaId),
       media_type: mediaType,
+      media_title: title,
       backdrop_path: media.backdrop_path ?? "",
       comment,
       rating,

@@ -60,6 +60,7 @@ export async function signOut() {
 
 interface ReviewParameters {
   media_id: string;
+  media_title: string;
   media_type: MediaType;
   rating: number;
   comment?: string;

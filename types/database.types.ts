@@ -131,6 +131,7 @@ export type Database = {
           created_at: string | null
           id: string
           media_id: string
+          media_title: string | null
           media_type: string
           rating: number | null
           user_id: string | null
@@ -141,6 +142,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           media_id: string
+          media_title?: string | null
           media_type: string
           rating?: number | null
           user_id?: string | null
@@ -151,6 +153,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           media_id?: string
+          media_title?: string | null
           media_type?: string
           rating?: number | null
           user_id?: string | null
@@ -194,6 +197,7 @@ export type Database = {
           created_at: string | null
           id: string | null
           media_id: string | null
+          media_title: string | null
           media_type: string | null
           rating: number | null
           user_id: string | null

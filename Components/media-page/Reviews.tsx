@@ -15,11 +15,14 @@ import { TbHeart, TbMessage } from "react-icons/tb";
 import useProfile from "@/hooks/useProfile";
 import { useUIContext } from "@/providers/UIContext";
 import { useMedia } from "@/providers/MediaProvider";
+import { Movie } from "@/types/movie";
+import TVSeries from "@/types/tv";
 
 const Reviews = () => {
-  const { media } = useMedia();
-  const mediaId = media.id as string;
-  const mediaType = media.media_type as MediaType;
+  const mediaDetails = useMedia();
+  const media: Movie | TVSeries = mediaDetails;
+  const mediaId = String(media?.id);
+  const mediaType = media?.media_type as MediaType;
 
   const { data: reviews, isPending } = useReviewsForMedia(mediaId, mediaType);
   devLog.log("Reviews:", reviews);
