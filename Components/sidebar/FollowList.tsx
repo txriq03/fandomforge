@@ -68,11 +68,11 @@ const FollowCard = ({ followedUser }: { followedUser: FollowedUser }) => {
           badge: "bottom-2 right-1 border-sidebar border-3",
         }}
       >
-        <Avatar src={avatar} size="sm" />
+        <Avatar src={avatar} />
       </Badge>
-      <div className="flex flex-col gap-0">
+      <div className="flex flex-col gap-0 text-left">
         <p>{user.username}</p>
-        <p className="text-[0.6rem] text-success">online</p>
+        <p className="text-[0.7rem] text-success">online</p>
       </div>
     </button>
   );
