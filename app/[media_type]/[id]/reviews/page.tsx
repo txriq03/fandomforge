@@ -1,7 +1,6 @@
 import ReviewMessageBox from "@/Components/media-page/ReviewMessageBox";
 import Reviews from "@/Components/media-page/Reviews";
 import Padding from "@/Components/ui/Padding";
-import { Divider } from "@heroui/divider";
 import React from "react";
 
 const ReviewsPage = () => {

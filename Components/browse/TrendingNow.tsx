@@ -15,7 +15,6 @@ import { TbArrowNarrowRight } from "react-icons/tb";
 const TrendingNow = () => {
   const { browseType } = useParams();
   const type = browseType as MediaType;
-  console.log("Type:", type);
   const { data, isPending } = useTrending(type);
   type TrendingMedia = TrendingMovie | TrendingTV;
   const media: TrendingMedia[] = data;

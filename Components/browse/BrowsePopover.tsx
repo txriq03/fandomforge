@@ -28,7 +28,6 @@ const BrowsePopover = ({ browseType }: { browseType: BrowseType }) => {
   };
   return (
     <Dropdown
-      radius="sm"
       classNames={{
         base: "border-none outline-none lg:w-[220px] ",
         content: "bg-[#202339] text-primary-light font-main",

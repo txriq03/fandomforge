@@ -32,10 +32,12 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
           <BrowsePopover browseType={browseType} />
         </div>
 
-        <div className="flex flex-row gap-4">
-          <SearchField />
-          <FilterOptions />
-        </div>
+        {browseType !== "reviews" && (
+          <div className="flex flex-row gap-4">
+            <SearchField />
+            <FilterOptions />
+          </div>
+        )}
 
         <MainSection browseType={browseType} />
       </Padding>

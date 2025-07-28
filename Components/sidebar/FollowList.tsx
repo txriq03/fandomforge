@@ -1,6 +1,7 @@
 "use client";
 import { useFollowing } from "@/hooks/useFollowing";
 import { getPfp } from "@/lib/supabase/utils";
+import { devLog } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { Avatar } from "@heroui/avatar";
 import { Badge } from "@heroui/badge";
@@ -19,7 +20,7 @@ type FollowedUser = {
 
 const FollowList = () => {
   const { data: following, isPending } = useFollowing();
-  console.log("Following:", following);
+  devLog.log("Following:", following);
 
   if (following?.length === 0) return;
 

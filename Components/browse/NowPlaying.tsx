@@ -20,7 +20,6 @@ const NowPlaying = () => {
   const { data, isPending } = useNowPlaying(type);
   type DiscoverMedia = DiscoverMovie | DiscoverTVSeries;
   const media: DiscoverMedia[] = data?.results;
-  console.log("NowPlaying:", media);
   const isMobile = useIsMobile();
   const isTablet = useMediaQuery("(max-width: 1024px");
   const isLarge = useMediaQuery("(max-width: 1260px");

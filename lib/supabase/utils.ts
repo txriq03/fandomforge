@@ -251,15 +251,6 @@ export const followUser = async (followedId?: string | null) => {
   return { sucess: true };
 };
 
-type FollowedUser = {
-  followed_id: string;
-  followed: {
-    avatar_url: string;
-    id: string;
-    username: string;
-  };
-};
-
 export const getFollowing = async () => {
   const {
     data: { user },
@@ -267,22 +258,10 @@ export const getFollowing = async () => {
   } = await supabase.auth.getUser();
 
   if (authError || !user) throw new Error("Not authenticated.");
-
-  const followedUsersQuery = supabase
-    .from("follows")
-    .select("followed_id, followed:followed_id ( id, username, avatar_url )")
-    .eq("follower_id", user.id);
-
-  // type FollowedUsers = QueryData<typeof followedUsersQuery>;
-
   const { data, error } = await supabase
     .from("follows")
     .select("followed_id, followed:followed_id ( id, username, avatar_url )")
     .eq("follower_id", user.id);
-
-  // const { data, error } = await followedUsersQuery;
-
-  // const followedUsers: FollowedUsers | null = data;
 
   if (error) throw new Error(error.message);
 
@@ -327,4 +306,12 @@ export const unfollowUser = async (
   });
 
   if (error) throw new Error(error.message);
+};
+
+export const getAllReviews = async (): Promise<Review[]> => {
+  const { data, error } = await supabase.from("reviews").select("*");
+
+  if (error) throw new Error("Failed to get all reviews");
+
+  return data ?? [];
 };

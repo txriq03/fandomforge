@@ -9,19 +9,20 @@ import { Card, CardBody } from "@heroui/card";
 import { Spinner } from "@heroui/spinner";
 import { useParams } from "next/navigation";
 import ReviewStarRating from "./ReviewStarRating";
-import { timeago } from "@/lib/utils";
+import { devLog, timeago } from "@/lib/utils";
 import { Button } from "@heroui/button";
 import { TbHeart, TbMessage } from "react-icons/tb";
 import useProfile from "@/hooks/useProfile";
 import { useUIContext } from "@/providers/UIContext";
+import { useMedia } from "@/providers/MediaProvider";
 
 const Reviews = () => {
-  const params = useParams();
-  const mediaId = params.id as string;
-  const mediaType = params.media_type as MediaType;
+  const { media } = useMedia();
+  const mediaId = media.id as string;
+  const mediaType = media.media_type as MediaType;
 
   const { data: reviews, isPending } = useReviewsForMedia(mediaId, mediaType);
-  console.log("Reviews:", reviews);
+  devLog.log("Reviews:", reviews);
 
   if (isPending) {
     return (

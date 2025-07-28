@@ -63,6 +63,7 @@ interface ReviewParameters {
   media_type: MediaType;
   rating: number;
   comment?: string;
+  backdrop_path?: string;
 }
 
 export const createReview = async (input: ReviewParameters) => {

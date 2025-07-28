@@ -126,6 +126,7 @@ export type Database = {
       }
       reviews: {
         Row: {
+          backdrop_path: string
           comment: string | null
           created_at: string | null
           id: string
@@ -135,6 +136,7 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          backdrop_path?: string
           comment?: string | null
           created_at?: string | null
           id?: string
@@ -144,6 +146,7 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          backdrop_path?: string
           comment?: string | null
           created_at?: string | null
           id?: string
@@ -186,6 +189,7 @@ export type Database = {
       reviews_with_profiles: {
         Row: {
           avatar_url: string | null
+          backdrop_path: string | null
           comment: string | null
           created_at: string | null
           id: string | null

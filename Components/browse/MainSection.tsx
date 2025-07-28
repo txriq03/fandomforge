@@ -6,6 +6,7 @@ import TrendingNow from "./TrendingNow";
 import NowPlaying from "./NowPlaying";
 import { BrowseType } from "@/types/browseType";
 import { useSearchParams } from "next/navigation";
+import ReviewGrid from "./ReviewGrid";
 
 const MainSection = ({ browseType }: { browseType: BrowseType }) => {
   const searchParams = useSearchParams();
@@ -29,6 +30,7 @@ const MainSection = ({ browseType }: { browseType: BrowseType }) => {
         </>
       )}
       {isMovie && <NowPlaying />}
+      {isReview && <ReviewGrid />}
     </>
   );
 };

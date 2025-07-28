@@ -1,6 +1,7 @@
 "use client";
 import useProfile from "@/hooks/useProfile";
 import { isSameUser } from "@/lib/supabase/utils";
+import { devLog } from "@/lib/utils";
 import { useUser } from "@/providers/UserProvider";
 import { Profile } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
@@ -23,7 +24,7 @@ const InsideBanner = ({ profile }: { profile: Profile }) => {
   //     <Spinner variant="simple" color="danger" className="m-auto" size="lg" />
   //   );
   // }
-  console.log("Profile:", profile);
+  devLog.log("Profile:", profile);
 
   return (
     <div className="container w-full  text-white flex justify-between items-end">

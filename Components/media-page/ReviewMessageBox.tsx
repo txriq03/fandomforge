@@ -1,9 +1,12 @@
 "use client";
 import useIsMobile from "@/hooks/useIsMobile";
 import { createReview } from "@/lib/supabase/actions";
+import { useMedia } from "@/providers/MediaProvider";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
+import { Movie } from "@/types/movie";
 import { MediaType } from "@/types/trending";
+import TVSeries from "@/types/tv";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
 import { Form } from "@heroui/form";
@@ -16,9 +19,10 @@ import { TbStar, TbStarFilled } from "react-icons/tb";
 
 const ReviewMessageBox = () => {
   const user = useUser();
-  const params = useParams();
-  const mediaId = params.id as string;
-  const mediaType = params.media_type as MediaType;
+  const mediaDetails = useMedia();
+  const media: Movie | TVSeries = mediaDetails;
+  const mediaId = media.id;
+  const mediaType = media.media_type as MediaType;
   const isMobile = useIsMobile();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -37,8 +41,9 @@ const ReviewMessageBox = () => {
 
     setIsLoading(true);
     const result = await createReview({
-      media_id: mediaId,
+      media_id: String(mediaId),
       media_type: mediaType,
+      backdrop_path: media.backdrop_path ?? "",
       comment,
       rating,
     });
@@ -47,7 +52,6 @@ const ReviewMessageBox = () => {
       addToast({ title: "Review submitted!", color: "success" });
 
       setRating(0);
-      console.log("Rating after reset:", rating);
       setComment("");
 
       // Invalidate review query to trigger refetch
