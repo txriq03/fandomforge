@@ -62,7 +62,7 @@ const ReviewMessageBox = () => {
 
       // Invalidate review query to trigger refetch
       queryClient.invalidateQueries({
-        queryKey: ["reviews", mediaId, mediaType],
+        queryKey: ["reviews", String(mediaId), mediaType],
       });
     } else {
       addToast({
