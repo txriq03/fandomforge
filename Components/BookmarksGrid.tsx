@@ -41,11 +41,12 @@ const BookmarksGrid = () => {
         <SkeletonCard className="hidden sm:flex" />
         <SkeletonCard className="hidden md:flex" />
         <SkeletonCard className="hidden lg:flex" />
+        <SkeletonCard className="hidden 2xl:flex" />
       </div>
     );
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 lg:gap-3">
       {mediaQueries.map((query, index) => {
         const poster = getImageUrl(query.data?.poster_path);
         const { media_id, media_type } = bookmarks[index];
