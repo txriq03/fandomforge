@@ -136,7 +136,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                       radius="sm"
                       size={isMobile ? "md" : "md"}
                     >
-                      Play Now
+                      Play Trivia
                     </Button>
                     <Button
                       as={Link}

@@ -1,6 +1,7 @@
 import DevelopmentAlert from "@/Components/DevelopmentAlert";
 import BannerCarousel from "@/Components/BannerCarousel";
 import TrendingCarousel from "@/Components/TrendingCarousel";
+import ReviewCarousel from "@/Components/ReviewCarousel";
 
 export default async function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default async function HomePage() {
       </div>
       <DevelopmentAlert />
       <TrendingCarousel />
+      <ReviewCarousel />
     </div>
   );
 }

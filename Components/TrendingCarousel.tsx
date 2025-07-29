@@ -2,18 +2,15 @@
 
 import { useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { useQuery } from "@tanstack/react-query";
-import { getTrending } from "@/lib/api/tmdb";
 import { TrendingMedia } from "@/types/trending";
 import { cn } from "@/lib/utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import MediaPoster from "./MediaPoster";
 import useIsMobile from "@/hooks/useIsMobile";
 import { Button } from "@heroui/button";
-import { Skeleton } from "@heroui/skeleton";
-import { Card } from "@heroui/card";
 import { useTrending } from "@/hooks/useTrending";
 import SkeletonCard from "./SkeletonCard";
+import { Alert } from "@heroui/alert";
 
 const TrendingCarousel = () => {
   const isMobile = useIsMobile();
@@ -35,7 +32,8 @@ const TrendingCarousel = () => {
     }
   }, [emblaApi, trending]);
 
-  if (error) return <div>Something went wrong</div>;
+  if (error)
+    return <Alert title="Something went wrong" description={error.message} />;
 
   return (
     <div>
