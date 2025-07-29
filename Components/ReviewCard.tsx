@@ -1,6 +1,8 @@
+"use client";
 import { getImageUrl } from "@/lib/api/tmdb";
 import { getPfp } from "@/lib/supabase/utils";
 import { timeago } from "@/lib/utils";
+import { useUIContext } from "@/providers/UIContext";
 import { Review } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
 import { Card, CardBody, CardHeader } from "@heroui/card";
@@ -8,6 +10,8 @@ import { Image } from "@heroui/image";
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const imageUrl = getImageUrl(review.backdrop_path);
+  const { openProfileModal } = useUIContext();
+
   console.log(review);
   return (
     <div className="pb-7">
@@ -38,14 +42,19 @@ const ReviewCard = ({ review }: { review: Review }) => {
           </p>
         </CardBody>
 
-        <Avatar
-          src={getPfp(review.avatar_url)}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"
-          size="lg"
-          classNames={{
-            base: "border-10 border-background h-18 w-18",
-          }}
-        />
+        <button
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 cursor-pointer"
+          onClick={() => openProfileModal(review.user_id)}
+        >
+          <Avatar
+            src={getPfp(review.avatar_url)}
+            size="lg"
+            classNames={{
+              base: "border-10 border-background h-18 w-18 group-base",
+              img: "group-base-hover:brightness-50 transition-all duration-300",
+            }}
+          />
+        </button>
 
         <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 left-0 px-2 py-1">
           {timeago(review.created_at!)}

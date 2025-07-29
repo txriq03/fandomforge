@@ -22,12 +22,12 @@ const ReviewCarousel = () => {
     return <Alert title="Something went wrong" description={error.message} />;
 
   return (
-    <Padding className="px-2 sm:px-4 py-10 space-y-2">
-      <h2 className="text-xl sm:text-3xl font-semibold dark:text-indigo-400 font-heading">
+    <div className=" py-10 space-y-2">
+      <h2 className="px-2 sm:px-4  text-xl sm:text-3xl font-semibold dark:text-indigo-400 font-heading">
         Recent Reviews
       </h2>
 
-      <div className="flex  overflow-hidden" ref={emblaRef}>
+      <div className="flex px-2 sm:px-4 overflow-hidden" ref={emblaRef}>
         <div className="flex gap-2">
           {reviews?.map((review: Review) => (
             <div className="flex-[0_0_250px]">
@@ -36,7 +36,7 @@ const ReviewCarousel = () => {
           ))}
         </div>
       </div>
-    </Padding>
+    </div>
   );
 };
 
