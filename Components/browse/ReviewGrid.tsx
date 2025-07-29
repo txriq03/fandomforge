@@ -37,8 +37,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
             radius="none"
             className="object-cover group-hover:brightness-50 transition-filter duration-300"
           />
-          <p className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap hidden group-hover:block font-semibold">
-            Read full review
+          <p className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap hidden group-hover:block font-bold font-heading">
+            Read Full Review
           </p>
         </CardHeader>
 
