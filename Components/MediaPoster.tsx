@@ -48,8 +48,8 @@ const MediaPoster = ({ media, className, number, mediaType }: Props) => {
         }}
       />
       {number && (
-        <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-rose-400 grid place-items-center font-bold font-heading rounded-br-sm text-slate-50">
-          {formatNumber(number)}
+        <div className="top-0 left-0 h-8 w-8 absolute z-20 bg-rose-400 sm:pl-1 max-sm:grid max-sm:place-items-center  font-bold font-heading sm:rounded-br-full text-slate-50">
+          <p>{formatNumber(number)}</p>
         </div>
       )}
 
