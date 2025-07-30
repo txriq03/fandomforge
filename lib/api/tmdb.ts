@@ -1,6 +1,6 @@
 import { MediaType } from "@/types/trending";
 import { devLog } from "../utils";
-import { MovieCreditsResponse } from "@/types/tmdb";
+import { MovieCreditsResponse, TmdbReviewsResponse } from "@/types/tmdb";
 
 const options = {
   method: "GET",
@@ -146,6 +146,21 @@ export const getCredits = async (
   const res = await fetch(url, options);
 
   if (!res.ok) throw new Error("Failed to get credits");
+
+  const data = await res.json();
+
+  return data ?? [];
+};
+
+export const getTmdbReviews = async (
+  mediaId: string,
+  mediaType: MediaType
+): Promise<TmdbReviewsResponse> => {
+  const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/reviews?language=en-US&page=1`;
+
+  const res = await fetch(url, options);
+
+  if (!res.ok) throw new Error("Failed to get TMDB reviews");
 
   const data = await res.json();
 
