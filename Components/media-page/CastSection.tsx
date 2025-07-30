@@ -38,7 +38,7 @@ const CastSection = () => {
 
   return (
     <div className="space-y-2 py-2">
-      <h2 className="text-base xl:text-3xl font-heading text-primary-light font-semibold">
+      <h2 className="text-base md:text-lg lg:text-xl xl:text-3xl font-heading text-primary-light font-semibold">
         Actors
       </h2>
 
@@ -64,7 +64,9 @@ const ActorGrid = ({ cast }: { cast: CastMember[] }) => {
               width={isMobile ? 60 : 70}
             />
             <div className="py-2 overflow-hidden">
-              <p className="text-sm sm:text-2xl">{actor.name}</p>
+              <p className="text-sm sm:text-lg lg:text-xl xl:text-2xl">
+                {actor.name}
+              </p>
               <p className="text-foreground/75 text-[0.8rem] sm:text-base line-clamp-2">
                 {actor.character}
               </p>
