@@ -311,7 +311,8 @@ export const unfollowUser = async (
 export const getAllReviews = async (): Promise<Review[]> => {
   const { data, error } = await supabase
     .from("reviews_with_profiles")
-    .select("*");
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) throw new Error("Failed to get all reviews");
 
