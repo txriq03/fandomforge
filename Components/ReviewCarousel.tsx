@@ -1,39 +1,58 @@
 "use client";
-import React from "react";
-import Padding from "./ui/Padding";
 import { useAllReviews } from "@/hooks/useAllReviews";
-import useIsMobile from "@/hooks/useIsMobile";
 import useEmblaCarousel from "embla-carousel-react";
-import { Alert } from "@heroui/alert";
 import { Review } from "@/types/tables";
-import ReviewCard from "./ReviewCard";
+import ReviewCard, { ReviewCardSkeleton } from "./ReviewCard";
+import { Link } from "@heroui/link";
+import { Button } from "@heroui/button";
+import { TbArrowRight } from "react-icons/tb";
 
 const ReviewCarousel = () => {
   const { data: reviews, isPending, error } = useAllReviews();
-  const isMobile = useIsMobile();
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+  const [emblaRef] = useEmblaCarousel({
     loop: false,
     dragFree: true,
     slidesToScroll: 1,
     align: "start",
   });
 
-  if (error)
-    return <Alert title="Something went wrong" description={error.message} />;
+  if (error) {
+    console.log("Error retrieving all reviews:", error.message);
+    return null;
+  }
 
   return (
     <div className=" py-10 space-y-2">
-      <h2 className="px-2 sm:px-4  text-xl sm:text-3xl font-semibold dark:text-indigo-400 font-heading">
-        Recent Reviews
-      </h2>
+      <div className="flex justify-between items-end px-2 sm:px-4">
+        <h2 className="  text-xl sm:text-2xl  dark:text-indigo-400 font-heading">
+          Recent Reviews
+        </h2>
+
+        {!isPending && reviews.length > 5 && (
+          <Link
+            size="sm"
+            color="primary"
+            href="/browse/reviews"
+            className="text-primary-light"
+            anchorIcon={<TbArrowRight />}
+            isBlock
+          >
+            All Reviews
+          </Link>
+        )}
+      </div>
 
       <div className="flex px-2 sm:px-4 overflow-hidden" ref={emblaRef}>
         <div className="flex gap-2">
-          {reviews?.map((review: Review) => (
-            <div className="flex-[0_0_250px]">
-              <ReviewCard review={review} />
-            </div>
-          ))}
+          {isPending
+            ? [...Array(5)].map((_, index) => (
+                <ReviewCardSkeleton key={index} />
+              ))
+            : reviews?.map((review: Review) => (
+                <div className="flex-[0_0_250px]" key={review.id}>
+                  <ReviewCard review={review} />
+                </div>
+              ))}
         </div>
       </div>
     </div>

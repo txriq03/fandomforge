@@ -7,6 +7,7 @@ import { Review } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
 import { Card, CardBody, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
+import { Skeleton } from "@heroui/skeleton";
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const imageUrl = getImageUrl(review.backdrop_path);
@@ -50,21 +51,50 @@ const ReviewCard = ({ review }: { review: Review }) => {
             src={getPfp(review.avatar_url)}
             size="lg"
             classNames={{
-              base: "border-10 border-background h-18 w-18 group-base",
-              img: "group-base-hover:brightness-50 transition-all duration-300",
+              base: "border-10 border-background h-18 w-18",
+              img: "hover:brightness-75 transition-all duration-200",
             }}
           />
         </button>
 
-        <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 left-0 px-2 py-1">
+        <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 right-0 px-2 py-1">
           {timeago(review.created_at!)}
         </p>
 
-        <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 right-0 px-2 py-1">
+        <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 left-0 px-2 py-1">
           {review.username}
         </p>
       </Card>
     </div>
+  );
+};
+
+export const ReviewCardSkeleton = () => {
+  return (
+    <Card
+      className="p-0 flex-[0_0_250px] h-[220px] overflow-hidden bg-neutral-900"
+      shadow="none"
+    >
+      <div className="space-y-2">
+        <Skeleton className="bg-indigo-900">
+          <div className="w-full h-[80px] bg-indigo-900" />
+        </Skeleton>
+
+        <div className="px-2 space-y-2">
+          <Skeleton className="w-3/5 rounded-full h-3">
+            <div className="rounded-full" />
+          </Skeleton>
+
+          <Skeleton className="w-2/5 rounded-full h-3">
+            <div />
+          </Skeleton>
+
+          <Skeleton className="w-4/5 rounded-full h-3">
+            <div />
+          </Skeleton>
+        </div>
+      </div>
+    </Card>
   );
 };
 
