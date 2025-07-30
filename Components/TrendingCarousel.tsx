@@ -33,7 +33,13 @@ const TrendingCarousel = () => {
   }, [emblaApi, trending]);
 
   if (error)
-    return <Alert title="Something went wrong" description={error.message} />;
+    return (
+      <Alert
+        title="Something went wrong"
+        description={error.message}
+        color="danger"
+      />
+    );
 
   return (
     <div>

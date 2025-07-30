@@ -7,12 +7,10 @@ import { Alert } from "@heroui/alert";
 import { Avatar } from "@heroui/avatar";
 import { Card, CardBody } from "@heroui/card";
 import { Spinner } from "@heroui/spinner";
-import { useParams } from "next/navigation";
 import ReviewStarRating from "./ReviewStarRating";
 import { devLog, timeago } from "@/lib/utils";
 import { Button } from "@heroui/button";
 import { TbHeart, TbMessage } from "react-icons/tb";
-import useProfile from "@/hooks/useProfile";
 import { useUIContext } from "@/providers/UIContext";
 import { useMedia } from "@/providers/MediaProvider";
 import { Movie } from "@/types/movie";
@@ -24,7 +22,11 @@ const Reviews = () => {
   const mediaId = String(media?.id);
   const mediaType = media?.media_type as MediaType;
 
-  const { data: reviews, isPending } = useReviewsForMedia(mediaId, mediaType);
+  const {
+    data: reviews,
+    isPending,
+    error,
+  } = useReviewsForMedia(mediaId, mediaType);
   devLog.log("Reviews:", reviews);
 
   if (isPending) {
@@ -37,7 +39,16 @@ const Reviews = () => {
     );
   }
 
-  if (!reviews || reviews.length === 0) {
+  if (error)
+    return (
+      <Alert
+        title="Something went wrong"
+        description={error.message}
+        color="danger"
+      />
+    );
+
+  if (reviews.length === 0) {
     return <Alert title="No reviews" description="No reviews for this media" />;
   }
 

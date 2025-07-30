@@ -20,8 +20,6 @@ const MovieLayout = async ({ params, children }: PageProps) => {
   let media = await getMediaById(id, media_type);
   media = { ...media, media_type: media_type };
 
-  console.log(media);
-
   devLog.log(media);
   return (
     <MediaProvider media={media}>
