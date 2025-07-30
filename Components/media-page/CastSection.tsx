@@ -1,6 +1,7 @@
 "use client";
 
 import { useCredits } from "@/hooks/useCredits";
+import useIsMobile from "@/hooks/useIsMobile";
 import { getImageUrl } from "@/lib/api/tmdb";
 import { useMedia } from "@/providers/MediaProvider";
 import { CastMember } from "@/types/tmdb";
@@ -49,21 +50,24 @@ const CastSection = () => {
 };
 
 const ActorGrid = ({ cast }: { cast: CastMember[] }) => {
+  const isMobile = useIsMobile();
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {cast.map((actor: CastMember) => {
         if (!actor.profile_path) return null;
         return (
-          <div className="flex gap-3 bg-primary/5 rounded-xl h-[150px]">
+          <div className="flex gap-3 bg-primary/5 rounded-xl h-[90px] sm:h-[105px]">
             <Image
               src={getImageUrl(actor.profile_path)}
-              className="object-cover flex-shrink-0 min-w-[100px]"
+              className="object-cover flex-shrink-0 min-w-[60px] sm:min-w-[70px]"
               height="auto"
-              width={100}
+              width={isMobile ? 60 : 70}
             />
-            <div className="py-2">
-              <p className="text-2xl">{actor.name}</p>
-              <p className="text-foreground/75">{actor.character}</p>
+            <div className="py-2 overflow-hidden">
+              <p className="text-sm sm:text-2xl">{actor.name}</p>
+              <p className="text-foreground/75 text-[0.8rem] sm:text-base line-clamp-2">
+                {actor.character}
+              </p>
             </div>
           </div>
         );
