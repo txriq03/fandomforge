@@ -65,10 +65,6 @@ const Reviews = () => {
       />
     );
 
-  if (reviews.length === 0) {
-    return <Alert title="No reviews" description="No reviews for this media" />;
-  }
-
   return (
     <>
       <div className="pt-10 pb-2 text-sm sm:text-lg text-foreground/60 font-light flex justify-between items-end">
@@ -85,13 +81,24 @@ const Reviews = () => {
         </Switch>
       </div>
       <div className="flex flex-col gap-2">
-        {isSelected
-          ? tmdbReviews?.map((review: TmdbReview) => (
+        {isSelected ? (
+          tmdbReviews?.length === 0 ? (
+            <Alert
+              title="No TMDB reviews"
+              description="No reviews for this media"
+            />
+          ) : (
+            tmdbReviews?.map((review: TmdbReview) => (
               <TmdbReviewCard review={review} key={review.id} />
             ))
-          : reviews.map((review: Review) => (
-              <ReviewCard review={review} key={review.id} />
-            ))}
+          )
+        ) : reviews.length === 0 ? (
+          <Alert title="No reviews" description="No reviews for this media" />
+        ) : (
+          reviews.map((review: Review) => (
+            <ReviewCard review={review} key={review.id} />
+          ))
+        )}
       </div>
     </>
   );
