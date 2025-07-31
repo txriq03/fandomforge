@@ -3,11 +3,11 @@ import { Poppins, Quicksand } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers/Providers";
 import NavWrapper from "@/Components/navigation/NavWrapper";
-import Topbar from "@/Components/navigation/Topbar";
 import LoginModal from "@/Components/LoginModal";
 import { createClient } from "@/lib/supabase/server";
 import { UserProvider } from "@/providers/UserProvider";
 import ProfileWrapper from "@/Components/profile/ProfileWrapper";
+import NextTopLoader from "nextjs-toploader";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -41,6 +41,7 @@ export default async function RootLayout({
       className={`bg-background ${poppins.variable} ${quicksand.variable}`}
     >
       <body className={`antialiased dark bg-background text-foreground`}>
+        <NextTopLoader color="#818cf8" />
         <Providers>
           <UserProvider user={user}>
             <NavWrapper>

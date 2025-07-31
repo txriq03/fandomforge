@@ -29,7 +29,7 @@ const Reviews = () => {
   const mediaType = media?.media_type as MediaType;
 
   // For switch
-  const [isSelected, setIsSelected] = useState(false);
+  const [showTMDB, setShowTMDB] = useState(false);
 
   const {
     data: reviews,
@@ -41,7 +41,7 @@ const Reviews = () => {
   const { data: tmdbReviewResponse } = useTmdbReviews(
     mediaId,
     mediaType,
-    isSelected
+    showTMDB
   );
   const tmdbReviews = tmdbReviewResponse?.results;
   devLog.log("TMDB Reviews:", tmdbReviews);
@@ -74,14 +74,14 @@ const Reviews = () => {
           classNames={{
             label: "text-teal-500",
           }}
-          isSelected={isSelected}
-          onValueChange={setIsSelected}
+          isSelected={showTMDB}
+          onValueChange={setShowTMDB}
         >
           TMDB
         </Switch>
       </div>
       <div className="flex flex-col gap-2">
-        {isSelected ? (
+        {showTMDB ? (
           tmdbReviews?.length === 0 ? (
             <Alert
               title="No TMDB reviews"
