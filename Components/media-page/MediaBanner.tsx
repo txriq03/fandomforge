@@ -1,6 +1,7 @@
 "use client";
 import { getImageUrl } from "@/lib/api/tmdb";
 import { cn } from "@/lib/utils";
+import { useMedia } from "@/providers/MediaProvider";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
 import { Button } from "@heroui/button";
@@ -8,8 +9,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { TbArrowLeft } from "react-icons/tb";
 
-const MediaBanner = ({ media }: { media: Movie | TVSeries }) => {
-  const router = useRouter();
+const MediaBanner = () => {
+  const media: Movie | TVSeries = useMedia();
   const backdropUrl = getImageUrl(media.backdrop_path);
   const title = "title" in media ? media.title : media.name;
   return (

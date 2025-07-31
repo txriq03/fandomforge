@@ -26,15 +26,15 @@ import { useIsBookmarked } from "@/hooks/useIsBookmarked";
 import { addBookmark, removeBookmark } from "@/lib/supabase/utils";
 import { MediaType } from "@/types/trending";
 import { useQueryClient } from "@tanstack/react-query";
+import { useMedia } from "@/providers/MediaProvider";
 
-const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
+const MediaHeader = () => {
+  const media: Movie | TVSeries = useMedia();
   const user = useUser();
   const [showMore, toggleShowMore] = useState(false);
   const [isBookmarkPending, setIsBookmarkPending] = useState(false);
-  const router = useRouter();
 
   // Set variables
-  const backdropUrl = getImageUrl(media.backdrop_path);
   const posterUrl = getImageUrl(media.poster_path, "500");
   const mediaType: MediaType = "title" in media ? "movie" : "tv";
 
@@ -77,7 +77,7 @@ const MediaHeader = ({ media }: { media: Movie | TVSeries }) => {
         });
       }
 
-      // ✅ Invalidate the query so it refetches and updates the UI
+      // Invalidate the query so it refetches and updates the UI
       queryClient.invalidateQueries({
         queryKey: ["isBookmarked", user.id, media.id, mediaType],
       });

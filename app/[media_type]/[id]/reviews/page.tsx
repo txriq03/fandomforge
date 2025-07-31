@@ -7,8 +7,6 @@ const ReviewsPage = () => {
   return (
     <Padding className="pt-2 pb-20">
       <ReviewMessageBox />
-      {/* <Divider className="mt-[30px] mb-[15px] bg-primary/25" /> */}
-
       <Reviews />
     </Padding>
   );

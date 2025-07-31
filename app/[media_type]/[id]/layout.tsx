@@ -23,9 +23,9 @@ const MovieLayout = async ({ params, children }: PageProps) => {
   devLog.log(media);
   return (
     <MediaProvider media={media}>
-      <MediaBanner media={media} />
-      <MediaHeader media={media} />
-      <MediaTabs media={media} />
+      <MediaBanner />
+      <MediaHeader />
+      <MediaTabs />
       {children}
     </MediaProvider>
   );
