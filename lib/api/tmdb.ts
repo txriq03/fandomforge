@@ -93,6 +93,16 @@ export const getMovieGenres = async () => {
   return data ?? [];
 };
 
+export const getTvGenres = async () => {
+  const url = "https://api.themoviedb.org/3/genre/tv/list";
+  const res = await fetch(url, options);
+
+  if (!res.ok) throw new Error("Failed to fetch TV genres");
+  const data = await res.json();
+
+  return data ?? [];
+};
+
 export const getMediaDiscovery = async (
   mediaType: MediaType = "movie",
   genres = "",
@@ -105,7 +115,8 @@ export const getMediaDiscovery = async (
   }
 
   if (year) {
-    url = url + `&year=${year}`;
+    const yearParam = mediaType === "tv" ? "first_air_date_year" : "year";
+    url = url + `&${yearParam}=${year}`;
   }
 
   const res = await fetch(url, options);
@@ -145,7 +156,7 @@ export const getSearchAndDiscovery = async (
 ) => {
   const searchUrl = `https://api.themoviedb.org/3/search/${mediaType}?query=${query}`;
   const filterUrl = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&page=1&sort_by=popularity.desc${
-    year ? `&year=${year}` : ""
+    year ? `&${mediaType === "tv" ? "first_air_date_year" : "year"}=${year}` : ""
   }${genres ? `&with_genres=${genres}` : ""}`;
 
   // If both search query and filter options are present

@@ -1,16 +1,22 @@
 "use client";
 import { Select, SelectItem } from "@heroui/select";
-import { useMovieGenres } from "@/hooks/useMovieGenres";
+import { useGenres } from "@/hooks/useGenres";
 import { Genre } from "@/types/genres";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import { MediaType } from "@/types/trending";
 
 const FilterOptions = () => {
   const router = useRouter();
-  const { data, isPending } = useMovieGenres();
+  const params = useParams();
+  const mediaType = params.browseType as MediaType;
+
+  const { data, isPending } = useGenres(mediaType);
   const genresList: Genre[] = data?.genres;
   const [genres, setGenres] = useState<Set<string>>();
+  const [selectedYear, setSelectedYear] = useState<string>("");
+
   const years = Array.from(
     { length: new Date().getFullYear() - 1970 + 1 },
     (_, i) => {
@@ -22,23 +28,30 @@ const FilterOptions = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
-    console.log("Genre size", genres?.size);
-    console.log("Genres:", genres);
-
     if (genres && genres?.size > 0) {
       params.set("genres", Array.from(genres).join(","));
     } else {
       params.delete("genres");
     }
 
+    if (selectedYear) {
+      params.set("year", selectedYear);
+    } else {
+      params.delete("year");
+    }
+
     router.replace(`?${params.toString()}`);
-  }, [genres, router]);
+  }, [genres, selectedYear, router]);
 
   const handleGenreChange = (e: any) => {
     const values = e.target.value
       .split(",")
       .filter((v: string) => v.trim() !== "");
     setGenres(new Set(values));
+  };
+
+  const handleYearChange = (value: string | null) => {
+    setSelectedYear(value || "");
   };
 
   return (
@@ -85,6 +98,7 @@ const FilterOptions = () => {
         placeholder="Any"
         isClearable
         defaultItems={years}
+        onValueChange={handleYearChange}
         classNames={{
           base: "hidden sm:flex font-main",
           popoverContent: "bg-[#202339]",

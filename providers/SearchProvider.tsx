@@ -1,16 +1,20 @@
 // context/SearchContext.tsx
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
-import { useSearch } from "@/hooks/useSearch";
+import { useSearchAndDiscovery } from "@/hooks/useSearchAndDiscovery";
 import { MediaType } from "@/types/trending";
-import { SearchMovieResponse, SearchTVResponse } from "@/types/tmdb";
 import { useSearchParams } from "next/navigation";
 
 type SearchContextType = {
   query: string;
-  data: SearchMovieResponse | SearchTVResponse;
+  genres: string;
+  year: string;
+  data: {
+    searchResults: any[];
+    filteredResults: any[];
+  };
   isPending: boolean;
   isFetching: boolean;
 };
@@ -26,13 +30,29 @@ export const SearchProvider = ({
 }) => {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
+  const genres = searchParams.get("genres") || "";
+  const year = searchParams.get("year") || "";
 
   const debouncedQuery = useDebounce(query, 300);
 
-  const { data, isPending, isFetching } = useSearch(debouncedQuery, mediaType);
+  const { data, isPending, isFetching } = useSearchAndDiscovery(
+    debouncedQuery,
+    mediaType,
+    genres,
+    year
+  );
 
   return (
-    <SearchContext.Provider value={{ query, data, isPending, isFetching }}>
+    <SearchContext.Provider 
+      value={{ 
+        query, 
+        genres, 
+        year, 
+        data: data || { searchResults: [], filteredResults: [] }, 
+        isPending, 
+        isFetching 
+      }}
+    >
       {children}
     </SearchContext.Provider>
   );
