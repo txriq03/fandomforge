@@ -13,6 +13,7 @@
     --card: oklch(98.4% 0.003 247.858);
     --options: white;
     --sidebar: #1d1d1f;
+    --secondary: #e879f9;
   }
 
   .dark {
@@ -24,6 +25,7 @@
 }
 
 @theme inline {
+  --color-secondary: var(--secondary);
   --font-main: var(--font-poppins);
   --font-heading: var(--font-quicksand);
   --color-background: var(--background);

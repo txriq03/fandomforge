@@ -19,11 +19,6 @@ import { Chip } from "@heroui/chip";
 import { useTrending } from "@/hooks/useTrending";
 
 const BannerCarousel = ({ className }: { className?: string }) => {
-  // const { data: trending, isPending } = useQuery({
-  //   queryKey: ["trendingMedia"],
-  //   queryFn: () => getTrending(),
-  // });
-
   const { data: trending, isPending } = useTrending();
   const top5 = trending?.slice(0, 5) || [];
 

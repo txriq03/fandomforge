@@ -1,11 +1,7 @@
 import BrowsePopover from "@/Components/browse/BrowsePopover";
 import FilterOptions from "@/Components/browse/FilterOptions";
 import MainSection from "@/Components/browse/MainSection";
-import NowPlaying from "@/Components/browse/NowPlaying";
-import PopularNow from "@/Components/browse/PopularNow";
 import SearchField from "@/Components/browse/SearchField";
-import SearchResults from "@/Components/browse/SearchResults";
-import TrendingNow from "@/Components/browse/TrendingNow";
 import Padding from "@/Components/ui/Padding";
 import { SearchProvider } from "@/providers/SearchProvider";
 import { BrowseType } from "@/types/browseType";

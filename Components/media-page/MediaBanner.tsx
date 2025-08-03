@@ -4,10 +4,7 @@ import { cn } from "@/lib/utils";
 import { useMedia } from "@/providers/MediaProvider";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
-import { Button } from "@heroui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { TbArrowLeft } from "react-icons/tb";
 
 const MediaBanner = () => {
   const media: Movie | TVSeries = useMedia();

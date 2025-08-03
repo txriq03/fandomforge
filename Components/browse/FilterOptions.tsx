@@ -3,9 +3,11 @@ import { Select, SelectItem } from "@heroui/select";
 import { useMovieGenres } from "@/hooks/useMovieGenres";
 import { Genre } from "@/types/genres";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const FilterOptions = () => {
+  const router = useRouter();
   const { data, isPending } = useMovieGenres();
   const genresList: Genre[] = data?.genres;
   const [genres, setGenres] = useState<Set<string>>();
@@ -17,8 +19,26 @@ const FilterOptions = () => {
     }
   ).reverse();
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    console.log("Genre size", genres?.size);
+    console.log("Genres:", genres);
+
+    if (genres && genres?.size > 0) {
+      params.set("genres", Array.from(genres).join(","));
+    } else {
+      params.delete("genres");
+    }
+
+    router.replace(`?${params.toString()}`);
+  }, [genres, router]);
+
   const handleGenreChange = (e: any) => {
-    setGenres(new Set(e.target.value.split(",")));
+    const values = e.target.value
+      .split(",")
+      .filter((v: string) => v.trim() !== "");
+    setGenres(new Set(values));
   };
 
   return (

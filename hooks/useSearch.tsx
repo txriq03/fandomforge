@@ -2,10 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getSearch } from "@/lib/api/tmdb";
 import { MediaType } from "@/types/trending";
 
-export function useSearch(query: string, mediaType: MediaType) {
+export function useSearch(
+  search: string,
+  mediaType: MediaType,
+  genres?: string,
+  year?: string
+) {
   return useQuery({
-    queryKey: ["search", query],
-    queryFn: () => getSearch(query, mediaType),
-    enabled: (mediaType === "movie" || mediaType === "tv") && !!query,
+    queryKey: ["search", search, genres, year],
+    queryFn: () => getSearch(search, mediaType),
+    enabled: (mediaType === "movie" || mediaType === "tv") && !!search,
   });
 }

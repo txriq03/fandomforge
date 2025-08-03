@@ -35,6 +35,7 @@
     "@heroui/theme": "^2.4.20",
     "@heroui/toast": "^2.0.13",
     "@heroui/tooltip": "^2.2.20",
+    "@heroui/user": "^2.2.20",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.2",
     "@tanstack/react-query": "^5.81.2",

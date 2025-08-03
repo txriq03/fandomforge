@@ -137,6 +137,63 @@ export const getSearch = async (query: string, mediaType: MediaType) => {
   return data ?? [];
 };
 
+export const getSearchAndDiscovery = async (
+  query: string,
+  mediaType: MediaType,
+  genres?: string,
+  year?: string
+) => {
+  const searchUrl = `https://api.themoviedb.org/3/search/${mediaType}?query=${query}`;
+  const filterUrl = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&page=1&sort_by=popularity.desc${
+    year ? `&year=${year}` : ""
+  }${genres ? `&with_genres=${genres}` : ""}`;
+
+  // If both search query and filter options are present
+  if (query && (year || genres)) {
+    const searchFetch = await fetch(searchUrl, options);
+    const filterFetch = await fetch(filterUrl, options);
+
+    const [searchRes, filterRes] = await Promise.all([
+      searchFetch,
+      filterFetch,
+    ]);
+
+    if (!searchRes.ok || !filterRes.ok)
+      throw new Error("Failed to get search or filtered results");
+
+    const [searchData, filterData] = await Promise.all([
+      searchRes.json(),
+      filterRes.json(),
+    ]);
+
+    return {
+      searchResults: searchData?.results ?? [],
+      filteredResults: filterData?.results ?? [],
+    };
+  }
+
+  // If only filter options are present
+  if (year || genres) {
+    const filterRes = await fetch(filterUrl, options);
+
+    const filterData = await filterRes.json();
+
+    return {
+      searchResults: [],
+      filteredResults: filterData?.results ?? [],
+    };
+  }
+
+  // if only search query is present
+  const searchRes = await fetch(searchUrl, options);
+  const searchData = await searchRes.json();
+
+  return {
+    searchResults: searchData?.results ?? [],
+    filteredResults: [],
+  };
+};
+
 export const getCredits = async (
   mediaId: string,
   mediaType: MediaType

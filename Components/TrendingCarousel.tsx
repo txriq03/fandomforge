@@ -45,7 +45,7 @@ const TrendingCarousel = () => {
     <div>
       <div className="flex justify-between py-2 px-2 sm:px-4 items-end">
         {/* Heading */}
-        <h2 className=" text-xl sm:text-3xl font-semibold dark:text-indigo-400">
+        <h2 className=" text-xl sm:text-3xl font-semibold text-secondary">
           Top 10
         </h2>
 
