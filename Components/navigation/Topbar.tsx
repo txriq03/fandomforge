@@ -70,18 +70,9 @@ const Topbar = () => {
 
         <NavbarItem>
           {user ? (
-            // <Avatar
-            //   as="button"
-            //   isFocusable
-            //   onClick={() => openProfileModal(user.id)}
-            //   src={getPfp(profile?.avatar_url)}
-            //   classNames={{
-            //     base: "hover:brightness-50 duration-200 transition-filter cursor-pointer",
-            //   }}
-            // />
             <User
               name={profile?.username}
-              description={"Level 1"}
+              description={`Level ${profile?.level}`}
               avatarProps={{
                 src: getPfp(profile?.avatar_url),
               }}

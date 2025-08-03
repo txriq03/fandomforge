@@ -4,8 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Review } from "@/types/tables";
 import ReviewCard, { ReviewCardSkeleton } from "./ReviewCard";
 import { Link } from "@heroui/link";
-import { Button } from "@heroui/button";
-import { TbArrowRight } from "react-icons/tb";
+import { TbChevronRight } from "react-icons/tb";
 
 const ReviewCarousel = () => {
   const { data: reviews, isPending, error } = useAllReviews();
@@ -34,8 +33,9 @@ const ReviewCarousel = () => {
             color="primary"
             href="/browse/reviews"
             className="text-primary-light"
-            anchorIcon={<TbArrowRight />}
             isBlock
+            showAnchorIcon
+            anchorIcon={<TbChevronRight />}
           >
             All Reviews
           </Link>
