@@ -1,7 +1,8 @@
 import React from "react";
 import { TbStar, TbStarFilled } from "react-icons/tb";
 
-const ReviewStarRating = ({ rating }: { rating: number }) => {
+const ReviewStarRating = ({ rating }: { rating: number | null }) => {
+  if (!rating) return null;
   return (
     <div className="flex sm:gap-1 ">
       {[...Array(5)].map((_, index: number) => {

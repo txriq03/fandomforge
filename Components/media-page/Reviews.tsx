@@ -155,7 +155,6 @@ const ReviewCard = ({ review }: { review: Review }) => {
 
 const TmdbReviewCard = ({ review }: { review: TmdbReview }) => {
   const avatar = getImageUrl(review.author_details.avatar_path);
-  const { openProfileModal } = useUIContext();
 
   return (
     <Card className="bg-transparent" shadow="none">
@@ -168,10 +167,12 @@ const TmdbReviewCard = ({ review }: { review: TmdbReview }) => {
             <p className="text-foreground/75 text-sm">
               {review.author_details.username}
             </p>
-            {/* <p className="text-foreground/25">•</p>
+            <p className="text-foreground/25">•</p>
             <div className="text-[0.8rem]">
-              {review.rating && <ReviewStarRating rating={review.rating} />}
-            </div> */}
+              {review.author_details.rating && (
+                <ReviewStarRating rating={review.author_details.rating} />
+              )}
+            </div>
           </div>
 
           <p className="text-[0.75rem] sm:text-[0.8rem] md:text-[0.9rem] font-light line-clamp-4">
