@@ -2,6 +2,9 @@ import DevelopmentAlert from "@/Components/DevelopmentAlert";
 import BannerCarousel from "@/Components/BannerCarousel";
 import TrendingCarousel from "@/Components/TrendingCarousel";
 import ReviewCarousel from "@/Components/ReviewCarousel";
+import Chatbox from "@/Components/global-chat/GlobalChat";
+import RecentReviewsBox from "@/Components/recent-reviews-box/RecentReviewsBox";
+import Padding from "@/Components/ui/Padding";
 
 export default async function HomePage() {
   return (
@@ -12,6 +15,11 @@ export default async function HomePage() {
       <DevelopmentAlert />
       <TrendingCarousel />
       <ReviewCarousel />
+
+      <Padding className="px-2 sm:px-4 flex flex-col sm:flex-row min-h-[700px] sm:min-h-[400px] gap-3">
+        <Chatbox className="flex-2" />
+        <RecentReviewsBox className="flex-1" />
+      </Padding>
     </div>
   );
 }

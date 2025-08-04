@@ -36,6 +36,8 @@ Currently, this app is still in development. Here is a checklist of what needs t
 | Messaging System             |                            Directly message other fans in real-time                             |       ❌ |
 | Search & Browse              |                  Discover trending, popular, and now-playing content from TMDB                  |       ✔️ |
 | Edit Profile                 |                      Users can edit their avatar, display name, email, etc                      |       ❌ |
+| Global Chat                  |           Users can interact in a global chat room so they can talk to the community            |       ❌ |
+| User Status                  |                        Implement online and offline attributes to users                         |       ❌ |
 
 ## Tech Stack
 
