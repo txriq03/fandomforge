@@ -34,7 +34,7 @@ Currently, this app is still in development. Here is a checklist of what needs t
 | Real-Time Notifications      |               Get alerted when someone follows you or interacts with your content               |       ❌ |
 | AI-Powered Trivia Generation | Random multiple-choice questions generated using GPT-4.1, based on selected movies or TV Series |       ❌ |
 | Messaging System             |                            Directly message other fans in real-time                             |       ❌ |
-| Search & Browse              |                  Discover trending, popular, and now-playing content from TMDB                  |       ⚠️ |
+| Search & Browse              |                  Discover trending, popular, and now-playing content from TMDB                  |       ✔️ |
 | Edit Profile                 |                      Users can edit their avatar, display name, email, etc                      |       ❌ |
 
 ## Tech Stack
