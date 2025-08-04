@@ -21,6 +21,7 @@ import { useTmdbReviews } from "@/hooks/useTmdbReviews";
 import { TmdbReview } from "@/types/tmdb";
 import { getImageUrl } from "@/lib/api/tmdb";
 import Link from "next/link";
+import Rating from "@/types/rating";
 
 const Reviews = () => {
   const mediaDetails = useMedia();
@@ -123,7 +124,9 @@ const ReviewCard = ({ review }: { review: Review }) => {
             <p className="text-foreground/75 text-sm">{review.username}</p>
             <p className="text-foreground/25">•</p>
             <div className="text-[0.8rem]">
-              {review.rating && <ReviewStarRating rating={review.rating} />}
+              {review.rating && (
+                <ReviewStarRating rating={review.rating as Rating} />
+              )}
             </div>
           </div>
 
@@ -170,7 +173,9 @@ const TmdbReviewCard = ({ review }: { review: TmdbReview }) => {
             <p className="text-foreground/25">•</p>
             <div className="text-[0.8rem]">
               {review.author_details.rating && (
-                <ReviewStarRating rating={review.author_details.rating} />
+                <ReviewStarRating
+                  rating={review.author_details.rating as Rating}
+                />
               )}
             </div>
           </div>
