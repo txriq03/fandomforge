@@ -4,18 +4,27 @@ import { useGenres } from "@/hooks/useGenres";
 import { Genre } from "@/types/genres";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { MediaType } from "@/types/trending";
+import { Key } from "@react-types/shared";
 
 const FilterOptions = () => {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const mediaType = params.browseType as MediaType;
 
   const { data, isPending } = useGenres(mediaType);
   const genresList: Genre[] = data?.genres;
-  const [genres, setGenres] = useState<Set<string>>();
-  const [selectedYear, setSelectedYear] = useState<string>("");
+
+  // Initialize state from URL parameters
+  const [genres, setGenres] = useState<Set<string>>(() => {
+    const genresParam = searchParams.get("genres");
+    return genresParam ? new Set(genresParam.split(",")) : new Set();
+  });
+  const [selectedYear, setSelectedYear] = useState<string>(
+    () => searchParams.get("year") || ""
+  );
 
   const years = Array.from(
     { length: new Date().getFullYear() - 1970 + 1 },
@@ -26,21 +35,21 @@ const FilterOptions = () => {
   ).reverse();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
 
     if (genres && genres?.size > 0) {
-      params.set("genres", Array.from(genres).join(","));
+      urlParams.set("genres", Array.from(genres).join(","));
     } else {
-      params.delete("genres");
+      urlParams.delete("genres");
     }
 
     if (selectedYear) {
-      params.set("year", selectedYear);
+      urlParams.set("year", selectedYear);
     } else {
-      params.delete("year");
+      urlParams.delete("year");
     }
 
-    router.replace(`?${params.toString()}`);
+    router.replace(`?${urlParams.toString()}`);
   }, [genres, selectedYear, router]);
 
   const handleGenreChange = (e: any) => {
@@ -50,8 +59,9 @@ const FilterOptions = () => {
     setGenres(new Set(values));
   };
 
-  const handleYearChange = (value: string | null) => {
-    setSelectedYear(value || "");
+  const handleYearChange = (value: Key | null) => {
+    console.log("Year changed to:", value);
+    setSelectedYear((value as string) || "");
   };
 
   return (
@@ -76,6 +86,7 @@ const FilterOptions = () => {
         isClearable
         spinnerProps={{ variant: "simple" }}
         onChange={handleGenreChange}
+        selectedKeys={Array.from(genres)}
       >
         {genresList?.map((genre: Genre) => (
           <SelectItem
@@ -98,7 +109,8 @@ const FilterOptions = () => {
         placeholder="Any"
         isClearable
         defaultItems={years}
-        onValueChange={handleYearChange}
+        selectedKey={selectedYear}
+        onSelectionChange={handleYearChange}
         classNames={{
           base: "hidden sm:flex font-main",
           popoverContent: "bg-[#202339]",

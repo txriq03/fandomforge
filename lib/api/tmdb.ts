@@ -156,8 +156,14 @@ export const getSearchAndDiscovery = async (
 ) => {
   const searchUrl = `https://api.themoviedb.org/3/search/${mediaType}?query=${query}`;
   const filterUrl = `https://api.themoviedb.org/3/discover/${mediaType}?language=en-US&page=1&sort_by=popularity.desc${
-    year ? `&${mediaType === "tv" ? "first_air_date_year" : "year"}=${year}` : ""
+    year
+      ? `&${
+          mediaType === "tv" ? "first_air_date_year" : "primary_release_year"
+        }=${year}`
+      : ""
   }${genres ? `&with_genres=${genres}` : ""}`;
+
+  devLog.log("URL:", filterUrl);
 
   // If both search query and filter options are present
   if (query && (year || genres)) {
