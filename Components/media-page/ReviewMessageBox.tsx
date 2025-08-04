@@ -15,7 +15,7 @@ import { addToast } from "@heroui/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
-import { TbStar, TbStarFilled } from "react-icons/tb";
+import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 
 const ReviewMessageBox = () => {
   const user = useUser();
@@ -27,7 +27,7 @@ const ReviewMessageBox = () => {
   const mediaType = media.media_type as MediaType;
   const isMobile = useIsMobile();
   const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState<Rating>(0);
   const [isLoading, setIsLoading] = useState(false);
   const queryClient = useQueryClient();
 
@@ -139,37 +139,78 @@ const NoAuthBox = () => {
   );
 };
 
+type Rating = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 interface StarRatingProps {
-  rating?: number;
-  onChange?: (value: number) => void;
+  rating?: Rating;
+  onChange?: (value: Rating) => void;
 }
-const StarRating = ({ rating = 0, onChange }: StarRatingProps) => {
+
+const StarRating = ({ rating = 0 as Rating, onChange }: StarRatingProps) => {
   const isMobile = useIsMobile();
   const [hover, setHover] = useState<number | null>(null);
-  const current = rating;
 
-  const handleClick = (value: number) => {
-    onChange?.(value);
+  const ratingValue = rating / 2; // Convert to 0.5 scale for internal use (e.g., 7 -> 3.5 stars)
+
+  const handleCycleClick = (starIndex: number) => {
+    const starValue = starIndex + 1;
+
+    const currentValue =
+      ratingValue >= starValue ? 1 : ratingValue >= starValue - 0.5 ? 0.5 : 0;
+
+    let nextValue: number;
+
+    if (currentValue === 0) nextValue = (starValue - 0.5) * 2;
+    else if (currentValue === 0.5) nextValue = starValue * 2;
+    else nextValue = (starValue - 1) * 2;
+
+    const clampedValue = Math.max(1, Math.min(10, nextValue));
+
+    onChange?.(clampedValue as Rating);
+  };
+
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    const hoverX = event.clientX - rect.left;
+    const half = rect.width / 2;
+
+    const isLeftHalf = hoverX < half;
+    const hoverValue = isLeftHalf ? index + 0.5 : index + 1;
+
+    setHover(hoverValue);
   };
 
   return (
-    <div className="flex  ">
-      {[...Array(5)].map((_, index: number) => {
-        const value = index + 1;
-        const isFilled = value <= (hover ?? current);
+    <div className="flex">
+      {[...Array(5)].map((_, index) => {
+        const starValue = index + 1;
+        const displayValue = hover ?? ratingValue;
+
+        let starType: "empty" | "half" | "full" = "empty";
+        if (displayValue >= starValue) starType = "full";
+        else if (displayValue >= starValue - 0.5) starType = "half";
+
         return (
           <button
             type="button"
-            key={value}
-            onClick={() => handleClick(value)}
-            className="cursor-pointer  px-[2px]"
-            onMouseEnter={() => setHover(value)}
+            key={index}
+            onClick={() => handleCycleClick(index)}
+            onMouseMove={(e) => handleMouseMove(e, index)}
             onMouseLeave={() => setHover(null)}
+            className="cursor-pointer px-[2px]"
           >
-            {isFilled ? (
+            {starType === "full" ? (
               <TbStarFilled
                 size={isMobile ? 21 : 24}
-                className="text-yellow-400 cursor-pointer"
+                className="text-yellow-400"
+              />
+            ) : starType === "half" ? (
+              <TbStarHalfFilled
+                size={isMobile ? 21 : 24}
+                className="text-yellow-400"
               />
             ) : (
               <TbStar size={isMobile ? 21 : 24} />
@@ -180,4 +221,5 @@ const StarRating = ({ rating = 0, onChange }: StarRatingProps) => {
     </div>
   );
 };
+
 export default ReviewMessageBox;
