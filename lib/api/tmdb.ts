@@ -83,21 +83,11 @@ export async function fetchMedia(mediaId: number, mediaType: MediaType) {
   return data;
 }
 
-export const getMovieGenres = async () => {
-  const url = "https://api.themoviedb.org/3/genre/movie/list";
+export const getGenres = async (mediaType: MediaType) => {
+  const url = `https://api.themoviedb.org/3/genre/${mediaType}/list`;
   const res = await fetch(url, options);
 
-  if (!res.ok) throw new Error("Failed to fetch movie genres");
-  const data = await res.json();
-
-  return data ?? [];
-};
-
-export const getTvGenres = async () => {
-  const url = "https://api.themoviedb.org/3/genre/tv/list";
-  const res = await fetch(url, options);
-
-  if (!res.ok) throw new Error("Failed to fetch TV genres");
+  if (!res.ok) throw new Error("Failed to fetch genre list.");
   const data = await res.json();
 
   return data ?? [];
