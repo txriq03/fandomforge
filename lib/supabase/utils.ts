@@ -318,3 +318,16 @@ export const getAllReviews = async (): Promise<Review[]> => {
 
   return data ?? [];
 };
+
+export const subscribeToGlobalMessages = (callback: (message: any) => void) => {
+  return supabase
+    .channel("public:global_messages")
+    .on(
+      "postgres_changes",
+      { event: "INSERT", schema: "public", table: "global_messages" },
+      (payload) => {
+        callback(payload.new);
+      }
+    )
+    .subscribe();
+};
