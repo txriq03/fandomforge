@@ -1,8 +1,9 @@
 import { sendGlobalMessage } from "@/lib/supabase/actions";
 import { Button } from "@heroui/button";
+import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { addToast } from "@heroui/toast";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { TbMoodSmile, TbSend } from "react-icons/tb";
 
 const MessageBox = () => {
@@ -10,7 +11,9 @@ const MessageBox = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const sendMessage = async () => {
+  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (message.trim() === "") return;
     setLoading(true);
 
     try {
@@ -36,7 +39,7 @@ const MessageBox = () => {
   };
 
   return (
-    <div className="flex gap-2">
+    <Form className="flex gap-2 flex-row" onSubmit={sendMessage}>
       {/* Input field */}
       <Input
         value={message}
@@ -58,12 +61,12 @@ const MessageBox = () => {
         isIconOnly
         color="primary"
         isDisabled={message.trim() === ""}
-        onPress={sendMessage}
         isLoading={loading}
+        type="submit"
       >
         <TbSend size={iconSize} />
       </Button>
-    </div>
+    </Form>
   );
 };
 
