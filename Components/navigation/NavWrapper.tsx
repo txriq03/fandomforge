@@ -5,6 +5,7 @@ import { useSidebar } from "@/providers/SidebarProvider";
 import Sidebar from "./Sidebar";
 import MobileMenu from "./MobileMenu";
 import Topbar from "./Topbar";
+import Footer from "../Footer";
 
 const NavWrapper = ({ children }: { children: ReactNode }) => {
   const { collapsed } = useSidebar();
@@ -20,6 +21,7 @@ const NavWrapper = ({ children }: { children: ReactNode }) => {
       >
         <Topbar />
         {children}
+        <Footer />
       </main>
     </div>
   );
