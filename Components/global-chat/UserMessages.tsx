@@ -6,9 +6,13 @@ import { Avatar } from "@heroui/avatar";
 import { Spinner } from "@heroui/spinner";
 import { RealtimeChannel } from "@supabase/supabase-js";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { RefObject, useEffect } from "react";
 
-const UserMessages = () => {
+const UserMessages = ({
+  scrollRef,
+}: {
+  scrollRef: RefObject<HTMLDivElement | null>;
+}) => {
   const { data: messages, isPending } = useGlobalMessages();
   const queryClient = useQueryClient();
 
@@ -32,6 +36,16 @@ const UserMessages = () => {
       });
     };
   }, []);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
 
   if (isPending)
     return (

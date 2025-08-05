@@ -1,11 +1,8 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { TbMessage } from "react-icons/tb";
 import { useUser } from "@/providers/UserProvider";
-import { Button } from "@heroui/button";
-import { useUIContext } from "@/providers/UIContext";
-import useIsMobile from "@/hooks/useIsMobile";
 import NoAuthBox from "./NoAuthBox";
 import MessageBox from "./MessageBox";
 import UserMessages from "./UserMessages";
@@ -16,6 +13,8 @@ interface Props {
 
 const GlobalChat = ({ className }: Props) => {
   const user = useUser();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   return (
     <div
       className={cn(
@@ -31,8 +30,8 @@ const GlobalChat = ({ className }: Props) => {
         </div>
 
         {/* User Messages */}
-        <div className="flex-1 overflow-y-auto">
-          <UserMessages />
+        <div ref={scrollRef} className="flex-1 overflow-y-auto">
+          <UserMessages scrollRef={scrollRef} />
         </div>
 
         {/* Footer */}
