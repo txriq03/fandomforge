@@ -12,7 +12,7 @@ const RecentReviewsBox = ({ className }: Props) => {
         className
       )}
     >
-      <h3 className="text-primary-light">Recent Reviews</h3>
+      <h3 className="text-primary-light px-2">Recent Reviews</h3>
       <div className="flex-1 grid place-items-center">
         <p className="text-lg text-slate-500/75 font-semibold">
           In Development

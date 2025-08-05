@@ -100,6 +100,27 @@ export type Database = {
           },
         ]
       }
+      global_messages: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: number
+          user_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: number
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -185,6 +206,17 @@ export type Database = {
           is_online: boolean | null
           last_sign_in_at: string | null
           level: number | null
+          username: string | null
+        }
+        Relationships: []
+      }
+      global_messages_with_profiles: {
+        Row: {
+          avatar_url: string | null
+          content: string | null
+          created_at: string | null
+          id: number | null
+          user_id: string | null
           username: string | null
         }
         Relationships: []

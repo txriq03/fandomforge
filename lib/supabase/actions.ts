@@ -89,3 +89,31 @@ export const createReview = async (input: ReviewParameters) => {
 
   return { success: true };
 };
+
+export const sendGlobalMessage = async (content: string) => {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("User not authenticated.");
+  }
+
+  const { error, data } = await supabase
+    .from("global_messages")
+    .insert([
+      {
+        user_id: user.id,
+        content: content,
+      },
+    ])
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data;
+};

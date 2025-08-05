@@ -4,3 +4,5 @@ export type Review =
   Database["public"]["Views"]["reviews_with_profiles"]["Row"];
 export type Profile = Database["public"]["Views"]["extended_profiles"]["Row"];
 export type Follow = Database["public"]["Tables"]["follows"]["Row"];
+export type GlobalMessage =
+  Database["public"]["Views"]["global_messages_with_profiles"]["Row"];

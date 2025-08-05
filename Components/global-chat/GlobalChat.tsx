@@ -8,6 +8,7 @@ import { useUIContext } from "@/providers/UIContext";
 import useIsMobile from "@/hooks/useIsMobile";
 import NoAuthBox from "./NoAuthBox";
 import MessageBox from "./MessageBox";
+import UserMessages from "./UserMessages";
 
 interface Props {
   className?: string;
@@ -15,8 +16,6 @@ interface Props {
 
 const Chatbox = ({ className }: Props) => {
   const user = useUser();
-  const { authModal } = useUIContext();
-  const isMobile = useIsMobile();
   return (
     <div
       className={cn(
@@ -25,11 +24,16 @@ const Chatbox = ({ className }: Props) => {
       )}
     >
       <div className="flex flex-col justify-between flex-1">
-        <div className="text-primary-light flex gap-2 items-center">
+        {/* Header */}
+        <div className="text-primary-light flex gap-2 items-center px-1">
           <TbMessage />
           <p>Global Chat</p>
         </div>
 
+        {/* User Messages */}
+        <UserMessages />
+
+        {/* Footer */}
         <div className="p-2">{user ? <MessageBox /> : <NoAuthBox />}</div>
       </div>
     </div>

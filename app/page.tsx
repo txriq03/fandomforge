@@ -16,7 +16,7 @@ export default async function HomePage() {
       <TrendingCarousel />
       <ReviewCarousel />
 
-      <Padding className="px-2 sm:px-4 flex flex-col sm:flex-row min-h-[700px] sm:min-h-[400px] gap-3">
+      <Padding className="px-2 sm:px-4 flex flex-col sm:flex-row h-[700px] sm:h-[400px] gap-3">
         <Chatbox className="flex-2" />
         <RecentReviewsBox className="flex-1" />
       </Padding>

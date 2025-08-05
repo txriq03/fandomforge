@@ -1,4 +1,4 @@
-import { Profile } from "@/types/tables";
+import { GlobalMessage, Profile } from "@/types/tables";
 import { devLog } from "../utils";
 import { createClient } from "./client";
 import { MediaType } from "@/types/trending";
@@ -320,8 +320,9 @@ export const getAllReviews = async (): Promise<Review[]> => {
 };
 
 export const subscribeToGlobalMessages = (callback: (message: any) => void) => {
-  return supabase
-    .channel("public:global_messages")
+  const channel = supabase.channel("global_messages");
+
+  channel
     .on(
       "postgres_changes",
       { event: "INSERT", schema: "public", table: "global_messages" },
@@ -330,4 +331,20 @@ export const subscribeToGlobalMessages = (callback: (message: any) => void) => {
       }
     )
     .subscribe();
+
+  return channel;
+};
+
+export const fetchInitialGlobalMessages = async (): Promise<
+  GlobalMessage[]
+> => {
+  const { data, error } = await supabase
+    .from("global_messages_with_profiles")
+    .select("*")
+    .order("created_at", { ascending: true })
+    .limit(100);
+
+  if (error) throw error;
+
+  return data;
 };
