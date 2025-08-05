@@ -55,7 +55,7 @@ const UserMessages = ({
     );
 
   return (
-    <div className="flex flex-col gap-2 justify-end">
+    <div className="flex flex-col gap-2 min-h-full justify-end">
       {messages?.map((message) => (
         <Message key={message.id} message={message} />
       ))}

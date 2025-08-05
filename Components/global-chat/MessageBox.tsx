@@ -14,7 +14,7 @@ const MessageBox = () => {
     setLoading(true);
 
     try {
-      const data = await sendGlobalMessage(message);
+      await sendGlobalMessage(message);
       setMessage("");
     } catch (err) {
       if (err instanceof Error) {
