@@ -79,7 +79,7 @@ const Topbar = () => {
               isFocusable
               onClick={() => openProfileModal(user.id)}
               classNames={{
-                base: "hover:brightness-75 duration-200 transition-filter cursor-pointer bg-primary-light/10 rounded-full pr-5",
+                base: "hover:brightness-75 duration-200 transition-filter cursor-pointer bg-background/50 rounded-full pr-5",
                 description: "text-white/50",
               }}
             />

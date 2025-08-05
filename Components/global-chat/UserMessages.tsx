@@ -1,6 +1,6 @@
 import { useGlobalMessages } from "@/hooks/useGlobalMessages";
 import { getPfp, subscribeToGlobalMessages } from "@/lib/supabase/utils";
-import { timeago } from "@/lib/utils";
+import { devLog, timeago } from "@/lib/utils";
 import { GlobalMessage } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
 import { Spinner } from "@heroui/spinner";
@@ -15,6 +15,8 @@ const UserMessages = ({
 }) => {
   const { data: messages, isPending } = useGlobalMessages();
   const queryClient = useQueryClient();
+
+  devLog.log("Messages:", messages);
 
   useEffect(() => {
     let subscription: RealtimeChannel | null = null;
@@ -55,7 +57,7 @@ const UserMessages = ({
     );
 
   return (
-    <div className="flex flex-col gap-2 min-h-full justify-end">
+    <div className="flex flex-col gap-1 min-h-full justify-end">
       {messages?.map((message) => (
         <Message key={message.id} message={message} />
       ))}
@@ -70,7 +72,7 @@ const Message = ({ message }: { message: GlobalMessage }) => {
 
       <div className="flex flex-col text-sm">
         <p>{message.username}</p>
-        <p className="text-[0.8rem] text-slate-300 p-2 bg-slate-400/5 rounded-md">
+        <p className="text-[0.8rem] text-slate-300 p-2 bg-slate-400/5 rounded-md self-start">
           {message.content}
         </p>
         <p className="text-[0.7rem] text-slate-600">

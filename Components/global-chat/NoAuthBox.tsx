@@ -8,13 +8,13 @@ const NoAuthBox = () => {
   const { authModal } = useUIContext();
   return (
     <div className="border-1 border-dashed border-primary rounded-lg px-2 py-4 flex justify-center flex-col gap-2 items-center">
-      <p className="text-primary-light/50 text-sm md:text-base">
+      <p className="text-primary-light/50 text-sm md:text-sm">
         Join the conversation
       </p>
       <Button
         color="primary"
         className="px-20"
-        size={isMobile ? "sm" : "md"}
+        size={"sm"}
         onPress={authModal.onOpen}
       >
         Sign in

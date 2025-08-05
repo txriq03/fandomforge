@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
-import { TbMessage } from "react-icons/tb";
+import { TbGlobe, TbMessage, TbWorld } from "react-icons/tb";
 import { useUser } from "@/providers/UserProvider";
 import NoAuthBox from "./NoAuthBox";
 import MessageBox from "./MessageBox";
@@ -25,7 +25,7 @@ const GlobalChat = ({ className }: Props) => {
       <div className="flex flex-col justify-between flex-1">
         {/* Header */}
         <div className="text-primary-light flex gap-2 items-center px-1">
-          <TbMessage />
+          <TbWorld />
           <p>Global Chat</p>
         </div>
 
