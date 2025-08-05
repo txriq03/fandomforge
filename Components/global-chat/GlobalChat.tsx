@@ -14,12 +14,12 @@ interface Props {
   className?: string;
 }
 
-const Chatbox = ({ className }: Props) => {
+const GlobalChat = ({ className }: Props) => {
   const user = useUser();
   return (
     <div
       className={cn(
-        "p-2 rounded-xl bg-primary/1 border-1 border-primary/25 flex-1 flex ",
+        "p-2 rounded-xl bg-primary/1 border-1 border-primary/25 flex-1 flex overflow-hidden ",
         className
       )}
     >
@@ -31,7 +31,9 @@ const Chatbox = ({ className }: Props) => {
         </div>
 
         {/* User Messages */}
-        <UserMessages />
+        <div className="flex-1 overflow-y-auto">
+          <UserMessages />
+        </div>
 
         {/* Footer */}
         <div className="p-2">{user ? <MessageBox /> : <NoAuthBox />}</div>
@@ -40,4 +42,4 @@ const Chatbox = ({ className }: Props) => {
   );
 };
 
-export default Chatbox;
+export default GlobalChat;

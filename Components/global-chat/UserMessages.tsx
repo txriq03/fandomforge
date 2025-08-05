@@ -33,10 +33,15 @@ const UserMessages = () => {
     };
   }, []);
 
-  if (isPending) return <Spinner />;
+  if (isPending)
+    return (
+      <div className="p-2">
+        <Spinner />
+      </div>
+    );
 
   return (
-    <div className="flex flex-col gap-2 justify-end overflow-y-scroll">
+    <div className="flex flex-col gap-2 justify-end">
       {messages?.map((message) => (
         <Message key={message.id} message={message} />
       ))}
