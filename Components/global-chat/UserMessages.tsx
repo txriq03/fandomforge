@@ -1,6 +1,8 @@
 import { useGlobalMessages } from "@/hooks/useGlobalMessages";
+import { createClient } from "@/lib/supabase/client";
 import { getPfp, subscribeToGlobalMessages } from "@/lib/supabase/utils";
-import { devLog, timeago } from "@/lib/utils";
+import { cn, devLog, timeago } from "@/lib/utils";
+import { useUser } from "@/providers/UserProvider";
 import { GlobalMessage } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
 import { Spinner } from "@heroui/spinner";
@@ -15,29 +17,23 @@ const UserMessages = ({
 }) => {
   const { data: messages, isPending } = useGlobalMessages();
   const queryClient = useQueryClient();
+  const supabase = createClient();
 
   devLog.log("Messages:", messages);
 
   useEffect(() => {
-    let subscription: RealtimeChannel | null = null;
-    const subscribe = async () => {
-      subscription = await subscribeToGlobalMessages((newMessage) => {
-        queryClient.setQueryData(["globalMessages"], (oldData: any) => [
-          ...(oldData || []),
-          newMessage,
-        ]);
-      });
-    };
-
-    subscribe();
+    const channel = subscribeToGlobalMessages((newMessage: any) => {
+      queryClient.setQueryData(["globalMessages"], (oldData: any) => [
+        ...(oldData || []),
+        newMessage,
+      ]);
+    });
 
     return () => {
       // Fire-and-forget the unsubscribe Promise
-      subscription?.unsubscribe().catch((err) => {
-        console.error("Failed to unsubscribe from global messages:", err);
-      });
+      supabase.removeChannel(channel);
     };
-  }, []);
+  }, [supabase]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -66,18 +62,38 @@ const UserMessages = ({
 };
 
 const Message = ({ message }: { message: GlobalMessage }) => {
-  return (
-    <div className="flex p-2 gap-2 items-start rounded-md">
-      <Avatar src={getPfp(message.avatar_url)} />
+  const user = useUser();
+  const isSameUser = user?.user_metadata.username === message.username;
 
-      <div className="flex flex-col text-sm">
-        <p>{message.username}</p>
-        <p className="text-[0.8rem] text-slate-300 p-2 bg-slate-400/5 rounded-md self-start">
-          {message.content}
-        </p>
-        <p className="text-[0.7rem] text-slate-600">
-          {timeago(message.created_at!)}
-        </p>
+  return (
+    <div className={cn("w-full flex", isSameUser && "justify-end")}>
+      <div
+        className={cn(
+          "flex p-2 gap-2 items-start rounded-md",
+          isSameUser && "flex-row-reverse"
+        )}
+      >
+        <Avatar src={getPfp(message.avatar_url)} />
+
+        <div
+          className={cn(
+            "flex flex-col text-sm items-start",
+            isSameUser && "items-end"
+          )}
+        >
+          <p>{message.username}</p>
+          <p
+            className={cn(
+              "text-[0.8rem] text-slate-300 p-2 bg-slate-400/5 rounded-md self-start",
+              isSameUser && "self-end"
+            )}
+          >
+            {message.content}
+          </p>
+          <p className="text-[0.7rem] text-slate-600">
+            {timeago(message.created_at!)}
+          </p>
+        </div>
       </div>
     </div>
   );

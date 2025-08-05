@@ -320,9 +320,8 @@ export const getAllReviews = async (): Promise<Review[]> => {
 };
 
 export const subscribeToGlobalMessages = (callback: (message: any) => void) => {
-  const channel = supabase.channel("global_messages");
-
-  channel
+  const channel = supabase
+    .channel("global_messages")
     .on(
       "postgres_changes",
       { event: "INSERT", schema: "public", table: "global_messages" },
