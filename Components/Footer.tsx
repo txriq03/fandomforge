@@ -8,7 +8,7 @@ const Footer = () => {
       <p>Developed with ❤️ and ☕</p>
       <div className="inline">
         <span className="text-white/75">by</span>{" "}
-        <Link href={portfolio} target="_blank">
+        <Link href={portfolio} target="_blank" className="z-1">
           Tariq
         </Link>
       </div>
