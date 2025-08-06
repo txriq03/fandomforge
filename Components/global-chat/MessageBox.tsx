@@ -3,6 +3,7 @@ import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { addToast } from "@heroui/toast";
+import { useQueryClient } from "@tanstack/react-query";
 import React, { FormEvent, useState } from "react";
 import { TbMoodSmile, TbSend } from "react-icons/tb";
 
@@ -10,6 +11,7 @@ const MessageBox = () => {
   const iconSize = 18;
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const MessageBox = () => {
     try {
       await sendGlobalMessage(message);
       setMessage("");
+      queryClient.invalidateQueries({ queryKey: ["global_messages"] });
     } catch (err) {
       if (err instanceof Error) {
         addToast({

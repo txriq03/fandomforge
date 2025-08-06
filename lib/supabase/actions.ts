@@ -102,11 +102,24 @@ export const sendGlobalMessage = async (content: string) => {
     throw new Error("User not authenticated.");
   }
 
+  // Fetch user's profile (username & avatar_url)
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("username, avatar_url")
+    .eq("id", user.id)
+    .single();
+
+  if (profileError || !profile) {
+    throw new Error("Failed to fetch user profile.");
+  }
+
   const { error, data } = await supabase
     .from("global_messages")
     .insert([
       {
         user_id: user.id,
+        username: profile.username,
+        avatar_url: profile.avatar_url,
         content: content,
       },
     ])
