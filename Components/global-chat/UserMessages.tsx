@@ -21,19 +21,72 @@ const UserMessages = ({
 
   devLog.log("Messages:", messages);
 
-  useEffect(() => {
-    const channel = subscribeToGlobalMessages((newMessage: any) => {
-      queryClient.setQueryData(["globalMessages"], (oldData: any) => [
-        ...(oldData || []),
-        newMessage,
-      ]);
-    });
+useEffect(() => {
+  let subscription: RealtimeChannel
 
-    return () => {
-      // Fire-and-forget the unsubscribe Promise
-      supabase.removeChannel(channel);
-    };
-  }, [supabase]);
+  const setupRealtimeSubscription = async () => {
+    await unsubscribeRealtimeConnection()
+    subscription = supabase
+      .channel('global_messages')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'global_messages',
+        },
+        (payload) => {
+  const newMessage = payload.new;
+
+  queryClient.setQueryData(["global_messages"], (old: any) => {
+    if (!old || old.length === 0) return [newMessage];
+
+    // Prevent duplicate keys when mapping the array by checking the id of the last item to the new message id
+    const last = old[old.length - 1];
+    if (last.id === newMessage.id) return old;
+
+    return [...old, newMessage];
+  });        }
+      )
+      .subscribe((status) => {
+        console.log('Global messages listener...', status)
+      })
+  }
+
+  const unsubscribeRealtimeConnection = async () => {
+    if (subscription) {
+      const message = await subscription.unsubscribe()
+      console.log(`${message} - Global messages listener removed.`)
+    }
+  }
+
+  const handleVisibilityChange = async () => {
+    if (document.visibilityState === 'visible') {
+      console.log('Tab is visible again.')
+      if (subscription.state === 'closed') {
+        console.log('SUBSCRIPTION IS CLOSED.')
+        // Token refesh is important to prevent prevent reconnection failure
+        const { data } = await supabase.auth.getSession()
+        if (data.session) {
+          supabase.realtime.setAuth(data.session?.access_token)
+          setupRealtimeSubscription()
+        }
+      }
+    }
+  }
+
+  // Set up initial subscription
+  setupRealtimeSubscription()
+
+  // Listen for visibility changes
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+
+  // Cleanup
+  return () => {
+    unsubscribeRealtimeConnection()
+    document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }
+}, [])
 
   // Scroll to bottom when messages change
   useEffect(() => {

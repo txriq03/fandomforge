@@ -3,7 +3,7 @@ import { fetchInitialGlobalMessages } from "@/lib/supabase/utils";
 
 export function useGlobalMessages() {
   return useQuery({
-    queryKey: ["globalMessages"],
+    queryKey: ["global_messages"],
     queryFn: fetchInitialGlobalMessages,
   });
 }
