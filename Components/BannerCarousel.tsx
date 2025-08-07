@@ -128,8 +128,8 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                   <div className="flex gap-2">
                     <Button
                       color="primary"
-                      radius="sm"
-                      size={isMobile ? "md" : "md"}
+                      radius="lg"
+                      size="md"
                     >
                       Play Trivia
                     </Button>
@@ -137,9 +137,9 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                       as={Link}
                       href={url}
                       isIconOnly
-                      className=" text-white bg-neutral-600"
-                      radius="sm"
-                      size={isMobile ? "md" : "md"}
+                      className=" text-white bg-white/10"
+                      radius="lg"
+                      size={"md"}
                     >
                       <Info size={isMobile ? 18 : 24} />
                     </Button>
@@ -208,7 +208,7 @@ const MetadataChip = ({ Icon, value, fill = false }: MetadataChipProps) => {
         color="primary"
         size="sm"
         radius="sm"
-        className="font-bold p-1"
+        className="font-bold p-1 bg-amber-400/25"
         startContent={<Icon className="text-amber-300" size={15} />}
       >
         {value}

@@ -47,7 +47,7 @@ const ProfileModal = ({ className }: { className?: string }) => {
             {(onClose) => (
               <>
                 {/* Banner area*/}
-                <div className="relative w-full h-[150px] sm:h-[170px] bg-[#232634]">
+                <div className="relative w-full h-[150px] sm:h-[170px] bg-indigo-500">
                   <div className="flex justify-end p-1">
                     <ProfilePopoverMenu profile={profile} />
                   </div>
@@ -81,6 +81,9 @@ const ProfileModal = ({ className }: { className?: string }) => {
                       <Button
                         startContent={<FaPen />}
                         size={isMobile ? "sm" : "md"}
+                        className="bg-white/5"
+                        radius="lg"
+
                       >
                         Edit Profile
                       </Button>
