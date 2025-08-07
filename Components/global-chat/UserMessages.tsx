@@ -2,6 +2,7 @@ import { useGlobalMessages } from "@/hooks/useGlobalMessages";
 import { createClient } from "@/lib/supabase/client";
 import { getPfp, subscribeToGlobalMessages } from "@/lib/supabase/utils";
 import { cn, devLog, timeago } from "@/lib/utils";
+import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
 import { GlobalMessage } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
@@ -155,6 +156,7 @@ const Message = ({
 }) => {
   const user = useUser();
   const isSameUser = user?.user_metadata.username === message.username;
+  const { openProfileModal } = useUIContext();
 
   return (
     <div className={cn("w-full flex", isSameUser && "justify-end")}>
@@ -165,7 +167,11 @@ const Message = ({
           isGrouped && "px-2 pt-0"
         )}
       >
-        {!isGrouped && <Avatar src={getPfp(message.avatar_url)} />}
+        {!isGrouped && <button onClick={() => openProfileModal(message.user_id)} className="group cursor-pointer">
+          <Avatar src={getPfp(message.avatar_url)} classNames={{
+            img: "hover:brightness-75 transition-all duration-300",
+          }} />
+          </button>}
 
         <div
           className={cn(
@@ -178,7 +184,7 @@ const Message = ({
           {!isGrouped && <p>{message.username}</p>}
           <p
             className={cn(
-              "text-[0.8rem] text-slate-300 p-2.5 bg-slate-400/5 rounded-md self-start",
+              "text-[0.8rem] sm:text-sm text-slate-300 p-2.5 bg-slate-400/5 rounded-md self-start",
               isSameUser && "self-end"
             )}
           >

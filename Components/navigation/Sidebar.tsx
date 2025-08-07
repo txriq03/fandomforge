@@ -59,8 +59,8 @@ const Sidebar = () => {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center rounded-lg text-foreground/65 text-sm hover:text-primary dark:hover:text-primary-light  transition-all duration-400 text-nowrap",
-                  collapsed ? "justify-center p-2.5" : "gap-2 p-2.5",
+                  "flex items-center rounded-lg text-foreground/65 text-base hover:text-primary dark:hover:text-primary-light  transition-all duration-400 text-nowrap",
+                  collapsed ? "justify-center p-2.5 text-sm" : "gap-2 p-2.5",
                   isActive &&
                     "bg-primary-light text-indigo-50 hover:text-indigo-50 dark:hover:text-indigo-50"
                 )}
@@ -93,7 +93,7 @@ const Sidebar = () => {
           </div>
         )}
 
-        {/* Footer */}
+        {/* Sidebar Footer */}
         <div className="mt-auto gap-4 flex flex-col">
           <Divider />
           {user ? (
