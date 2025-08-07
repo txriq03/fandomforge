@@ -17,12 +17,14 @@
   }
 
   .dark {
-    --background: hsl(233deg, 23%, 15%);
+    --background: rgb(10, 10, 10);
     --foreground: #f5f5f7;
-    --sidebar: hsl(232deg, 23%, 18%);
-    --card: hsl(240deg, 21%, 15%);
+    --sidebar: #161616;
+    --card: #161616;
   }
 }
+
+
 
 @theme inline {
   --color-secondary: var(--secondary);
