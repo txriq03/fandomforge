@@ -18,7 +18,7 @@ const MediaTabs = () => {
     <Padding className="overflow-x-scroll">
       <Tabs
         variant="underlined"
-        color="secondary"
+        color="primary"
         size={isMobile ? "md" : "lg"}
         selectedKey={pathname}
         aria-label="Tabs"

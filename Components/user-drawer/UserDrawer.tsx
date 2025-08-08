@@ -55,7 +55,7 @@ const UserDrawer = () => {
         <DrawerContent>
             {(onClose) => (
                 <>
-                <DrawerHeader className='px-5 pt-10 pb-5'>
+                <DrawerHeader className='px-4 pt-10 pb-5'>
                   <div className='bg-white/3 p-5 rounded-[20px] w-full'>
 
                   <div className='flex gap-3'>
@@ -72,7 +72,7 @@ const UserDrawer = () => {
                   </div>
                   </div>
                 </DrawerHeader>
-                <DrawerBody>
+                <DrawerBody className='px-4'>
                     {/* Options */}
                     <div className='flex gap-2'>
                     <OptionCard name="Settings" Icon={RiSettings3Fill} className='flex-1'/>

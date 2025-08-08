@@ -16,7 +16,7 @@ const MediaBanner = () => {
         `w-full h-[280px] sm:h-[300px] bg-slate-800 bg-cover bg-center relative`
       )}
     >
-      <div className="absolute inset-0 bg-gradient-to-b z-1  from-black/80 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b z-1  from-black/80 via-transparent to-background sm:to-transparent" />
 
       <Image
         alt={title}

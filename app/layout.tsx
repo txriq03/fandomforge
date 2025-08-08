@@ -51,7 +51,7 @@ export default async function RootLayout({
 
             {/* Modals and Drawers*/}
             <LoginModal />
-            <ProfileWrapper /> Contains ProfileModal and Profile
+            <ProfileWrapper />  {/* Contains ProfileModal and Profile */}
             <ProfileDrawer />
           </UserProvider>
         </Providers>
