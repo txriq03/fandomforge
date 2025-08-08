@@ -26,7 +26,7 @@ const Sidebar = () => {
     >
       <aside
         className={cn(
-          "h-full  bg-sidebar transition-all duration-500  flex flex-col ease-in-out relative",
+          "h-full  bg-transparent transition-all duration-500  flex flex-col ease-in-out relative",
           collapsed ? "w-16 p-3" : "w-54 p-3"
         )}
       >
@@ -44,8 +44,9 @@ const Sidebar = () => {
             )}
           />
         </Button>
+        
 
-        <nav className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-1 my-auto">
           {navItems.map((item) => {
             let isActive;
             if (item.href != "/") {
@@ -62,7 +63,7 @@ const Sidebar = () => {
                   "flex items-center rounded-lg text-foreground/65 text-base hover:text-primary dark:hover:text-primary-light  transition-all duration-400 text-nowrap",
                   collapsed ? "justify-center p-2.5 text-sm" : "gap-2 p-2.5",
                   isActive &&
-                    "bg-primary-light text-indigo-50 hover:text-indigo-50 dark:hover:text-indigo-50"
+                    "bg-white/10 text-indigo-50 hover:text-indigo-50 dark:hover:text-indigo-50"
                 )}
               >
                 <item.icon size={18} className="leading-none" />
@@ -82,7 +83,7 @@ const Sidebar = () => {
         </nav>
 
         {/* Follow List */}
-        {user && (
+        {/* {user && (
           <div
             className={cn(
               "my-auto py-10 px-2 text-sm transition-all duration-300 opacity-100",
@@ -91,10 +92,10 @@ const Sidebar = () => {
           >
             <FollowList />
           </div>
-        )}
+        )} */}
 
         {/* Sidebar Footer */}
-        <div className="mt-auto gap-4 flex flex-col">
+        {/* <div className="mt-auto gap-4 flex flex-col">
           <Divider />
           {user ? (
             <SidebarFooter />
@@ -108,7 +109,7 @@ const Sidebar = () => {
               {collapsed ? <LogIn size={18} /> : "Login"}
             </Button>
           )}
-        </div>
+        </div> */}
       </aside>
     </div>
   );
