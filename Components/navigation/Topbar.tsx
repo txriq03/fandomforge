@@ -20,7 +20,7 @@ const Topbar = () => {
   const { collapsed } = useSidebar();
   const user = useUser();
   const { data: profile } = useOwnProfile();
-  const { authModal, openProfileModal } = useUIContext();
+  const { authModal, openProfileModal, profileDrawer } = useUIContext();
 
   const isHomePage = pathname === "/";
   return (
@@ -77,7 +77,7 @@ const Topbar = () => {
                 src: getPfp(profile?.avatar_url),
               }}
               isFocusable
-              onClick={() => openProfileModal(user.id)}
+              onClick={profileDrawer.onOpen}
               classNames={{
                 base: "hover:brightness-75 duration-200 transition-filter cursor-pointer bg-background/50 rounded-full pr-5",
                 description: "text-white/50",

@@ -22,6 +22,7 @@ type Modal = {
 interface UIContextType {
   authModal: Modal;
   profileModal: Modal;
+  profileDrawer: Modal;
   openProfileModal: (profileUserId: string | null) => void;
   closeProfileModal: () => void;
   profileUserId: string | null;
@@ -41,6 +42,7 @@ export const useUIContext = () => {
 const UIContextProvider = ({ children }: { children: ReactNode }) => {
   const authModal = useDisclosure();
   const profileModal = useDisclosure();
+  const profileDrawer = useDisclosure();
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
   const openProfileModal = (profileUserId: string | null) => {
@@ -58,6 +60,7 @@ const UIContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         authModal,
         profileModal,
+        profileDrawer,
         profileUserId,
         setProfileUserId,
         openProfileModal,

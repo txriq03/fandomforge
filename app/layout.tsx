@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 import { UserProvider } from "@/providers/UserProvider";
 import ProfileWrapper from "@/Components/profile/ProfileWrapper";
 import NextTopLoader from "nextjs-toploader";
+import ProfileDrawer from "@/Components/user-drawer/UserDrawer";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -47,8 +48,11 @@ export default async function RootLayout({
             <NavWrapper>
               <div className=" min-h-screen">{children}</div>
             </NavWrapper>
+
+            {/* Modals and Drawers*/}
             <LoginModal />
-            <ProfileWrapper />
+            <ProfileWrapper /> Contains ProfileModal and Profile
+            <ProfileDrawer />
           </UserProvider>
         </Providers>
       </body>
