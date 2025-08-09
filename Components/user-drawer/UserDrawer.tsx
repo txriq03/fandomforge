@@ -2,21 +2,15 @@
 import useOwnProfile from '@/hooks/useOwnProfile'
 import { signOut } from '@/lib/supabase/actions'
 import { getPfp } from '@/lib/supabase/utils'
-import { cn } from '@/lib/utils'
 import { useUIContext } from '@/providers/UIContext'
 import { useUser } from '@/providers/UserProvider'
 import { Avatar } from '@heroui/avatar'
 import { Button } from '@heroui/button'
 import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter} from '@heroui/drawer'
-import { user } from '@heroui/theme'
-import { profile } from 'console'
-import { Settings } from 'lucide-react'
-import { Icon } from 'next/dist/lib/metadata/types/metadata-types'
-import Link from 'next/link'
-import { IconType } from 'react-icons'
 import { HiUser } from 'react-icons/hi2'
 import { RiSettings3Fill } from 'react-icons/ri'
-import { TbHistory, TbSettings, TbSettingsFilled } from 'react-icons/tb'
+import { TbHistory } from 'react-icons/tb'
+import OptionCard from './OptionCard'
 
 const UserDrawer = () => {
     const { profileDrawer } = useUIContext();
@@ -89,22 +83,6 @@ const UserDrawer = () => {
             )}
         </DrawerContent>
     </Drawer>
-  )
-}
-
-interface OptionCardProps {
-  name: string;
-  Icon: IconType;
-  className?: string;
-  href?: string;
-}
-
-const OptionCard = ({name, Icon, className, href}: OptionCardProps) => {
-  return (
-    <Link href={href ?? ''} onClick={() => console.log("Option clicked!")} className={cn('cursor-pointer p-2  rounded-lg flex flex-col items-center justify-center gap-1 border-1 border-white/10 hover:bg-white/7 hover:text-foreground/100 duration-200 transition-all h-[100px] text-white/50', className)}>
-      <Icon size={24}/>
-      <p>{name}</p>
-    </Link>
   )
 }
 

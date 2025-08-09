@@ -5,10 +5,10 @@ import React from "react";
 
 const ReviewsPage = () => {
   return (
-    <Padding className="pt-2 pb-20">
+    <div className="pt-2 pb-20 px-5 lg:px-0">
       <ReviewMessageBox />
       <Reviews />
-    </Padding>
+    </div>
   );
 };
 

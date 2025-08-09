@@ -158,7 +158,7 @@ const MediaHeader = () => {
       </div>
 
       {/* Show for other devices */}
-      <div className="bg-primary/1 w-full  px-5 sm:px-10 max-sm:hidden">
+      <div className="bg-primary/1 w-full  px-5 lg:px-0 max-sm:hidden">
         <div className="flex flex-col sm:flex-row gap-1 sm:gap-10">
           {/* Poster and buttons */}
           <div className="flex  sm:flex-col gap-2 py-5 w-full sm:w-[180px] lg:w-[250px]  flex-shrink-0 -mt-30 items-end sm:items-stretch">

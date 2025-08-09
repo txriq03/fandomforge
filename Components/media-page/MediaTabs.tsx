@@ -15,7 +15,7 @@ const MediaTabs = () => {
 
   const type = media.media_type;
   return (
-    <Padding className="overflow-x-scroll">
+    <div className="overflow-x-scroll px-4 lg:px-0">
       <Tabs
         variant="underlined"
         color="primary"
@@ -47,7 +47,7 @@ const MediaTabs = () => {
           as={Link}
         />
       </Tabs>
-    </Padding>
+    </div>
   );
 };
 

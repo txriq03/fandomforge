@@ -17,6 +17,7 @@ import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
 import { useTrending } from "@/hooks/useTrending";
+import Container from "./ui/Container";
 
 const BannerCarousel = ({ className }: { className?: string }) => {
   const { data: trending, isPending } = useTrending();
@@ -92,7 +93,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t  from-background  to-background/25" />
-                <div className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
+                <Container className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
                   {logoURL ? (
                     <Image
                       src={logo}
@@ -144,7 +145,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                       <Info size={isMobile ? 18 : 24} />
                     </Button>
                   </div>
-                </div>
+                </Container>
               </div>
             </div>
           );

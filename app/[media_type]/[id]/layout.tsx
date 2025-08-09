@@ -1,6 +1,7 @@
 import MediaBanner from "@/Components/media-page/MediaBanner";
 import MediaTabs from "@/Components/media-page/MediaTabs";
 import MediaHeader from "@/Components/MediaHeader";
+import Container from "@/Components/ui/Container";
 import { getMediaById } from "@/lib/api/tmdb";
 import { devLog } from "@/lib/utils";
 import MediaProvider from "@/providers/MediaProvider";
@@ -24,9 +25,18 @@ const MovieLayout = async ({ params, children }: PageProps) => {
   return (
     <MediaProvider media={media}>
       <MediaBanner />
+
+
+      <Container symmetrical>
+
+        <div className="lg:max-w-[1300px] mx-auto">
+
       <MediaHeader />
       <MediaTabs />
       {children}
+        </div>
+
+      </Container>
     </MediaProvider>
   );
 };

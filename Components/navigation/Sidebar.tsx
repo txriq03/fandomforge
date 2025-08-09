@@ -21,16 +21,16 @@ const Sidebar = () => {
 
   return (
     <div
-      className="group/sidebar fixed hidden lg:block h-screen shadow-xl z-50"
+      className="group/sidebar fixed hidden lg:block h-screen z-50"
       data-state={collapsed ? "closed" : "open"}
     >
       <aside
         className={cn(
-          "h-full  bg-transparent transition-all duration-500  flex flex-col ease-in-out relative",
-          collapsed ? "w-16 p-3" : "w-54 p-3"
+          "h-full  bg-transition transition-all duration-500  flex flex-col ease-in-out relative",
+          collapsed ? " p-5" : "w-54 p-3"
         )}
       >
-        <Button
+        {/* <Button
           isIconOnly
           variant="light"
           onPress={toggleCollapsed}
@@ -43,7 +43,7 @@ const Sidebar = () => {
               "transition-transform duration-500 group-data-[state=open]/sidebar:rotate-180"
             )}
           />
-        </Button>
+        </Button> */}
         
 
         <nav className="flex flex-col gap-1 my-auto">
@@ -66,7 +66,7 @@ const Sidebar = () => {
                     "bg-white/10 text-indigo-50 hover:text-indigo-50 dark:hover:text-indigo-50"
                 )}
               >
-                <item.icon size={18} className="leading-none" />
+                <item.icon size={21} className="leading-none" />
                 <span
                   className={cn(
                     "transition-all duration-400",

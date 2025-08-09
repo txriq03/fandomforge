@@ -16,7 +16,7 @@ const NavWrapper = ({ children }: { children: ReactNode }) => {
       <main
         className={cn(
           "transition-all duration-500 relative",
-          collapsed ? "lg:ml-[64px]" : "lg:ml-[216px]"
+          
         )}
       >
         <Topbar />

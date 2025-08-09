@@ -37,7 +37,7 @@ const CastSection = () => {
     );
 
   return (
-    <div className="space-y-2 py-2">
+    <div className="space-y-2 py-2 px-5 lg:px-0">
       <h2 className="text-base md:text-lg lg:text-xl xl:text-3xl font-heading text-primary-light font-semibold">
         Actors
       </h2>
