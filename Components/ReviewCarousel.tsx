@@ -23,7 +23,7 @@ const ReviewCarousel = () => {
 
   return (
     <Container className=" py-10 space-y-2">
-      <div className="flex justify-between items-end px-2 lg:pl-0 lg:pr-5">
+      <div className="flex justify-between items-end px-2 sm:px-4 lg:pl-0 lg:pr-5">
         <h2 className="  text-xl sm:text-2xl  text-primary-light font-heading">
           Recent Reviews
         </h2>
@@ -43,7 +43,7 @@ const ReviewCarousel = () => {
         )}
       </div>
 
-      <div className="flex px-2 lg:px-0 overflow-hidden" ref={emblaRef}>
+      <div className="flex px-2 sm:px-4 lg:px-0 overflow-hidden" ref={emblaRef}>
         <div className="flex gap-2">
           {isPending
             ? [...Array(5)].map((_, index) => (

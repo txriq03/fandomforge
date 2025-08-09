@@ -5,7 +5,7 @@ import Container from "./ui/Container";
 const DevelopmentAlert = () => {
   return (
     <Container>
-      <div className="w-full flex justify-center px-2 lg:pl-0 lg:pr-5">
+      <div className="w-full flex justify-center px-2 sm:px-4 lg:pl-0 lg:pr-5">
         <Alert
           variant="faded"
           color="warning"

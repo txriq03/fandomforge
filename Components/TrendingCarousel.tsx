@@ -46,7 +46,7 @@ const TrendingCarousel = () => {
 
   return (
     <Container>
-      <div className="flex justify-between py-2 px-2 lg:pl-0 lg:pr-5 items-end">
+      <div className="flex justify-between py-2 px-2 sm:px-4 lg:pl-0 lg:pr-5 items-end">
         {/* Heading */}
         <h2 className=" text-xl sm:text-3xl font-semibold text-primary-light">
           Top 10
@@ -86,7 +86,7 @@ const TrendingCarousel = () => {
       )}
       {/* Carousel */}
       <div
-        className=" flex justify-center px-0 overflow-hidden "
+        className=" flex justify-center px-0 sm:px-4 lg:px-0 overflow-hidden "
         ref={emblaRef}
       >
         <div className="flex gap-1 sm:gap-2">
