@@ -84,7 +84,7 @@ const MobileSidebar = () => {
                         onPress={mobileSidebar.onClose}
                         startContent={<item.icon size={21} />}
                         className={cn(
-                          "text-start align-start justify-start py-5 px-5 bg-transparent text-foreground/70 font-semibold",
+                          "text-start align-start justify-start py-5 px-5 bg-transparent text-foreground/70 font-semibold hover:text-foreground",
                           isActive && "bg-white/5 text-foreground font-bold"
                         )}
                         size="lg"

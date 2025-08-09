@@ -127,11 +127,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                   </p>
 
                   <div className="flex gap-2">
-                    <Button
-                      color="primary"
-                      radius="lg"
-                      size="md"
-                    >
+                    <Button color="primary" radius="sm" size="md">
                       Play Trivia
                     </Button>
                     <Button
@@ -139,7 +135,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                       href={url}
                       isIconOnly
                       className=" text-white bg-white/10"
-                      radius="lg"
+                      radius="sm"
                       size={"md"}
                     >
                       <Info size={isMobile ? 18 : 24} />
