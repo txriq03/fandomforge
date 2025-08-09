@@ -11,6 +11,7 @@ import { Button } from "@heroui/button";
 import { useTrending } from "@/hooks/useTrending";
 import SkeletonCard from "./SkeletonCard";
 import { Alert } from "@heroui/alert";
+import Container from "./ui/Container";
 
 const TrendingCarousel = () => {
   const isMobile = useIsMobile();
@@ -34,16 +35,18 @@ const TrendingCarousel = () => {
 
   if (error)
     return (
-      <Alert
-        title="Something went wrong"
-        description={error.message}
-        color="danger"
-      />
+      <Container>
+        <Alert
+          title="Something went wrong"
+          description={error.message}
+          color="danger"
+        />
+      </Container>
     );
 
   return (
-    <div>
-      <div className="flex justify-between py-2 px-2 sm:px-4 items-end">
+    <Container>
+      <div className="flex justify-between py-2 px-2 lg:pl-0 lg:pr-5 items-end">
         {/* Heading */}
         <h2 className=" text-xl sm:text-3xl font-semibold text-primary-light">
           Top 10
@@ -83,7 +86,7 @@ const TrendingCarousel = () => {
       )}
       {/* Carousel */}
       <div
-        className=" flex justify-center sm:px-4 overflow-hidden "
+        className=" flex justify-center px-0 overflow-hidden "
         ref={emblaRef}
       >
         <div className="flex gap-1 sm:gap-2">
@@ -113,7 +116,7 @@ const TrendingCarousel = () => {
           })}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

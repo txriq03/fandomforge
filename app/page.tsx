@@ -14,17 +14,19 @@ export default async function HomePage() {
         <BannerCarousel />
       </div>
 
-      <Container className="space-y-4">
+      <div className="space-y-4">
+        <DevelopmentAlert />
 
-      <DevelopmentAlert />
-      <TrendingCarousel />
-      <ReviewCarousel />
+        <TrendingCarousel />
+        <ReviewCarousel />
 
-      <Padding className="px-2 sm:px-0 flex flex-col sm:flex-row h-[500px] sm:h-[400px] gap-3">
-        <Chatbox className="flex-2" />
-        {/* <RecentReviewsBox className="flex-1" /> */}
-      </Padding>
-      </Container>
+        <Container>
+          <div className="px-2 lg:pl-0 lg:pr-5 flex flex-col sm:flex-row h-[500px] sm:h-[400px] gap-3">
+            <Chatbox className="flex-2" />
+            {/* <RecentReviewsBox className="flex-1" /> */}
+          </div>
+        </Container>
+      </div>
     </div>
   );
 }

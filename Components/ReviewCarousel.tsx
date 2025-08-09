@@ -5,6 +5,7 @@ import { Review } from "@/types/tables";
 import ReviewCard, { ReviewCardSkeleton } from "./ReviewCard";
 import { Link } from "@heroui/link";
 import { TbChevronRight } from "react-icons/tb";
+import Container from "./ui/Container";
 
 const ReviewCarousel = () => {
   const { data: reviews, isPending, error } = useAllReviews();
@@ -21,8 +22,8 @@ const ReviewCarousel = () => {
   }
 
   return (
-    <div className=" py-10 space-y-2">
-      <div className="flex justify-between items-end px-2 sm:px-4">
+    <Container className=" py-10 space-y-2">
+      <div className="flex justify-between items-end px-2 lg:pl-0 lg:pr-5">
         <h2 className="  text-xl sm:text-2xl  text-primary-light font-heading">
           Recent Reviews
         </h2>
@@ -42,7 +43,7 @@ const ReviewCarousel = () => {
         )}
       </div>
 
-      <div className="flex px-2 sm:px-4 overflow-hidden" ref={emblaRef}>
+      <div className="flex px-2 lg:px-0 overflow-hidden" ref={emblaRef}>
         <div className="flex gap-2">
           {isPending
             ? [...Array(5)].map((_, index) => (
@@ -55,7 +56,7 @@ const ReviewCarousel = () => {
               ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
