@@ -2,6 +2,7 @@ import BrowsePopover from "@/Components/browse/BrowsePopover";
 import FilterOptions from "@/Components/browse/FilterOptions";
 import MainSection from "@/Components/browse/MainSection";
 import SearchField from "@/Components/browse/SearchField";
+import Container from "@/Components/ui/Container";
 import Padding from "@/Components/ui/Padding";
 import { SearchProvider } from "@/providers/SearchProvider";
 import { BrowseType } from "@/types/browseType";
@@ -21,7 +22,10 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
 
   return (
     <SearchProvider mediaType={mediaType}>
-      <Padding className="font-main pt-[75px] pb-[50px] space-y-6">
+      <Container
+        symmetrical
+        className="font-main px-5 lg:px-0 pt-[75px] pb-[50px] space-y-6"
+      >
         {/* Browse Movies/Tv Shows/Reviews popover */}
         <div className="flex gap-2 text-primary-light/25 font-bold font-heading text-3xl lg:text-5xl items-center">
           <h1>Browse</h1>
@@ -36,7 +40,7 @@ const BrowseMediaPage = async ({ params }: PageProps) => {
         )}
 
         <MainSection browseType={browseType} />
-      </Padding>
+      </Container>
     </SearchProvider>
   );
 };

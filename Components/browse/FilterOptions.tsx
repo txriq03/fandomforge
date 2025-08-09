@@ -74,8 +74,8 @@ const FilterOptions = () => {
           base: "hidden sm:flex",
           label: "group-data-[has-label-outside=true]:text-indigo-200",
           trigger:
-            "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
-          popoverContent: "bg-[#202339]",
+            "bg-white/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
+          popoverContent: "bg-[#161616]",
         }}
         label="Genres"
         isVirtualized
@@ -113,14 +113,14 @@ const FilterOptions = () => {
         onSelectionChange={handleYearChange}
         classNames={{
           base: "hidden sm:flex font-main",
-          popoverContent: "bg-[#202339]",
+          popoverContent: "bg-[#161616]",
         }}
         inputProps={{
           classNames: {
             label:
               " group-data-[filled-within=true]:text-indigo-200 text-indigo-200",
             inputWrapper:
-              "bg-primary-light/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
+              "bg-white/5 data-[hover=true]:bg-primary-light/10 data-[focus=true]:bg-primary-light/7",
           },
         }}
       >
