@@ -46,7 +46,7 @@ const Topbar = () => {
       </NavbarContent>
 
       {/* Left side*/}
-      {!isHomePage && (
+      {/* {!isHomePage && (
         <NavbarContent
           className={`transition-all duration-500 ${
             collapsed ? "lg:ml-[64px]" : "lg:ml-[216px]"
@@ -65,7 +65,7 @@ const Topbar = () => {
             </Button>
           </NavbarItem>
         </NavbarContent>
-      )}
+      )} */}
 
       {/* Right side */}
       <NavbarContent justify="end" className="gap-1">

@@ -75,6 +75,7 @@ const MobileSidebar = () => {
                         "   text-white/75 font-heading font-semibold",
                         isActive && "font-bold text-foreground"
                       )}
+                      key={item.name}
                     >
                       <Button
                         as={Link}

@@ -27,12 +27,14 @@ import { addBookmark, removeBookmark } from "@/lib/supabase/utils";
 import { MediaType } from "@/types/trending";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMedia } from "@/providers/MediaProvider";
+import { useMediaQuery } from "usehooks-ts";
 
 const MediaHeader = () => {
   const media: Movie | TVSeries = useMedia();
   const user = useUser();
   const [showMore, toggleShowMore] = useState(false);
   const [isBookmarkPending, setIsBookmarkPending] = useState(false);
+  const matches = useMediaQuery("(max-width: 1024px)");
 
   // Set variables
   const posterUrl = getImageUrl(media.poster_path, "500");
@@ -169,10 +171,20 @@ const MediaHeader = () => {
               shadow="lg"
             />
             <div className="flex flex-1 gap-2">
-              <Button fullWidth color="primary">
+              <Button
+                fullWidth
+                color="primary"
+                radius="sm"
+                size={matches ? "sm" : "md"}
+              >
                 Play
               </Button>
-              <Button isIconOnly className="bg-pink-500 text-white">
+              <Button
+                isIconOnly
+                className="bg-pink-500 text-white"
+                radius="sm"
+                size={matches ? "sm" : "md"}
+              >
                 <Heart size={18} />
               </Button>
             </div>
