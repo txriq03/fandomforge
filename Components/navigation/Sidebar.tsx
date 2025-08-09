@@ -44,8 +44,8 @@ const Sidebar = () => {
             )}
           />
         </Button> */}
-        
 
+        {/* Navbar for above mobile view port */}
         <nav className="flex flex-col gap-1 my-auto">
           {navItems.map((item) => {
             let isActive;

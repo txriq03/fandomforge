@@ -3,10 +3,7 @@ import { FaHouseChimney } from "react-icons/fa6";
 import {
   TbBookmarksFilled,
   TbBrandSafari,
-  TbCompass,
-  TbDeviceTvFilled,
   TbHistory,
-  TbMovie,
   TbUsersGroup,
 } from "react-icons/tb";
 
@@ -18,10 +15,8 @@ export type navItem = {
 
 export const navItems: navItem[] = [
   { name: "Home", icon: FaHouseChimney, href: "/" },
-  // { name: "Movies", icon: TbMovie, href: "/movie" },
-  // { name: "TV Shows", icon: TbDeviceTvFilled, href: "/tv" },
   { name: "Browse", icon: TbBrandSafari, href: "/browse" },
-  { name: "History", icon: TbHistory, href: "/history" },
+  // { name: "History", icon: TbHistory, href: "/history" },
   { name: "Saved", icon: TbBookmarksFilled, href: "/bookmarks" },
-  { name: "Community", icon: TbUsersGroup, href: "/community" },
+  // { name: "Community", icon: TbUsersGroup, href: "/community" },
 ];

@@ -7,7 +7,7 @@ import { Navbar, NavbarContent, NavbarItem } from "@heroui/navbar";
 import { Avatar } from "@heroui/avatar";
 import { User } from "@heroui/user";
 import { RiSearch2Line } from "react-icons/ri";
-import { TbArrowLeft, TbUser } from "react-icons/tb";
+import { TbArrowLeft, TbMenu, TbUser } from "react-icons/tb";
 import { Button } from "@heroui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { useSidebar } from "@/providers/SidebarProvider";
@@ -20,7 +20,7 @@ const Topbar = () => {
   const { collapsed } = useSidebar();
   const user = useUser();
   const { data: profile } = useOwnProfile();
-  const { authModal, openProfileModal, profileDrawer } = useUIContext();
+  const { authModal, profileDrawer, mobileSidebar } = useUIContext();
 
   const isHomePage = pathname === "/";
   return (
@@ -32,6 +32,19 @@ const Topbar = () => {
       }}
       shouldHideOnScroll={true}
     >
+      <NavbarContent className="lg:hidden">
+        <NavbarItem>
+          <Button
+            isIconOnly
+            variant="light"
+            radius="lg"
+            onPress={mobileSidebar.onOpen}
+          >
+            <TbMenu size={24} />
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+
       {/* Left side*/}
       {!isHomePage && (
         <NavbarContent
