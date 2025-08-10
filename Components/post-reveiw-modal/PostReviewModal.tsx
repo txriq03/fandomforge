@@ -1,6 +1,7 @@
 import { useUIContext } from "@/providers/UIContext";
 import { Alert } from "@heroui/alert";
 import { Button } from "@heroui/button";
+import { Form } from "@heroui/form";
 import {
   Modal,
   ModalBody,
@@ -10,8 +11,10 @@ import {
 } from "@heroui/modal";
 import React from "react";
 import { TbPlus } from "react-icons/tb";
+import ReviewForm from "./ReviewForm";
+import SearchMediaField from "./SearchMediaField";
 
-const ReviewModal = () => {
+const PostReviewModal = () => {
   const { reviewModal } = useUIContext();
   return (
     <>
@@ -32,6 +35,8 @@ const ReviewModal = () => {
                   description="This section is currently in development. Come back again later!"
                   color="warning"
                 />
+                <SearchMediaField />
+                {/* <ReviewForm /> */}
               </ModalBody>
               <ModalFooter>
                 <Button color="primary" fullWidth onPress={reviewModal.onClose}>
@@ -61,8 +66,4 @@ const Trigger = ({ onOpen }: { onOpen: () => void }) => {
   );
 };
 
-const ReviewForm = () => {
-  return <p>Content</p>;
-};
-
-export default ReviewModal;
+export default PostReviewModal;
