@@ -11,11 +11,9 @@ import {
   DrawerContent,
   DrawerFooter,
 } from "@heroui/drawer";
-import { ModalProps } from "@heroui/modal";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 const MobileSidebar = () => {
   const { mobileSidebar } = useUIContext();

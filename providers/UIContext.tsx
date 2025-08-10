@@ -24,6 +24,7 @@ interface UIContextType {
   profileModal: Modal;
   profileDrawer: Modal;
   mobileSidebar: Modal;
+  reviewModal: Modal;
   openProfileModal: (profileUserId: string | null) => void;
   closeProfileModal: () => void;
   profileUserId: string | null;
@@ -45,6 +46,7 @@ const UIContextProvider = ({ children }: { children: ReactNode }) => {
   const profileModal = useDisclosure();
   const profileDrawer = useDisclosure();
   const mobileSidebar = useDisclosure();
+  const reviewModal = useDisclosure();
 
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
@@ -65,6 +67,7 @@ const UIContextProvider = ({ children }: { children: ReactNode }) => {
         profileModal,
         profileDrawer,
         mobileSidebar,
+        reviewModal,
         profileUserId,
         setProfileUserId,
         openProfileModal,

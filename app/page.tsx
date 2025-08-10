@@ -3,8 +3,6 @@ import BannerCarousel from "@/Components/BannerCarousel";
 import TrendingCarousel from "@/Components/TrendingCarousel";
 import ReviewCarousel from "@/Components/ReviewCarousel";
 import Chatbox from "@/Components/global-chat/GlobalChat";
-import RecentReviewsBox from "@/Components/recent-reviews-box/RecentReviewsBox";
-import Padding from "@/Components/ui/Padding";
 import Container from "@/Components/ui/Container";
 
 export default async function HomePage() {

@@ -9,7 +9,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
 import { LogIn, LucideProps, Settings, User2 } from "lucide-react";
 import Link from "next/link";
 import { ForwardRefExoticComponent, RefAttributes, useState } from "react";
-import { TbMenu3 } from "react-icons/tb";
+import { TbMenu3, TbPlus } from "react-icons/tb";
 
 const MobileMenu = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,7 +27,7 @@ const MobileMenu = () => {
           radius="lg"
           size="lg"
         >
-          <TbMenu3 size={32} />
+          <TbPlus size={32} />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

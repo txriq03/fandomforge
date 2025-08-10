@@ -6,19 +6,15 @@ import Sidebar from "./Sidebar";
 import MobileMenu from "./MobileMenu";
 import Topbar from "./Topbar";
 import Footer from "../Footer";
+import ReviewModal from "../ReviewModal";
 
 const NavWrapper = ({ children }: { children: ReactNode }) => {
-  const { collapsed } = useSidebar();
   return (
     <div className="font-main">
       <Sidebar />
-      <MobileMenu />
-      <main
-        className={cn(
-          "transition-all duration-500 relative",
-          
-        )}
-      >
+      {/* <MobileMenu /> */}
+      <ReviewModal />
+      <main className={cn("transition-all duration-500 relative")}>
         <Topbar />
         {children}
         <Footer />
