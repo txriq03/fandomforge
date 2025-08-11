@@ -1,6 +1,11 @@
 import { MediaType } from "@/types/trending";
 import { devLog } from "../utils";
-import { MovieCreditsResponse, TmdbReviewsResponse } from "@/types/tmdb";
+import {
+  MovieCreditsResponse,
+  SearchMovieResponse,
+  SearchTVResponse,
+  TmdbReviewsResponse,
+} from "@/types/tmdb";
 
 const options = {
   method: "GET",
@@ -127,15 +132,18 @@ export const getNowPlaying = async (mediaType: MediaType) => {
   return data ?? [];
 };
 
-export const getSearch = async (query: string, mediaType: MediaType) => {
+export const getSearch = async (
+  query: string,
+  mediaType: MediaType
+): Promise<SearchMovieResponse | SearchTVResponse> => {
   const url = `https://api.themoviedb.org/3/search/${mediaType}?query=${query}`;
 
   const res = await fetch(url, options);
 
   if (!res.ok) throw new Error("Failed to get search results.");
-  const data = await res.json();
+  const data: SearchMovieResponse | SearchTVResponse = await res.json();
 
-  return data ?? [];
+  return data;
 };
 
 export const getSearchAndDiscovery = async (
