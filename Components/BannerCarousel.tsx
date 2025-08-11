@@ -14,6 +14,7 @@ import { IconType } from "react-icons";
 import { TrendingMedia } from "@/types/trending";
 import { Spinner } from "@heroui/spinner";
 import { Image } from "@heroui/image";
+import NextImage from "next/image";
 import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
 import { useTrending } from "@/hooks/useTrending";
@@ -86,12 +87,13 @@ const BannerCarousel = ({ className }: { className?: string }) => {
 
           return (
             <div className="flex-[0_0_100%] relative h-full" key={media.id}>
-              <div
-                className="w-full h-full bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${media.backdrop_path})`,
-                }}
-              >
+              <div className="w-full h-full bg-cover bg-center relative">
+                <NextImage
+                  fill
+                  alt={name}
+                  className="object-cover"
+                  src={`https://image.tmdb.org/t/p/original/${media.backdrop_path}`}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t  from-background  to-background/25" />
                 <Container className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
                   {logoURL ? (
