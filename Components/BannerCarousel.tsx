@@ -93,6 +93,7 @@ const BannerCarousel = ({ className }: { className?: string }) => {
                   alt={name}
                   className="object-cover"
                   src={`https://image.tmdb.org/t/p/original/${media.backdrop_path}`}
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t  from-background  to-background/25" />
                 <Container className="absolute bottom-0 left-0 text-white z-10 space-y-3 p-5 sm:p-10">
