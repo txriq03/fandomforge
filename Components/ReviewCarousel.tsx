@@ -49,7 +49,7 @@ const ReviewCarousel = () => {
             ? [...Array(5)].map((_, index) => (
                 <ReviewCardSkeleton key={index} />
               ))
-            : reviews?.map((review: Review) => (
+            : reviews?.slice(0, 8).map((review: Review) => (
                 <div className="flex-[0_0_250px]" key={review.id}>
                   <ReviewCard review={review} />
                 </div>
