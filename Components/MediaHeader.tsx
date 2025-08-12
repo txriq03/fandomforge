@@ -176,8 +176,9 @@ const MediaHeader = () => {
                 color="primary"
                 radius="sm"
                 size={matches ? "sm" : "md"}
+                startContent={<TbDeviceGamepad3Filled className="shrink-0" />}
               >
-                Play
+                Play Trivia
               </Button>
               <Button
                 isIconOnly

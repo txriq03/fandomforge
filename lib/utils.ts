@@ -48,12 +48,6 @@ export const formatDate = (iso: string, yearOnly = false) => {
   return yearOnly ? format(date, "yyyy") : format(date, "do MMMM, yyyy");
 };
 
-// export const timeago = (iso: string) => {
-//   const raw = formatDistanceToNow(new Date(iso), { addSuffix: true });
-//   const timeAgo = raw.replace(/^about /, "");
-//   return timeAgo;
-// };
-
 export const timeago = (date: string) => {
   return timeagoFormat(date);
 };
