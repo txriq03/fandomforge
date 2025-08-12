@@ -1,7 +1,7 @@
 "use client";
 import { getImageUrl } from "@/lib/api/tmdb";
 import { getPfp } from "@/lib/supabase/utils";
-import { timeago } from "@/lib/utils";
+import { shortTimeago, timeago } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { Review } from "@/types/tables";
 import { Avatar } from "@heroui/avatar";
@@ -57,7 +57,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
         </button>
 
         <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 right-0 px-2 py-1">
-          {timeago(review.created_at!)}
+          {shortTimeago(review.created_at!)}
         </p>
 
         <p className="absolute text-[0.8rem] text-foreground/25 bottom-0 left-0 px-2 py-1">
