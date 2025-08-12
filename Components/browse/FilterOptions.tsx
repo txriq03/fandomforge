@@ -60,7 +60,6 @@ const FilterOptions = () => {
   };
 
   const handleYearChange = (value: Key | null) => {
-    console.log("Year changed to:", value);
     setSelectedYear((value as string) || "");
   };
 

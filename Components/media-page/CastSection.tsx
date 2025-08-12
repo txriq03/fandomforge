@@ -18,8 +18,6 @@ const CastSection = () => {
     error,
   } = useCredits(media.id, media.media_type);
 
-  console.log("Credits:", credits);
-
   if (error)
     return (
       <Alert

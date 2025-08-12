@@ -71,7 +71,6 @@ export async function getOwnProfile(): Promise<Profile | null> {
     devLog.log("session:", session);
   }
 
-  devLog.log("session ID:", session.user.id);
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")

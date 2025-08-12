@@ -21,21 +21,16 @@ const MovieLayout = async ({ params, children }: PageProps) => {
   let media = await getMediaById(id, media_type);
   media = { ...media, media_type: media_type };
 
-  devLog.log(media);
   return (
     <MediaProvider media={media}>
       <MediaBanner />
 
-
       <Container symmetrical>
-
         <div className="lg:max-w-[1300px] mx-auto">
-
-      <MediaHeader />
-      <MediaTabs />
-      {children}
+          <MediaHeader />
+          <MediaTabs />
+          {children}
         </div>
-
       </Container>
     </MediaProvider>
   );

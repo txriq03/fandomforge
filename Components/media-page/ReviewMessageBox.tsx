@@ -23,7 +23,6 @@ const ReviewMessageBox = () => {
   const media: Movie | TVSeries = mediaDetails;
 
   const mediaId = media.id;
-  console.log("MediaID from messagebox", mediaId);
   const mediaType = media.media_type as MediaType;
   const isMobile = useIsMobile();
   const [comment, setComment] = useState("");

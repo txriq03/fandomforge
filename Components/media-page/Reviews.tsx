@@ -37,7 +37,6 @@ const Reviews = () => {
     isPending,
     error,
   } = useReviewsForMedia(mediaId, mediaType);
-  devLog.log("Reviews:", reviews);
 
   const { data: tmdbReviewResponse } = useTmdbReviews(
     mediaId,
@@ -45,7 +44,6 @@ const Reviews = () => {
     showTMDB
   );
   const tmdbReviews = tmdbReviewResponse?.results;
-  devLog.log("TMDB Reviews:", tmdbReviews);
 
   if (isPending) {
     return (

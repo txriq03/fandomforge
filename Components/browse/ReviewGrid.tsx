@@ -12,7 +12,6 @@ import ReviewCard from "../ReviewCard";
 
 const ReviewGrid = () => {
   const { data, isPending } = useAllReviews();
-  devLog.log("Reviews:", data);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5  gap-2">
       {data?.map((review: Review) => (

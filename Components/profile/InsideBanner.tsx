@@ -24,7 +24,6 @@ const InsideBanner = ({ profile }: { profile: Profile }) => {
   //     <Spinner variant="simple" color="danger" className="m-auto" size="lg" />
   //   );
   // }
-  devLog.log("Profile:", profile);
 
   return (
     <div className="container w-full  text-white flex justify-between items-end">

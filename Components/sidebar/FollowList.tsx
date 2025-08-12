@@ -20,7 +20,6 @@ type FollowedUser = {
 
 const FollowList = () => {
   const { data: following, isPending } = useFollowing();
-  devLog.log("Following:", following);
 
   if (following?.length === 0) return;
 

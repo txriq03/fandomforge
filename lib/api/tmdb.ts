@@ -37,7 +37,6 @@ export const getTrending = async (mediaType: TrendingType = "all") => {
   const filtered = data.results.filter(
     (item: any) => item.media_type !== "person"
   );
-  devLog.log("Filtered: ", filtered);
   return filtered;
 };
 
@@ -160,8 +159,6 @@ export const getSearchAndDiscovery = async (
         }=${year}`
       : ""
   }${genres ? `&with_genres=${genres}` : ""}`;
-
-  devLog.log("URL:", filterUrl);
 
   // If both search query and filter options are present
   if (query && (year || genres)) {

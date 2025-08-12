@@ -1,57 +1,22 @@
 import { useSearch } from "@/hooks/useSearch";
 import { getImageUrl } from "@/lib/api/tmdb";
 import { cn, devLog, formatDate } from "@/lib/utils";
-import { middleware } from "@/middleware";
 import { SearchMovieResult, SearchTVResult } from "@/types/tmdb";
 import { MediaType } from "@/types/trending";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 import { Image } from "@heroui/image";
-import { Select, SelectItem } from "@heroui/select";
 import React, { Dispatch, useEffect, useState } from "react";
 
-const SearchMediaField = () => {
-  const [mediaType, setMediaType] = useState<MediaType>("movie");
-  return (
-    <div className="flex gap-2">
-      <SearchMediaAutoComplete className="flex-2" mediaType={mediaType} />
-      <MediaTypeSelect
-        className="flex-1"
-        mediaType={mediaType}
-        setMediaType={setMediaType}
-      />
-    </div>
-  );
-};
-
-const MediaTypeSelect = ({
+const FilterAutocomplete = ({
   className,
   mediaType,
-  setMediaType,
+  setMediaId,
+  setBackdropPath,
 }: {
   className?: string;
   mediaType: MediaType;
-  setMediaType: Dispatch<React.SetStateAction<MediaType>>;
-}) => {
-  return (
-    <Select
-      className={cn(className)}
-      defaultSelectedKeys={["movie"]}
-      value={mediaType}
-      onChange={(e) => setMediaType(e.target.value as MediaType)}
-      aria-label="Select Media Type"
-    >
-      <SelectItem key="movie">Movie</SelectItem>
-      <SelectItem key="tv">TV</SelectItem>
-    </Select>
-  );
-};
-
-const SearchMediaAutoComplete = ({
-  className,
-  mediaType,
-}: {
-  className?: string;
-  mediaType: MediaType;
+  setMediaId: Dispatch<React.SetStateAction<string | number | null>>;
+  setBackdropPath: Dispatch<React.SetStateAction<string | null>>;
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const [debouncedValue, setDebouncedValue] = useState("");
@@ -71,11 +36,19 @@ const SearchMediaAutoComplete = ({
 
   return (
     <Autocomplete
+      isRequired
       className={cn(className)}
+      name="title"
       placeholder="Type to search..."
       isLoading={isFetching}
       onInputChange={setSearchValue}
       aria-label="Search Movies or TV Shows"
+      onSelectionChange={(key) => {
+        setMediaId(key as string | number);
+
+        const selectedMedia = results?.find((item) => item.id == key);
+        selectedMedia && setBackdropPath(selectedMedia.backdrop_path);
+      }}
     >
       {results?.map((item) => (
         <AutocompleteItem
@@ -104,8 +77,6 @@ const MediaAutocompleteCard = ({
     date = media.first_air_date;
   }
 
-  devLog.log("Media:", media);
-
   return (
     <article className="flex gap-2 font-main">
       <div className="aspect-2/3 w-[50px] flex-shrink-0">
@@ -119,4 +90,5 @@ const MediaAutocompleteCard = ({
     </article>
   );
 };
-export default SearchMediaField;
+
+export default FilterAutocomplete;

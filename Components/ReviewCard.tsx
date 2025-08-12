@@ -13,7 +13,6 @@ const ReviewCard = ({ review }: { review: Review }) => {
   const imageUrl = getImageUrl(review.backdrop_path);
   const { openProfileModal } = useUIContext();
 
-  console.log(review);
   return (
     <div className="pb-7">
       <Card
