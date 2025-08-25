@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navItems } from "@/lib/data/navItems";
+import { navItems } from "@/lib/constants";
 const BottomBar = () => {
   const pathname = usePathname();
 
@@ -21,7 +21,7 @@ const BottomBar = () => {
                   "flex flex-col items-center justify-center gap-0.5 text-xs px-3 py-1 transition-colors duration-400",
                   isActive
                     ? "text-primary"
-                    : "text-muted-foreground hover:text-primary"
+                    : "text-muted-foreground hover:text-primary",
                 )}
               >
                 <Icon size={20} />

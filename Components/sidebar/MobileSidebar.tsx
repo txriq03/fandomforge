@@ -1,5 +1,5 @@
 "use client";
-import { navItems } from "@/lib/data/navItems";
+import { navItems } from "@/lib/constants";
 import { signOut } from "@/lib/supabase/actions";
 import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
@@ -71,7 +71,7 @@ const MobileSidebar = () => {
                     <li
                       className={cn(
                         "   text-white/75 font-heading font-semibold",
-                        isActive && "font-bold text-foreground"
+                        isActive && "font-bold text-foreground",
                       )}
                       key={item.name}
                     >
@@ -83,7 +83,7 @@ const MobileSidebar = () => {
                         startContent={<item.icon size={21} />}
                         className={cn(
                           "text-start align-start justify-start py-5 px-5 bg-transparent text-foreground/70 font-semibold hover:text-foreground",
-                          isActive && "bg-white/5 text-foreground font-bold"
+                          isActive && "bg-white/5 text-foreground font-bold",
                         )}
                         size="lg"
                       >

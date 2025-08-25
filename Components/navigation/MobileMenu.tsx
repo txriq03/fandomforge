@@ -1,5 +1,5 @@
 "use client";
-import { navItems } from "@/lib/data/navItems";
+import { navItems } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
 import { useUser } from "@/providers/UserProvider";
@@ -70,7 +70,7 @@ const MobileMenunContent = ({ setPopoverOpen }: { setPopoverOpen: any }) => {
             key={item.name}
             className={cn(
               "flex flex-col items-center",
-              shouldShowAuthItems() && "hidden"
+              shouldShowAuthItems() && "hidden",
             )}
           >
             <Button
