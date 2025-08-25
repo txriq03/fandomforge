@@ -1,4 +1,4 @@
-import statusOptions, { StatusOption } from "@/lib/data/statusOptions";
+import statusOptions, { StatusOption } from "@/lib/constants";
 import { signOut } from "@/lib/supabase/actions";
 import { cn } from "@/lib/utils";
 import { useUIContext } from "@/providers/UIContext";
