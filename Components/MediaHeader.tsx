@@ -28,6 +28,7 @@ import { MediaType } from "@/types/trending";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMedia } from "@/providers/MediaProvider";
 import { useMediaQuery } from "usehooks-ts";
+import PlayTriviaBtn from "./media-page/PlayTriviaBtn";
 
 const MediaHeader = () => {
   const media: Movie | TVSeries = useMedia();
@@ -130,13 +131,7 @@ const MediaHeader = () => {
 
         {/* Big buttons */}
         <div className="flex gap-2 py-2">
-          <Button
-            fullWidth
-            color="primary"
-            startContent={<TbDeviceGamepad3Filled className="shrink-0" />}
-          >
-            Play Trivia
-          </Button>
+          <PlayTriviaBtn />
           <Button
             fullWidth
             variant="ghost"
@@ -171,15 +166,7 @@ const MediaHeader = () => {
               shadow="lg"
             />
             <div className="flex flex-1 gap-2">
-              <Button
-                fullWidth
-                color="primary"
-                radius="sm"
-                size={matches ? "sm" : "md"}
-                startContent={<TbDeviceGamepad3Filled className="shrink-0" />}
-              >
-                Play Trivia
-              </Button>
+              <PlayTriviaBtn radius="sm" size={matches ? "sm" : "md"} />
               <Button
                 isIconOnly
                 className="bg-pink-500 text-white"

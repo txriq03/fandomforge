@@ -3,7 +3,6 @@ import MediaTabs from "@/Components/media-page/MediaTabs";
 import MediaHeader from "@/Components/MediaHeader";
 import Container from "@/Components/ui/Container";
 import { getMediaById } from "@/lib/api/tmdb";
-import { devLog } from "@/lib/utils";
 import MediaProvider from "@/providers/MediaProvider";
 import { MediaType } from "@/types/trending";
 import { ReactNode } from "react";
