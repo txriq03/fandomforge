@@ -29,6 +29,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useMedia } from "@/providers/MediaProvider";
 import { useMediaQuery } from "usehooks-ts";
 import PlayTriviaBtn from "./media-page/PlayTriviaBtn";
+import { Payload } from "@/lib/api/openai";
 
 const MediaHeader = () => {
   const media: Movie | TVSeries = useMedia();
@@ -96,6 +97,13 @@ const MediaHeader = () => {
   };
   const title = "title" in media ? media.title : media.name;
 
+  // NOTE: This is the payload, used to generate trivia questions.
+  const payload: Payload = {
+    number: 5,
+    difficulty: "medium",
+    title,
+  };
+
   return (
     <>
       {/* Only show for Mobile */}
@@ -131,7 +139,7 @@ const MediaHeader = () => {
 
         {/* Big buttons */}
         <div className="flex gap-2 py-2">
-          <PlayTriviaBtn />
+          <PlayTriviaBtn payload={payload} />
           <Button
             fullWidth
             variant="ghost"
@@ -166,7 +174,11 @@ const MediaHeader = () => {
               shadow="lg"
             />
             <div className="flex flex-1 gap-2">
-              <PlayTriviaBtn radius="sm" size={matches ? "sm" : "md"} />
+              <PlayTriviaBtn
+                payload={payload}
+                radius="sm"
+                size={matches ? "sm" : "md"}
+              />
               <Button
                 isIconOnly
                 className="bg-pink-500 text-white"
