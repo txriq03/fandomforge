@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       max_output_tokens: 10000,
     });
 
-    return NextResponse.json(resp.output_text);
+    return NextResponse.json(JSON.parse(resp.output_text));
   } catch (err) {
     console.error("Error generating trivia:", err);
     return NextResponse.json(
