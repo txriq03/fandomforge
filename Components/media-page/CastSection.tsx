@@ -65,9 +65,7 @@ const ActorGrid = ({ cast }: { cast: CastMember[] }) => {
               width={isMobile ? 60 : 70}
             />
             <div className="py-2 overflow-hidden">
-              <p className="text-sm sm:text-lg lg:text-xl xl:text-2xl">
-                {actor.name}
-              </p>
+              <p className="text-sm sm:text-lg lg:text-xl ">{actor.name}</p>
               <p className="text-foreground/75 text-[0.8rem] sm:text-base line-clamp-2">
                 {actor.character}
               </p>

@@ -1,5 +1,5 @@
 import { useGenerateTrivia } from "@/hooks/useGenerateTrivia";
-import { Difficulty, Payload } from "@/lib/api/openai";
+import { Payload } from "@/lib/api/openai";
 import { Button } from "@heroui/button";
 import { TbDeviceGamepad3Filled } from "react-icons/tb";
 
