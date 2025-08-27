@@ -13,7 +13,9 @@ interface Props {
 }
 
 const PlayTriviaBtn = ({ size, radius, payload, onDone }: Props) => {
-  const { mutate, isPending } = useGenerateTrivia();
+  const { data, isFetching, refetch } = useGenerateTrivia(payload);
+
+  if (data) console.log("Generated Questions:", data);
 
   return (
     <Button
@@ -22,21 +24,17 @@ const PlayTriviaBtn = ({ size, radius, payload, onDone }: Props) => {
       radius={radius}
       color="primary"
       startContent={
-        !isPending && (
+        !isFetching && (
           <TbDeviceGamepad3Filled
             size={size === "md" ? 18 : 14}
             className="shrink-0"
           />
         )
       }
-      isLoading={isPending}
-      onPress={() =>
-        mutate(payload, {
-          onSuccess: (data) => console.log("Trivia data:", data),
-        })
-      }
+      isLoading={isFetching}
+      onPress={() => refetch()}
     >
-      {!isPending && "Play Trivia"}
+      {isFetching ? "Generating..." : "Play Trivia"}
     </Button>
   );
 };

@@ -13,7 +13,7 @@ export type TriviaResponse = {
   }>;
 };
 
-export const loadTrivia = async (payload: Payload) => {
+export const generateTrivia = async (payload: Payload) => {
   const res = await fetch("/api/generate-trivia", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
