@@ -20,6 +20,7 @@ type Modal = {
 };
 
 interface UIContextType {
+  triviaModal: Modal;
   authModal: Modal;
   profileModal: Modal;
   profileDrawer: Modal;
@@ -47,6 +48,7 @@ const UIContextProvider = ({ children }: { children: ReactNode }) => {
   const profileDrawer = useDisclosure();
   const mobileSidebar = useDisclosure();
   const reviewModal = useDisclosure();
+  const triviaModal = useDisclosure();
 
   const [profileUserId, setProfileUserId] = useState<string | null>(null);
 
@@ -63,6 +65,7 @@ const UIContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <UIContext.Provider
       value={{
+        triviaModal,
         authModal,
         profileModal,
         profileDrawer,

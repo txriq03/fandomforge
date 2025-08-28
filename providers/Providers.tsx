@@ -7,6 +7,7 @@ import { HeroUIProvider } from "@heroui/system";
 import { ToastProvider } from "@heroui/toast";
 import AuthContextProvider from "./AuthContext";
 import { useRouter } from "next/navigation";
+import { TriviaProvider } from "./TriviaProvider";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -24,9 +25,11 @@ const Providers = ({ children }: { children: ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
           <ToastProvider />
-          <UIContextProvider>
-            <SidebarProvider>{children}</SidebarProvider>
-          </UIContextProvider>
+          <TriviaProvider>
+            <UIContextProvider>
+              <SidebarProvider>{children}</SidebarProvider>
+            </UIContextProvider>
+          </TriviaProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </HeroUIProvider>

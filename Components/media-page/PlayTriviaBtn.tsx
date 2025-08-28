@@ -1,6 +1,8 @@
-import { useGenerateTrivia } from "@/hooks/useGenerateTrivia";
 import { Payload } from "@/lib/api/openai";
+import { useTrivia } from "@/providers/TriviaProvider";
 import { Button } from "@heroui/button";
+import { addToast } from "@heroui/toast";
+import { useParams, useRouter } from "next/navigation";
 import { TbDeviceGamepad3Filled } from "react-icons/tb";
 
 type Size = "sm" | "md" | "lg";
@@ -13,9 +15,22 @@ interface Props {
 }
 
 const PlayTriviaBtn = ({ size, radius, payload, onDone }: Props) => {
-  const { data, isFetching, refetch } = useGenerateTrivia(payload);
+  const { generate, isFetching } = useTrivia();
+  const router = useRouter();
+  const params = useParams();
 
-  if (data) console.log("Generated Questions:", data);
+  const handleClick = async () => {
+    try {
+      const data = await generate(payload);
+      console.log("Trivia Data:", data);
+
+      // TODO: Push after data exists in cache
+      // router.push(`/${params.mediaType}/${params.id}/trivia`)
+    } catch (e) {
+      console.error(e);
+      addToast({ title: "Error generating trivia" });
+    }
+  };
 
   return (
     <Button
@@ -31,10 +46,10 @@ const PlayTriviaBtn = ({ size, radius, payload, onDone }: Props) => {
           />
         )
       }
-      isLoading={isFetching}
-      onPress={() => refetch()}
+      isLoading={isFetching(payload)}
+      onPress={handleClick}
     >
-      {isFetching ? "Generating..." : "Play Trivia"}
+      {isFetching(payload) ? "Generating..." : "Play Trivia"}
     </Button>
   );
 };
