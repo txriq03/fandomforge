@@ -10,6 +10,7 @@ import ProfileWrapper from "@/Components/profile/ProfileWrapper";
 import NextTopLoader from "nextjs-toploader";
 import UserDrawer from "@/Components/user-drawer/UserDrawer";
 import MobileSidebar from "@/Components/sidebar/MobileSidebar";
+import TriviaModal from "@/Components/modals/TriviaModal";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -54,6 +55,7 @@ export default async function RootLayout({
             <ProfileWrapper /> {/* Contains ProfileModal and ProfileDrawer */}
             <UserDrawer />
             <MobileSidebar />
+            <TriviaModal />
           </UserProvider>
         </Providers>
       </body>

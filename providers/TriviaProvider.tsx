@@ -1,11 +1,23 @@
 // providers/TriviaProvider.tsx
 "use client";
-import { createContext, useContext, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { triviaKey } from "@/hooks/useGenerateTrivia";
 import { generateTrivia, type Payload } from "@/lib/api/openai";
+import { Movie } from "@/types/movie";
+import TVSeries from "@/types/tv";
 
 type TriviaCtx = {
+  activeTriviaMedia: Movie | TVSeries | null;
+  setActiveTriviaMedia: Dispatch<SetStateAction<Movie | TVSeries | null>>;
   /** Fire the query and cache the result (returns data) */
   generate: (payload: Payload) => Promise<unknown>;
   /** Prefetch in the background (no UI wait) */
@@ -30,6 +42,9 @@ export function TriviaProvider({ children }: { children: React.ReactNode }) {
   const activeRef = useRef<Payload | undefined>(undefined);
 
   const isFetchingAny = useIsFetching({ queryKey: ["generate-trivia"] }) > 0;
+  const [activeTriviaMedia, setActiveTriviaMedia] = useState<
+    Movie | TVSeries | null
+  >(null);
 
   const value = useMemo<TriviaCtx>(() => {
     const generate = async (payload: Payload) => {
@@ -65,6 +80,8 @@ export function TriviaProvider({ children }: { children: React.ReactNode }) {
     const getActive = () => activeRef.current;
 
     return {
+      activeTriviaMedia,
+      setActiveTriviaMedia,
       generate,
       prefetch,
       getFromCache,
@@ -74,7 +91,7 @@ export function TriviaProvider({ children }: { children: React.ReactNode }) {
       setActive,
       getActive,
     };
-  }, [qc, isFetchingAny]);
+  }, [qc, isFetchingAny, activeTriviaMedia]);
 
   return (
     <TriviaContext.Provider value={value}>{children}</TriviaContext.Provider>
