@@ -55,12 +55,13 @@ const ActorGrid = ({ cast }: { cast: CastMember[] }) => {
         if (!actor.profile_path) return null;
         return (
           <div
-            className="flex gap-3 bg-white/3 rounded-xl h-[90px] sm:h-[105px]"
+            className="flex gap-3 bg-white/3 rounded-md h-[90px] sm:h-[105px]"
             key={actor.id}
           >
             <Image
               src={getImageUrl(actor.profile_path)}
               className="object-cover flex-shrink-0 min-w-[60px] sm:min-w-[70px]"
+              radius="sm"
               height="auto"
               width={isMobile ? 60 : 70}
             />
