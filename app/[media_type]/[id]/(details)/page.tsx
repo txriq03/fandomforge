@@ -5,7 +5,6 @@ import React from "react";
 const MoviePage = () => {
   return (
     <div className="pt-2">
-      {/* <Overview /> */}
       <CastSection />
     </div>
   );

@@ -8,9 +8,12 @@ import MediaPoster from "./MediaPoster";
 import { Alert } from "@heroui/alert";
 import { Spinner } from "@heroui/spinner";
 import SkeletonCard from "./SkeletonCard";
+import MediaPanel from "./MediaPanel";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const BookmarksGrid = () => {
   const user = useUser();
+  const isMobile = useIsMobile();
 
   if (!user)
     return (
@@ -46,7 +49,7 @@ const BookmarksGrid = () => {
     );
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 lg:gap-3">
+    <div className="grid grid-cols-1 gap-3 sm:gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 lg:gap-3">
       {mediaQueries.map((query, index) => {
         const poster = getImageUrl(query.data?.poster_path);
         const { media_id, media_type } = bookmarks[index];
@@ -56,7 +59,9 @@ const BookmarksGrid = () => {
 
         if (!poster) return null;
 
-        return (
+        return isMobile ? (
+          <MediaPanel key={media_id} media={media} mediaType={media_type} />
+        ) : (
           <MediaPoster key={media_id} media={media} mediaType={media_type} />
         );
       })}
