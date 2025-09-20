@@ -3,7 +3,7 @@ import { imageBaseUrl } from "@/lib/constants";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import React from "react";
-import { cn, formatNumber } from "@/lib/utils";
+import { cn, formatDate, formatNumber } from "@/lib/utils";
 import { MediaType, TrendingMedia } from "@/types/trending";
 import { Button } from "@heroui/button";
 import { Image } from "@heroui/image";
@@ -11,6 +11,7 @@ import NextImage from "next/image";
 import { DiscoverMovie, DiscoverTVSeries, Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
 import BookmarkButton from "./ui/BookmarkButton";
+import VoteAverageChip from "./ui/AverageVoteChip";
 
 interface Props {
   media: Movie | TVSeries | DiscoverMovie | DiscoverTVSeries;
@@ -31,6 +32,13 @@ const MediaPanel = ({ media, className, number, mediaType }: Props) => {
     name = (media as TVSeries | DiscoverTVSeries).name;
   }
 
+  const releaseOrAirDate =
+    "release_date" in media
+      ? media.release_date
+      : "first_air_date" in media
+        ? media.first_air_date
+        : "";
+
   return (
     <article
       className={cn(
@@ -44,6 +52,7 @@ const MediaPanel = ({ media, className, number, mediaType }: Props) => {
       />
 
       <div className="relative flex w-full h-full">
+        {/* Poster */}
         <Image
           alt={name}
           src={posterUrl}
@@ -72,13 +81,20 @@ const MediaPanel = ({ media, className, number, mediaType }: Props) => {
               {media.overview}
             </p>
 
+            {/* Metadata and Buttons */}
             <div
-              className="mt-auto self-end z-1"
+              className="mt-auto self-end z-1 flex justify-between w-full"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
               }}
             >
+              <div className="flex text-sm gap-2 items-end text-foreground/75">
+                <VoteAverageChip averageVote={media.vote_average} />
+                <p>•</p>
+                <p>{formatDate(releaseOrAirDate, true)}</p>
+              </div>
+
               <BookmarkButton
                 mediaId={media.id}
                 mediaType={mediaType}
