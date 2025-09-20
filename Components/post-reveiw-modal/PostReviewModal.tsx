@@ -156,7 +156,7 @@ const Trigger = ({ onOpen }: { onOpen: () => void }) => {
       size="lg"
       color="primary"
       onPress={onOpen}
-      className="absolute bottom-0 right-0 m-5 z-1 fixed"
+      className="absolute bottom-0 right-0 m-5 z-5 fixed"
     >
       <TbPlus size={32} />
     </Button>

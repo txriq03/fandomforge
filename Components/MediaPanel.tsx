@@ -73,7 +73,7 @@ const MediaPanel = ({ media, className, number, mediaType }: Props) => {
             </p>
 
             <div
-              className="mt-auto self-end z-2"
+              className="mt-auto self-end z-1"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
