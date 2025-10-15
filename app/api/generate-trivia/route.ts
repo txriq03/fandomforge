@@ -7,15 +7,27 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { number, title, difficulty } = await req.json();
+    const { mediaType, number, title, difficulty } = await req.json();
 
-    console.log("Number:", number, "Title:", title, "Difficulty:", difficulty);
+    console.log(
+      "Media Type:",
+      mediaType,
+      "Number:",
+      number,
+      "Title:",
+      title,
+      "Difficulty:",
+      difficulty,
+    );
+
+    const media_type = mediaType === "tv" ? "tv show" : "movie";
 
     const resp = await openai.responses.create({
       model: "gpt-5-nano",
       prompt: {
         id: "pmpt_689e12e503ec8195a34cce784e88678601336bf859955944",
         variables: {
+          media_type,
           number: String(number),
           title,
           difficulty,

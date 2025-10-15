@@ -1,5 +1,12 @@
+import { MediaType } from "@/types/trending";
+
 export type Difficulty = "easy" | "medium" | "hard";
-export type Payload = { number: number; title: string; difficulty: Difficulty };
+export type Payload = {
+  mediaType: MediaType;
+  number: number;
+  title: string;
+  difficulty: Difficulty;
+};
 
 export type TriviaResponse = {
   questions: Array<{

@@ -99,6 +99,7 @@ const MediaHeader = () => {
 
   // NOTE: This is the payload, used to generate trivia questions.
   const payload: Payload = {
+    mediaType: mediaType,
     number: 5,
     difficulty: "medium",
     title,

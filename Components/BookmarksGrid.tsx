@@ -2,11 +2,9 @@
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { fetchMedia, getImageUrl } from "@/lib/api/tmdb";
 import { useUser } from "@/providers/UserProvider";
-
 import { useQueries } from "@tanstack/react-query";
 import MediaPoster from "./MediaPoster";
 import { Alert } from "@heroui/alert";
-import { Spinner } from "@heroui/spinner";
 import SkeletonCard from "./SkeletonCard";
 import MediaPanel from "./MediaPanel";
 import useIsMobile from "@/hooks/useIsMobile";
