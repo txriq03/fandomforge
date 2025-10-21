@@ -23,7 +23,7 @@ const TriviaPage = async ({
 
   return (
     <Container>
-      <MCQList payload={payload} />
+      <MCQList />
     </Container>
   );
 };
