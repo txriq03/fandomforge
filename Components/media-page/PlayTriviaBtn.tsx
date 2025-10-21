@@ -4,6 +4,7 @@ import { useTrivia } from "@/providers/TriviaProvider";
 import { useUIContext } from "@/providers/UIContext";
 import { Button } from "@heroui/button";
 import { addToast } from "@heroui/toast";
+import { usePathname, useRouter } from "next/navigation";
 import { TbDeviceGamepad3Filled } from "react-icons/tb";
 
 type Size = "sm" | "md" | "lg";
@@ -19,6 +20,9 @@ const PlayTriviaBtn = ({ size, radius, payload, onDone }: Props) => {
   const { setActiveTriviaMedia, generate, isFetching } = useTrivia();
   const { triviaModal } = useUIContext();
   const media = useMedia();
+  const pathname = usePathname();
+  const router = useRouter();
+  const { title, difficulty, number } = payload;
 
   const handleClick = async () => {
     try {
@@ -34,12 +38,14 @@ const PlayTriviaBtn = ({ size, radius, payload, onDone }: Props) => {
         description: "Trivia questions are ready!",
         color: "success",
       });
-      // router.push(`/${params.mediaType}/${params.id}/trivia`)
     } catch (e) {
       console.error(e);
       addToast({ title: "Error generating trivia" });
     } finally {
       triviaModal.onClose();
+      router.push(
+        `${pathname}/trivia?title=${title}&difficulty=${difficulty}&questions=${number}`,
+      );
     }
   };
 

@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { triviaKey } from "@/hooks/useGenerateTrivia";
 import { generateTrivia, type Payload } from "@/lib/api/openai";
 import { Movie } from "@/types/movie";
 import TVSeries from "@/types/tv";
@@ -36,6 +35,9 @@ type TriviaCtx = {
 };
 
 const TriviaContext = createContext<TriviaCtx | null>(null);
+
+export const triviaKey = (p: Payload) =>
+  ["generate-trivia", JSON.stringify(p)] as const;
 
 export function TriviaProvider({ children }: { children: React.ReactNode }) {
   const qc = useQueryClient();
